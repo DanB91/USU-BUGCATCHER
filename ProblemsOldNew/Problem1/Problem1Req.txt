@@ -1,0 +1,22 @@
+1.The BMI calculator program accepts three integer values, which represent: 
+&nbsp; height in feet,
+&nbsp; height in inches,
+&nbsp; and weight in lbs.
+<BR/>
+2. If the input of the values are invalid ( not integers or less than 0), or if fewer than three values provided, it will show:
+  "Invalid input value". Input should be in the following format: 6 1 150
+<BR/>
+3. The Program will output a BMI score and the weight category that score falls under according to the following table:
+<BR/>
+
+ Classification: &nbsp; Score
+----------------------
+Underweight: < 18.5
+Normal weight: 18.5 - 24.9
+Overweight: 25 - 29.9
+Obese: > 30
+<BR/>
+4. The formula for BMI is: (weight/(height*height))*703
+<BR/)>
+5. Output will be in the following format: <BR/>
+Score: 18.2 Rating: Underweight

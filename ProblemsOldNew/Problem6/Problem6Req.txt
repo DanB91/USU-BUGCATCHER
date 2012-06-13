@@ -1,0 +1,5 @@
+1. The Cipher encrypts messages by taking a String and an integer.
+The string represents the message to be encrypted, and the integer the amount to shift each letter of the string by.
+For example, Cipher abc 4 would return "efg" and Cipher ABC -1 would return ZAB
+2. If the input is invalid or Cipher is not given two arguments, it will return "Invalid input."
+3. The cipher should maintain capitalization and accept any integer. 

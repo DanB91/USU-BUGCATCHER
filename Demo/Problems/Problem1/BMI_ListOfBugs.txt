@@ -1,0 +1,6 @@
+List of Bugs:
+
+BUG 1: 		LINE 21 	Forgot to initialize inches with parameter from Constructor.
+BUG 2: 		LINE 28 	Missing *12 to get feet in terms of inches.
+BUG 3: 		LINE 35 	Order of operations problem, missing parenthesis.
+BUG 4: 		LINE 41-48 	Logic error in comparisons, order is wrong.

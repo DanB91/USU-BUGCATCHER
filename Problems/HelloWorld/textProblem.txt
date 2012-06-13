@@ -1,0 +1,7 @@
+
+
+public class HelloWorld{
+	
+   public static void main(String[] args){
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>      System.out.println("Hello," + args[0] + "!");</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>   }</SPAN><br />	
+}

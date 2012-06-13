@@ -1,0 +1,127 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8;nocache" />
+<title></title>
+
+<script language="javascript" src="Scripts/Content_BugTest.js"></script>
+<script language="javascript" src="Scripts/Content_Requirements.js"></script>
+<script language="javascript" src="Scripts/Problem1.js"></script>
+<script language="javascript" src="Scripts/Problem2.js"></script>
+<script language="javascript" src="Scripts/Problem3.js"></script>
+<script language="javascript" src="Scripts/Problem4.js"></script>
+<script language="javascript" src="Scripts/Problem5.js"></script>
+<script language="javascript" src="Scripts/StudentContentUpdate.js"></script>
+<script language="javascript" src="Scripts/Student.js"></script>
+<script language="javascript" src="Scripts/StudentTimer.js"></script>
+<script type="text/javascript" src="Scripts/Prettify/prettify.js"></script>
+
+<link rel="stylesheet" href="CSS/Student.css" type="text/css" />
+<link href="CSS/prettify.css" type="text/css" rel="stylesheet" />
+
+
+
+</head>
+
+<body onload=initialize(); >
+
+<script language="javascript">
+//document.onload=loadTeamNames();
+//document.onLoad=t();
+</script>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+<div id="container" class="gradient">
+	<div id="header">
+    <div id="header-left" align=left>
+      <h2 id="timer">00:00</h2>
+    </div>
+    <div id="header-right" align=right>
+      <div id="BugsFoundImage"><img src="Images/BugsFound.gif" /></div>
+      <div id="LogOut"><a href="LogoutImpl.php">Log Out</a></div>
+      <div id="BugsFoundText">0</div>      
+    </div>
+    <div id="header-middle" align=center>
+      <img src="Images/BannerSmall.gif" height="50" width="175" />
+    </div>
+    <div id="header-winningteams">
+    	1st: Team Amazingly Awesome<br/>
+      2nd: Team Not Quite As Awesome<br/>
+      3rd: Team Even Less Awesome<br/>
+    </div>
+	</div>
+	<div id="navigation" class="gradient">
+		<ul>
+      <li><a onMouseOver="document.body.style.cursor = 'pointer';"
+             onmouseout="document.body.style.cursor = 'default';"
+             class="navMargin" href="#" disabled >Requirements</a></li>
+			<li><a class="navLeftMost" href="#"   onclick="event.preventDefault(); getReqAndProb('Problem1', radio1.checked);">Problem 1</a></li>
+			<li><a class="navMiddle" href="#"    onclick="event.preventDefault(); getReqAndProb('Problem2', radio1.checked);">Problem 2</a></li>
+			<li><a class="navMiddle" href="#"    onclick="event.preventDefault(); getReqAndProb('Problem3', radio1.checked);">Problem 3</a></li>
+			<li><a class="navMiddle" href="#"    onclick="event.preventDefault(); getReqAndProb('Problem4', radio1.checked);">Problem 4</a></li>
+			<li><a class="navRightMost" href="#" onClick="event.preventDefault(); getReqAndProb('Problem5', radio1.checked);">Problem 5</a></li>
+			<li><a onMouseOver="document.body.style.cursor = 'pointer';"
+             onmouseout="document.body.style.cursor = 'default';"
+             class="navMargin" href="#" disabled >Bug Tester</a></li>
+		</ul>
+	</div>
+	<div id="content-container">
+		<div id="StudentLeft" align=center>
+      <div id="Requirements" align=left>
+         <div id="RequirementsList">
+          <p>Please select a problem</p>
+        </div>
+      </div>
+		</div>
+		<div id="StudentRight" align=center>
+      <div id="BugTester">
+        <form onSubmit="event.preventDefault(); getBugTestInfo(testInput.value,testOutput.value);" id="BugTester">
+            <p>Test Input:</p>
+            <input type=text" name="TestInput" id="testInput" class="Stext"/><br />
+            <p>Expected Output:</p>
+            <input type=text" name="TestOutput" id="testOutput" class="Stext"/><br />
+            <input type="submit" value="Test For Bug!" id="testforBug" class="Sbutton"/>
+        </form>
+      </div>
+      <p>Results:</p>
+      <div id="ResultsList" align=left>
+          <p>Results #1</p>
+          <p>Results #2</p>
+          <p>Results #3</p>
+          <p>Results #4</p>
+          <p>And this requirement is just here to test to see if word wrap is actually working</p>
+        </div>
+        <div id="ChatBox"><form id="ChatForm" onSubmit="event.preventDefault(); instantMessaging(ChatInput.value);"><input type="text" id="ChatInput" /></form></div>
+    </div>
+    <div id="StudentMiddle" align=left>
+      <div id="StudentMiddleTop">
+        <div id="SourceTitle">Source Code:</div>
+        <div id="CoverageToggle" align=right>
+          <form >
+            <label>Code Coverage:</label>
+            <input type=radio name="Coverage" id="radio1" onchange=check(); />On<input type=radio name="Coverage" id="radio2" checked onchange=unCheck(); />Off
+          </form>
+        </div>
+      </div>
+      <div id="StudentMiddleBottom">
+        <div id="ProblemCode">
+<pre>Please select a problem</pre>
+        </div>
+      </div>
+    </div>
+	</div>
+	<div id="footer" class="gradient">
+    <p>Copyright © MAMAN, 2012</p>
+  </div>
+	<div class="nooverflow">&nbsp;</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+Problem 5
+
+class Triangle {
+  protected static int firstAngle = 0;
+  protected static int secondAngle = 0;
+  protected static int thirdAngle = 0;
+  static int RIGHTANGLE = 95;
+  static int SUMTRIANGLEANGLE = 180;
+    
+  /*Determine which angle is the biggest one*/
+  public static int biggest(int angle1, 
+                      int angle2, int angle3){
+   if(((angle1 <= angle2)&&(angle2 >= angle3))
+     ||((angle2 >= angle1)&&(angle1 <= angle3)))
+         return angle3;
+   else if (((angle1 <= angle3)
+                          &&(angle3 <= angle2))
+     ||((angle3 <= angle1)&&(angle1 <= angle2)))
+         return angle2;
+   else
+      return angle1;
+  }
+  /*find what kinds of triangle*/
+  public static String findTriangleType(){
+   int bigAngle = biggest(firstAngle, 
+                        secondAngle,thirdAngle);
+   int sum = firstAngle + secondAngle + thirdAngle;
+   if (sum > SUMTRIANGLEANGLE)
+       return "Not a Triangle";
+   else if (bigAngle >= RIGHTANGLE)
+       return "Obtuse";
+   else if (bigAngle == RIGHTANGLE)
+       return "Right";
+   else
+       return "Acute";        
+  }
+  /*constructor*/
+  public Triangle(int angle1, 
+                        int angle2, int angle3){
+    firstAngle = angle1;
+    secondAngle = angle2;
+    thirdAngle = angle3;
+  }
+            
+  public static void main(String[] args) {
+        
+    int angle1 = Integer.parseInt(args[0]);
+    int angle2 = Integer.parseInt(args[1]);
+    int angle3 = Integer.parseInt(args[2]);
+      
+    if(angle1 <= 0 || angle2 <= 0 ||angle3 <= 0){
+     System.out.println("Invalid Input Value(s)");
+        return;        
+    } 
+        
+    Triangle tr = new Triangle(arg1, arg2, arg3);
+    System.out.println(tr.findTriangleType());        
+  }
+}

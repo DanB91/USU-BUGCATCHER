@@ -1,0 +1,5 @@
+1. The Converter Problem breaks down a large number of seconds into minutes, hours and days
+<br />
+2. It accepts one number as input, which should represent a number of seconds.  If a negative number is entered, it will return "Error: Bad Input".
+<br />
+3. It outputs the time in this format Days:Hours:Minutes:Seconds, where seconds always includes at least one decimal place.

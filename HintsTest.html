@@ -1,0 +1,85 @@
+<html>
+<head>
+<title></title>
+
+<script language="javascript" src="Scripts/Admin.js"></script>
+<script language="javascript" src="Scripts/Recieve.js"></script>
+<link rel="stylesheet" href="CSS/HintsTest.css" type="text/css" />
+
+</head>
+
+<body onload=loadManage()>
+
+<script language="javascript">
+//document.onload=loadTeamNames();
+//document.onLoad=loadManage();
+</script>
+
+<div id="container">
+	<div id="header">
+    <h1>Administrator</h1>
+    <img src="Images/BannerSmall.gif" height="50" width="175" />
+	</div>
+	<div id="navigation">
+		<ul>
+			<li><a href="#">Competition Setup</a></li>
+			<li><a href="#">Team Management</a></li>
+			<li><a href="#">Progress/Statistics</a></li>
+			<li><a href="#">Hints</a></li>
+		</ul>
+	</div>
+	<div id="content-container">
+    <div id="CustomHeader" align=center>
+      <h2>Custom Hint</h2>
+    </div>
+    <div id="PreDefHeader" align=center>
+      <h2>PreDef Hint</h2>
+    </div>
+		<div id="HintsLeft" align=center>
+      <p>Enter a Custom Hint:</p>
+	  <form onSubmit="event.preventDefault(); sendHintsCust(CustomHint.value); " method="get">
+      <textarea name="CustomHint" id="CustomHint" onFocus="if(this.value==this.defaultValue) {this.value='';}" wrap="physical">Custom Hints (click here)
+      </textarea ><br />
+      <input type="submit" name="submitCust" id="SendCustom" value="Send Custom Hint" class="Hbutton" />
+	  </form >
+		</div>
+		<div id="HintsRight" align=center>
+      <div id="HintsPreDefTop">
+        <div id="HintsPreDefRight">
+          <p>Select Hint to View:</p>
+          <div id="HintNum" > <select name="HHintNum" id="HHintNum" size=7 class="Hselect">
+            
+          </select>
+		 </div>
+		
+        </div>
+        <div id="HintsPreDefLeft">
+          <p>Select Problem Number:</p>
+          <select name="HProbNum" id="HProbNum" size=5 class="Hselect" onchange=showPre(this.value);>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+          </select>
+        </div>
+      </div>
+      <div id="HintsPreDefBottom">
+        <div id="HintText">
+          <p>Hint text will appear here when hint number is selected.</p>
+        </div>
+		<form onSubmit="event.preventDefault(); sendHintPreDef();">
+        <input type="submit" name="SendPreDef" id="SendPreDef" value="Send Pre-Defined Hint" class="Hbutton" />
+		</form>
+      </div>
+		</div>
+    <div id="footer">
+      <p>Copyright © MAMAN, 2012</p>
+    </div>
+	</div>
+	<div class="nooverflow">&nbsp;</div>
+</div>
+
+</body>
+
+</html>

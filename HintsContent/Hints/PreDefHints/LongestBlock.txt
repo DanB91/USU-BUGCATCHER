@@ -1,0 +1,1 @@
+If the current count is 1, which letter should the loop start with?<!@!>If the curCount is 1, then I have looked at exactly one letter, so what should my current maximum be?<!@!>Strings are arrays of characters, the first letter is at position 0, and the last letter is a position size-1.  Does the loop encapsulate the last letter?<!@!>

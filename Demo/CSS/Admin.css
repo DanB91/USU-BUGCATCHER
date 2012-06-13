@@ -1,0 +1,724 @@
+body
+{
+  background: #777;
+}
+
+div.nooverflow
+{
+  clear: left;
+  line-height: 0;
+  height: -5px;
+}
+
+#container
+{
+	margin: 20 auto;
+	margin-bottom: 0px;
+	padding: 0px;
+	width: 1000px;
+	background: #bf8c00; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjclIiBzdG9wLWNvbG9yPSIjYmY4YzAwIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMzAlIiBzdG9wLWNvbG9yPSIjZjRjMjQ0IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNDklIiBzdG9wLWNvbG9yPSIjZTJhMjAwIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iNzIlIiBzdG9wLWNvbG9yPSIjZjRjMjQ0IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2JmOGMwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+  background: -moz-linear-gradient(-45deg,  #bf8c00 7%, #f4c244 30%, #e2a200 49%, #f4c244 72%, #bf8c00 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(7%,#bf8c00), color-stop(30%,#f4c244), color-stop(49%,#e2a200), color-stop(72%,#f4c244), color-stop(100%,#bf8c00)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg,  #bf8c00 7%,#f4c244 30%,#e2a200 49%,#f4c244 72%,#bf8c00 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg,  #bf8c00 7%,#f4c244 30%,#e2a200 49%,#f4c244 72%,#bf8c00 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg,  #bf8c00 7%,#f4c244 30%,#e2a200 49%,#f4c244 72%,#bf8c00 100%); /* IE10+ */
+  background: linear-gradient(-45deg,  #bf8c00 7%,#f4c244 30%,#e2a200 49%,#f4c244 72%,#bf8c00 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf8c00', endColorstr='#bf8c00',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+  background-size: 100% 100px;
+	-moz-box-shadow: 2px 2px 15px 5px #333;
+  -webkit-box-shadow: 2px 2px 15px 5px #333;
+  box-shadow: 2px 2px 15px 5px #333;
+}
+
+#header
+{
+	padding: 0px;
+	text-align: right;
+	color: #000000;
+}
+
+#header-timer
+{
+  float: left;
+  width: 150px;
+  padding: 0px 0px;
+  text-align: left;
+  background-image: url("Images/transparent.gif");
+  background-size: 100% 100%;
+}
+
+#header-logo
+{
+  float: right;
+  width: 300px;
+  padding-right: 0px;
+  text-align: right;
+  background-image: url("Images/transparent.gif");
+  background-size: 100% 100%;
+}
+
+#header-title
+{
+  float: right;
+  width: 400px;
+  text-align: center;
+}
+
+#header-controls
+{
+  float: right;
+  width: 150px;
+  text-align: left;
+  background-image: url("Images/transparent.gif");
+  background-size: 100% 100%;
+}
+
+#header-logo img
+{
+  padding: 0px 10px;
+  padding-top: 12px;
+}
+
+#navigation
+{
+	float: left;
+	width: 1000px;
+	/*background: #7CA2DA;*/
+	background: #000000; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxMiUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIzOCUiIHN0b3AtY29sb3I9IiMzNTM1MzUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI2MSUiIHN0b3AtY29sb3I9IiMyNjI2MjYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI4NiUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #000000 12%, #353535 38%, #262626 61%, #000000 86%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(12%,#000000), color-stop(38%,#353535), color-stop(61%,#262626), color-stop(86%,#000000)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* IE10+ */
+  background: linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=0 ); /* IE6-8 */
+}
+
+#navigation ul
+{
+	margin: 0;
+	padding: 0;
+  text-align: center;
+}
+
+#navigation ul li
+{
+	list-style-type: none;
+	display: inline;
+}
+
+a.navNormal
+{
+	display: block;
+	float: left;
+	padding: 5px 10px;
+	width: 150px;
+	text-decoration: none;
+  font-weight: bold;
+	border-right: 1px solid #777;
+	color: #BF2A0E;
+}
+
+a.navAlt
+{
+	display: block;
+	float: left;
+	padding: 5px 10px;
+	width: 150px;
+	text-decoration: none;
+  font-weight: bold;
+	border-right: 1px solid #777;
+	background: #9b0000; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxNCUiIHN0b3AtY29sb3I9IiM5YjAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI0MSUiIHN0b3AtY29sb3I9IiNjMTQ4M2YiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNjMTQ4M2YiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI4NiUiIHN0b3AtY29sb3I9IiM5YjAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #9b0000 14%, #c1483f 41%, #c1483f 60%, #9b0000 86%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(14%,#9b0000), color-stop(41%,#c1483f), color-stop(60%,#c1483f), color-stop(86%,#9b0000)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* IE10+ */
+  background: linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9b0000', endColorstr='#9b0000',GradientType=0 ); /* IE6-8 */
+  /*color: #BD9400;*/
+  color: #000;
+}
+
+#navigation li a:hover
+{
+  	background: #9b0000; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxNCUiIHN0b3AtY29sb3I9IiM5YjAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI0MSUiIHN0b3AtY29sb3I9IiNjMTQ4M2YiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI2MCUiIHN0b3AtY29sb3I9IiNjMTQ4M2YiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI4NiUiIHN0b3AtY29sb3I9IiM5YjAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #9b0000 14%, #c1483f 41%, #c1483f 60%, #9b0000 86%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(14%,#9b0000), color-stop(41%,#c1483f), color-stop(60%,#c1483f), color-stop(86%,#9b0000)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* IE10+ */
+  background: linear-gradient(top,  #9b0000 14%,#c1483f 41%,#c1483f 60%,#9b0000 86%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9b0000', endColorstr='#9b0000',GradientType=0 ); /* IE6-8 */
+  /*color: #BD9400;*/
+  color: #000;
+}
+
+#Content
+{
+	float: left;
+	width: 1000px;
+	background: #2c2c2c;
+}
+
+#footer
+{
+	clear: both;
+	background: #000000; /* Old browsers */
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxMiUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIzOCUiIHN0b3AtY29sb3I9IiMzNTM1MzUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI2MSUiIHN0b3AtY29sb3I9IiMyNjI2MjYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI4NiUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #000000 12%, #353535 38%, #262626 61%, #000000 86%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(12%,#000000), color-stop(38%,#353535), color-stop(61%,#262626), color-stop(86%,#000000)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* IE10+ */
+  background: linear-gradient(top,  #000000 12%,#353535 38%,#262626 61%,#000000 86%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=0 ); /* IE6-8 */
+	text-align: right;
+	padding: 0px;
+	height: 40px;
+  color: #C39F00;
+  margin-bottom: 0px;
+}
+
+#footer p
+{
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+/*##############################################################################*/
+/*                            Styles For Competition                            */
+/*##############################################################################*/
+#CompMain
+{
+	clear: left;
+	float: left;
+	width: 498px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	border-right: 2px solid #999;
+  background: #2c2c2c;
+  font-weight: bold;
+  color: #CDAB31;
+}
+
+#CompMain h1
+{
+  padding-top: 10px;
+  padding-bottom: 25px;
+  margin: 0;
+}
+
+#CompMain hr
+{
+  height: 1px solid #999;
+  border-left: none;
+  border-right: none;
+  margin: 0;
+  padding: 0;
+}
+
+#CompMain p
+{
+  padding-top: 10px;
+  padding-bottom: 0px;
+  margin: 0;
+}
+
+#CsetupForm
+{
+  width: 400px;
+  padding-right: 20px;
+  padding-left: 0px;
+}
+
+.Cselect
+{
+  background: #999;
+  padding: 3px;
+  margin: 5px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  width: 250px;
+  border: 2px double #000;
+}
+
+.Ctext
+{
+  background: #999;
+  padding: 3px;
+  margin: 5px;
+  margin-top: 0px;
+  margin-bottom: 15px;
+  width: 250px;
+  border: 2px double #000;
+}
+
+.Ctext:disabled
+{
+  background: #999;
+  padding: 3px;
+  margin: 5px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  width: 250px;
+  border: 2px double #000;
+  color: #100;
+}
+
+.Cbutton
+{
+  width: 150px;
+  margin-left: 5px;
+  margin-right: 20px;
+}
+
+#CompRight
+{
+  clear: top;
+	float: right;
+	width: 500px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+  background: #2c2c2c;
+  color: #CDAB31;
+  font-weight: bold;
+}
+
+#CompRight h1
+{
+  padding-top: 10px;
+  padding-bottom: 25px;
+  margin: 0;
+}
+
+#CsettingsForm
+{
+  width: 450px;
+  padding-right: 30px;
+  padding-left: 0px;
+}
+
+/*##############################################################################*/
+/*                               Styles For Manage                              */
+/*##############################################################################*/
+#ManageMain
+{
+	clear: left;
+	float: left;
+	width: 248px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	border-right: 2px solid #999;
+  background: #2c2c2c;
+  font-weight: bold;
+  color: #CDAB31;
+}
+
+#ManageMain h2
+{
+  padding-top: 20px;
+  margin: 0;
+}
+
+#ManageMain hr
+{
+  height: 1px solid #999;
+  border-left: none;
+  border-right: none;
+  margin: 0;
+  padding: 0;
+}
+
+#ManageMain p
+{
+  padding-top: 10px;
+  padding-bottom: 0px;
+  margin: 0;
+}
+
+#MTeamName
+{
+  background: #888;
+  padding: 3px;
+  width: 200px;
+  border: 2px double #000;
+}
+
+#MTeamSelect
+{
+  width: 180px;
+  background: #888;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
+#ManageRight
+{
+	float: right;
+	width: 750px;
+	padding: 20px 0;
+	margin: 0px;
+	display: inline;
+  background: #2c2c2c;
+  color: #CDAB31;
+}
+
+#MRefreshButton
+{
+  float: right;
+}
+
+#MRefreshButton img
+{
+  height: 50px;
+  width: 50px;
+  margin-top: -30px;
+}
+
+#ManageRight h2
+{
+  margin: 0;
+  margin-top: 10px;
+}
+
+#ManageRight h3
+{
+  margin: 0;
+}
+
+#MTeamTable
+{
+  padding: 0px 10px;
+}
+
+/*#students*/
+.MStudentSelect
+{
+  background: #888;
+  padding: 3px;
+  margin: 5px;
+  margin-top: 0px;
+  width: 180px;
+  border: 2px double #000;
+}
+
+div.MStudentInfo
+{
+  float: left;
+  width: 210;
+  padding: 0px;
+  margin: 0px 15px;
+  background: #111;
+  -moz-box-shadow: 2px 2px 15px 2px #444;
+  -webkit-box-shadow: 2px 2px 15px 2px #573800;
+}
+
+div.MStudentInfo label
+{
+  margin-bottom: 0px;
+}
+
+input.Mtext
+{
+  background: #888;
+  padding: 3px;
+  margin: 5px;
+  margin-top: 0px;
+  width: 180px;
+  border: 2px double #000;
+}
+
+input.Mbutton
+{
+  width: 70px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+div.MStudentInfo h3
+{
+  padding-top: 5px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/*##############################################################################*/
+/*                              Styles For Progress                             */
+/*##############################################################################*/
+#ProgressMain
+{
+	clear: left;
+	float: left;
+	width: 1000px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+  background: #2c2c2c;
+  font-weight: bold;
+  color: #CDAB31;
+}
+
+#ProgressMain h1
+{
+  padding-top: 10px;
+  padding-bottom: 25px;
+  margin: 0;
+}
+
+#ProgressMain hr
+{
+  height: 1px solid #999;
+  border-left: none;
+  border-right: none;
+  margin: 0;
+  padding: 0;
+}
+
+#ProgressMain p
+{
+  padding-top: 10px;
+  padding-bottom: 0px;
+  margin: 0;
+}
+
+#PHeader
+{
+  width: 950px;
+  height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-bottom: 15px;
+  /*#FEAA16;*/
+  -moz-box-shadow: 2px 2px 15px 2px #573800;
+  -webkit-box-shadow: 2px 2px 15px 2px #111;
+}
+
+table.PTable
+{
+  width: 932px;
+  background: #1d1d1d;
+  border: 1px solid #000;/*#CDAB31;*/
+}
+
+#PHeadTable
+{
+  text-align: center;
+}
+
+tr.PHeadRow
+{
+  color: #CDAB31;
+}
+
+tr.PRow
+{
+  background: #888;
+  /*color: #000000;*/
+}
+
+td.PTeamName
+{
+  /*width: 184px;*/
+}
+
+td.PTeamMember
+{
+  width: 183px;
+}
+
+td.PStats
+{
+  width: 138px;
+  text-align: center;
+}
+
+/*##############################################################################*/
+/*                               Styles For Hints                               */
+/*##############################################################################*/
+#CustomHeader
+{
+	clear: left;
+	float: left;
+	width: 450px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	border-right: 2px solid #000;
+	border-bottom: 2px solid #000;
+  background: #2c2c2c;
+  font-weight: bold;
+  color: #CDAB31;
+}
+
+#PreDefHeader
+{
+	float: right;
+	width: 548px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	border-bottom: 2px solid #000;
+	font-weight: bold;
+  background: #2c2c2c;
+  color: #CDAB31;
+}
+
+#HintsLeft
+{
+	float: left;
+	width: 450px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+  background: #2c2c2c;
+  font-weight: bold;
+  color: #CDAB31;
+}
+
+#HintsLeft h3
+{
+  padding-top: 20px;
+  margin: 0;
+}
+
+#HintsLeft hr
+{
+  height: 1px solid #999;
+  border-left: none;
+  border-right: none;
+  margin: 0;
+  padding: 0;
+}
+
+#HintsLeft p
+{
+  padding-top: 20px;
+  padding-bottom: 0px;
+  margin: 0px;
+}
+
+#CustomHint
+{
+  width: 400px;
+  height: 150px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  background: #999;
+}
+
+#HintsRight
+{
+	float: right;
+	width: 548px;
+	padding: 0px;
+	padding-bottom: 20px;
+	margin: 0px;
+	display: inline;
+	border-left: 2px solid #000;
+  background: #2c2c2c;
+  color: #CDAB31;
+}
+
+#HintsPreDefTop
+{
+	float: right;
+	width: 548px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	font-weight: bold;
+  background: #2c2c2c;
+  color: #CDAB31;
+}
+
+#HintsPreDefRight
+{
+	float: right;
+	width: 274px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	font-weight: bold;
+  background: #2c2c2c;
+  color: #CDAB31;
+}
+
+#HintsPreDefRight p
+{
+  padding-top: 20px;
+  padding-bottom: 0px;
+  margin: 0;
+}
+
+#HintsPreDefLeft
+{
+	float: right;
+	width: 274px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	font-weight: bold;
+  background: #2c2c2c;
+  color: #CDAB31;
+}
+
+#HintsPreDefLeft p
+{
+  padding-top: 20px;
+  padding-bottom: 0px;
+  margin: 0;
+}
+
+#HintsPreDefBottom
+{
+	float: right;
+	width: 548px;
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+	font-weight: bold;
+  background: #2c2c2c;
+  color: #CDAB31;
+}
+
+#HintsPreDefBottom p
+{
+  padding-top: 20px;
+  padding-bottom: 0px;
+  margin: 0;
+}
+
+.Hselect
+{
+  width: 180px;
+  background: #999;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
+.Hbutton
+{
+}
+
+#SendPreDef
+{
+  margin-top: 10px;
+}

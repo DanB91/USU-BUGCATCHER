@@ -1,0 +1,5 @@
+bobBuilder tested problem HelloWorld with input: 'Chelynn' and output: 'Hello, Chelynn!'
+<!@!>Bug found!
+<!@!>bobBuilder tested problem QuickAdd with input: '2 2' and output: '4'
+<!@!>Bug found!
+<!@!>

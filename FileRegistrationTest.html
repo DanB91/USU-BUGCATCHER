@@ -1,0 +1,77 @@
+<html>
+<head>
+<title></title>
+
+<script language="javascript" src="Scripts/FileRegistrationTest.js"></script>
+<link rel="stylesheet" href="CSS/FileRegistrationTest.css" type="text/css" />
+
+</head>
+
+<body>
+
+<div id="container">
+	<div id="header">
+    <h1>Administrator</h1>
+    <img src="Images/BannerSmall.gif" height="50" width="175" />
+	</div>
+	<div id="navigation">
+		<ul>
+			<li><a href="#">Competition Setup</a></li>
+			<li><a href="#">Team Management</a></li>
+			<li><a href="#">Progress/Statistics</a></li>
+			<li><a href="#">Hints</a></li>
+      <li><a href="#">Registration</a></li>
+		</ul>
+	</div>
+	<div id="content-container">
+		<div id="RegistrationLeft" align=center>
+    	<div id="RRegistrationForm">
+        <div id="RHeaderBorder"><h2>Registration Form</h2></div>
+        <form onSubmit="event.preventDefault(); return false;" method="get">
+            Number of Students:
+            <input type="text" name="RNumStudents" id="RNumStudents" />
+            <br />
+            <input type="submit" value="Create Form" onClick="JavaScript:CreateForm()" name="submit" />
+        </form>
+        <div id="RFormDownload">A download link will appear here after the form has been created.</div>
+      </div>
+    </div>
+		<div id="RegistrationRight">
+        <div id="RHeaderBorder"><h2>View Login Information Sheet</h2></div>
+
+<form>
+  Competition ID:
+  <select name="RCompetitionID" id="RCompetitionID" class="RSelect" onChange="loadPrintPreview(this)">
+    <option selected class="ROption">Select an ID</option>
+    <option class="ROption">abcd1234</option>
+    <option class="ROption">efgh5678</option>
+  </select>
+</form>
+        
+<textarea cols=34 rows=16 id="RViewArea"></textarea>          
+<div id="RAccountDownload">A download link will appear here when a competition ID is selected above.</div>
+
+    </div>
+    <div id="RegistrationMiddle">
+    	<div id="RFileRegistration">
+        <div id="RHeaderBorder"><h2>File Registration</h2></div>
+        <form action="UploadRegistrationFile.php" method="post" enctype="multipart/form-data">
+            <label for="file">Filename:</label>
+            <input type="file" name="file" id="file" /> 
+            <br />
+            <input type="submit" value="Register" name="RUploadFile" />
+        </form>
+        <div id="RFileRegistrationText">Currently the only supported filetypes are ".txt" and ".xml". Files must also follow the <a href="FormattingGuidelines.html" target="_blank">formatting guidelines</a>.</div>
+        <iframe id="RTarget" name="RTarget" src="#" style="width:0;height:0;border:0px solid #000;"></iframe>
+			</div>
+    </div>
+		<div id="footer">
+			<p>Copyright © MAMAN, 2012</p>
+		</div>
+	</div>
+	<div class="nooverflow">&nbsp;</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+Problem 4 
+student: Tested input 0 and Expected output 0;0;0;0<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input 3 and Expected output 0:0:0:3<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input 60 and Expected output 0:0:1:0<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input 61 and Expected output 0:0:1:1<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input -1 and Expected output Error: Bad Input<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input hello and Expected output Error: Bad Input<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input 100 and Expected output 0:0:1:40<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input 120 and Expected output 0:0:2:0<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input 120 and Expected output 0:0:2:0.0<!@!>Buggy Output: 0:0:2:0.0
+Found a bug!!!
+<!@!>Problem 4 
+student: Tested input 60.4 and Expected output 0:0:1:0.4<!@!>student: Did not find a bug.
+<!@!>Problem 4 
+student: Tested input 3600 and Expected output 0:1:0:0.0<!@!>Buggy Output: Found a bug!!!
+<!@!>Problem 3 
+student: Tested input 1 over 0 and Expected output reare<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 1 over 0 and Expected output Infinity<!@!>Buggy Output: Infinity
+Found a bug!!!
+<!@!>Problem 3 
+student: Tested input 1 over 0 and Expected output infinity<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 plus 0 and Expected output 5<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 plus 6 and Expected output 11<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 plus 6 and Expected output 11.0<!@!>Buggy Output: 11.0
+Found a bug!!!
+<!@!>Problem 3 
+student: Tested input 5 minus 5 and Expected output 0<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 minus 5 and Expected output 0.0<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 *6 and Expected output 30.0<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 times 6 and Expected output 30<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 10 over 4 and Expected output 2.5<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 10 over 4 and Expected output 2.5<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 times 5 and Expected output 25.5<!@!>student: Did not find a bug.
+<!@!>Problem 3 
+student: Tested input 5 times 5 and Expected output 25.0<!@!>Buggy Output: 25.0
+Found a bug!!!
+<!@!>student: hey<!@!>student: I'm lonely<!@!>student: someone talk to me<!@!>student: please<!@!>Problem 2 
+student: Tested input 10 0 0 and Expected output $10.00<!@!>student: Did not find a bug.
+<!@!>

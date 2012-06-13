@@ -1,0 +1,12 @@
+
+
+public class Reverse{
+	
+   public static String reverseIt(String s){
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>      String reversed = "";</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>      for (int i = 1; i < s.length(); i++)</SPAN><br />         {
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>            char letter = s.charAt(i);</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>            reversed = letter + reversed;</SPAN><br />         }
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>      return reversed;</SPAN><br />   }
+	
+   public static void main(String[] args){
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>      String toReverse = args[0].toLowerCase();</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>      System.out.println(reverseIt(toReverse));</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>   }</SPAN><br />
+}

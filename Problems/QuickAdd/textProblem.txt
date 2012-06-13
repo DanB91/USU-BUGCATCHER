@@ -1,0 +1,10 @@
+
+
+public class QuickAdd{
+	
+   public static void main(String[] args){
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>      double num1 = Double.parseDouble(args[0]);</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>      double num2 = Double.parseDouble(args[1]);</SPAN><br />		
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>      double sum = num1 - num2;</SPAN><br />		
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>      System.out.println(sum);</SPAN><br />		
+<SPAN style='BACKGROUND-COLOR: #66CCCC'>   }</SPAN><br />
+}

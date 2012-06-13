@@ -1,0 +1,17 @@
+var string_ProgStat = '<div id="ProgressMain" align=center>';
+string_ProgStat +=  '  <h2>Progress & Statistics</h2>';
+string_ProgStat +=  '  <div name="PHeader" id="PHeader">';
+string_ProgStat +=  '   <table class="PTable" rules="all" id="PHeadTable">';
+string_ProgStat +=  '    <tr class="PHeadRow">';
+string_ProgStat +=  '      <td class="PTeamName">Team Name</td>';
+string_ProgStat +=  '      <td class="PTeamMember">Team Captain</td>';
+string_ProgStat +=  '      <td Class="Pstats">Bugs found</td>';
+string_ProgStat +=  '      <td Class="PStats">Time of last bug found</td>';
+string_ProgStat +=  '      <td Class="PStats">Total time of bugs found</td>';
+string_ProgStat +=  '      <td Class="PStats">Place</td>';
+string_ProgStat +=  '    </tr>';
+string_ProgStat +=  '  </table>';
+string_ProgStat +=  '  <div id="PTeamTables"></div>';
+string_ProgStat +=  '  </div>';
+string_ProgStat +=  '</div>';
+string_ProgStat +=  '';

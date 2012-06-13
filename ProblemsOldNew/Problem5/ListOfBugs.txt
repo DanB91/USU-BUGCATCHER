@@ -1,0 +1,7 @@
+Bug number  Line of code where the bug is located  Description of bug
+
+1           5      	Right angle is 90, changed to 95.
+2           25		Doesn't return "not a triangle" if angles are too small.	
+3           27      Returns a right triangle as an obtuse
+4           14      Finds the wrong biggest angle sometimes.
+5           57      logic error	(if one angle equals 0, get wrong result)				

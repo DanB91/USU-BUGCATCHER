@@ -1,0 +1,56 @@
+Problem 2
+ 
+public class Flooring{
+ private double length = 0;
+ private double width = 0;
+ private int type = 0;
+ private static double shagCarpet = 1.00;
+ private static double linoleum = 2.50;
+ private static double hardwood = 5.00;
+ public static final int SHAG = 1;
+ public static final int LINO = 2;
+ public static final int WOOD = 3;
+   
+public Flooring(double len, double wid, 
+      int typ)
+ {
+   length = len;
+   width = wid;
+   type = typ;
+ }
+  
+private double computeArea(double len, double wid)
+ {
+   return len + wid;
+ }
+  
+private double price()
+ {
+   double area = computeArea(width, width);
+   double price = 2*area;
+   if(type == SHAG)
+      price *= shagCarpet;
+   else if(type == LINO)
+      price *= linoleum;
+   else
+      price *= hardwood;
+   return price;
+ }
+
+public static void main(String[] args) {
+ 
+ double length = Double.parseDouble(args[0]);
+ double width = Double.parseDouble(args[1]);
+ int type = Integer.parseInt(args[2]);
+
+ if(length <= 0 || width <= 0 ||type <= 0 || 
+      type > 3)
+ {
+   System.out.println("Invalid Input Value(s)");
+   return;
+ }
+           
+   Flooring flr = new Flooring(length,
+      width, type);
+   System.out.printf("$"+"%1$.2f\n", flr.price());        
+}

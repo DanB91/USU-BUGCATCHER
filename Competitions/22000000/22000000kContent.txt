@@ -1,0 +1,30 @@
+danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '4 5' and output: '9'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 7' and output: '12'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '4 5' and output: '9'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '8' and output: '7'
+<!@!>Bug not found!
+<!@!>danb91 tested problem HelloWorld with input: 'j' and output: 'Hello, j!'
+<!@!>Bug found!
+<!@!>danb91 tested problem HelloWorld with input: 'j' and output: 'Hello, j!'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 4' and output: '9'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem SalePrice with input: '80 9' and output: '9'
+<!@!>Bug not found!
+<!@!>danb91 tested problem SalePrice with input: '100 9' and output: '91'
+<!@!>

@@ -1,0 +1,55 @@
+Student Help
+
+
+Registering and Getting Started
+
+Registration
+You must register to take part in the competition.  Enter your first name, last name, school, select your state, and choose a username and password.  Make sure student is selected as your user type, then click "Register".  This will create an account for you.
+
+Logging In
+Once you have registered, you need to log in.  Enter the username and password you chose, then wait for the administrator to give you the competition ID.  Again, make sure the user type selected is student.  Then click "Log In".
+
+Teams
+Now that you have logged in, you need to be on a team to compete (it is possible to be a team all by yourself).  The administrator will create your teams, please wait patiently for further instructions from him.  When everyone is on a team, the administrator will begin the competition.
+
+
+Competing
+
+Time Left
+There is a countdown timer in the top left corner, this displays how many minutes are left in the competition.  The competition administrator has the ability to pause this timer, if he does so, you will be unable to enter test cases until he resumes the competition.
+
+Requirements
+There is a requirements section on the left edge of the window.  This contains information about how the code in that problem should be working.  It also gives you instructions on how to format your input.
+
+Uncovering a Bug
+If the code returns an unexpected or incorrect value, then a bug is uncovered.  For example: if I enter into a calculator program 2 * 3, I expect to get a 6 for my answer.  If the program has a bug or mistake, then it will return something other than 6, and I have uncovered a bug.
+
+Entering a Test Case
+The test case input is on the right side of the window.  Here you can enter test cases to uncover bugs.  To enter a test case, follow the format given in the requirements section and place your input in the "Test Input" text box.  Then enter in the "Expected Output" text box the output you would expect if the program were functioning properly.  Then click "Test For Bug!".  Your results box will display whether you found a new bug, a repeat bug, or did not find a bug.
+
+Test Results
+The results message box is located just below the "Test For Bug!" button.  This message will inform you of whether you have found a new bug, repeat bug, or no bug.
+
+New Bug Found
+If a test case you entered uncovers a new bug in the code, it will display a message telling you that you found a bug.  If you find a bug, your window will also display an animation of a bug being stomped and increase the count of bugs found.
+
+Repeat Bug Found
+If your input uncovered a bug you have already uncovered, you will get a message in your results box telling you that you have already found that bug.
+
+No Bug Found
+If your input did not uncover a bug, you will get a message in your results box telling you that you did not find a bug.
+
+Navigating Between Problems
+Your competition may have 1 to 5 problems.  To work on a problem, the team captain must click the tab with the label for that problem.  Only the team captain is allowed to navigate between problems, and all team members must work on the same problem.
+
+Code Coverage
+Code coverage highlights the code executed by your last test case.  There is an on/off switch for this underneath the problem selection tabs.  The administrator may disable code coverage, if he has, you will not have this option.
+
+Bugs Found
+On the top banner, there is a number labeled "Bugs Found" this number represents the total number of bugs you have found so far.
+
+Scoring and Ranking
+The scores are based on how many bugs you find and how long it took you to find them.  The top three teams will be displayed near the top left corner.
+
+Logging out
+To log out, click the "Log Out" link in the top right corner.  Once you have logged out, you may log back in.

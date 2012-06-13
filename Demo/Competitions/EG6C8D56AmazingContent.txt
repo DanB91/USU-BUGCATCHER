@@ -1,0 +1,10 @@
+Problem 3 
+chelynn: Tested input 2 minus 0 and Expected output 2<!@!>chelynn: Did not find a bug.
+<!@!>Problem 3 
+chelynn: Tested input 2 minus 0 and Expected output 2.0<!@!>Buggy Output: Found a bug!!!
+<!@!>Problem 3 
+chelynn: Tested input 4 over 4 and Expected output 1<!@!>chelynn: Did not find a bug.
+<!@!>Problem 3 
+chelynn: Tested input 4 over 4 and Expected output 1.0<!@!>Buggy Output: 1.0
+Found a bug!!!
+<!@!>

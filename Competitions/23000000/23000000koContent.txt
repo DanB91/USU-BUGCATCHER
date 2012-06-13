@@ -1,0 +1,77 @@
+danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yaa'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Reverse with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Calculator with input: '1 plus 3' and output: '4'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Calculator with input: '1 minus 4' and output: '-3'
+<!@!>danb91 tested problem Encoder with input: 'yay 1' and output: 'zbz'
+<!@!>Bug found!
+<!@!>danb91 tested problem Calculator with input: '4 minus 5' and output: '-1'
+<!@!>danb91 tested problem HelloWorld with input: 'j' and output: 'Hello, j!'
+<!@!>Bug found!
+<!@!>danb91 tested problem HelloWorld with input: 'j' and output: 'Hello, j!'
+<!@!>Bug found!
+<!@!>danb91 tested problem HelloWorld with input: 'j' and output: 'Hello, j!'
+<!@!>Bug found!
+<!@!>danb91 tested problem HelloWorld with input: 'j' and output: 'Hello, j!'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '3 6' and output: '9'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem Calculator with input: '1 plus 4' and output: '5'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Calculator with input: '1 minus 4' and output: '-3'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '3 4' and output: '7'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '4 5' and output: '9'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>danb91 tested problem QuickAdd with input: '5 6' and output: '11'
+<!@!>Bug found!
+<!@!>

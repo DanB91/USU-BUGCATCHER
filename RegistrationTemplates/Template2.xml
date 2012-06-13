@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--***EXAMPLE***
+  <student>
+    <first_name>John</first_name>
+    <last_name>Doe</last_name>
+    <username>MyUsername</username>
+    <password>MyPassword</password>
+    <school_name>Example High School</school_name>
+    <state>NY</state> NOTE: Use 2-letter state abbreviations.
+  </student>
+-->
+
+
+<registration_form>
+
+  <team>
+    <team_name></team_name>
+
+    <!--Student 1 Information-->
+    <student>
+      <first_name></first_name>
+      <last_name></last_name>
+      <username></username>
+      <password></password>
+      <school_name></school_name>
+      <state></state>
+    </student>
+
+    <!--Student 2 Information-->
+    <student>
+      <first_name></first_name>
+      <last_name></last_name>
+      <username></username>
+      <password></password>
+      <school_name></school_name>
+      <state></state>
+    </student>
+</registration_form>

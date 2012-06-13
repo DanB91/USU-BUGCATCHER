@@ -1,0 +1,35 @@
+Problem 6
+
+public class Cipher {
+    
+    public static String encrypt(String plainText, int shift){
+	char[] plainTextArr = plainText.toCharArray();
+	char[] encryptedText = new char[plainTextArr.length];
+    
+	for (int i= 0; i < encryptedText.length - 1; i++){
+	    encryptedText[i] = encryptChar(plainTextArr[i], shift);
+	}
+    
+	return new String(encryptedText);
+  }
+  
+  public static char encryptChar(char plainChar , int shift){
+      if (Character.isLowerCase(plainChar)) {
+ 	  int shiftedChar = (plainChar - 'a') + shift;
+	  shiftedChar = (shiftedChar < 0) ? shiftedChar + 26 : shiftedChar % 26;
+	  return (char) (shiftedChar + 'a');
+      } else {
+	  int shiftedChar = (plainChar - 'A') + shift;
+	  shiftedChar = shiftedChar % 26;
+	  return (char) (shiftedChar + 'A');
+       }
+  }
+
+ public static void main(String[] args){
+	try{
+		System.out.println(Cipher.encrypt(args[0], Integer.parseInt(args[1]));
+	} catch(ArrayIndexOutOfBoundsException e){
+		System.out.println("Invalid Input");
+	}
+ }
+}

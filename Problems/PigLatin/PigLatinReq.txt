@@ -1,0 +1,7 @@
+1. PigLatin takes any number of words, and translates them into pig latin.
+<br/>
+2. If the word starts with a consonant or "ch," "th," or "sh," it moves the letter(s) to the end of the word and adds "-ay"
+<br/>
+3. If the word starts with a vowel or contains only one letter, it simply adds "-ay" to the end of the word.
+<br/>
+4. The output will always be in lowercase.

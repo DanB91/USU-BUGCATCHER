@@ -1,0 +1,3 @@
+Problem 1 
+chelynn: Tested input 3 4 0 and Expected output 0<!@!>chelynn: Did not find a bug.
+<!@!>

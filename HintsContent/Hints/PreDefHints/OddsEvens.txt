@@ -1,0 +1,1 @@
+If you find an odd digit, how much should the count be incremented by?<!@!>Numbers are in a base 10 system, dividing by 10 cuts off the rightmost number, and modding gets the rightmost number.<!@!>If your number is 1, how many odds should it have?<!@!>

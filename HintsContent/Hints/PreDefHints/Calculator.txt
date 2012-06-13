@@ -1,0 +1,1 @@
+Check the order of the inputs passed.<!@!>A modulus operator (%) gets the remainder after division.<!@!>When adding doubles, check to see if you are loosing precision.<!@!>How many times is num2 being counted in the product?<!@!>

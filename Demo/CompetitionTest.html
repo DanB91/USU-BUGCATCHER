@@ -1,0 +1,87 @@
+<html>
+<head>
+<title></title>
+
+<script language="javascript" src="Scripts/Admin.js"></script>
+<link rel="stylesheet" href="CSS/CompetitionTest.css" type="text/css" />
+
+</head>
+
+<body onload=loadTeamNames()>
+
+<div id="container">
+	<div id="header">
+    <h1>Administrator</h1>
+    <img src="Images/BannerSmall.gif" height="50" width="175">
+	</div>
+	<div id="navigation">
+		<ul>
+			<li><a href="#">Competition Setup</a></li>
+			<li><a href="#">Team Management</a></li>
+			<li><a href="#">Progress/Statistics</a></li>
+			<li><a href="#">Hints</a></li>
+		</ul>
+	</div>
+	<div id="content-container">
+		<div id="CompMain" align=center>
+      <h1>Competition Setup</h1>
+      <div id="CsetupForm" align=center>
+        <form onSubmit="event.preventDefault(); createCompetition(); return false;" method="GET">
+        
+          Select Mode:<br>
+          <select name="Mode" id="Mode" class="Cselect">
+            <option value=0>Requirements & Code</option>
+            <option value=1>Requirements, Code, & Code Coverage</option>
+          </select><br>
+
+          Select Number of Problems:<br>
+          <select name="NumOfProblems" id="NumOfProblems" class="Cselect">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+          </select><br>
+
+          Allow Hints:<br>
+          <select name="AllowHints" id="AllowHints" class="Cselect">
+            <option value=1>YES</option>
+            <option value=0>NO</option>
+          </select><br>
+
+          Competition Time (mins):<br>
+          <input name="CompTime" id="CompTime" class="Ctext"><br>
+
+          <input type="submit" value="Setup Competition" name="submit" id="submit" class="Cbutton"><br><br>
+        </form>
+      </div>
+		</div>
+		<div id="CompRight" align=center>
+      <h1>Selected Settings</h1>
+      <div id="CsettingsForm" align=center>
+        Mode:<br>
+        <input name="ModeSet" id="ModeSet" class="Ctext" disabled><br>
+
+        Number of Problems:<br>
+        <input name="NumOfProblemsSet" id="NumOfProblemsSet" class="Ctext" disabled><br>
+
+        Hints Allowed:<br>
+        <input name="AllowHintsSet" id="AllowHintsSet" class="Ctext" disabled><br>
+
+        Competition Time(mins):<br>
+        <input name="CompTimeSet" id="CompTimeSet" class="Ctext" disabled><br>
+        
+        Competition ID:<br>
+        <input name="CompIDSet" id="CompIDSet" class="Ctext" disabled><br>
+      </div>
+    </div>
+		<div id="footer">
+			<p>Copyright © MAMAN, 2012</p>
+		</div>
+	</div>
+	<div class="nooverflow">&nbsp;</div>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+1. Longest block takes in a word or series of letters, and returns the maximum number of times any letter occurs consecutively.
+<br />
+2. "aabbbcddb" would return 3, for example, because there are 3 'b's in a row.
+<br />
+3. Capital and lower case letters are counted as distinct.

@@ -1,0 +1,1 @@
+<font color='#551D00'> Admin: Hint for HelloWorld.<br>9 times out of 10, it's just a simple typo.</font><!@!>

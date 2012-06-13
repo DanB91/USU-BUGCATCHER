@@ -1,0 +1,3 @@
+student tested problem SalePrice with input: '100 1' and output: '99'
+<!@!>Bug found!
+<!@!>

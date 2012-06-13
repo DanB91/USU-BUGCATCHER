@@ -1,0 +1,43 @@
+<div id="CustomHeader" align=center>
+      <h2>Custom Hint</h2>
+    </div>
+    <div id="PreDefHeader" align=center>
+      <h2>PreDef Hint</h2>
+    </div>
+		<div id="HintsLeft" align=center>
+      <p>Enter a Custom Hint:</p>
+	  <form onsubmit="event.preventDefault(); sendHintsCust(CustomHint.value); " method="get">
+      <textarea name="CustomHint" id="CustomHint" onfocus="if(this.value==this.defaultValue) {this.value='';}" wrap="physical">Custom Hints (click here)
+      </textarea ><br>
+      <input type="submit" name="submitCust" id="SendCustom" value="Send Custom Hint" class="Hbutton">
+	  </form >
+		</div>
+		<div id="HintsRight" align=center>
+      <div id="HintsPreDefTop">
+        <div id="HintsPreDefRight">
+          <p>Select Hint to View:</p>
+          <div id="HintNum" >
+            <select name="HHintNum" id="HHintNum" size=7 class="Hselect">
+            </select>
+          </div>
+        </div>
+        <div id="HintsPreDefLeft">
+          <p>Select Problem Number:</p>
+          <select name="HProbNum" id="HProbNum" size=5 class="Hselect" onchange=showPre(this.value);>
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+          </select>
+        </div>
+      </div>
+      <div id="HintsPreDefBottom">
+        <div id="HintText">
+          <p>Hint text will appear here when hint number is selected.</p>
+        </div>
+		<form onsubmit="event.preventDefault(); sendHintPreDef();">
+        <input type="submit" name="SendPreDef" id="SendPreDef" value="Send Pre-Defined Hint" class="Hbutton">
+		</form>
+      </div>
+		</div>

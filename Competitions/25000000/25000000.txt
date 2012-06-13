@@ -1,0 +1,6 @@
+1
+Blank
+0
+70
+SalePrice
+0

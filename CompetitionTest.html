@@ -1,0 +1,99 @@
+<html>
+<head>
+<title></title>
+
+<script language="javascript" src="Scripts/Admin.js"></script>
+<link rel="stylesheet" href="CSS/CompetitionTest.css" type="text/css" />
+
+</head>
+
+<body>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+<div id="container" class="gradient">
+	<div id="header">
+    <div id="header-logo"><img src="Images/BannerSmall.gif" height="50" width="175" /></div>
+    <div id="header-title"><h1>Administrator</h1></div>
+    <div id="header-controls">
+    	<img src="Images/PlayButton.png" height="50" width="50" onclick=setupCompetition(); />
+      <img src="Images/PauseButton.png" height="50" width="50" onclick=pauseTimer(); />
+    </div>
+    <div id="header-timer"></div>
+  </div>
+	<div id="navigation" class="gradient">
+		<ul>
+			<li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" >Competition Setup</a></li>
+			<li><a id="navManage" class="navNormal" href="JavaScript:setManage()">Team Management</a></li>
+			<li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" >Progress/Statistics</a></li>
+			<li><a id="navHints" class="navNormal" href="JavaScript:setHints()" >Hints</a></li>
+		</ul>
+	</div>
+  <div id="Content">
+		<div id="CompLeft">
+    	<h2>Competition Settings</h2>
+      <div id="CsetupForm">
+        <form name="CompForm" id="CompForm" onSubmit="event.preventDefault(); createCompetition(); return false;" method="GET">
+        
+          <u>Allow Code Coverage</u><br />
+          <div class="Cradio-container">
+            <input type="radio" class="Cradio-left" name="AllowCoverage" id="AllowCoverage" value="1" /> Yes 
+            <input type="radio" class="Cradio-right" name="AllowCoverage" id="AllowCoverage" value="0" /> No 
+          </div><br />
+
+          <u>Allow Hints</u><br />
+          <div class="Cradio-container">
+            <input type="radio" class="Cradio-left" name="AllowHints" id="AllowHints" value="1" /> Yes 
+            <input type="radio" class="Cradio-right" name="AllowHints" id="AllowHints" value="0" /> No 
+          </div><br />
+
+          <u>Competition Time (mins)</u><br />
+          <input name="CompTime" id="CompTime" class="Ctext" /><br />
+
+          <input type="submit" value="Setup Competition" name="CSetupButton" id="CSetupButton" class="Cbutton" onClick="createCompetition()" /><br /><br />
+          
+        </form>
+        <div id="CSetupError" class="Cerror-normal"></div>
+      </div>
+    </div>
+    <div id="CompRight">
+    	<h2>Problem Selection</h2>
+    	<form>
+          <u>Available Problems</u><br />
+          <select name="ProblemsList" id="ProblemsList" class="Cselect" size="8" onChange="document.getElementById('CTextArea').value=this.options[this.selectedIndex].text;">
+          </select><br />
+          
+          <u>Selected Problems</u><br />
+          <select name="SelectedProblems" id="SelectedProblems" class="Cselect"  size="5">
+          </select>
+          
+          <input type="submit" value="Move Up" name="CMoveUp" id="CMoveUp" class="Cbutton-small" onClick="moveProblemUp()" />
+          <input type="submit" value="Move Down" name="CMoveDown" id="CMoveDown" class="Cbutton-small" onClick="moveProblemDown()" />
+       </form>
+    </div>
+    <div id="CompMiddle">
+      <h2>Problem Preview</h2> 
+      <div id="CPreview">
+        <textarea cols="54" rows="18" id="CTextArea" disabled></textarea>          
+        <form onSubmit="event.preventDefault(); return false;" method="get">
+            <input type="submit" value="Add Problem" onClick="addProb(ProblemsList.value)" name="submit" class="Cbutton-preview"/>
+            <input type="submit" value="Remove Problem" onClick="removeProb(SelectedProblems.value)" name="submit"  class="Cbutton-preview"  disabled />
+        </form>
+      </div>
+    </div>
+  </div>
+	<div id="footer" class="gradient">
+    <p>Copyright © MAMAN, 2012</p>
+  </div>
+	<div class="nooverflow">&nbsp;</div>
+</div>
+
+</body>
+
+</html>

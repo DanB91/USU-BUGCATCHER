@@ -1,0 +1,11 @@
+1. The Flooring Problem calculates the cost of a flooring material for the size of a room.
+<BR/>
+2. It accepts as parameters a length, width, and type of flooring material. 
+&nbsp; &nbsp; Input should be in the following format: 5 5 1
+&nbsp;TYPES:
+&nbsp; &nbsp; 1- Shag Carpet : $1.00/ft
+&nbsp; &nbsp; 2- Linoleum : $2.50/ft
+&nbsp; &nbsp; 3- Hardwood : $5.00/ft
+<BR/>
+3. It outputs the total cost to cover the size of the floor in the following format
+&nbsp; &nbsp; Output will be in the following format: $4.00
