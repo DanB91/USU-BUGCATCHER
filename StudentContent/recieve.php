@@ -8,7 +8,7 @@
 $compID = $_COOKIE['compID'];
 $userID		= $_COOKIE['userID'];
 
-if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '' && isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '')//If the competition has been created and the user is correctly loged in
+if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '' && isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '')//If the competition has been created and the user is correctly logged in
 {
 
 	$con = mysql_connect("localhost","guest","");
@@ -24,39 +24,40 @@ if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '' && isset($_COOKIE["user
 	{
 	
 		$teamName = $row['teamName'];
-		$file=file("../Competitions/${compID}/${compID}${teamName}Content.txt",FILE_IGNORE_NEW_LINES);//Open the file in an array
+		$contents=file("../Competitions/${compID}/${compID}${teamName}Content.txt",FILE_IGNORE_NEW_LINES);//Open the file in an array
+		$hints = file("../Competitions/${compID}/${compID}Content.txt", FILE_IGNORE_NEW_LINES);//Open the file in an array
+		
+		$contentCount=count($contents);
+		$hintCount=count($hints);
 
-		$contentString = '';//Used to hold the contesnts of the chat file
+		$arrayToReturn=array();
 
-		for($line=0;$line<count($file);$line++){
 
-			$messageArr=explode("<!@!>",$file[$line]);//Seperate the chat file in to pieces by using "<!@!>" as a delimiter
-			$count = count($messageArr);
+		//get remaining contents
+		for($line=0 ;$line<$contentCount; $line++){
+			$arrayToReturn = array_merge($arrayToReturn, explode("<!@!>",$contents[$line]));
+			//explode seperates the array based on the delimeter <!@!>
+		}
+		//if not all hints were used, put in the rest
+		for($line=0 ;$line<$hintCount; $line++){
+			$arrayToReturn= array_merge($arrayToReturn, explode("<!@!>",$hints[$line]));
+		}
+		date_default_timezone_set('America/Denver');
+   		$date=((date('H')*60)+date('i'))*60+date('s');
+		
+		//append currentServerTime to end of array
+		array_splice($arrayToReturn, count($arrayToReturn)-1, 0, $date);
 
-			for($i = 0; $i < $count; $i++)//Store the array in contentString
-			{
-				$contentString .= $messageArr[$i]."<br>";
-			}
-
+		for($i=0; $i<count($arrayToReturn);){
+				if($arrayToReturn[$i]=="")
+					array_splice($arrayToReturn, $i, 1);
+				else
+					$i++;
 		}
 		
-		//The following bit code is used to append any hints or messages from the admin to contentString before it is returned.
-		//Note that all admin messages or hints will be displayed at the bottom of the chat box
-		$adminContent = file("../Competitions/${compID}/${compID}Content.txt", FILE_IGNORE_NEW_LINES);
-		
-		for($line=0;$line<count($adminContent);$line++){
+		$arrayToReturn = json_encode($arrayToReturn);
 
-			$messageArr=explode("<!@!>",$adminContent[$line]);//Seperate the array based on the delimeter <!@!>
-			$count = count($messageArr);
-
-			for($i = 0; $i < $count; $i++)//Print array
-			{
-				$contentString .= $messageArr[$i]."<br>";
-			}
-
-		}
-		
-		echo $contentString;//Echo back the contentString see student.js for more details.
+		echo $arrayToReturn;//Echo back the arrayToReturn see student.js for more details.
 		mysql_close($con);
 	}
 	else

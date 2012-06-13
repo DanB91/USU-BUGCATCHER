@@ -1,0 +1,9 @@
+Triangle classifies a triangle given the value of its angles.
+LINE 8: Right angle is set to 93.
+LINE 28: Doesn't return "not a triangle" if angles are less than 180.
+LINE 30: Right angle returns "obtuse".
+LINE 13: Returns the wrong angle sometimes.
+LINE 23: Doesn't return "Invalid input" if one of the angles is 0.
+
+
+

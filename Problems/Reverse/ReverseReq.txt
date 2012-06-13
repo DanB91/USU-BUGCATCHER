@@ -1,3 +1,5 @@
-1. Reverse takes in a word, and returns it in reverse.
+1. Reverse takes in a single word, and returns it in reverse.
 <br/>
 2. All characters' case should be the same in the output, and reverse should handle any characters except whitespace. 
+<br/>
+3. If given multiple words, reverse will return only the first reversed.

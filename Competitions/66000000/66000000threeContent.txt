@@ -1,0 +1,1 @@
+40099<!@!>[Test, taratoo, Reverse]<br>Input: 'hi'<br>Expected output: 'ih'<br>Actual Output: 'i'<br>Bug found!<!@!>40128<!@!>[Test, taratoo, Reverse]<br>Input: 'Hi'<br>Expected output: 'iH'<br>Actual Output: 'ih'<br>Bug found!<!@!>

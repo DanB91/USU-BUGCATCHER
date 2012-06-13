@@ -36,9 +36,13 @@ public class Converter_Bug1 {
          return days + ":" + hours + ":" + minutes + ":" + seconds;
      }      
      
-   public static void main(String[] args) {
-       double num = Double.parseDouble(args[0]);
-       String answer = convertSecsToTime(num);
-       System.out.println(answer);
-   }    
+    public static void main(String[] args) {
+        try{
+            double num = Double.parseDouble(args[0]);
+            String answer = convertSecsToTime(num);
+            System.out.println(answer);
+        }catch(Exception e){
+            System.out.println("Error: Bad Input");
+        }
+    }
 }

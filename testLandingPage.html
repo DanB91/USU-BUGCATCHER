@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <script language="javascript" src="Scripts/landingPage.js"></script>
+		<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body onload=loadComps();>
+    <div id="headerSplash"></div>
+    <div class="leftColBody" style="margin: 0 auto; width: 1000px;">
+        <div id="left" style="float: left; width: 250px; margin: 30px 0 0 20px;">
+            <p id="smallerHeader" style="color:#000;">Available Competitions</p>
+            <div id="temp">Press refresh</div>
+    <!--        <input type="submit" value="Refresh" >-->
+            <a class="button" onClick="loadComps()"><p>Refresh</p></a>
+            
+        </div><!--end left-->
+        <div id="right" style="float: left; widht:600px; margin: 30px 0 0 50px;">
+            <p id="smallerHeader" style="color:#000;">Competition Information</p>
+            <div><textarea rows="10" cols="30" id="displayInfo"></textarea></div>
+    <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
+            <a class="button" onClick="joinComp()"><p>Join Competition</p></a>
+        </div><!--end right-->
+         <div class="nooverflow"></div>
+        </div><!--end threecolbody-->
+         <div class="nooverflow"></div>
+     <div id="footer" style="margin: 0 auto;">
+     </div>
+        
+    </body>
+</html>

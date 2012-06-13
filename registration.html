@@ -1,74 +1,70 @@
-<html>
-    
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
-<title></title>
+<title>Registration</title>
 
 <script language="javascript" src="Scripts/registrationIndex.js"></script>
 <script language="javascript" src="Scripts/States.js"></script>
-<link rel="stylesheet" href="CSS/index.css" type="text/css" />
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
 
 </head>
 
 <body onload=loadIndex()>
 
 <div id="container">
-	<div id="header">
-    <img src="Images/BugCatcherLogo.png" id="banner">
-	</div>
-	<div id="header-bar">
-	</div>
-	<div id="content-container">
-		<div id="IndexLeft" align=center>
-      <h2>Registration</h2>
-      <div id="WelcomeText">
-        <p>Fill out the form to the right to create an account</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <div id="Signature"><p></p></div>
-      </div>
-		</div>
-		<div id="IndexMiddle" align=center>
-      <h3>Registered</h3>
-      <div name="RegistrationError" id="RegistrationError"></div>
-      <div id="Registration">
-        <form name="RegistrationForm" method="get" onsubmit="event.preventDefault(); OnRegister(); return false;">
-          <p>First Name</p>
-          <input type="text" id="Registrationfirstname" name="Registrationfirstname" class="Itext"><br>
-          <p>Last Name</p>
-          <input type="text" id="Registrationlastname" name="Registrationlastname" class="Itext"><br>
-          <p>School Name</p>
-          <input type="text" id="Registrationschoolname" name="Registrationschoolname" class="Itext"><br>
-          <p>State</p>
-          <div id="StateSelection"><select name="Registrationstate" id="Registrationstate"></select></div>
-          <!-- <input type="text" id="Registerstate" name="Registerstate" class="Itext"><br> -->
-          <p>Username</p>
-          <input type="text" id="Registrationusername" name="Registrationusername" class="Itext"><br>
-          <p>Password</p>
-          <input type="password" id="Registrationpassword" name="Registrationpassword" class="Itext"><br>
-          <p>Usertype</p>
-          <div id="RegistrationRadioBox" class="RadioBox">
-            <input type="radio" name="Registrationusertype" id="Registrationusertype" value="admin" class="Iradio">Admin
-            <input type="radio" name="Registrationusertype" id="Registrationusertype" value="student" checked class="Iradio">Student<br>
-          </div>
-          <input type="submit" value="Register" class="Ibutton">
-        </form>
-      </div>
+	<div id="headerSplash">
+	    <h1>Bug Catcher</h1>
     </div>
+	
+    <div id="content-container">       
+		<div id="OneCol">
+        	<div name="RegistrationError" id="RegistrationError"></div>
+        	<div id="Registration">
+                <form class="form" style="width: 610px;" name="RegistrationForm" method="get" onSubmit="event.preventDefault(); OnRegister(); return false;">
+					<div class="formHeader"><h3 class="formHeadText">register</h3></div>
+                    <fieldset>
+                    <div id="formColLeft">
+                        <p>First Name</p>
+                        <input type="text" id="Registrationfirstname" name="Registrationfirstname" class="Itext"><br>
+                        <p>Last Name</p>
+                        <input type="text" id="Registrationlastname" name="Registrationlastname" class="Itext"><br>
+                        <p>School Name</p>
+                        <input type="text" id="Registrationschoolname" name="Registrationschoolname" class="Itext"><br>
+                        <p>State</p>
+                        <div id="StateSelection"><select name="Registrationstate" id="Registrationstate"></select></div>
+                        <!-- <input type="text" id="Registerstate" name="Registerstate" class="Itext"><br> -->
+                    </div><!--end formColLeft"-->
+                    <div id="formColRight">
+                        <p>Username</p>
+                        <input type="text" id="Registrationusername" name="Registrationusername" class="Itext"><br>
+                        <p>Password</p>
+                        <input type="password" id="Registrationpassword" name="Registrationpassword" class="Itext"><br>
+                        <p>Usertype</p>
+                        <div id="RegistrationRadioBox" class="RadioBox">
+                            <input type="radio" name="Registrationusertype" id="Registrationusertype" value="admin" class="Iradio">Admin<br />
+                            <input type="radio" name="Registrationusertype" id="Registrationusertype" value="student" checked class="Iradio">Student<br />
+                        </div><!--end RegistrationRadioBox-->
+                    </div><!--end formColRight-->
+                  
+                    <input id="RegisterButton" type="submit" value="Register" class="Ibutton">
+                    </fieldset>
+                    <div id="formFooter"></div>
+                </form>
+            </div><!--end Registration-->
+        </div><!--end OneCol-->
 
+		<div class="nooverflow">&nbsp;</div>
+		<div name="LoginError" id="LoginError"></div>
 
-      <div name="LoginError" id="LoginError"></div>
-
-      <div class="nooverflow">&nbsp;</div>
-    
-	</div>
-	<div id="footer">
-    <p></p>
-  </div>
+		<div id="footer">
+		</div>
+      
+    </div><!--content-containter-->
 	<div class="nooverflow">&nbsp;</div>
-</div>
+</div><!--end container-->
 <div id="JS_Output" style="position: absolute; top: 0px; left: 0px;"></div>
 <div id="LoginResult"></div>
 </body>

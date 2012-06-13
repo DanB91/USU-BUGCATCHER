@@ -1,0 +1,1 @@
+30900<!@!>[Test, mitch.r.adams, QuickAdd]<br>Input: '31 78'<br>Expected output: '109'<br>Actual Output: '-47.0'<br>Bug found!<!@!>

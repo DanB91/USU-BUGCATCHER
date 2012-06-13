@@ -1,0 +1,1 @@
+40803<!@!>[Test, Student1003, HelloWorld]<br>Input: 'K'<br>Expected output: 'Hello, K!'<br>Actual Output: 'Hello,K!'<br>Bug found!<!@!>40812<!@!>[Test, Student1003, HelloWorld]<br>Input: 'j'<br>Expected output: 'Hello, j!'<br>Actual Output: 'Hello,j!'<br>Bug already found!<!@!>

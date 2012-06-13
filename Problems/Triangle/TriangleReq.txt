@@ -2,6 +2,6 @@
 <br/>
 2. If the input of the values are invalid (no bigger than 0 or not integers), or if fewer than three values provided, it will show "Invalid input value".
 <br/>
-3. If the sum of three values of the angle is not equal 180, then it will output the message "Not a Triangle".
+3. If the sum of three values of the angle is not equal to 180, then it will output the message "Not a Triangle".
 <br/>
 4. Otherwise, it will output whether the triangle is a right triangle, obtuse or acute.

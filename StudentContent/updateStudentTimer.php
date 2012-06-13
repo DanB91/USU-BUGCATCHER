@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 
 
@@ -8,9 +8,8 @@ $comp = $_COOKIE['compID'];
 //Opens the file containing the master time of the competition and sends that time to the students
 if(file_exists("../Competitions/${comp}/".$comp."MasterTimer.txt"))
 {
-    $masterTimer = fopen("../Competitions/${comp}/".$comp."MasterTimer.txt","r");
-    echo fgets($masterTimer);
-    fclose($masterTimer);
+    $masterTimer = file("../Competitions/${comp}/".$comp."MasterTimer.txt");
+    echo $masterTimer[0];
 }
 else
     echo "Timer failed to load 000";

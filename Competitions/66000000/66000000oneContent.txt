@@ -1,0 +1,1 @@
+40071<!@!>[Test, tnoble, QuickAdd]<br>Input: '2 2'<br>Expected output: '0'<br>Actual output: '4.0'<br>Bug not found!<!@!>40083<!@!>[Test, tnoble, QuickAdd]<br>Input: '2 2'<br>Expected output: '4'<br>Actual Output: '0.0'<br>Bug found!<!@!>40154<!@!>[Test, tnoble, Reverse]<br>Input: 'hi'<br>Expected output: 'ih'<br>Actual Output: 'i'<br>Bug found!<!@!>

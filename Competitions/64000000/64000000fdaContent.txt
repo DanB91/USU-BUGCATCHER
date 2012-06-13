@@ -1,0 +1,1 @@
+39493<!@!>[Test, tnoble, Triangle]<br>Input: '90 45 45'<br>Expected output: 'Right'<br>Actual Output: 'Acute'<br>Bug found!<!@!>39500<!@!>[Test, tnoble, Triangle]<br>Input: '90 45 45'<br>Expected output: 'Right'<br>Actual Output: 'Obtuse'<br>Bug found!<!@!>

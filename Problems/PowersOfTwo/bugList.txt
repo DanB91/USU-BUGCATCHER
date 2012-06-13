@@ -1,0 +1,1 @@
+LINE12: powerOfTwo = 2 * powerOfTwo;

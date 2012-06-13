@@ -50,17 +50,24 @@ body{
 /*______________________________________________________________________________*/
 #header{
       color: #000000;
+			height: 60px;
       padding: 0px;
       text-align: right;}
 
 #header-left{
       clear: left;
       float: left;
-      text-align: left;
+      font-size: 15px;
+      font-weight: bold;
+			padding: 0px;
+			padding-top: 3px;
+      text-align: center;
       width: 150px;}
 
 #timer{
-      margin-left: 20px;}
+      font-size: 30px;
+      margin: 0px;
+      padding: 0px;}
 
 #header-right{
       float: right;
@@ -77,9 +84,14 @@ body{
       margin-top: 5px;
       width: 85;}
 
-#LogOut{
+#header-logout-help{
       float: right;
+      text-align: center;
       width: 75;}
+
+#header-logout-help img{
+      margin: 0px;
+      margin-top: 2px;}
 
 #BugsFoundText{
       float: right;
@@ -205,18 +217,32 @@ body{
 
 #ReqLabel{
 			clear: left;
-			color: #CDAB31;
+			color: #BF2A0E;
 			float: left;
 			font-weight: bold;
+			height: 26px;
 			padding: 0px;
 			padding-top: 4px;
 			text-align: center;
 			width: 250px;}
 
-#BugTestLabel{
-			color: #CDAB31;
+#ProblemsLabel{
+			border-left: 2px solid #676767;
+			border-right: 2px solid #676767;
+			color: #BF2A0E;
 			float: left;
 			font-weight: bold;
+			height: 26px;
+			padding: 0px;
+			padding-top: 4px;
+			text-align: center;
+			width: 496px;}
+
+#BugTestLabel{
+			color: #BF2A0E;
+			float: left;
+			font-weight: bold;
+			height: 26px;
 			padding: 0px;
 			padding-top: 4px;
 			text-align: center;
@@ -321,26 +347,120 @@ body{
       width: 496px;}
 
 #StudentMiddleTop{
-    float: left;
-    margin-bottom: -10px;
-    margin-top: 5px;
-    width: 496px;}
+      float: left;
+      font-size: .85em;
+      height: 35px;
+      margin-bottom: -10px;
+      margin-top: 5px;
+      text-align: center;
+      width: 496px;}
 
-#SourceTitle{
+#CoverageToggle{
       clear:left;
       float: left;
       margin: 0px;
       padding: 0px;
-      padding-left: 15px;
-      width: 233px;}
+      padding-left: 3px;}
 
-#CoverageToggle{
-      clear: right;
-      float: right;
-      margin: 0px;
-      padding: 0px;
-      padding-right: 15px;
-      width: 233px;}
+#ProblemName{
+			float: left;
+			font-size: 20px;
+			height: 35px;
+			margin: 0px;
+			overflow: hidden;
+			padding: 0px;
+			text-align: center;
+			width: 260px;}
+
+#ProblemsListLink{
+      color: #77f;
+			float: right;
+			margin: 0px;
+			margin-right: 3px;
+			padding: 0px;
+			text-decoration: none;}
+
+/*                                       Pop-Up Area For the List of Problems
+/*______________________________________________________________________________*/
+#PopUpButton{
+      clear: both;
+			float: left;}
+
+#PopUpArea{
+			background: #587736;
+			color: #000;
+			float: right;
+			height: 230px;
+			overflow: hidden;
+			position: relative;
+					left: 0px;
+					top: -8px;
+			text-align: left;}
+			
+.PUA-hidden{
+			height: 0px;
+			width: 0px;
+			z-index: -5;}
+			
+.PUA-showing-1col{
+			width: 125px;
+			z-index: 30;}
+	
+.PUA-showing-2col{
+			width: 265px;
+			z-index: 30;}
+	
+.PUA-showing-3col{
+			width: 405px;
+			z-index: 30;}
+
+#PopUpArea ul{
+			background: #587736;
+			float: left;
+			height: 200;
+			margin-left: 9px;
+			margin-top: 10px;
+			padding: 3px;
+			width: 120px;}
+
+#PopUpArea ul li{
+      list-style-type: none;
+			}
+
+#PopUpArea a{
+			color: #000;}
+
+#Background_Tinted{
+			clear: right;
+			background: #587736;
+			border-radius: 10px;
+			float: right;
+			height: 230px;
+			opacity: .9;
+			overflow: hidden;
+			position: relative;
+					left: 0px;
+					top: -238px;}
+			
+.BT-hidden{
+			height: 0px;
+			width: 0px;
+			z-index: -5;}
+			
+			
+.BT-showing-1col{
+			width: 125px;
+			z-index: 20;}
+	
+.BT-showing-2col{
+			width: 265px;
+			z-index: 20;}
+	
+.BT-showing-3col{
+			width: 405px;
+			z-index: 20;}
+
+/*______________________________________________________________________________*/
 
 #StudentMiddleBottom{
       border-top: 2px solid #676767;

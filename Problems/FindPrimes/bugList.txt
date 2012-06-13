@@ -1,0 +1,5 @@
+FindPrimes lists all the prime numbers less than or equal to the input, separated by commas.
+LINE 12: Will not find the max if it is prime (< should be <=).
+LINE 9: Will break the program if given 3 or less.
+LINE 12: Should check j up to sqrt(i) not (i/2).
+LINE 19: Inserts extra commas when given a value above 5.

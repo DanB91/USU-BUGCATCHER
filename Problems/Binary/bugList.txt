@@ -1,0 +1,3 @@
+Binary converts a double in base 10 to its binary representation.
+LINE13: System.out.print(0)
+LINE17: System.out.print(0);

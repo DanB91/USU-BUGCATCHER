@@ -24,11 +24,13 @@ public class FindPrimes_Bug1 {
 		}
 		return primes;
 	}
-	
-	public static void main(String[] args){
-		int maximum = Integer.parseInt(args[0]);
-		
-		System.out.println(listPrimes(maximum));
-	}
 
+    public static void main(String[] args){
+        try{
+            int maximum = Integer.parseInt(args[0]);
+            System.out.println(listPrimes(maximum));
+        }catch(Exception e){
+            System.out.println("Error: Bad Input");
+        }
+    }
 }

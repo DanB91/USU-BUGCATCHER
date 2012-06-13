@@ -1,6 +1,6 @@
-1
+2
 Blank
 0
-2
-Encoder
+70
+Fibonacci,PowersOfTwo
 0

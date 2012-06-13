@@ -1,0 +1,6 @@
+3
+Blank
+0
+30
+GroupSum,SalePrice,PowersOfTwo
+0

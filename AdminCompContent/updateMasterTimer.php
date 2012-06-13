@@ -5,6 +5,8 @@ $seconds = $_GET['seconds'];
 $comp = $_COOKIE['adminCompID'];
 
 //Opens the file containing the Master Time for the current competition
+//if(!isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')
+//{
 $masterTimer = fopen("../Competitions/${comp}/".$comp."MasterTimer.txt","w");
 
 //Outputs the time to the Master Timer file; accounts for leading zeros
@@ -28,4 +30,7 @@ else
 
 //Closes the Master Timer file
 fclose($masterTimer);
+//}
+//else
+//    echo "updateMasterTimer.php compID not set";
 ?>

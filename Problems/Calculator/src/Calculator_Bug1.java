@@ -35,10 +35,16 @@ public class Calculator_Bug1 {
     }
     
     public static void main(String[] args){
+	    try{
         double num1 = Double.parseDouble(args[0]);
         String sign = args[1];                     
         double num2 = Double.parseDouble(args[2]);
         double answer = doTheMath(num1, num2, sign); 
-        System.out.println(answer);        
+        System.out.println(answer);    
+	    }
+	    catch(Exception e)
+	    {
+		    System.out.println("Error: Bad Input");
+	    }
     }
 }

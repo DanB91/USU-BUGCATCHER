@@ -1,0 +1,1 @@
+Input: "translate to pig latin"  Output: "ranslatet-ay ot-ay igp-ay atinl-ay"

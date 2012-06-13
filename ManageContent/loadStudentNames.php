@@ -8,6 +8,8 @@
 	$teamN = $_GET['q'];
 	$selectName=$_GET["selectName"];
 
+        
+        
 if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')//If competition has been creatd
 {
 	$adminCompID = strtolower($_COOKIE['adminCompID']);
@@ -29,7 +31,7 @@ if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')//If competit
 		  $row2 = mysql_fetch_array($results2);
 		  
 		  $fullName = $row2['lastname'] . ', ' . $row2['firstname'];
-		  $NextOption = "<option> ${fullName} </option>";
+		  $NextOption = "<option> ${fullName}  </option>";
 		  $team_String .= $NextOption;
 		}
 	}

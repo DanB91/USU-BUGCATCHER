@@ -19,55 +19,40 @@ else
         return FALSE;
 }
 }
-function int_to_char($value)
-{
-  $value += 48;
-  if ($value > 57)
-  {
-		$value += 7;
-		mt_srand(time());
-		if (mt_rand(0,1))
-		{
-    	$value += 32;
-		}
-  }
-  return chr($value);
-}
+
 
 function generateCompetitionID($newID,$idCounter){
-    if($newID ==""){
-
-        $key = "";
-        $numCount = 0;
-        $alphaCount = 0;
-        for ($index = 0; $index < $specialNumber; $index++)
-        {
-            $selection = mt_rand(0,1);
-            if ($selection == 0 && $numCount < 4)
-            {
-                $number = mt_rand(1,9);
-                $numCount++;
-            }
-            else
-            {
-            if ($alphaCount < 4)
-            {
-                $number = mt_rand(10,35);
-                $alphaCount++;
-            }
-            else
-            {
-                $number = mt_rand(1,9);
-            }
-            }
-            $character = int_to_char($number);
-            $key = $key.$character;
-        }
-
+    if(trim($newID) == ''){
+  $key = "";
+  mt_srand();
+  $numCount = 0;
+  $alphaCount = 0;
   
-   
-        return strtoupper($key);        
-        
+  for ($index = 0; $index < 8; $index++)
+  {
+    $selection = mt_rand(0,1);
+    if ($selection == 0 && $numCount < 4)
+    {
+        $number = mt_rand(1,9);
+        $numCount++;
+    }
+    else
+    {
+      if ($alphaCount < 4)
+      {
+        $number = mt_rand(10,35);
+        $alphaCount++;
+      }
+      else
+      {
+        $number = mt_rand(1,9);
+      }
+    }
+    $character = int_to_char($number);
+    $key = $key.$character;
+  }
+  //echo '<br>'.$key.' Length:'.strlen($key);
+  return $key;        
     }
     $specialNumber = 8;
     $stringNumber = (string)$idCounter;
@@ -167,7 +152,7 @@ $newTeamIDm = $_GET['newTeamIDm'];
         (
         compTeamIndex int NOT NULL AUTO_INCREMENT,
         PRIMARY KEY(compTeamIndex),
-        teamname varchar(20),
+        teamname varchar(20) UNIQUE,
         Member1name varchar(20),
         Member1ID varchar(20),
         Member2name varchar(20),

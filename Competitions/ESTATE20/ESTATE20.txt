@@ -1,0 +1,6 @@
+6
+Blank
+1
+45
+PowersOfTwo,QuickAdd,SalePrice,Reverse,Binary,Converter
+0
