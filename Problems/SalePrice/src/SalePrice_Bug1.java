@@ -1,4 +1,4 @@
-//BUG 1: LINE 17 does not allow a discount of 0
+//BUG 1: LINE 15 does not allow a discount of 0
 
 public class SalePrice_Bug1 {
 
@@ -9,6 +9,7 @@ public class SalePrice_Bug1 {
 	}
 	
 	public static void main(String[] args){
+	try{
 		double price = Double.parseDouble(args[0]);
 		double discount = Double.parseDouble(args[1]);
 		
@@ -18,5 +19,8 @@ public class SalePrice_Bug1 {
 			double discountedPrice = SalePrice_Bug1.discountedPrice(price, discount);
 			System.out.println(discountedPrice);
 		}
+	}catch(Exception e){
+    	System.out.println("Error: Bad Input");
+    }
 	}
 }

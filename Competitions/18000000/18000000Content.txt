@@ -1,1 +1,0 @@
-<font color='#551D00'> Admin: Hint for PigLatin.<br>You might need to make some ch-ch-changes to this code.</font><!@!><font color='#551D00'> [Hint] LongestBlock.<br>If the curCount is 1, then I have looked at exactly one letter, so what should my current maximum be?</font><!@!>

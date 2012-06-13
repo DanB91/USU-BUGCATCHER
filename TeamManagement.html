@@ -1,0 +1,142 @@
+<html>
+<head>
+<title>Admin</title>
+
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+<script language="javascript" src="Scripts/Admin.js"></script>
+<script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
+<script language="javascript" src="Scripts/AdminTimer.js"></script>
+<script language="javascript" src="Scripts/CountdownTimer.js"></script>
+
+<script language="javascript">
+var compSetLanguage = '';
+var compSetMode = '';
+var compSetProblems = '';
+var compSetHints = '';
+var compSetTime = '';
+var compSetID = '';
+</script>
+
+</head>
+
+<body onload=AdminLoadCheck();>
+
+<div id="container" class="gradient">
+	<div id="header">
+    	<div id="header-remainingTime">
+          	Time remaining
+			<p id="header-timer">00:00</p>
+        </div><!--end header-remainingTime-->
+        <div id="header-controls">
+            <img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); /> 
+        </div><!--end header-controls-->        
+        <p id="adminHeader">Bug Catcher: Administrator</p>
+	</div><!--end header-->
+    
+	<div id="admenu">
+		<div id="navTabs" style="width: 583px; margin: 0 -200px 0 200px;">
+            <ul>
+                <li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Setup</h4></a></li>
+                <li><a id="navManage" class="navNormal" href="JavaScript:setManage()"><h4>Team Management</h4></a></li>
+                <li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" ><h4>Progress/Statistics</h4></a></li>
+                <li><a id="navHints" class="navNormal" href="JavaScript:setHints()" ><h4>Hints</h4></a></li>
+            </ul>
+		</div><!--end navTabs-->
+	</div><!--end navigation-->
+    
+	<div id="Content">
+<!--Do Not Delete The Comment Below This-->
+<!--CONVERSION_STARTS_HERE-->
+    <div id="ManageMain" align=center style="background: #D3FBA7; border: none; height: 380px; margin: 0px; margin-right: 0px; padding-right: 0px; width: 230px;">
+       <h2>Create Team</h2>
+      <form onSubmit="event.preventDefault(); addTeam(); return false;" method="get">
+        <p>Team Name:</p><input type="text" name="MTeamName" id="MTeamName" /><br /><br />
+        <input type="submit" value="Create Team" name="submit" />
+      </form>
+      <hr />
+      <h2>Edit Team</h2>
+      <p>Select A Team:</p>
+      <div id="MTeamList"></div>
+		</div>
+		<div id="ManageRight" style="background: #D3FBA7; border-left: 10px solid #779853; height: 380px;">
+      <div align=center>
+        <h2>Team Information</h2>
+        <div id="MTeamTitle">Please select a team name.</div><br />
+        <div id="MTeamTable">
+          <div name="MStudent1" id="MStudent1" class="MStudentInfo" style="background: #fffded; margin: 0px;">
+            <h3>Student 1</h3>
+            <form id="MForm1" onSubmit="event.preventDefault(); addRemoveStudent('Username_S1', 'Stud1'); return false;" method="get">
+              <label>Name:</label><br />
+              <div id="Member1">
+                <select name="Stud1" id="Stud1" class="MStudentSelect" onChange="currentSelection(this.value)">
+                <option>------Select a Name------</option>
+                </select>
+              </div>
+              <label>Username:</label><br />
+              <input type="text" name="Username_S1" id="Username_S1" value="BugMaster1337" class="Mtext" readonly /><br />
+              <label>School:</label><br />
+              <input type="text" name="School_S1" id="School_S1" value="Example University" class="Mtext" readonly /><br />
+              <label>State:</label><br />
+              <input type="text" name="State_S1" id="State_S1" value="NW" class="Mtext" readonly /><br />
+                  <input type="hidden" name="selectName" id="selectName" value="Stud1" />
+              <input type="submit" value="Add" name="add1" id="add1" class="Mbutton" />
+              <input type="submit" value="Remove" name="remove1" id="remove1" class="Mbutton" />
+            </form>
+          </div>
+          <div name="MStudent2" id="MStudent2" class="MStudentInfo" style="background: #fffded; margin: 0px 5px;">
+            <h3>Student 2</h3>
+            <form id="MForm2" onSubmit="event.preventDefault(); addRemoveStudent('Username_S2', 'Stud2'); return false;" method="get">
+              <label>Name:</label><br />
+              <div id="Member2">
+                <select name="Stud2" id="Stud2" class="MStudentSelect" onChange="currentSelection(this)">
+                <option>------Select a Name------</option>
+                </select>
+              </div>
+              <label>Username:</label><br />
+              <input type="text" name="Username_S2" id="Username_S2" value="Insecticider" class="Mtext" readonly /><br />
+              <label>School:</label><br />
+              <input type="text" name="School_S2" id="School_S2" value="Example University" class="Mtext" readonly /><br />
+              <label>State:</label><br />
+              <input type="text" name="State_S2" id="State_S2" value="NW" class="Mtext" readonly /><br />
+                  <input type="hidden" name="selectName" id="selectName" value="Stud2" />
+              <input type="submit" value="Add" name="add2" id="add2" class="Mbutton" />
+              <input type="submit" value="Remove" name="remove2" id="remove2" class="Mbutton" />
+            </form>
+          </div>
+          <div name="MStudent3" id="MStudent3" class="MStudentInfo" style="background: #fffded; margin: 0px;">
+            <h3>Student 3</h3>
+            <form id="MForm3" onSubmit="event.preventDefault(); addRemoveStudent('Username_S3', 'Stud3'); return false;" method="get">
+              <label>Name:</label><br />
+              <div id="Member3">
+                <select name="Stud3" id="Stud3" class="MStudentSelect" onChange="currentSelection(this)">
+                <option>------Select a Name------</option>
+                </select>
+              </div>
+              <label>Username:</label><br />
+                <input type="text" name="Username_S3" id="Username_S3" value="DenverCoder9" class="Mtext" readonly /><br />
+              <label>School:</label><br />
+              <input type="text" name="School_S3" id="School_S3" value="Example University" class="Mtext" readonly /><br />
+              <label>State:</label><br />
+              <input type="text" name="State_S3" id="State_S3" value="NW" class="Mtext" readonly /><br />
+                 <input type="hidden" name="selectName" id="selectName" value="Stud3" />
+              <input type="submit" value="Add" name="add3" id="add3" class="Mbutton" />
+              <input type="submit" value="Remove" name="remove3" id="remove3" class="Mbutton" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--CONVERSION_ENDS_HERE-->
+<!--Do Not Delete The Comment Above This-->
+	</div><!--end content-->
+    
+	<div id="footer" style="margin: 0 auto;">
+  		<div id="adminCompID"></div>
+    	<div id="copyright"><p></p></div>
+	</div><!--end footer-->
+	<div class="nooverflow"></div>
+</div><!--end container-->
+
+</body>
+
+</html>

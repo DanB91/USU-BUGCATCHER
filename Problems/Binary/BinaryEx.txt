@@ -1,0 +1,1 @@
+INPUT: 5  OUTPUT: 101

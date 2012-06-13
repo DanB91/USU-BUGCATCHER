@@ -1,3 +1,0 @@
-1. OddsandEvens takes a string, which should be either "odd" or "even" and an integer.
-It returns the number of odd or even digits in the integer, respectively.
-2. If given invalid input, it should return a string describing the problem with the input.

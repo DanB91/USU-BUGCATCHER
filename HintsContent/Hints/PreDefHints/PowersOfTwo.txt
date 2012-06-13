@@ -1,0 +1,1 @@
+The problem of the powerOfTwo is probably in proximity to the printing. Consider looking at how each power of two is calculated.

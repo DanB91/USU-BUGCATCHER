@@ -1,0 +1,1 @@
+42334<!@!>[Test, taratoo, Reverse]<br>Input: 'hi'<br>Expected output: 'ih'<br>Actual Output: 'i'<br>Bug found!<!@!>

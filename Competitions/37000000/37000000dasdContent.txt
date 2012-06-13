@@ -1,0 +1,1 @@
+67760<!@!>[Test, AaronA, QuickAdd]<br>Input: '4 4'<br>Expected output: '0'<br>Actual output: '8.0'<br>Bug not found!<!@!>67773<!@!>[Test, AaronA, QuickAdd]<br>Input: '4 4'<br>Expected output: '8'<br>Actual Output: '0.0'<br>Bug found!<!@!>67814<!@!>[Test, AaronA, HelloWorld]<br>Input: 'a'<br>Expected output: 'Hello, a!'<br>Actual Output: 'Hello,a!'<br>Bug found!<!@!>

@@ -1,5 +1,0 @@
-1. This program runs as a simple calculator
-
-2. It accepts as imput a simple math problem in this format ex. "1 plus 1". It accepts plus, minus, over and times as operators
-
-3. The user can enter whole numbers "8 times 4" or numbers with decimals "8.4 over 2.2".

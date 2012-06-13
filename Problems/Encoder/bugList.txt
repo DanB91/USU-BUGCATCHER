@@ -1,0 +1,5 @@
+Encoder takes a string and an int, and shifts all the characters in the string by that int ("a" 1 becomes "b").
+LINE 30: Adds 26 when the shifted letter is a, shifting it past z. (Should be strictly <).
+LINE 20: Mods by 25 instead of 26.
+LINE 35: Subtracts rather than taking the mod, meaning it will not work on large inputs.
+LINE 12: Takes the absolute value, making it not work on negative shifts.

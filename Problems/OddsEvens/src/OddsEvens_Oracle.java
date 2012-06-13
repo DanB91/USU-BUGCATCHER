@@ -27,12 +27,16 @@ public class OddsEvens_Oracle {
 	}
 	
 	public static void main(String[] args){
+	try{
 			int num = Integer.parseInt(args[1]);
 			if (args[0].equals("even")){
 				System.out.println(OddsEvens_Oracle.evenDigits(num));
 			} else if (args[0].equals("odd")){
 				System.out.println(OddsEvens_Oracle.oddDigits(num));
 			}
+	}catch(Exception e){
+    	System.out.println("Error: Bad Input");
+    }
 	}
 
 }

@@ -20,7 +20,8 @@ function strposOffset($search, $string, $offset)
 }
 $compID = $_COOKIE['compID'];
 $userID	= $_COOKIE['userID'];
-$chat   = $_GET['string'];
+include("../mfunctions.php");
+$chat   = normalInputProtextChat($_GET['string']);
 
 if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '' && isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '')
 {
@@ -47,17 +48,21 @@ if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '' && isset($_COOKIE["user
     $theData =  fread($file,filesize($fileText));
     fclose($file);
     //check to see if we should enter "stack mode"
-    if(substr_count($theData,$constantDelimiter) >= $changeSize){
-         $newFileString = substr($theData,strposOffset($constantDelimiter,$theData,1)+strlen($constantDelimiter));
+    /*if(substr_count($theData,$constantDelimiter) >= $changeSize){
+        $newFileString = substr($theData,strposOffset($constantDelimiter,$theData,1)+strlen($constantDelimiter));
         $fh = fopen($fileText, 'w') or die("can't open file");
-        fwrite($fh, $newFileString . $constantDelimiter . "[Chat]" . $userName.": ".$chat);
+		//put in time stamp
+		date_default_timezone_set('America/Denver');
+        fwrite($fh, $newFileString . $constantDelimiter .date('H:i:s').$constantDelimiter. "[Chat] " . $userName.": ".$chat. $constantDelimiter);
         fclose($fh);
     }
-    else{
+    else{*/
         $fh = fopen($fileText, 'a') or die("can't open file");
-        fwrite($fh,  $constantDelimiter ."[Chat]" . $userName.": ".$chat);
+		//put in time stamp
+		date_default_timezone_set('America/Denver');
+        fwrite($fh,  (((date('H')*60)+date('i'))*60+date('s')).$constantDelimiter ."[Chat] " . $userName.": ".$chat. $constantDelimiter);
         fclose($fh);        
-    }
+  /* }
 	//echo "ddt";
 		/*
 		$teamName = $row['teamName'];

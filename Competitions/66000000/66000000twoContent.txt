@@ -1,0 +1,1 @@
+40092<!@!>[Test, chelynnd, QuickAdd]<br>Input: '2 2'<br>Expected output: '4'<br>Actual Output: '0.0'<br>Bug found!<!@!>40105<!@!>[Test, chelynnd, Reverse]<br>Input: 'abc'<br>Expected output: 'cba'<br>Actual Output: 'cb'<br>Bug found!<!@!>40151<!@!>[Test, chelynnd, Reverse]<br>Input: 'aDb'<br>Expected output: 'dDa'<br>Actual output: 'bDa'<br>Bug not found!<!@!>

@@ -29,12 +29,16 @@ public class OddsEvens_Bug2 {
 	}
 	
 	public static void main(String[] args){
+	try{
 			int num = Integer.parseInt(args[1]);
 			if (args[0].equals("even")){
 				System.out.println(OddsEvens_Bug2.evenDigits(num));
 			} else if (args[0].equals("odd")){
 				System.out.println(OddsEvens_Bug2.oddDigits(num));
 			}
+	}catch(Exception e){
+    	System.out.println("Error: Bad Input");
+    }
 	}
 
 }

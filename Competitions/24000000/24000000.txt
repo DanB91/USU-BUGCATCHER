@@ -1,6 +1,6 @@
-1
+10
 Blank
 0
-80
-Reverse
+40
+Fibonacci,PowersOfTwo,Binary,SalePrice,Calculator,FindPrimes,Reverse,QuickAdd,OddsEvens,Encoder
 0

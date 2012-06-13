@@ -1,0 +1,1214 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {	margin: 0; padding: 0;}
+body {
+	background-image: url('../Images/bg.gif');
+	background-repeat:repeat;
+}
+
+a{
+	border:none;
+	text-decoration:none;
+}
+
+a img {
+	border: none;
+	text-decoration:none;
+}
+
+hr {
+	height: 9px;
+	background-color: #779853;
+	border: none;
+	margin: 15px 0;
+}
+
+/* Display Text: */
+@font-face {
+	font-family: Dekar; src: url('dekar-webfont.ttf');
+	font-family: Dekar; font-weight:lighter; src: url('dekar_light-webfont.ttf');													  
+}
+
+p {
+	text-align:left;
+}
+
+h1 {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #fdd794;
+	font-size: 80px;
+	padding: 90px 0 0 350px;
+}
+
+#smHeader {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #fdd794;
+	overflow:visible;
+	font-size: 30px;
+	float: right;
+	width: 200px;
+	text-align: center;
+	margin: 10px 90px 0 0;
+}
+
+#adminHeader {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #fdd794;
+	font-size: 30px;
+	float: left;
+	width: 160px;
+	text-align: center;
+	margin: 0 0 0 90px;
+}
+
+#smallerHeader {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #fdd794;
+	font-size: 20px;
+	overflow:visible;
+}
+
+h2 {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #2f393f;
+	text-align: left;
+	font-size: 30px;
+}
+
+h3 {
+	color: #fff;
+	font-family: Dekar;
+	font-weight: lighter;
+}
+
+/* styles for the links on the header (help and logout) and navigation */
+h4 {
+	color: #fff;
+	text-align: center;
+	font-family: Dekar;
+	font-weight: lighter;
+	font-size: 18px;
+	padding: 10px 0;
+}
+
+/* --------------- NAVIGATION --------------- */
+#navigation {
+	width: 1000px;
+	height: 48px;
+	margin: 0 auto;
+	background: url('../Images/menu.png') no-repeat;
+}
+
+li {
+	list-style: none;	
+}
+
+#ReqLabel {
+	height: 44px;
+	width: 250px;
+	float: left;
+	padding: 4px 0 0 0;
+}
+
+#ProblemsLabel {
+	width: 500px;
+	height: 44px;
+	float: left;
+	padding: 4px 0 0 0;
+	color: #394e5f;
+}
+
+#navTabs {
+	height: 48px;
+	width: 500px;
+	text-align: left;
+	float: left;
+}
+
+#navTabs li{
+	float: left;
+}
+
+#navTabs a {
+	display: block;
+	padding: 14px 18px;
+	text-decoration: none;
+	color: #fff;
+}
+
+#BugTestLabel{
+	height: 44px;
+	width: 250px;
+	float: left;
+	padding: 4px 0 0 0;
+}
+
+#header-logout-help{
+	float: right;
+	width: 91px;
+	height: 79px;
+}
+
+#header-left {
+	color: #fff;	
+	font-family: Dekar;
+	font-weight: lighter;
+	padding: 10px 20px 0 20px;
+	float: left;
+}
+
+#timer {
+	height: 51px;
+}
+
+#header-winningteams {
+	float: left;
+	height: 78px;
+	color: #aad67b;
+}
+
+#header-right {
+	float: right;
+	width: 180px;
+	height: 73px;
+	padding: 0 0 0 50px;	
+}
+
+#header{
+	clear: both;	
+}
+/* --- end Navigation --- */
+
+
+/* --------------- LAYOUT --------------- */
+#content{
+	width: 1000px;
+	margin: 0 auto;
+	background-color: #aad67b;
+}
+
+#content-container {
+	width: 1000px;
+	margin: 0 auto;
+	background-color: #aad67b;
+}
+
+#IndexLeft {
+	float: left;
+	width: 622px;
+	background-color: #aad67b;
+}
+
+#IndexMiddle {
+	float:left;
+	width: 369px;
+	border-left: 9px solid #779853;
+	background-color: #cdefa9;
+}
+
+/* Larger header for front pages */
+#headerSplash {
+	background: url('../Images/header.jpg') no-repeat;
+	width: 1000px;
+	height: 243px;
+	margin: 0 auto;
+}
+
+#header {
+	background: url('../Images/header.png') no-repeat;
+	width: 1000px;
+	height: 79px;
+	margin: 0 auto;
+}
+
+/* -------------------- Student Layout --------------------*/
+.studentBody {
+	background: url('../Images/studentBody.png') repeat-y;
+}
+
+#StudentLeft{
+	float: left;
+	width: 241px;
+	padding: 10px 0 0 9px;
+}
+
+#RequirementsList{
+	border:1px solid #afcb91;
+	background-color:#fff;
+    color: #000;
+	padding: 7px;
+    height: 380px;
+    overflow-y: scroll;
+    word-wrap: break-word;
+	margin: 0 0 0 -8px;
+	width: 222px;
+}
+
+#StudentMiddle {
+	float:left;
+	width: 500px;
+	padding: 10px 0 0 0;
+	background-color: #d3fba7;
+}
+
+#StudentMiddleTop{
+    float: left;
+	width: 200px;
+    height: 35px;
+    margin-bottom: -10px;
+	margin-top: -7px;
+    text-align: center;
+}
+
+#StudentMiddleBottom{
+    float: left;
+    width: 496px;
+}
+
+#ProblemCode{
+    border:1px solid #afcb91;
+	background-color:#fff;
+    color: #000;
+    float: left;
+    height: 344px;
+    margin-left: 15px;
+    margin-top: -30px;
+    overflow-y: scroll;
+    padding: 7px;
+    width: 465px;
+	word-wrap: break-word;
+}
+
+#ProblemCode pre{
+    margin: 0px;
+    padding: 0px;
+}
+
+#CoverageToggle{
+
+    float: right;
+    margin: 0px 30px 0 0;
+    padding: 0px;
+    padding-left: 3px;
+}
+
+#ProblemName{
+	float: right;
+	font-size: 20px;
+	height: 35px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	text-align: center;
+	width: 220px;
+}
+
+#ProblemsListLink{
+    color: #2f393f;
+	float: left;
+	margin: 0px;
+	margin-right: 3px;
+	padding: 0px;
+	text-decoration: none;
+}
+
+/* ---- Pop-Up Area For the List of Problems ---- */
+#PopUpButton{
+    clear: both;
+	float: left;
+}
+
+#popParent {
+	position: relative;	
+	float: left;
+	width: 274px;
+}
+
+#PopUpArea{
+	background: url('../Images/changeProblems.png') no-repeat;
+	color: #000;
+	float: left;
+	height: 514px;
+	width: 274px;
+	overflow: hidden;
+	position: absolute;
+/*	left: 20%;*/
+	padding: 80px 10px 10px 10px;
+/*	top: 10%;*/
+	text-align: left;
+}
+			
+.PUA-hidden{
+	height: 0px;
+	width: 0px;
+	z-index: -5;
+}
+			
+.PUA-showing-1col{
+	width: 125px;
+	z-index: 30;
+}
+	
+.PUA-showing-2col{
+	width: 265px;
+	z-index: 30;
+}
+	
+.PUA-showing-3col{
+	width: 405px;
+	z-index: 30;
+}
+
+#PopUpArea ul{
+/*	background: #587736;*/
+	float: left;
+	height: 200;
+	margin-left: 9px;
+	margin-top: 10px;
+	padding: 3px;
+	width: 120px;
+}
+
+#PopUpArea ul li{
+    list-style-type: none;
+}
+
+#PopUpArea a{
+	color: #000;
+}
+
+#Background_Tinted{
+	clear: right;
+	background: #587736;
+	border-radius: 10px;
+	float: right;
+	height: 230px;
+	opacity: .9;
+	overflow: hidden;
+	position: relative;
+	left: 0px;
+	top: -238px;
+}
+			
+.BT-hidden{
+	height: 0px;
+	width: 0px;
+	z-index: -5;
+}
+			
+			
+.BT-showing-1col{
+	width: 125px;
+	z-index: 20;
+}
+	
+.BT-showing-2col{
+	width: 265px;
+	z-index: 20;
+}
+	
+.BT-showing-3col{
+	width: 405px;
+	z-index: 20;
+}
+
+#StudentRight {
+	float: right;
+	width: 241px;
+	padding: 10px 0 0 9px;
+}
+
+#ResultsList{
+    border:1px solid #afcb91;
+	background-color:#fff;
+    color: #000;
+	padding: 7px;
+    height: 190px;
+    overflow-y: scroll;
+    word-wrap: break-word;
+}
+
+#ChatBox{
+    height: 25px;
+/*    text-align: center;*/
+    width: 246px;
+}
+
+#ChatInput{
+/*    margin-left: -1;
+    margin-top: 1;*/
+/*    width: 220px;*/
+}
+
+
+/*used on registration form*/
+#OneCol{
+	width: 800px;
+	margin: 0 auto;
+	padding: 20px 0 0 0;
+}
+
+#WelcomeText {
+	padding: 65px 0 0 75px;
+	width: 430px;
+}
+
+#footer {
+	background: url('../Images/footer.png') no-repeat;
+	width:1000px;
+	height:72px;
+	clear: both;
+}
+
+
+#arrow {
+	float:left;	
+	margin: 60px 0 0 -9px;
+}
+/* --- end Layout --- */
+
+
+
+/* ------------- ADMIN LAYOUT STYLES ------------ */
+#header-controls{
+	float: left;
+	width: 100px;
+	height: 79px;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+#header-remainingTime {
+	float: left;
+	width: 200px;
+}
+
+#admenu {
+	width: 1000px;
+	height: 48px;
+	margin: 0 auto;
+	background: url('../Images/admenu.png') repeat-x;
+	text-align:center;
+}
+
+#admenu h4 {
+	margin: 0;
+	padding: 0;
+}
+
+#admenu li {
+	text-align:center;	
+}
+
+#admenu a:hover {
+	color:#2f393f;	
+}
+
+#header-remainingTime {
+	color: #fff;
+	font-family: Dekar;
+	font-weight: lighter;
+	font-size: 24px;
+	padding: 10px 0 0 20px;
+}
+
+option.difficulty0{
+	background-color:#d3fba7;
+}
+option.difficulty1{
+	background-color:#f4f673;
+}
+option.difficulty2{
+	background-color:#ffd35c;
+}
+option.difficulty3{
+	background-color:#ff9453;
+}
+option.difficulty4{
+	background-color:#e7542c;
+}
+
+/*--COMP LAYOUT--*/
+.threeColBody {
+	background: url('../Images/studentBody.png') repeat-y;	
+}
+
+.leftColBody {
+	background: url('../Images/leftColBody.png') repeat-y;	
+}
+
+.CompBody h2 {
+	font-size: 24px;
+	padding: 10px 20px;
+	
+}
+
+#CompLeft{
+	/*background: #AAD67B;
+/*	border-right: 9px solid #779853;*/
+	clear: left;
+	color: #000;
+	display: inline;
+	float: left;
+	font-weight: bold;
+	margin: 0px 30px 0 0;
+	padding: 0px;
+	text-align: center;
+	width: 248px;
+}
+
+#CompRight {
+	float: right;
+	width: 230px;
+	display: inline;
+/*	border-left: 9px solid #779853;*/
+}
+
+#CompMiddle h4 {
+	color: #32434f;
+	text-align: left;
+}
+
+#CsetupForm{
+	margin: 0px;
+	margin-top: 20px;
+	padding: 0px;
+	padding-right: 20px;
+	text-align: center;
+	width: 248px;
+}
+
+.Cradio-container{
+	border:1px solid #afcb91;
+	color: #000;
+	margin: 0px;
+	margin-left: 48px;
+	margin-top: 3px;
+	text-align: left;
+	width: 150px;
+}
+
+.Cradio-left{
+	margin-right: 0px;
+}
+			
+.Cradio-right{
+	margin-left: 10px;
+	margin-right: 0px;
+}
+
+.Ctext input[type=text], .Ctext input[type=file], .Ctext input[type=password], .Ctext textarea{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 150px;
+}
+
+#CTextArea {
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 440px;
+}
+
+#CBugArea{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 440px;
+}
+
+.Cselect{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding: 7px;
+	width: 200px;
+}
+
+#CompNameID {
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 150px;
+}
+
+#CompTime {
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 150px;
+}
+
+.Cbutton{
+	margin: 0px;
+	width: 130px;
+}
+
+#CSetupError{
+	height: 140px;
+	padding-bottom: 6px;
+	margin-top: -20px;
+	overflow: hidden;
+}
+
+.Cerror-bad{	
+	background: #E38686;
+	color: #000;
+	font-weight: normal;
+}
+
+.Cerror-good{	
+	background: #d3fba7;
+	color: #3c454b;
+	font-weight: normal;
+}
+
+.Cerror-normal{
+	background-color: #AAD67B;
+	color: #3c454b;
+	font-weight: normal;
+}
+
+/* --- end Setup Layout --- */
+
+
+/* --- Manage Layout --- */
+#ManageMain {
+	width: 238px;
+	float: left;
+	clear: left;
+	padding:10px;
+}
+
+#ManageMain hr {
+	margin:10px 0 20px -10px; 	
+}
+
+#ManageMain h2 {
+	padding-bottom: 10px;	
+}
+
+#ManageRight {
+	width: 720px;
+	float: left;
+	clear: right;
+	padding: 10px;
+}
+
+#MTeamTable{
+    padding: 0px 10px;
+}
+
+#MStudent1, #MStudent2, #MStudent3 {
+	width: 230px;
+	float: left;
+}
+
+/* --- end Manage Layout ---*/
+
+
+/* --- Progress Layout --- */
+#ProgressMain h2 {
+	padding: 20px;	
+}
+
+table.PTable{
+    background: #2f393f;
+    border: 1px solid #272e31;
+    width: 935px;
+	margin: 20px 0 0 0;
+}
+
+#PHeadTable{
+    text-align: center;
+}
+
+tr.PHeadRow{
+    color: #fff;
+}
+
+tr.PRow{
+    background: #d3fba7;
+}
+
+td.PTeamName{
+    /*No Style Needed At The Moment*/
+}
+
+td.PTeamMember{
+    width: 183px;
+}
+
+td.PStats{
+    text-align: center;
+    width: 138px;
+}
+/* --- end Progress Layout --- */
+
+
+
+/* --- Hints Layout --- */
+#CustomHeader{
+	border-right: 9px solid #779853;
+	background-color: #d3fba7;
+    clear: left;
+    display: inline;
+    float: left;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;	
+	width: 440px;
+}
+
+#CustomHeader h2{
+	padding: 0 0 0 20px;	
+}
+
+#PreDefHeader{
+    display: inline;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 540px;
+}
+	  
+#HintsLeft{
+	border-right: 9px solid #779853;
+    display: inline;
+    float: left;
+    margin: 0px;
+	padding: 0;
+    width: 440px;
+	height: 400px;
+	background-color: #d3fba7;
+}
+
+#HintsLeft hr{
+    border-left: none;
+    border-right: none;
+    height: 9px solid #779853;
+    margin: 0;
+    padding: 0;
+}
+
+#HintsLeft p{
+    margin: 0px;
+    padding: 20px 0 10px 20px;
+}
+
+#CustomHint{
+	border:1px solid #afcb91;
+    background: #fff;
+    height: 150px;
+	padding: 7px;
+    margin-top: 0px;
+    width: 400px;
+}
+	  
+#HintsRight{
+      display: inline;
+      float: right;
+      margin: 0px;
+      padding: 0px;
+      padding-bottom: 20px;
+      width: 540px;}
+
+#HintsPreDefTop{
+      display: inline;
+      float: right;
+      margin: 0px;
+      padding: 0px;
+      width: 540px;}
+
+#HintsPreDefRight{
+    display: inline;
+	text-align: left;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 264px;}
+
+#HintsPreDefRight p{
+    margin: 0;
+    padding-bottom: 0px;
+    padding-top: 20px;}
+
+#HintsPreDefLeft{
+    display: inline;
+	text-align: left;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 264px;}
+
+#HintsPreDefLeft p{
+    margin: 0;
+    padding-bottom: 0px;
+    padding-top: 20px;
+}
+
+#HintsPreDefBottom{
+    display: inline;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 540px;
+}
+
+#HintsPreDefBottom p{
+    margin: 0;
+    padding-bottom: 0px;
+	padding-top: 20px;
+}
+	  
+.Hselect{
+	background: #fff;
+	border:1px solid #afcb91;
+    margin: 0px;
+    padding: 7px;
+    width: 180px;
+}
+	  
+/* --- end Hints Layout --- */
+
+
+/* --------------- FORMS --------------- */
+#formcontainer{
+/*	margin: 0 0 50px 0;*/
+}
+.form{
+	margin: 50px auto;
+	width: 274px;	
+	background-color: #fffded;
+}
+
+.form fieldset{
+	border: 2px solid #779853;
+	margin: -7px 0 0 0;
+}
+
+.form input[type=text], .form input[type=file], .form input[type=password], .form textarea{		
+	border:1px solid #afcb91;
+	background-color:#fff;
+	padding:7px;
+	width: 220px;
+}
+
+.form p{
+	padding: 30px 0 5px 23px;
+}
+
+/* the class fields is mostly for the studentRight column on the student page (chat and input stuff) */
+.fields input[type=text], .fields input[type=file], .fields input[type=password], .fields textarea{		
+	border:1px solid #afcb91;
+	background-color:#fff;
+	padding:7px;
+	width: 200px;
+}
+
+.fields p {
+	padding: 10px 0 5px 20px;	
+}
+
+#formColLeft {
+	float: left;
+	width: 300px;
+}
+
+#formColLeft input[type=text], #formColLeft input[type=file], #formColLeft input[type=password], #formColLeft textarea, #formColLeft #StateSelection{	
+	margin: 0 0 0 22px;
+}
+
+#formColRight {
+	float: left;
+	width: 300px;
+}
+
+#formColRight input[type=text], #formColRight input[type=file], #formColRight input[type=password], #formColRight textarea {	
+	margin: 0 0 0 22px;
+}
+
+.RadioBox{
+	text-align:left;
+	padding: 0 0 0 20px;
+}
+.formHeader {
+	background: url('../Images/formHeader.png') repeat-x;
+	height: 67px;
+}
+
+.formHeadText {
+	color: #fff;
+	font-family: Dekar;
+	font-weight: lighter;
+	font-size: 25px;
+	padding: 15px 0 0 25px;
+	text-align:left;
+}
+
+#formFooter {
+	background: url('../Images/formFooter.png') repeat-x;
+	height: 9px;
+}
+
+/* Comp Forms */
+#CompForm input[type=text], #CompForm input[type=file], #CompForm input[type=password], #CompForm textarea{		
+	border:1px solid #afcb91;
+	background-color:#fff;
+	padding:7px;
+	width: 200px;
+}
+
+#CompForm p{
+	text-align:left;
+	padding: 30px 0 5px 23px;
+	text-decoration: none;
+}
+
+/* Manage Forms */
+#MForm1 input[type=text], #MForm2 input[type=text], #MForm3 input[type=text], #MTeamName{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	padding:7px;
+	width: 180px;
+}
+
+#MTeamName {
+	margin: 0 0 0 -15px;	
+}
+
+/* --- end Forms --- */
+
+
+/* ----- Buttons ----- */
+#LoginButton {
+	background: url('../Images/login.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 0;
+}
+
+#RegisterButton {
+	background: url('../Images/register.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+#ResetButton {
+	background: url('../Images/resetemailBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+#ResetPassButton {
+	background: url('../Images/resetpassBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+#testforBug {
+	background: url('../Images/testBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+#CSetupButton {
+	background: url('../Images/setupCompBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+#aBut {
+	background: url('../Images/addProbBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 5px;
+}
+
+#rBut {
+	background: url('../Images/removeProbBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #32434f;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+#CMoveUp {
+	background: url('../Images/moveupBtn.png') no-repeat;
+	width: 182px;
+	height: 70px;
+	font-size: 1px;
+	color: #32434f;
+	border: none;
+	cursor: pointer;
+	margin: 5px 10px;
+}
+
+#CMoveDown {
+	background: url('../Images/movedownBtn.png') no-repeat;
+	width: 182px;
+	height: 70px;
+	font-size: 1px;
+	color: #32434f;
+	border: none;
+	cursor: pointer;
+	margin: 5px 10px;
+}
+
+#add1, #add2, #add3 {
+	background: url('../Images/addBtn.png') no-repeat;
+	width: 90px;
+	height: 48px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 0px;
+}
+
+#remove1, #remove2, #remove3 {
+	background: url('../Images/removeBtn.png') no-repeat;
+	width: 91px;
+	height: 48px;
+	font-size: 1px;
+	color: #32434f;
+	border: none;
+	cursor: pointer;
+	margin: 20px 0px;
+}
+
+#createTeam {
+	background: url('../Images/createTeam.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 0 20px -15px;
+}
+
+#SendCustom {
+	background: url('../Images/custHintBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 5px;
+}
+
+#SendPreDef {
+	background: url('../Images/predefhintBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #32434f;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
+
+/* ----- Dynamic Buttons ----- */
+.buttonText {
+	color: #2f393f;	
+	font-size: 30px;
+}
+
+.button {
+	margin: 10px 0;	
+	cursor: pointer;
+}
+
+a.button {
+    /* Sliding right image */
+    background: transparent url(../Images/buttonR.png) no-repeat scroll top right; 
+	display: block;
+	float: left;
+	height: 70px;
+	margin-right: 6px;
+	padding: 0 18px 0 0; 
+	/* FONT PROPERTIES */
+	text-decoration: none;
+	color: #2f393f;
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-size:40px;
+	font-weight:normal;
+}
+a.button p {
+	/* Background left image */ 
+	background: transparent url(../Images/buttonL.png) no-repeat; 
+	display: block;
+	line-height: 65px;
+	padding: 0px 20px 5px 40px;
+} 
+a.button:hover p{
+	text-decoration:none;
+}
+
+.nooverflow{
+      clear: left;
+      line-height: 0;
+}
+/* --- end Buttons --- */

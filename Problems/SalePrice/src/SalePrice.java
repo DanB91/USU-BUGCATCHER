@@ -9,6 +9,7 @@ public class SalePrice{
    }
 	
    public static void main(String[] args){
+   try{
       double price = Double.parseDouble(args[0]);
       double discount = Double.parseDouble(args[1]);
 		
@@ -18,5 +19,8 @@ public class SalePrice{
          double discountedPrice = SalePrice.discountedPrice(discount, price);
          System.out.println(discountedPrice);
       }
+    } catch(Exception e){
+    	System.out.println("Error: Bad Input");
+    }
    }
 }

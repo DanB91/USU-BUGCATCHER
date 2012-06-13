@@ -1,0 +1,104 @@
+<html>
+<head>
+<title></title>
+
+<link rel="stylesheet" href="CSS/Admin.css" type="text/css" />
+<script language="javascript" src="Scripts/Admin.js"></script>
+<script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
+<script language="javascript" src="Scripts/AdminTimer.js"></script>
+<script language="javascript" src="Scripts/CountdownTimer.js"></script>
+
+<script language="javascript">
+var compSetLanguage = '';
+var compSetMode = '';
+var compSetProblems = '';
+var compSetHints = '';
+var compSetTime = '';
+var compSetID = '';
+</script>
+
+</head>
+
+<body onload=AdminLoadCheck();>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+<div id="container" class="gradient">
+	<div id="header">
+    <div id="header-logo"><img src="Images/BugCatcherLogo.png" /></div>
+    <div id="header-title"><h1>Administrator</h1></div>
+    <div id="header-controls">
+    	<img title="Start Competition" src="Images/start.gif" height="50" width="50" onclick=startCompetition(); /> 
+    </div>
+    <div id="header-remainingTime">
+      Time remaining
+      <p id="header-timer">00:00</p>
+    </div>
+  </div>
+	<div id="navigation" class="gradient">
+		<ul>
+			<li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" >Competition Setup</a></li>
+			<li><a id="navManage" class="navNormal" href="JavaScript:setManage()">Team Management</a></li>
+			<li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" >Progress/Statistics</a></li>
+			<li><a id="navHints" class="navNormal" href="JavaScript:setHints()" >Hints</a></li>
+      <li><a id="navFileReg" class="navNormal" href="JavaScript:setFileRegistration()" >File Registration</a></li>
+		</ul>
+	</div>
+	<div id="Content">
+<!--CONVERSION_STARTS_HERE-->
+		<div id="CustomHeader" align=center>
+      <h2>Custom Hint</h2>
+    </div>
+    <div id="PreDefHeader" align=center>
+      <h2>PreDef Hint</h2>
+    </div>
+		<div id="HintsLeft" align=center>
+      <p>Enter a Custom Hint:</p>
+      <form onSubmit="event.preventDefault(); sendHintsCust(CustomHint.value); " method="get">
+        <textarea name="CustomHint" id="CustomHint" onFocus="if(this.value==this.defaultValue) {this.value='';}" wrap="physical">Custom Hints (click here)
+        </textarea ><br />
+        <input type="submit" name="submitCust" id="SendCustom" value="Send Custom Hint" class="Hbutton" />
+      </form >
+		</div>
+		<div id="HintsRight" align=center>
+      <div id="HintsPreDefTop">
+        <div id="HintsPreDefRight">
+          <p>Select Hint to View:</p>
+          <div id="HintNum" >
+            <select name="HHintNum" id="HHintNum" size=7 class="Hselect">
+            </select>
+          </div>
+        </div>
+        <div id="HintsPreDefLeft">
+          <p>Select Problem Number:</p>
+          <div id="probNamesHints">
+              <select name="HProbNum" id="HProbNum" size=5 class="Hselect" onchange=showPre(this.value);>
+              </select>
+          </div>
+        </div>
+      </div>
+      <div id="HintsPreDefBottom">
+        <p id="HintText">Hint text will appear here when hint number is selected.</p>
+        <form onSubmit="event.preventDefault(); sendHintPreDef();">
+            <input type="submit" name="SendPreDef" id="SendPreDef" value="Send Pre-Defined Hint" class="Hbutton" />
+        </form>
+      </div>
+		</div>
+<!--CONVERSION_ENDS_HERE-->
+	</div>
+	<div id="footer" class="gradient">
+  	<div id="adminCompID"></div>
+    <div id="copyright"><p></p></div>
+  </div>
+	<div class="nooverflow">&nbsp;</div>
+</div>
+
+</body>
+
+</html>

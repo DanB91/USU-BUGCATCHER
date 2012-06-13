@@ -1,0 +1,12 @@
+49058<!@!>[Test, dustin.allred, Fibonacci]<br>Input: '4'<br>Expected output: '1 1 2 4'<br>Actual output: '1 1 2 3'<br>Bug not found!<!@!>49181<!@!>[Test, dustin.allred, Fibonacci]<br>Input: '5'<br>Expected output: '1 1 2 3 5'<br>Actual Output: '1 
+1 
+2 
+3 
+5 
+8'<br>Bug found!<!@!>49225<!@!>[Test, dustin.allred, Fibonacci]<br>Input: '6'<br>Expected output: '1 1 2 3 5 8'<br>Actual Output: '1 
+1 
+2 
+3 
+5 
+8 
+13'<br>Bug already found!<!@!>49263<!@!>[Test, dustin.allred, QuickAdd]<br>Input: '1 1'<br>Expected output: '2'<br>Actual Output: '0.0'<br>Bug found!<!@!>49277<!@!>[Test, dustin.allred, QuickAdd]<br>Input: '0 1'<br>Expected output: '1'<br>Actual Output: '-1.0'<br>Bug already found!<!@!>49291<!@!>[Test, dustin.allred, QuickAdd]<br>Input: '0 1'<br>Expected output: '1'<br>Actual Output: '-1.0'<br>Bug already found!<!@!>

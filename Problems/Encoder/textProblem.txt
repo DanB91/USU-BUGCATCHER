@@ -2,19 +2,29 @@
 
 public class Encoder{
    public static String encrypt(String toEncrypt, int shift){
-<SPAN style='BACKGROUND-COLOR: #66CCCC'>      char[] letterArray = toEncrypt.toCharArray();</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>      char[] encryptedLetterArray = new char[letterArray.length];</SPAN><br />		
-<SPAN style='BACKGROUND-COLOR: #66CCCC'>      for (int i = 0; i < letterArray.length; i++){</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>         encryptedLetterArray[i] = encryptChar(letterArray[i], Math.abs(shift));</SPAN><br />      }
+      char[] letterArray = toEncrypt.toCharArray();
+      char[] encryptedLetterArray = new char[letterArray.length];
 		
-<SPAN style='BACKGROUND-COLOR: #66CCCC'>      return new String(encryptedLetterArray);</SPAN><br />   }
+      for (int i = 0; i $lt letterArray.length; i++){
+         encryptedLetterArray[i] = encryptChar(letterArray[i], Math.abs(shift));
+      }
+		
+      return new String(encryptedLetterArray);
+   }
 	
    public static char encryptChar(char letter, int shift){
-<SPAN style='BACKGROUND-COLOR: #66CCCC'>      if (Character.isLowerCase(letter)){</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>         int shiftedLetter = (letter - 'a') + shift;</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>         if (shiftedLetter < 0)</SPAN><br />            shiftedLetter += 26;
+      if (Character.isLowerCase(letter)){
+         int shiftedLetter = (letter - 'a') + shift;
+         if (shiftedLetter &lt 0) 
+            shiftedLetter += 26;
          else 
-<SPAN style='BACKGROUND-COLOR: #66CCCC'>            shiftedLetter %= 25;</SPAN><br />			
-<SPAN style='BACKGROUND-COLOR: #66CCCC'>         return (char) (shiftedLetter + 'a');</SPAN><br />      }
+            shiftedLetter %= 25;
+			
+         return (char) (shiftedLetter + 'a');
+      }
       else {
          int shiftedLetter = (letter - 'A') + shift;
-         if (shiftedLetter <= 0)
+         if (shiftedLetter &lt= 0)
             shiftedLetter += 26;
          else
             shiftedLetter -= 26;
@@ -24,5 +34,13 @@ public class Encoder{
    }
 	
    public static void main(String[] args){
-<SPAN style='BACKGROUND-COLOR: #66CCCC'>      String toEncrypt = args[0];</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>      int shift = Integer.parseInt(args[1]);</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>      String encrypted = Encoder_Oracle.encrypt(toEncrypt, shift);</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>      System.out.println(encrypted);</SPAN><br /><SPAN style='BACKGROUND-COLOR: #66CCCC'>   }</SPAN><br />
+      String toEncrypt = args[0];
+      try{
+          int shift = Integer.parseInt(args[1]);
+          String encrypted = encrypt(toEncrypt, shift);
+          System.out.println(encrypted);
+      }catch(Exception e){
+          System.out.println("Error: Bad Input");
+      }
+   }
 }

@@ -1,0 +1,9 @@
+1. The Fibonacci series are the numbers that follow the sequence: 1 1 2 3 5 8 13 ...
+<br/>
+2. Each subsequent number after is the sum of the previous two.
+<br/>
+3. This program begins the sequence at 1 and prints until the Nth number in the sequence.
+<br/>
+4. The Nth number is the number input by the user.
+<br/>
+5. This program does not accept integers greater than or equal to 30.

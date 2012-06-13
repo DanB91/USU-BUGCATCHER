@@ -1,0 +1,1 @@
+40715<!@!>[Test, thecoolian, Reverse]<br>Input: 'revereit'<br>Expected output: 'tierever'<br>Actual Output: 'tiereve'<br>Bug found!<!@!>40764<!@!>[Test, thecoolian, QuickAdd]<br>Input: '1 1'<br>Expected output: '2'<br>Actual Output: '0.0'<br>Bug found!<!@!>

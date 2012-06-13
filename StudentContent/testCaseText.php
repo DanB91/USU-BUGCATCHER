@@ -16,7 +16,7 @@ mysql_select_db("competition", $con);
 
 $testInput  = mysql_real_escape_string(trim($_GET["testInput"])); //sanitizes input
 $testOutput =  mysql_real_escape_string(trim($_GET["testOutput"])); //sanitizes output
-$isCoverage = true; //boolean for coverage
+$isCoverage = $_GET["codeCov"]; //boolean for coverage
 $problemName = $_GET["problemNum"];
 $compID 	= $_COOKIE['compID'];
 $userID		= $_COOKIE['userID'];
@@ -44,7 +44,7 @@ $row = getMySQLResultArray("SELECT * FROM ${compID}students WHERE userID='${user
 $onTeam = $row['onTeam'];
 $userName = $row['username'];
 $teamName = $row['teamName'];
-$contentFileName = "$compID/$compID${teamName}Content.txt";//name of the content file
+$contentFileName = "C:/DropBox/htdocs/NewDesign/Competitions/$compID/$compID${teamName}Content.txt";//name of the content file
 
 
 //user must be on a team
@@ -54,14 +54,7 @@ if(!$onTeam)
 }
 ///////////////////////////////////
 
-
-
-
 chdir(ROOT_DIRECTORY);
-
-
-//Tell student that what they have done
-writeToContentFile("$userName tested problem $problemName with input: '$testInput' and output: '$testOutput'", $contentFileName);
 
 
 $bugFileLoc = "Competitions/${compID}/${compID}${teamName}${problemName}Bugs.txt";
@@ -76,7 +69,7 @@ $oracle = trim(shell_exec("java -jar Problems/${problemName}/${problemName}Oracl
 $buggyOutputs;//will hold the output of all the bugs 
 
 
-
+//var_dump($bugFilesInProblemDir);
 
 foreach($bugFilesInProblemDir as $index => $filePath)
 {
@@ -84,20 +77,21 @@ foreach($bugFilesInProblemDir as $index => $filePath)
 }
 
 
-//if the supplied output is not equal to the oracle output, obviously the student did not find the bug
-if($oracle != $testOutput)
-{
-	writeToContentFile('Bug not found!', $contentFileName);
-	die();
-}
 
 
 
-$foundBug = false; //will test to see if the user found a bug 
+$foundBug = '0'; //will test to see if the user found a bug 
 $alreadyFoundBug = false; //tests to see if the bug is already found
-
+$output = '';
 foreach($buggyOutputs as $index => $bO)
 {
+
+	//if the supplied output is not equal to the oracle output, obviously the student did not find the bug
+	if($oracle != $testOutput)
+	{
+		break;
+	}
+
 
 
 	$bugName = "bug $index";
@@ -111,28 +105,19 @@ foreach($buggyOutputs as $index => $bO)
 		if(isLineInFile($bugName, $bugFileLoc))
 		{
 			$alreadyFoundBug = true;
-			break;
+			$output = $bO;
+			continue;
 		}
 
 
-		//if coverage is on, get the line numbers of the program that are executed
+		
 
-		if($isCoverage)
-		{
-			chdir("Problems/$problemName");
-			$lineNums = getExecutedLines($problemName . '.jar', $testInput);
-			file_put_contents("lineNumbers.txt", implode("\n", $lineNums));
-			chdir(ROOT_DIRECTORY);
-
-		}
-
-
-		/*
+		
 		//add the bug to the file
 		$bugFile = fopen($bugFileLoc, "a");
 		fwrite($bugFile, $bugName . PHP_EOL);
 		fclose($bugFile);
-*/ 
+
 		
 
 		//increment the number of bugs
@@ -149,26 +134,41 @@ foreach($buggyOutputs as $index => $bO)
 
 
 		//alert the user they found a bug
-		writeToContentFile('Bug found!', $contentFileName);
+		writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual Output: '$bO'<br>Bug found!", $contentFileName);
 
 
-		$foundBug = true;
+		$foundBug = '1';
 
 		break;
 	}
 }
+//if coverage is on, get the line numbers of the program that are executed
+chdir("Competitions/$compID/");
 
-if($alreadyFoundBug)
+if(($lineNums = getExecutedLines($problemName, $testInput, $teamName)))
 {
-	writeToContentFile('Bug already found!', $contentFileName);
+
+	//var_dump($lineNums);
+	file_put_contents("$compID$teamName${problemName}Coverage.txt", implode("\n", $lineNums));
+	chdir(ROOT_DIRECTORY);
+
+	//var_dump($lineNums);
+
+}
+
+
+if($alreadyFoundBug&&!$foundBug)
+{
+	writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual Output: '$output'<br>Bug already found!", $contentFileName);
 
 }
 
 else if(!$foundBug)
 {
-	writeToContentFile('Bug not found!', $contentFileName);
-
+	writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual output: '$oracle'<br>Bug not found!", $contentFileName);
 }
+
+echo $foundBug;
 
 
 
@@ -178,20 +178,25 @@ else if(!$foundBug)
 //////functions//////////
 
 //returns an array of the line numbers of the executed lines of a program
-function getExecutedLines($bugFileName, $testInput)
+function getExecutedLines($problemName, $testInput, $teamName)
 {
 
-	$lineNums;
 
+
+	$lineNums = FALSE;
+	$command = "java -cp ../../Problems/emma.jar emmarun -sp ../../Problems/$problemName/src -r html -Dreport.html.out.file=$teamName$problemName/index.html -jar ../../Problems/$problemName/$problemName.jar $testInput";
+
+	
 	//run emma to generate the code coverage
-	if(!($output = shell_exec("java -cp ../emma.jar emmarun -sp src -r html -jar $bugFileName $testInput")))
-		trigger_error('Emma call failed');
+	if(!($output = shell_exec($command)))
+		trigger_error('Emma call failed ' . $output);
 
-	$greenLines = file_get_html('coverage/_files/1.html')->find('tr[class=c]');
+	$greenLines = file_get_html($teamName.$problemName.'/_files/1.html')->find('tr[class=c]');
 
 	//go through each element in outputted file by emma
 	foreach($greenLines as $element)
 	{
+
 
 		while($element->first_child())
 		{
@@ -204,7 +209,7 @@ function getExecutedLines($bugFileName, $testInput)
 	
 	}
 
-	return $lineNums;
+		return $lineNums;
 
 
 
@@ -255,8 +260,12 @@ function getMySQLResultArray($query)
 //writes the given string to the content file
 function writeToContentFile($stringToWrite, $contentFileName)
 {
-	$contentFile = fopen("Competitions/" . $contentFileName,"a");
-	fwrite($contentFile, $stringToWrite . PHP_EOL . '<!@!>');
+	$contentFile = fopen($contentFileName,"a");
+	//put in time stamp
+	date_default_timezone_set('America/Denver');
+	fwrite($contentFile, (((date('H')*60)+date('i'))*60+date('s'))."<!@!>");
+
+	fwrite($contentFile, $stringToWrite . '<!@!>');
 	fclose($contentFile);
 
 }

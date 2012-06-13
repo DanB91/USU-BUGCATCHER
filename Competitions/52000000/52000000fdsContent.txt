@@ -1,0 +1,1 @@
+73023<!@!>[Test, danb91, Calculator]<br>Input: '1 plus 1'<br>Expected output: '2'<br>Actual output: '2.0'<br>Bug not found!<!@!>73029<!@!>[Test, danb91, Calculator]<br>Input: '1 minus 2'<br>Expected output: '-1'<br>Actual Output: '1.0'<br>Bug found!<!@!>

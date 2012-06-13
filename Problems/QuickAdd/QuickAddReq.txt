@@ -1,3 +1,3 @@
-1.QuickAdd takes in two numbers and returns their sum.
+1. QuickAdd takes in two numbers and returns their sum.
 <br/>
-2.QuickAdd may take integers or decimal representations.
+2. QuickAdd may take integers or decimal representations.

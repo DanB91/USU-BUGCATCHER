@@ -1,0 +1,6 @@
+6
+Blank
+1
+60
+PowersOfTwo,QuickAdd,SalePrice,Reverse,Calculator,Converter
+1
