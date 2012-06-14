@@ -356,7 +356,9 @@ abstract class Model {
                $fieldType = 's';
            }
                
-           elseif (strpos($row['Type'], 'int') !== FALSE || strpos($row['Type'], 'bool') !== FALSE)
+           elseif (strpos($row['Type'], 'int') !== FALSE || 
+                   strpos($row['Type'], 'bool') !== FALSE ||
+                   strpos($row['Type'], 'bit') !== FALSE)
            {
                $fieldType = 'i';
            }
