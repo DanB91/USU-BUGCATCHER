@@ -85,9 +85,7 @@ function instantMessaging(message)//Find Code ---------- G1003
     $.post('StudentContent/instantMessging.php', "string="+message, 
         function(html){
             document.getElementById("ChatInput").value="";
-        });
-
-			
+        });			
 }
 
 //This function is called in the initialize function below
