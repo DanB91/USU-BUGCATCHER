@@ -1,6 +1,0 @@
-12
-Blank
-1
-22
-QuickAdd,Reverse,PowersOfTwo,HelloWorld,SalePrice,Binary,Fibonacci,GroupSum,Calculator,OddsEvens,Triangle,PigLatin
-1

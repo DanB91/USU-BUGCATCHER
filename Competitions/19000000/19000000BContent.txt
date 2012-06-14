@@ -1,3 +1,0 @@
-chelynn tested problem HelloWorld with input: 'c' and output: 'Hello, c!'
-<!@!>Bug found!
-<!@!><!@!>chelynn: Hey teammates

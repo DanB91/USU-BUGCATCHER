@@ -1,6 +1,0 @@
-3
-Blank
-0
-20
-PigLatin,PowersOfTwo,SalePrice
-1

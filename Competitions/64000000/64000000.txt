@@ -1,6 +1,0 @@
-4
-Blank
-0
-30
-PowersOfTwo,QuickAdd,Calculator,Triangle
-0

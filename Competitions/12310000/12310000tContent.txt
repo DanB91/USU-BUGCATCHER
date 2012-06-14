@@ -1,1 +1,0 @@
-62039<!@!>[Test, student2, Reverse]<br>Input: '0'<br>Expected output: '0'<br>Actual Output: ''<br>Bug found!<!@!>62054<!@!>[Test, student2, Reverse]<br>Input: '0'<br>Expected output: '0'<br>Actual Output: ''<br>Bug already found!<!@!>
