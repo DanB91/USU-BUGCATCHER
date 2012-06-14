@@ -374,18 +374,18 @@ function showProblemsList()
 {
 	if (HIDDEN)
 	{
-		document.getElementById("PopUpArea").setAttribute("class","PUA-"+PopUpShowingClass);
-		document.getElementById("PopUpArea").setAttribute("className","PUA-"+PopUpShowingClass);
-		//document.getElementById("Background_Tinted").setAttribute("class","BT-"+PopUpShowingClass);
-		//document.getElementById("Background_Tinted").setAttribute("className","BT-"+PopUpShowingClass);
+		$("#PopUpArea").attr("class","PUA-"+PopUpShowingClass);
+		$("#PopUpArea").attr("className","PUA-"+PopUpShowingClass);
+		//$("#Background_Tinted").attr("class","BT-"+PopUpShowingClass);
+		//$("#Background_Tinted").attr("className","BT-"+PopUpShowingClass);
 		HIDDEN=false;
 	}
 	else
 	{
-		document.getElementById("PopUpArea").setAttribute("class","PUA-hidden");
-		document.getElementById("PopUpArea").setAttribute("className","PUA-hidden");
-		//document.getElementById("Background_Tinted").setAttribute("class","BT-hidden");
-		//document.getElementById("Background_Tinted").setAttribute("className","BT-hidden");
+		$("#PopUpArea").attr("class","PUA-hidden");
+		$("#PopUpArea").attr("className","PUA-hidden");
+		//$("#Background_Tinted").attr("class","BT-hidden");
+		//$("Background_Tinted").attr("className","BT-hidden");
 		HIDDEN=true;
 	}
 }
@@ -444,40 +444,23 @@ function getReq(str, index)//Find Code ---------- PR1002
 //Postcondition: Displays the problem that the student selected
 function getProb(str, cov, index)//Find Code ---------- PR1003
 {
-	//alert("Called from getProb");
+    
+    $.post('StudentContent/showCode.php', "problem="+currProblem+"&coverage="+coverage + "&index=" + currIndex, 
+        function(html){
+        
+            if(hasFinished == 0)
+            {
+                $("#ProblemCode").html="<pre class='prettyprint lang-java linenums'>"+html+"</pre>";
+                prettyPrint();
+                getToolTip(currProblem);
 
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadInfoGetProb=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		loadInfoGetProb=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	loadInfoGetProb.onreadystatechange=function()
-	{
-		if (loadInfoGetProb.readyState==4 && loadInfoGetProb.status==200)
-		{
-
-
-			if(hasFinished == 0)
-			{
-				document.getElementById("ProblemCode").innerHTML="<pre class='prettyprint lang-java linenums'>"+loadInfoGetProb.responseText+"</pre>";
-				prettyPrint();
-				getToolTip(str);
-
-			}
-			else
-			{
-				document.getElementById("ProblemCode").innerHTML="This competition has concluded";
-			}
-		}
-	}
-
-	loadInfoGetProb.open("GET","StudentContent/showCode.php?problem="+str+"&coverage="+cov + "&index=" + index,true);
-	loadInfoGetProb.send();
-
+            }
+            else
+            {
+                $("#ProblemCode").html="This competition has concluded";
+            }
+        });
+	
 }
 
 function getToolTip(str)
@@ -839,13 +822,13 @@ function playVideo()
 	if (!PLAYING)
 	{
 		//alert("play");
-		document.getElementById("ProblemCode").innerHTML = swfCode;
+		$("#ProblemCode").html = swfCode;
 		PLAYING = true;
 	}
 	else
 	{
 		getProb(currProblem, coverage, currIndex);
-		//document.getElementById("ProblemCode").innerHTML="";
+		//$("#ProblemCode").html="";
 		PLAYING = false;
 		clearInterval(VideoInterval);
 	}

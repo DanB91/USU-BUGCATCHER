@@ -6,17 +6,18 @@
 
 set_error_handler('error');
 
+header("Content-type:text/html");
 
-
-$problem = $_GET["problem"];
-$coverage = trim($_GET["coverage"]);
+$problem = $_POST["problem"];
+$coverage = trim($_POST["coverage"]);
 $compID = $_COOKIE['compID'];
 $userID = $_COOKIE['userID'];
-$probNum = $_GET['index'];
+$probNum = $_POST['index'];
 $NumProbsC = 0;
 
 if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')
 {
+        
 	$fileComp=file("../Competitions/${compID}/${compID}.txt");//get number of allowed problems
 
         if(!file_exists("../Problems/${problem}/${problem}.txt"))

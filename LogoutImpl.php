@@ -4,12 +4,12 @@ $userID = $_COOKIE['userID'];
 $studentTable = $_COOKIE["compID"].'students';
 
 //Accesses the database and updates the account information to Logout the user
-$connection = mysql_connect("localhost","guest","");
+/*$connection = mysql_connect("localhost","guest","");
 mysql_select_db('competition');
 $getUser = mysql_query("SELECT username FROM competition.$studentTable WHERE userID='$userID'");
 $username = mysql_result($getUser,0);
 mysql_select_db('accounts');
-mysql_query("UPDATE students SET pingCount='0' WHERE username='$username'");
+mysql_query("UPDATE students SET pingCount='0' WHERE username='$username'");*/
 
 //Expires all of the user's cookies
 setcookie('usertype', '', time()-60);
