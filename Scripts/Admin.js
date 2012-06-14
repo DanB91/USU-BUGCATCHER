@@ -90,58 +90,24 @@ var compSetTime;
 //Postcondition: Starts the competition
 function startCompetition() //Find Code ---------- CS1001
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlstartCompetitionhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlstartCompetitionhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlstartCompetitionhttp.onreadystatechange=function()
-  {
-    if (xmlstartCompetitionhttp.readyState == 4 && xmlstartCompetitionhttp.status == 200)
-    {
+    $.ajax({url:"AdminCompContent/StartCompetition.php", success:function(){     
         //Need to write a new countdown function
-        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
+        $("#header-controls").html('<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />');
         //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();
-    }
-  }
-  //Don't start competition until the countdown timer reaches zero.
-  while (
-  xmlstartCompetitionhttp.open("GET","AdminCompContent/StartCompetition.php",true));
-  xmlstartCompetitionhttp.send();
-
+        startTimer();    
+    }});
 }
 
 function stopCompetition()
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlstopCompetition=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlstopCompetition=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlstopCompetition.onreadystatechange=function()
-  {
-    if (xmlstopCompetition.readyState == 4 && xmlstopCompetition.status == 200)
-    {
+    $.ajax({url:"AdminCompContent/StopCompetition.php", success:function(){     
         //Need to write a new countdown function
-        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />';
+        $("#header-controls").html('<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />');
         //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();
-    }
-  }
-  //Don't start competition until the countdown timer reaches zero.
-
-  xmlstopCompetition.open("GET","AdminCompContent/StopCompetition.php",true)
-  xmlstopCompetition.send();
-}
+        startTimer();   
+    }});
+}       
+        
 
 function refreshProbList()
 {
@@ -151,37 +117,48 @@ function refreshProbList()
       var pSBD = new Array(); //problems sorted by difficulty
       for(var i = 0; i < availableProbs.length; i++)
       {
-      		   	if (window.XMLHttpRequest)
-  				{// code for IE7+, Firefox, Chrome, Opera, Safari
-   					xmlGetDifficulty=new XMLHttpRequest();
-  				}
-  				else
-  				{// code for IE6, IE5
-    				xmlGetDifficulty=new ActiveXObject("Microsoft.XMLHTTP");
-  				}
-  
- 			 	xmlGetDifficulty.onreadystatechange=function()
-  				{
-    				if (xmlGetDifficulty.readyState == 4 && xmlGetDifficulty.status == 200)
-    				{
-    					
-    					
-    					
-    					difficulty = parseInt(xmlGetDifficulty.responseText);
-    					
-    					if(pSBD[difficulty] == undefined)
-    					{
-    						pSBD[difficulty] = new Array();
-    					}
-    					pSBD[difficulty].push(availableProbs[i]);
-    					
-    					
-						//content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"'>" + availableProbs[i] + "</option>"; 
-    				}
-    				
-  				}
-  			xmlGetDifficulty.open("GET","AdminCompContent/getDifficulty.php?problem="+availableProbs[i],false);
-  			xmlGetDifficulty.send();
+            if (window.XMLHttpRequest)
+                    {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlGetDifficulty=new XMLHttpRequest();
+                    }
+                    else
+                    {// code for IE6, IE5
+                    xmlGetDifficulty=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+
+                    xmlGetDifficulty.onreadystatechange=function()
+                    {
+                    if (xmlGetDifficulty.readyState == 4 && xmlGetDifficulty.status == 200)
+                    {
+                        
+                       
+//                        $.ajax({url: "AdminCompContent/getDifficulty.php?problem=" + availableProbs[i], success:function(result){
+//                                difficulty = parseInt(result);
+//                                alert(result);
+//                                if(pSBD[difficulty] == undefined)
+//                                {
+//                                        pSBD[difficulty] = new Array();
+//                                }
+//                                pSBD[difficulty].push(availableProbs[i]);
+//                        }});
+
+
+                    
+                            difficulty = parseInt(xmlGetDifficulty.responseText);
+                            
+                            if(pSBD[difficulty] == undefined)
+                            {
+                                    pSBD[difficulty] = new Array();
+                            }
+                            pSBD[difficulty].push(availableProbs[i]);
+
+
+                                    //content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"'>" + availableProbs[i] + "</option>"; 
+                    }
+
+                    }
+            xmlGetDifficulty.open("GET","AdminCompContent/getDifficulty.php?problem="+availableProbs[i],false);
+            xmlGetDifficulty.send();
   			
 
   			
@@ -194,26 +171,25 @@ function refreshProbList()
       
       	for(var prob = 0; prob < pSBD[difficulty].length; prob++)
       	{
-      		switch(difficulty)
-      		{
-      			case 0:
-      				diffStr = ' - Very Easy';
-      				break;
-      			case 1:
-					diffStr = ' - Easy';
-					break;
-      			case 2:
-      				diffStr = ' - Medium';
-					break;
-      			case 3:
-					diffStr = ' - Hard';
-      				break;
-      			case 4:
-      				diffStr = ' - Very Hard';
-      				break;
-     				
-      		}
-      		content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + pSBD[difficulty][prob] + "'>" + pSBD[difficulty][prob] + diffStr +"</option>"; 
+            switch(difficulty)
+            {
+                case 0:
+                        diffStr = ' - Very Easy';
+                        break;
+                case 1:
+                                diffStr = ' - Easy';
+                                break;
+                case 2:
+                        diffStr = ' - Medium';
+                                break;
+                case 3:
+                                diffStr = ' - Hard';
+                        break;
+                case 4:
+                        diffStr = ' - Very Hard';
+                        break;
+            }
+            content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + pSBD[difficulty][prob] + "'>" + pSBD[difficulty][prob] + diffStr +"</option>"; 
       	}
       }
       
@@ -238,26 +214,26 @@ function refreshProbList()
         {
             if (xmlGetDifficultyTwo.readyState == 4 && xmlGetDifficultyTwo.status == 200)
             {
-                    difficulty = parseInt(xmlGetDifficultyTwo.responseText); 
-                    var diffStr = '';
-                    switch (difficulty)
-                    {
-                            case 0:
-                                    diffStr = ' - Very Easy';
+                difficulty = parseInt(xmlGetDifficultyTwo.responseText); 
+                var diffStr = '';
+                switch (difficulty)
+                {
+                    case 0:
+                            diffStr = ' - Very Easy';
+                            break;
+                    case 1:
+                                    diffStr = ' - Easy';
                                     break;
-                            case 1:
-                                            diffStr = ' - Easy';
-                                            break;
-                            case 2:
-                                    diffStr = ' - Medium';
-                                            break;
-                            case 3:
-                                            diffStr = ' - Hard';
+                    case 2:
+                            diffStr = ' - Medium';
                                     break;
-                            case 4:
-                                    diffStr = ' - Very Hard';
-                                    break;    					
-                    }
+                    case 3:
+                                    diffStr = ' - Hard';
+                            break;
+                    case 4:
+                            diffStr = ' - Very Hard';
+                            break;    					
+                }
             content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
             }
         }
@@ -552,16 +528,16 @@ function createCompetition()//Find Code ---------- CS1011
 function setEditable(studPos)//Find Code ---------- TM1001
 {
 
-	var studentPosNum = studPos.charAt(studPos.length - 1);
-    
-	document.getElementById("Stud"+studentPosNum).value = "------Select a Name------";
-	document.getElementById("Stud"+studentPosNum).disabled = false;
-	document.getElementById("remove"+studentPosNum).disabled = true;
-	document.getElementById("add"+studentPosNum).disabled = false;
-	document.getElementById("Username_S"+studentPosNum).value = "N/A";
-	document.getElementById("School_S"+studentPosNum).value = "N/A";
-	document.getElementById("State_S"+studentPosNum).value = "N/A";
-	
+    var studentPosNum = studPos.charAt(studPos.length - 1);
+
+    document.getElementById("Stud"+studentPosNum).value = "------Select a Name------";
+    document.getElementById("Stud"+studentPosNum).disabled = false;
+    document.getElementById("remove"+studentPosNum).disabled = true;
+    document.getElementById("add"+studentPosNum).disabled = false;
+    document.getElementById("Username_S"+studentPosNum).value = "N/A";
+    document.getElementById("School_S"+studentPosNum).value = "N/A";
+    document.getElementById("State_S"+studentPosNum).value = "N/A";
+
 }
 
 //Precondition: Compeition must exist
@@ -634,29 +610,28 @@ function addTeam()//Find Code ---------- TM1004
 //is removed from the current compeition.
 function removeTeam()//Find Code ---------- TM1005
 {	
-	if (teamN=="")
-	{
-		document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
-		return;
-	}
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		removeTeamXML=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		removeTeamXML=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	removeTeamXML.onreadystatechange=function()
-	{
-		if (removeTeamXML.readyState==4 && removeTeamXML.status==200)
-		{
-			loadTeamNameList();
-		}
-		
-	}
-		removeTeamhttp.open("GET","ManageContent/removeTeam.php?"+"&team=" + teamN,true);
-		removeTeamhttp.send();
+    if (teamN=="")
+    {
+            document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
+            return;
+    }
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+            removeTeamXML=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+            removeTeamXML=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    removeTeamXML.onreadystatechange=function()
+    {
+        if (removeTeamXML.readyState==4 && removeTeamXML.status==200)
+        {
+                loadTeamNameList();
+        }
+    }
+        removeTeamhttp.open("GET","ManageContent/removeTeam.php?"+"&team=" + teamN,true);
+        removeTeamhttp.send();
 }
 
 //This function is called when there is no student in a position on a team
@@ -683,9 +658,9 @@ function showStudents(studentPosNum)//Find Code ---------- TM1006
       document.getElementById("Stud"+studentPosNum).disabled = false;
       document.getElementById("remove"+studentPosNum).disabled = true;
       document.getElementById("add"+studentPosNum).disabled = false;
-	  document.getElementById("Username_S"+studentPosNum).value = "N/A";
-	  document.getElementById("School_S"+studentPosNum).value = "N/A";
-	  document.getElementById("State_S"+studentPosNum).value = "N/A";
+      document.getElementById("Username_S"+studentPosNum).value = "N/A";
+      document.getElementById("School_S"+studentPosNum).value = "N/A";
+      document.getElementById("State_S"+studentPosNum).value = "N/A";
     }
   }
   var getVars = "q="+teamN+"&selectName=Stud"+studentPosNum;
