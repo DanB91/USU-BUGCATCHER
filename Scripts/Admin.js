@@ -188,7 +188,7 @@ function refreshProbList()
       	{
       		switch(difficulty)
       		{
-      			case 0: 
+      			case 0:
       				diffStr = ' - Very Easy';
       				break;
       			case 1:
@@ -234,7 +234,7 @@ function refreshProbList()
                     var diffStr = '';
                     switch (difficulty)
                     {
-                            case 0: 
+                            case 0:
                                     diffStr = ' - Very Easy';
                                     break;
                             case 1:
@@ -283,6 +283,7 @@ function popProbSelectBox()//Find Code ---------- CS1003
     if (xmlpopulateProbSelectBox.readyState == 4 && xmlpopulateProbSelectBox.status == 200)
     {
       availableProbs = eval(xmlpopulateProbSelectBox.responseText);
+      
       var index = availableProbs.indexOf(".");
           availableProbs.splice(index, 1);
           index = availableProbs.indexOf("..");
@@ -449,19 +450,16 @@ function moveProbDown(problem)//Find Code ---------- CS1010
 function createCompetition()//Find Code ---------- CS1011
 {
 
-  //STOPPED = true;
   
   var setupXML;
   var CodeCov = document.forms.CompForm.AllowCoverage;
   var inclCD = document.forms.CompForm.IncludeCountdown;
+  var hideComp = document.forms.CompForm.HideComp;
   var Time = document.getElementById("CompTime");
-  var CountdownVal;
-  
-//  if(inclCD[0].checked == true)
-//      CountdownVal = 1;
-//  else
-//      CountdownVal = 0; 
-      
+  var compName = document.getElementById("CompName").value;
+  var compDesc = document.getElementById("CompDesc").value; //Competition description
+  var passwd = document.getElementById("PassWord").value;
+
   if (window.XMLHttpRequest)
   {
     setupXML = new XMLHttpRequest();
@@ -474,16 +472,13 @@ function createCompetition()//Find Code ---------- CS1011
   
   setupXML.onreadystatechange=function()
   {
+
     if (setupXML.readyState == 4 && setupXML.status == 200)
     {
-      //if (setupXML.responseText.length == 8)
-      //{
-
+        alert(setupXML.responseText);
         compSetID = setupXML.responseText;
-                       
         
-        //compSetHints = Hints.options[Hints.selectedIndex].text;
-        //Hints.value = 1;
+
 		compSetTimeM = Time.value;
                 compSetTime = Time.value;
         if (CountdownVal)
@@ -494,11 +489,14 @@ function createCompetition()//Find Code ---------- CS1011
         //setCompCookies();
         createTimer();
         document.getElementById('adminCompID').innerHTML = "<p>" + "Competition ID: " +setupXML.responseText + "</p>";
-      //}
 
     }
     
   }
+  
+  var CodeCovVal;
+  var CountdownVal;
+  var HideCompVal;
   
    
   if(CodeCov[0].checked == true)
@@ -510,6 +508,12 @@ function createCompetition()//Find Code ---------- CS1011
       CountdownVal = 1;
   else
       CountdownVal = 0;
+  
+  if(hideComp[0].checked == true)
+      HideCompVal = 1;
+  else
+      HideCompVal = 0;
+
   
   var TimeVal = Time.value;
   var length = addedProbs.length;
@@ -535,36 +539,17 @@ function createCompetition()//Find Code ---------- CS1011
  
   if(TimeVal > 1000)
   {
-    document.getElementById('CSetupError').innerHTML = "The competition time must be less than 1000 minutes.";
+     document.getElementById('CSetupError').innerHTML = "The competition time must be less than 1000 minutes.";
     return;
   }
   
   
+
+  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
-  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "&newTeamIDm='" + document.getElementById("CompNameID").value + "'&inclCD=" + CountdownVal;
-  
-//  for(var i = 0; i < length; i++)
-//  {
-//      temp = addedProbs[i];
-//      contents += "&Prob" + (i + 1) + "=" + temp;
-//  }
- 
- 
-  /*var IETimeStamp = new Date().getTime();
-  
-  if (navigator.appName == "Microsoft Internet Explorer")
-  {
-    setupXML.open("GET","setupImpl.php?"+contents+"&"+IETimeStamp,true);
-    setupXML.send();
-  }
-  else
-  {
-    setupXML.open("GET","setupImpl.php?"+contents+"&"+IETimeStamp,true);
-    setupXML.send();
-  }*/
-    PAUSE = false;   
-    pauseTimer();
-    document.getElementById('header-timer').innerHTML=TimeVal +":00";
+  PAUSE = false;   
+  pauseTimer();
+  document.getElementById('header-timer').innerHTML=TimeVal +":00";
   setupXML.open("GET","setupImpl.php?"+contents,true);
   setupXML.send();
 
