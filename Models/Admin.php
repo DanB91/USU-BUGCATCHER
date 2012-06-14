@@ -22,6 +22,10 @@ class Admin extends Model{
         {
             if($fieldName === 'password')
                 continue;
+<<<<<<< HEAD
+=======
+            
+>>>>>>> branch 'master' of https://github.com/DanB91/USU-BUGCATCHER.git
             $value = "'" . $value . "'";
         }
         
@@ -38,12 +42,21 @@ class Admin extends Model{
     {
         
         try{
+<<<<<<< HEAD
             $user = new Admin($username, 'username');
             
             if($user->password !== crypt($password, SALT))
                     return FALSE;
             
             return $user;
+=======
+            $admin = new Admin($username, 'username');
+            
+            if($admin->password !== crypt($password, SALT))
+                    return FALSE;
+            
+            return $admin;
+>>>>>>> branch 'master' of https://github.com/DanB91/USU-BUGCATCHER.git
         }
         catch(BugCatcherException $ex)
         {
