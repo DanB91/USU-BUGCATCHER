@@ -82,23 +82,12 @@ function getWinningTeams()//Find Code ---------- G1001
 //Postcondition: Pushes the message to the appropriate team content file.
 function instantMessaging(message)//Find Code ---------- G1003
 {
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		instantMessagingXML=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		instantMessagingXML=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	instantMessagingXML.onreadystatechange=function()
-	{
-		if (instantMessagingXML.readyState==4 && instantMessagingXML.status==200)
-		{
-			document.getElementById("ChatInput").value="";
-		}
-	}
-	instantMessagingXML.open("GET","StudentContent/instantMessaging.php?string="+message,true);
-	instantMessagingXML.send();
+    $.post('StudentContent/instantMessging.php', "string="+message, 
+        function(html){
+            document.getElementById("ChatInput").value="";
+        });
+
+			
 }
 
 //This function is called in the initialize function below
@@ -218,30 +207,13 @@ function format(arr){
 //Postcondition: Disables the radio buttons if code coverage is disabled
 function setCodeCoverageState()//Find Code ---------- G1005
 {
-	//alert("recieving now");
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		setCodeCoverageStateXml=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		setCodeCoverageStateXml=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	setCodeCoverageStateXml.onreadystatechange=function()
-	{
-		if (setCodeCoverageStateXml.readyState==4 && setCodeCoverageStateXml.status==200)
-		{
-			if(setCodeCoverageStateXml.responseText != "SET")
-			{
-				//alert("The admin has disabled code coverage");
-				document.getElementById("Coverage").disabled = true;
-				//document.getElementById("radio2").disabled = true;
-			}
-		}
-	}
-	setCodeCoverageStateXml.open("GET","StudentContent/codeCoverageState.php",true);
-	setCodeCoverageStateXml.send();
+    $.post('StudentContent/codeCoverageState.php', "", 
+        function(html){
+            if (html.trim() != "SET")
+            {
+                $("#Coverage").attr("disabled", true);
+            }
+        });	
 }
 
 function loadStudentProblems()
