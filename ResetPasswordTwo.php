@@ -1,24 +1,17 @@
 <?php
-$firstname_str = $_GET['firstName'];
-$lastname_str = $_GET['lastName'];
-$schoolname_str = $_GET['schoolName'];
-$username_str = $_GET['username'];
-$newPass_str = $_GET['newPass'];
-$accountType_str = $_GET['actType'];
-
-$con = mysql_connect("localhost", "guest", "");
-mysql_select_db("accounts", $con);
+$firstname_str = $_POST['firstName'];
+$lastname_str = $_POST['lastName'];
+$schoolname_str = $_POST['schoolName'];
+$username_str = $_POST['username'];
+$newPass_str = $_POST['newPass'];
+$accountType_str = $_POST['actType'];
 
 if ($accountType_str == 'admin')
 {
-	$sql = "SELECT * FROM accounts.admins WHERE username='${username_str}'";
-	$result = mysql_query($sql);
-	$row = mysql_fetch_array($result);
-	if (($row['firstname'] == $firstname_str)&&($row['lastname'] == $lastname_str))
+	$admin = new Admin($username_str, "username");
+	if (($admin->fname == $firstname_str)&&($admin->lname == $lastname_str))
 	{
-		$password_str = crypt($newPass_str, '$6$rw34ffd3');
-		mysql_query("UPDATE accounts.admins SET password = '$password_str' WHERE username = '$username_str'");
-		mysql_close($con);
+		$admin->password = $newPass_str;
 		echo "Your password has been reset. You may now log in.";
 	}
 	else
@@ -28,14 +21,10 @@ if ($accountType_str == 'admin')
 }
 else
 {
-	$sql = "SELECT * FROM accounts.students WHERE username='${username_str}'";
-	$result = mysql_query($sql);
-	$row = mysql_fetch_array($result);
-	if (($row['firstname'] == $firstname_str)&&($row['lastname'] == $lastname_str)&&($row['school'] == $schoolname_str))
+    $user = new User($username_str, "username");
+	if (($user->fname == $firstname_str)&&($user->lname == $lastname_str)&&($user->schoolabbr == $schoolname_str))
 	{
-		$password_str = crypt($newPass_str, '$6$rw34ffd3');
-		mysql_query("UPDATE accounts.students SET password = '$password_str' WHERE username = '$username_str'");
-		mysql_close($con);
+		$user->password = $newPass_str;
 		echo "Your password has been reset. You may now log in.";
 	}
 	else
