@@ -215,7 +215,7 @@ abstract class Model {
     {
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
-        echo $sql;
+        
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
         
@@ -250,7 +250,9 @@ abstract class Model {
         {
             throw new BugCatcherException($this->uniqueFieldName . ' "'. $this->uniqueFieldValue . '" not found');
         }
-        $this->loadLinks();
+        
+        if($this->linkTables)
+            $this->loadLinks();
     }
 
 
