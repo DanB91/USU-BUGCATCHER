@@ -24,6 +24,7 @@ if ($accountType_str == 'admin')
 
         );
        ADMIN::registerAdmin($ADMIN);
+       print_r($ADMIN);
     }catch(Exception $e ){
         $success = false;
         RegistrationFail();

@@ -12,8 +12,8 @@ $accountType_str = $_GET['usertype'];
 //Handles administrator Login
 if ($accountType_str == 'admin')
 {//This verifies the information provided by the user against the server's database
- 
-  $ADMIN = ADMIN::login($username_str,$password_str);
+
+  $ADMIN = Admin::login($username_str,$password_str);
   if(!$ADMIN)
   {//Either the username or password provided by the user was incorrect (or both)
     echo "<br>Incorrect username or password.";
@@ -25,7 +25,7 @@ if ($accountType_str == 'admin')
         $_SESSION['userid'] = $USER->userid;
         $_SESSION['usertype'] = 'admin';
         $_SESSION['username'] = $USER->username;
-        echo "Pie";
+       // echo "Pie";
 
   }
 }
@@ -33,28 +33,30 @@ if ($accountType_str == 'admin')
 //Handles student Login
 else
 {//This verifies the information provided by the user against the server's database
-    echo $username_str."<br>";
-    echo  $password_str."<br>";
-    echo crypt($password_str, SALT);
-    if(($USER = User::login($username_str,$password_str)) != 'fds')
-            throw new Exception($USER);
+    //echo $username_str."<br>";
+    //echo  $password_str."<br>";
+    //$password_str
+    //echo crypt('password', SALT) ."<br>";
+    //echo crypt('password1', SALT) ."<br>";
+    //echo crypt($password_str, SALT) ."<br>";
     
-   
-    echo $USER->username;
+    $USER = User::login($username_str,$password_str);
+
+    //echo $USER->username;
   if(!$USER)
   {//Either the username or password provided by the user was incorrect (or both)
     echo "<br>Incorrect username or password.";
   }
   else
   {//Username was found and the password is correct
-     
     session_start();
     $_SESSION['userid'] = $USER->userid;
     $_SESSION['usertype'] = 'student';
     $_SESSION['username'] = $USER->username;
-    echo "Pie";
+    //echo "Pie";
 
   }
+
 }
 
 ?>
