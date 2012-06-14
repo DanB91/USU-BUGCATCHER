@@ -1,6 +1,0 @@
-15
-Blank
-0
-500
-HelloWorld,PowersOfTwo,QuickAdd,Fibonacci,Reverse,SalePrice,Binary,Calculator,FindPrimes,GroupSum,OddsEvens,Converter,PigLatin,Triangle,Encoder
-0

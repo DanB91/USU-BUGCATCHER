@@ -1,9 +1,0 @@
-student tested problem SalePrice with input: '100 1' and output: '99'
-<!@!>Bug found!
-<!@!>student tested problem SalePrice with input: '100 1' and output: '99'
-<!@!>Bug found!
-<!@!>student tested problem SalePrice with input: '100 1' and output: '99'
-<!@!>Bug found!
-<!@!>student tested problem SalePrice with input: '100 0' and output: '100'
-<!@!>Bug found!
-<!@!>

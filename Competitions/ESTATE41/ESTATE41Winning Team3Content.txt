@@ -1,1 +1,0 @@
-49394<!@!>[Test, dustin.allred, QuickAdd]<br>Input: '0 1'<br>Expected output: '1'<br>Actual Output: '-1.0'<br>Bug found!<!@!>

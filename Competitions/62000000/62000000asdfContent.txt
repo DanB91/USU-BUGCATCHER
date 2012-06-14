@@ -1,8 +1,0 @@
-39148<!@!>[Test, testud2, PowersOfTwo]<br>Input: '2'<br>Expected output: '1 2 4'<br>Actual Output: '1 4 4'<br>Bug found!<!@!>39166<!@!>[Test, testud2, PowersOfTwo]<br>Input: '2'<br>Expected output: '1 2 4'<br>Actual Output: '1 4 4'<br>Bug already found!<!@!>39190<!@!>[Test, testud2, PowersOfTwo]<br>Input: '3'<br>Expected output: '1 2 4 8'<br>Actual Output: '1 6 6 6'<br>Bug already found!<!@!>39208<!@!>[Test, testud2, PowersOfTwo]<br>Input: 'assda'<br>Expected output: 'ASD'<br>Actual output: ''<br>Bug not found!<!@!>39229<!@!>[Test, testud2, PowersOfTwo]<br>Input: '2.2'<br>Expected output: '2.3'<br>Actual output: ''<br>Bug not found!<!@!>39259<!@!>[Test, testud2, Fibonacci]<br>Input: '3'<br>Expected output: '1 1 2'<br>Actual Output: '1 
-1 
-2 
-3'<br>Bug found!<!@!>39268<!@!>[Test, testud2, Fibonacci]<br>Input: '4'<br>Expected output: '1 1 2 3'<br>Actual Output: '1 
-1 
-2 
-3 
-5'<br>Bug already found!<!@!>39287<!@!>[Test, testud2, Binary]<br>Input: '2'<br>Expected output: '10'<br>Actual Output: '01'<br>Bug found!<!@!>39294<!@!>[Test, testud2, Binary]<br>Input: '4'<br>Expected output: '100'<br>Actual Output: '011'<br>Bug already found!<!@!>39303<!@!>[Test, testud2, Binary]<br>Input: '5'<br>Expected output: '101'<br>Actual Output: '010'<br>Bug already found!<!@!>39346<!@!>[Test, testud2, Triangle]<br>Input: '3 3 3'<br>Expected output: 'Not a Triangle'<br>Actual Output: 'Acute'<br>Bug found!<!@!>39373<!@!>[Test, testud2, Triangle]<br>Input: '4 4 4'<br>Expected output: 'Not a Triangle'<br>Actual Output: 'Acute'<br>Bug already found!<!@!>39385<!@!>[Test, testud2, Triangle]<br>Input: '.2 .2 .2'<br>Expected output: 'Not a Triangle'<br>Actual output: 'Error: Bad Input'<br>Bug not found!<!@!>
