@@ -1,1 +1,0 @@
-33506<!@!>[Test, student2, Reverse]<br>Input: 'racar'<br>Expected output: 'racar'<br>Actual Output: 'raca'<br>Bug found!<!@!>

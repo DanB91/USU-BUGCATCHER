@@ -1,1 +1,0 @@
-71291<!@!>[Test, testud, Binary]<br>Input: '5'<br>Expected output: '101'<br>Actual Output: '010'<br>Bug found!<!@!>71353<!@!>[Test, testud, Fibonacci]<br>Input: '2'<br>Expected output: '1 1'<br>Actual Output: '1 1 2'<br>Bug found!<!@!>71406<!@!>[Test, testud, PowersOfTwo]<br>Input: '2'<br>Expected output: '1 2 4'<br>Actual Output: '1 4 4'<br>Bug found!<!@!>

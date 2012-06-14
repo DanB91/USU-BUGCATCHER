@@ -6,18 +6,20 @@
 
 set_error_handler('error');
 
+header("Content-type:text/html");
 
-
-$problem = $_GET["problem"];
-$coverage = trim($_GET["coverage"]);
+$problem = $_POST["problem"];
+$coverage = trim($_POST["coverage"]);
 $compID = $_COOKIE['compID'];
 $userID = $_COOKIE['userID'];
-$probNum = $_GET['index'];
+$teamName = $_SESSION['teamName'];
+$probNum = $_POST['index'];
 $NumProbsC = 0;
 
 if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')
 {
-	$fileComp=file("../Competitions/${compID}/${compID}.txt");//get number of allowed problems
+        
+	//$fileComp=file("../Competitions/${compID}/${compID}.txt");//get number of allowed problems
 
         if(!file_exists("../Problems/${problem}/${problem}.txt"))
         {
@@ -27,23 +29,9 @@ if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')
         
 	$fileCode=file("../Problems/${problem}/${problem}.txt");
 	$problemTxt = "";
-
-	//var_dump($fileCode);
-
-	$fileComp=file("../Competitions/${compID}/${compID}.txt");
-	$rest = $probNum;
-	
-	$con = mysql_connect("localhost", "guest", "");
-	mysql_select_db("competition", $con);
-	$sql = "SELECT * FROM usedids WHERE compID='${compID}'";
-	$result = mysql_query($sql);
-	$row = mysql_fetch_array($result);
-	$started = $row['hasstarted'];
-	
-	$sql="SELECT * FROM ${compID}students WHERE userID='${userID}'";
-	$result = mysql_query($sql);
-	$row = mysql_fetch_array($result);
-	$teamName = $row['teamName'];
+        
+        $comp = new Competition($compID);
+        $isPaused = $comp->isPaused();
 	
 	$coverageFileLoc = "C:/Dropbox/htdocs/NewDesign/Competitions/$compID/$compID$teamName${problem}Coverage.txt";
 	if(!file_exists($coverageFileLoc)) //create the coverage file if it doesn't exist
@@ -52,19 +40,15 @@ if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')
 		fclose($coverageFile);
 	}
 	
-	//$covFile=file($coverageFileLoc);
 	$covFile=explode("\n", file_get_contents($coverageFileLoc));
-	//var_dump($covFile);
 	$covIndex = 0;
-//	var_dump($covFile);
 
-	if($started == 1)//Displays the number of problems specified by the admin
+	if(!$isPaused)
 	{
 		for($i = 0; $i < count($fileCode); $i++)//get file contents
 		{
 			if($coverage == '1') //if coverage is enabled
 			{
-				//$problemTxt .= "Line: " .$i . " Coverage: " . $covFile[$covIndex] . "CovIndex: " . $covIndex ."\n";
 				if($covIndex < count($covFile) && $i == $covFile[$covIndex])
 				{
 					$problemTxt .= "<SPAN style='BACKGROUND-COLOR: #66CCCC'>" . rtrim($fileCode[$i]) . "</SPAN><br />";

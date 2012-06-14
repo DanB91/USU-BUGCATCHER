@@ -14,20 +14,20 @@ $con = mysql_connect('localhost','guest','') or	trigger_error('Could not connect
 mysql_select_db("competition", $con);
 
 
-$testInput  = mysql_real_escape_string(trim($_GET["testInput"])); //sanitizes input
-$testOutput =  mysql_real_escape_string(trim($_GET["testOutput"])); //sanitizes output
-$isCoverage = $_GET["codeCov"]; //boolean for coverage
-$problemName = $_GET["problemNum"];
+$testInput  = mysql_real_escape_string(trim($_POST["testInput"])); //sanitizes input
+$testOutput =  mysql_real_escape_string(trim($_POST["testOutput"])); //sanitizes output
+$isCoverage = $_POST["codeCov"]; //boolean for coverage
+$problemName = $_POST["problemNum"];
 $compID 	= $_COOKIE['compID'];
 $userID		= $_COOKIE['userID'];
-
+$teamName       = $_SESSION['teamName'];
 
 
 if(!isset($_COOKIE['compID']) || $_COOKIE['compID'] == '' || $_COOKIE['userID'] == '' || !isset($_COOKIE['userID']))
 {
 	trigger_error('You must be part of the competion to submit bugs');
-
 }
+
 //input and output cant be just white space or empty
 elseif (count(preg_split('/[\n\r\t\s]/', $testInput, NULL, PREG_SPLIT_NO_EMPTY)) == 0 || count(preg_split('/[\n\r\t\s]/', $testOutput, NULL, PREG_SPLIT_NO_EMPTY)) == 0)
 {
@@ -38,26 +38,18 @@ elseif($problemName == '')
 	trigger_error('Please select a problem'); 
 }
 
-
-$row = getMySQLResultArray("SELECT * FROM ${compID}students WHERE userID='${userID}'");
-
-$onTeam = $row['onTeam'];
-$userName = $row['username'];
-$teamName = $row['teamName'];
 $contentFileName = "C:/DropBox/htdocs/NewDesign/Competitions/$compID/$compID${teamName}Content.txt";//name of the content file
 
-
 //user must be on a team
-if(!$onTeam)
+/*if(!$onTeam)
 {
 	trigger_error('User must be on a team');
-}
+}*/
 ///////////////////////////////////
 
 chdir(ROOT_DIRECTORY);
 
-
-$bugFileLoc = "Competitions/${compID}/${compID}${teamName}${problemName}Bugs.txt";
+//$bugFileLoc = "Competitions/${compID}/${compID}${teamName}${problemName}Bugs.txt";
 $bugFilesInProblemDir = getBugFileNames($problemName);
 
 
@@ -85,14 +77,11 @@ $alreadyFoundBug = false; //tests to see if the bug is already found
 $output = '';
 foreach($buggyOutputs as $index => $bO)
 {
-
 	//if the supplied output is not equal to the oracle output, obviously the student did not find the bug
 	if($oracle != $testOutput)
 	{
 		break;
 	}
-
-
 
 	$bugName = "bug $index";
 

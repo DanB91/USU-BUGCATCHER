@@ -1,6 +1,0 @@
-1
-Blank
-0
-22
-Fibonacci
-0
