@@ -71,25 +71,11 @@ var doScrollDown = false;
 //Precondition: Student must be in a valid competition
 //Postcondition: Lists the top three teams on the student side
 function getWinningTeams()//Find Code ---------- G1001
-{
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		getWinningTeams=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		getWinningTeams=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	getWinningTeams.onreadystatechange=function()
-	{
-		if (getWinningTeams.readyState==4 && getWinningTeams.status==200)
-		{
-			document.getElementById("header-winningteams").innerHTML=getWinningTeams.responseText;
-		}
-	}
-	getWinningTeams.open("GET","StudentContent/showWinningTeams.php",true);
-	getWinningTeams.send();
+{      
+    $.post('StudentContent/showWinningTeams.php', "", 
+        function(html){
+            $("#header-winningteams").html=html;
+        });
 }
 
 //Precondition: Student must be on a team 
@@ -453,7 +439,6 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
                 $("#ProblemCode").html="<pre class='prettyprint lang-java linenums'>"+html+"</pre>";
                 prettyPrint();
                 getToolTip(currProblem);
-
             }
             else
             {
@@ -465,27 +450,13 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
 
 function getToolTip(str)
 {
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadToolTip=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		loadToolTip=new ActiveXObject("Microsoft.XMLHTTP");
-	}
+    $.post('StudentContent/getToolTip.php', "problem="+str, 
+        function(html){	
+            $("#BugTesterDiv").attr("title",html);
+            $("#ProblemName").html=str;
+        });
 
-	loadToolTip.onreadystatechange=function()
-	{
-		if (loadInfoGetProb.readyState==4 && loadInfoGetProb.status==200)
-		{
-			var example = loadToolTip.responseText; 	
-			document.getElementById("BugTesterDiv").title=example;
-			document.getElementById("ProblemName").innerHTML=str;
-		}
-	}
 
-	loadToolTip.open("GET","StudentContent/getToolTip.php?problem="+str,true);
-	loadToolTip.send();
 }
 
 //###################################################################################################//
@@ -498,30 +469,12 @@ function getToolTip(str)
 //Postcondition: Displays a team's bugs found
 function getBugs()//Find Code ---------- BF1001
 {
+    $.post('StudentContent/getBugsFound.php', "", 
+        function(html){
+            getBugs();     		
+            $("#BugsFoundText").html=html;
 
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadInfoGetBugs=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		loadInfoGetBugs=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	loadInfoGetBugs.onreadystatechange=function()
-	{
-		if (loadInfoGetBugs.readyState==4 && loadInfoGetBugs.status==200)
-		{
-
-			document.getElementById("BugsFoundText").innerHTML=loadInfoGetBugs.responseText;
-
-
-			
-		}
-	}
-
-	loadInfoGetBugs.open("GET","StudentContent/getBugsFound.php",false);
-	loadInfoGetBugs.send();
+        });
 }
 
 //Bug testing ---- BF1002
@@ -554,28 +507,10 @@ function getBugTestInfo(str, str2)
 
 function getAniState()
 {
-
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		getAniStateXML=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		getAniStateXML=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	getAniStateXML.onreadystatechange=function()
-	{
-		if (getAniStateXML.readyState==4 && getAniStateXML.status==200)
-		{
-			//alert(getAniStateXML.responseText);
-			countDownState = getAniStateXML.responseText;
-		}
-	}
-
-	getAniStateXML.open("GET","StudentContent/getAniState.php", true);
-	getAniStateXML.send();
-
+    $.post('StudentContent/getAniState.php', "", 
+        function(html){	
+            countDownState = html;
+        });
 }
 
 //This function is called in the initialize function below
