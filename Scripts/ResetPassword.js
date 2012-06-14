@@ -1,6 +1,6 @@
 function loadIndex()
 {
-  setInterval(function() { getResetUserType(); }, 100);
+  setInterval(function() {getResetUserType();}, 100);
 }
 
 //not in use in new (ie...easy) version.
@@ -41,6 +41,7 @@ function SendResetEmail()
 
 function resetPassword()
 {
+    
 	var newPassOne = document.getElementById("NewPassword").value;
 	var newPassTwo = document.getElementById("NewPasswordConfirm").value;
 	
@@ -66,53 +67,40 @@ function resetPassword()
 
 function VerifyResetTwo()
 {
-	var firstName = document.getElementById("Resetfirstname").value;
-	var lastName = document.getElementById("Resetlastname").value;
-	var schoolName = document.getElementById("Resetschoolname").value;
-	var username = document.getElementById("Resetusername").value;
-	var resetPass = document.getElementById("Resetpassword").value;
-	var confirmResetPass = document.getElementById("ConfirmResetpassword").value;
-	var userType;
+        
+    var firstName = $("#Resetfirstname").val();
+    var lastName = $("#Resetlastname").val();
+    var schoolName = $("#Resetschoolname").val();
+    var username = $("#Resetusername").val();
+    var resetPass = $("#Resetpassword").val();
+    var confirmResetPass = $("#ConfirmResetpassword").val();
+    var userType;
 	
-	if(document.ResetFormTwo.Resetusertype[0].checked == true)
-	{
-		userType = "admin";
-	}
-	else
-	{
-		userType = "student";
-	}
+    if(document.ResetFormTwo.Resetusertype[0].checked == true)
+    {
+        userType = "admin";
+    }
+    else
+    {
+        userType = "student";
+    }
 	
-	if (!resetPass == confirmResetPass)
-	{
-		document.getElementById("ResetError").innerHTML="Passwords do not match. Please enter again.";
-	}
-	else if (resetPass.length < 6)
-	{
-		document.getElementById("ResetError").innerHTML="Password must be at least six characters.";	    
-	}
-	else
-	{
-		if (window.XMLHttpRequest)
-  		{// code for IE7+, Firefox, Chrome, Opera, Safari
-  			xmlresetPassword=new XMLHttpRequest();
-  		}
-		else
-  		{// code for IE6, IE5
-  			xmlresetPassword=new ActiveXObject("Microsoft.XMLHTTP");
-  		}
-		xmlresetPassword.onreadystatechange=function()
-		{
- 			if (xmlresetPassword.readyState==4 && xmlresetPassword.status==200)
-    		{
-    			alert(xmlresetPassword.responseText);
-    			window.location = "index.html";
-   			}
-		}
-	
-		xmlresetPassword.open("GET","ResetPasswordTwo.php?firstName="+firstName+"&lastName="+lastName+"&schoolName="+schoolName+"&username="+username+"&newPass="+resetPass+"&actType="+userType,true);
-		xmlresetPassword.send();
-	}
+    if (!resetPass == confirmResetPass)
+    {
+        $("#ResetError").html="Passwords do not match. Please enter again.";
+    }
+    else if (resetPass.length < 6)
+    {
+        $("#ResetError").html="Password must be at least six characters.";	    
+    }
+    else
+    {
+        $.post('ResetPasswordTwo.php', "firstName="+firstName+"&lastName="+lastName+"&schoolName="+schoolName+"&username="+username+"&newPass="+resetPass+"&actType="+userType, 
+            function(html){
+                alert(html);
+                window.location = "index.html";
+            });
+    }
 }
 
 var recentlyChanged;
@@ -137,13 +125,13 @@ function getResetUserType()
     }
     return true;
   }
-/*  
-  if ((document.getElementById("Resetpassword").value.length < 6) && (document.getElementById("Resetpassword").value.length > 0))
+ 
+  if (($("#Resetpassword").val().length < 6) && ($("#Resetpassword").val().length > 0))
   {
   	document.getElementById("Resetpassword").style.backgroundColor = '#E38686';
   }
   else if (document.getElementById("Resetpassword").value.length >= 6)
   {
   	document.getElementById("Resetpassword").style.backgroundColor = '#69AF69';
-  }*/
+  }
 }
