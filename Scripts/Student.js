@@ -385,21 +385,21 @@ function getBugs()//Find Code ---------- BF1001
 //---------------------------------------------------------------------------------------
 function getBugTestInfo(str, str2)
 {
-        $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
-            function(html){
-                getBugs();     		
-		if (html.trim() == '1' && !recentlyLoged)
-		{
-                    bugFoundAnimation();
-		}
-		else
-		{
-                    getProb(currProblem, coverage, currIndex);
-                    recentlyLoged = false;
-		}
+    $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
+        function(html){
+            getBugs();     		
+            if (html.trim() == '1' && !recentlyLoged)
+            {
+                bugFoundAnimation();
+            }
+            else
+            {
+                getProb(currProblem, coverage, currIndex);
+                recentlyLoged = false;
+            }
 
-		$("#testInput").val('');
-		$("#testOutput").val('');
+            $("#testInput").val('');
+            $("#testOutput").val('');
         });
 
 
