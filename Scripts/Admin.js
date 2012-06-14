@@ -217,44 +217,44 @@ function refreshProbList()
       
      for(i = 0; i < addedProbs.length; i++)
      {
-             	if (window.XMLHttpRequest)
-  				{// code for IE7+, Firefox, Chrome, Opera, Safari
-   					xmlGetDifficultyTwo=new XMLHttpRequest();
-  				}
-  				else
-  				{// code for IE6, IE5
-    				xmlGetDifficultyTwo=new ActiveXObject("Microsoft.XMLHTTP");
-  				}
-  
- 			 	xmlGetDifficultyTwo.onreadystatechange=function()
-  				{
-    				if (xmlGetDifficultyTwo.readyState == 4 && xmlGetDifficultyTwo.status == 200)
-    				{
-    					difficulty = parseInt(xmlGetDifficultyTwo.responseText); 
-  			    		var diffStr = '';
-    					switch (difficulty)
-    					{
-      						case 0: 
-      							diffStr = ' - Very Easy';
-      							break;
-      						case 1:
-								diffStr = ' - Easy';
-								break;
-      						case 2:
-      							diffStr = ' - Medium';
-								break;
-      						case 3:
-								diffStr = ' - Hard';
-      							break;
-      						case 4:
-      							diffStr = ' - Very Hard';
-      							break;    					
-    					}
-            			content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
-    				}
-  				}
-  			xmlGetDifficultyTwo.open("GET","AdminCompContent/getDifficulty.php?problem="+addedProbs[i],false);
-  			xmlGetDifficultyTwo.send();   
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlGetDifficultyTwo=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+        xmlGetDifficultyTwo=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        xmlGetDifficultyTwo.onreadystatechange=function()
+        {
+            if (xmlGetDifficultyTwo.readyState == 4 && xmlGetDifficultyTwo.status == 200)
+            {
+                    difficulty = parseInt(xmlGetDifficultyTwo.responseText); 
+                    var diffStr = '';
+                    switch (difficulty)
+                    {
+                            case 0: 
+                                    diffStr = ' - Very Easy';
+                                    break;
+                            case 1:
+                                            diffStr = ' - Easy';
+                                            break;
+                            case 2:
+                                    diffStr = ' - Medium';
+                                            break;
+                            case 3:
+                                            diffStr = ' - Hard';
+                                    break;
+                            case 4:
+                                    diffStr = ' - Very Hard';
+                                    break;    					
+                    }
+            content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
+            }
+        }
+            xmlGetDifficultyTwo.open("GET","AdminCompContent/getDifficulty.php?problem="+addedProbs[i],false);
+            xmlGetDifficultyTwo.send();   
 
       }
       content += '</select>';
