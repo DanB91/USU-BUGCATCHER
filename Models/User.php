@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Model.php';
+require_once 'Team.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -15,6 +16,7 @@ require_once 'Model.php';
  * @author danielbokser
  */
 class User extends Model{
+  
     
     /**
      *Constructs a user using a given unique value 
@@ -25,6 +27,11 @@ class User extends Model{
         parent::__construct('USERS', $value, $fieldName, array('STUDENT_TEAM_LINK'));
     }
     
+    
+    public function addUserToTeam(Team $team)
+    {
+        $this->createRelationToModel($team, 'STUDENT_TEAM_LINK');
+    }
     
     
     /**

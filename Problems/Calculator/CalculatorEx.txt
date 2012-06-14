@@ -1,0 +1,1 @@
+Input: "2 times 3.2"  Output: "6.4"

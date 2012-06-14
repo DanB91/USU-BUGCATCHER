@@ -1,18 +1,12 @@
 <html>
 <head>
-<title></title>
+<title>Admin</title>
 
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
 <script language="javascript" src="Scripts/Admin.js"></script>
-<script language="javascript" src="Scripts/Content_AdminDefault.js"></script>
-<script language="javascript" src="Scripts/Content_FileReg.js"></script>
-<script language="javascript" src="Scripts/Content_Manage.js"></script>
-<script language="javascript" src="Scripts/Content_Setup.js"></script>
-<script language="javascript" src="Scripts/Content_ProgStat.js"></script>
-<script language="javascript" src="Scripts/Content_Hints.js"></script>
 <script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
 <script language="javascript" src="Scripts/AdminTimer.js"></script>
 <script language="javascript" src="Scripts/CountdownTimer.js"></script>
-<link rel="stylesheet" href="CSS/Admin.css" type="text/css" />
 
 <script language="javascript">
 var compSetLanguage = '';
@@ -27,41 +21,40 @@ var compSetID = '';
 
 <body onload=AdminLoadCheck();>
 
-<!--[if gte IE 9]>
-  <style type="text/css">
-    .gradient {
-       filter: none;
-    }
-  </style>
-<![endif]-->
-
 <div id="container" class="gradient">
 	<div id="header">
-    <div id="header-logo"><img src="Images/BugCatcherLogo.png" /></div>
-    <div id="header-title"><h1>Administrator</h1></div>
-    <div id="header-controls">
-    	<img src="Images/start.gif" height="50" width="50" onclick=startCompetition(); />
-    </div>
-    <div id="header-timer"></div>
-  </div>
-	<div id="navigation" class="gradient">
-		<ul>
-			<li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" >Competition Setup</a></li>
-			<li><a id="navManage" class="navNormal" href="JavaScript:setManage()">Team Management</a></li>
-			<li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" >Progress/Statistics</a></li>
-			<li><a id="navHints" class="navNormal" href="JavaScript:setHints()" >Hints</a></li>
-      <li><a id="navFileReg" class="navNormal" href="JavaScript:setFileRegistration()" >File Registration</a></li>
-		</ul>
-	</div>
-	<div id="Content"><br /><br /><h1 align=center><font color="#CDAB31">Welcome to Bug Catcher!</font></h1>
+    	<div id="header-remainingTime">
+          	Time remaining
+			<p id="header-timer">00:00</p>
+        </div><!--end header-remainingTime-->
+        <div id="header-controls">
+            <img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); /> 
+        </div><!--end header-controls-->        
+        <p id="adminHeader">Bug Catcher: Administrator</p>
+	</div><!--end header-->
+    
+	<div id="admenu">
+		<div id="navTabs" style="width: 583px; margin: 0 -200px 0 200px;">
+            <ul>
+                <li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Setup</h4></a></li>
+                <li><a id="navManage" class="navNormal" href="JavaScript:setManage()"><h4>Team Management</h4></a></li>
+                <li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" ><h4>Progress/Statistics</h4></a></li>
+                <li><a id="navHints" class="navNormal" href="JavaScript:setHints()" ><h4>Hints</h4></a></li>
+            </ul>
+		</div><!--end navTabs-->
+	</div><!--end navigation-->
+    
+	<div id="Content"><br /><br /><h1 style="margin: 0 0 0 -250; color: #2f393f">Welcome to Bug Catcher!</h1>
 	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-	</div>
-	<div id="footer" class="gradient">
-  	<div id="adminCompID"></div>
-    <div id="copyright"><p></p></div>
-  </div>
-	<div class="nooverflow">&nbsp;</div>
-</div>
+	    
+    </div><!--end content-->
+    
+	<div id="footer" style="margin: 0 auto;">
+  		<div id="adminCompID"></div>
+    	<div id="copyright"><p></p></div>
+	</div><!--end footer-->
+	<div class="nooverflow"></div>
+</div><!--end container-->
 
 </body>
 

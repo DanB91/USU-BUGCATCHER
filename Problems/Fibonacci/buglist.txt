@@ -1,0 +1,2 @@
+Fibonacci takes an int n, and outputs the first n fibonacci numbers.
+line7: i<=N+1 should be i<=N otherwise an extra number is printed

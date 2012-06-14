@@ -1,6 +1,6 @@
-2
+1
 Blank
 0
-44
-OddsEvens,LongestBlock
+60
+Reverse
 0

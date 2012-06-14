@@ -1,0 +1,9 @@
+48433<!@!>[Test, danb91, Fibonacci]<br>Input: '8'<br>Expected output: '1 1 2 3 5 8 13 21'<br>Actual Output: '1 
+1 
+2 
+3 
+5 
+8 
+13 
+21 
+34'<br>Bug found!<!@!>

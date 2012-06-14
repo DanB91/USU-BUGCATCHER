@@ -1,0 +1,6 @@
+6
+Blank
+1
+45
+QuickAdd,PowersOfTwo,SalePrice,Reverse,FindPrimes,Converter
+0

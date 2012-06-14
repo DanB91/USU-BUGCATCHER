@@ -27,7 +27,7 @@ if(isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '' && isset($_COOKIE["comp
 		if($teamName != "")//If on a team
 		{
 		
-			$results = mysql_query("SELECT * FROM ${comp}teams ORDER BY bugsFound DESC,totaltimefound DESC");
+			$results = mysql_query("SELECT * FROM ${comp}teams ORDER BY bugsFound DESC,totaltimefound DESC LIMIT 3");
 		
 			while($res = mysql_fetch_array($results))
 			{
@@ -45,11 +45,13 @@ if(isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '' && isset($_COOKIE["comp
 						break;
 				}
 				
-				if ($bugsFound = 1)
+				if ($bugsFound == 1)
 					$resultString .= ", 1 bug found <br>";
-				if ($bugsFound > 1)
+				else if ($bugsFound > 1)
 					$resultString .= ", " . $bugsFound . " bugs found <br>";
-				
+				else 
+					$resultString .= "<br>";
+					
 				if(count == 2)
 					break;
 				$count++;
@@ -57,8 +59,11 @@ if(isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '' && isset($_COOKIE["comp
 			echo $resultString;
 			mysql_close($con);
 		}
-		else
-			echo 0;
+		else{
+                    
+                    echo "Top three teams will be displayed here";
+                }
+                    
 		
 }
 else

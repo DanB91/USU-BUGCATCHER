@@ -1,5 +1,0 @@
-1. Won't fix errors because hours is set to true
-2. it returns as fixed as soon as seconds are fixed.
-3. Hours set to 60 instead of 24
-4. if seconds = 0 it says bad input
-5. when the minutes get past 60, hours subtracts.

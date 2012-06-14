@@ -1,3 +1,0 @@
-1. Subsets takes as input a series of integers of any length greater than zero. 
-It returns true if it is possible to get the first number by the addition of any subset of the following numbers.
-2. If there is only one number, then the list is empty, and it will only return true if the number is zero.

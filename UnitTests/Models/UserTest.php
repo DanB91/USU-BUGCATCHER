@@ -40,8 +40,8 @@ class UserTest extends PHPUnit_Framework_TestCase {
     
     public function testCommitToDB()
     {
-        /*
-       
+        
+       /*
         //$this->object->username = 'dansbok';
         $this->object->password = 'test';
         echo $this->object->password;
@@ -65,6 +65,11 @@ class UserTest extends PHPUnit_Framework_TestCase {
     public function testLoadLinks()
     {
         var_dump($this->object->teamids);
+    }
+    
+    public function testAddToTeam()
+    {
+        $this->object->addUserToTeam(new Team(1));
     }
     
     

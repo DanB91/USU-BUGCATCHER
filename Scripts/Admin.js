@@ -96,7 +96,7 @@ function startCompetition() //Find Code ---------- CS1001
     if (xmlstartCompetitionhttp.readyState == 4 && xmlstartCompetitionhttp.status == 200)
     {
         //Need to write a new countdown function
-        document.getElementById('header-controls').innerHTML = '<img src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />';
+        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
         //alert(xmlstartCompetitionhttp.responseText);
         startTimer();
     }
@@ -108,6 +108,32 @@ function startCompetition() //Find Code ---------- CS1001
 
 }
 
+function stopCompetition()
+{
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlstopCompetition=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    xmlstopCompetition=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  
+  xmlstopCompetition.onreadystatechange=function()
+  {
+    if (xmlstopCompetition.readyState == 4 && xmlstopCompetition.status == 200)
+    {
+        //Need to write a new countdown function
+        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />';
+        //alert(xmlstartCompetitionhttp.responseText);
+        startTimer();
+    }
+  }
+  //Don't start competition until the countdown timer reaches zero.
+
+  xmlstopCompetition.open("GET","AdminCompContent/StopCompetition.php",true)
+  xmlstopCompetition.send();
+}
 
 function refreshProbList()
 {
@@ -155,6 +181,8 @@ function refreshProbList()
       var diffStr = '';
       for(var difficulty = 0; difficulty < pSBD.length; difficulty++)
       {
+	if(pSBD[difficulty] == undefined)
+		continue;
       
       	for(var prob = 0; prob < pSBD[difficulty].length; prob++)
       	{
@@ -240,7 +268,7 @@ function refreshProbList()
 //Postcondition: Sets up files and does initial loading of problems available
 function popProbSelectBox()//Find Code ---------- CS1003
 {
-
+  
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     xmlpopulateProbSelectBox=new XMLHttpRequest();
@@ -277,11 +305,11 @@ function popProbSelectBox()//Find Code ---------- CS1003
 //Postcondition: Adds the problem to the added box(selected problems) and removes it from the available box(available problems)
 function addProb(problem)//Find Code ---------- CS1004
 {
-  if(addedProbs.length == 5)
-  {
-      document.getElementById('CSetupError').innerHTML = "You cannot have more than 5 problems in a competition.";
-      return;
-  }
+  //if(addedProbs.length == 5)
+  //{
+      //document.getElementById('CSetupError').innerHTML = "You cannot have more than 5 problems in a competition.";
+      //return;
+  //}
   
   if(problem == '')
   {
@@ -366,8 +394,36 @@ function showProbPreview(prob)//Find Code ---------- CS1008
     }
   }
   xmlshowPreview.open("GET","AdminCompContent/showPreview.php?problem=" + problem,true);
-  xmlshowPreview.send();
-	
+  xmlshowPreview.send();	
+  
+  showBugList(problem);
+}
+
+function showBugList(prob)
+{
+  if (prob == '')
+	  return;
+	  
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlshowBugList=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    xmlshowBugList=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  
+  xmlshowBugList.onreadystatechange=function()
+  {
+    if (xmlshowBugList.readyState == 4 && xmlshowBugList.status == 200)
+    {
+		document.getElementById('CBugArea').value=xmlshowBugList.responseText;
+		
+    }
+  }
+  xmlshowBugList.open("GET","AdminCompContent/showBugList.php?problem=" + prob,true);
+  xmlshowBugList.send();		  
+
 }
 
 function moveProbUp(problem)//Find Code ---------- CS1009
@@ -1231,7 +1287,8 @@ function loadProblemNames()//Find Code ---------- H1006
 //Checks all student users' current active status
 function AdminLoadCheck()//Find Code ---------- USC1001
 {
-	//The code for loading competition information will go here.
+	//getActiveCompetition();
+        getMasterTime();
 }
 
 //Gets the master time from the server when the admin logs in, if it exists
@@ -1255,9 +1312,9 @@ function getMasterTime()//Find Code ---------- USC1002
 			var time = getTimerXML.responseText;
 			  if (time.length > 3)
 			  {
-				  s = time.substring(time.length-2,time.length);
-				  m = time.substring(0,time.length-2);
-				  document.getElementById("header-timer").innerHTML=m+":"+s;
+				  seconds = time.substring(time.length-2,time.length);
+				  minutes = time.substring(0,time.length-2);
+				  document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
 			  }
 			  else
 			  {

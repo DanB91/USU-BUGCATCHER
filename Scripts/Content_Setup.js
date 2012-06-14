@@ -1,13 +1,14 @@
-var string_Setup = '<div id="CompLeft">';
+var string_Setup = '<div class="threeColBody">';
+string_Setup +=  '<div id="CompLeft">';
 string_Setup +=  '  <h2>Competition Settings</h2>';
 string_Setup +=  '  <div id="CsetupForm">';
 string_Setup +=  '    <form name="CompForm" id="CompForm" onSubmit="event.preventDefault(); createCompetition(); return false;" method="GET">';
-string_Setup +=  '      <span class="reqField">\&#10029;</span><u>Allow Code Coverage</u><br />';
+string_Setup +=  '      <u>Allow Code Coverage</u><br />';
 string_Setup +=  '      <div class="Cradio-container">';
 string_Setup +=  '        <input type="radio" class="Cradio-left" name="AllowCoverage" id="AllowCoverage" value="1" /> Yes ';
 string_Setup +=  '        <input type="radio" class="Cradio-right" name="AllowCoverage" id="AllowCoverage" value="0" checked /> No ';
 string_Setup +=  '      </div><br />';
-string_Setup +=  '		<span class="reqField">\&#10029;</span><u>Include Countdown</u><br />';
+string_Setup +=  '	<u>Include Countdown</u><br />';
 string_Setup +=  '		<div class="Cradio-container">';
 string_Setup +=  '		  <input type="radio" class="Cradio-left" name="IncludeCountdown" id="IncludeCountdown" value="1"/> Yes ';
 string_Setup +=  '		  <input type="radio" class="Cradio-right" name="IncludeCountdown" id="IncludeCountdown" value="0" checked /> No';
@@ -51,3 +52,5 @@ string_Setup +=  '        <input type="submit" id="rBut" value="Remove Problem" 
 string_Setup +=  '    </form>';
 string_Setup +=  '  </div>';
 string_Setup +=  '</div>';
+string_Setup +=  '<div class="nooverflow"></div>';
+string_Setup +=  '</div><!--end threeColBody-->';

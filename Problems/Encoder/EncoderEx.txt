@@ -1,0 +1,1 @@
+Input: "hello 2" Output: "jgnnq"

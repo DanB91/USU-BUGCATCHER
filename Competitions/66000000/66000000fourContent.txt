@@ -1,0 +1,1 @@
+40071<!@!>[Test, bobBuilder, QuickAdd]<br>Input: '2 2'<br>Expected output: '4'<br>Actual Output: '0.0'<br>Bug found!<!@!>40131<!@!>[Test, bobBuilder, Reverse]<br>Input: 'abc'<br>Expected output: 'cba'<br>Actual Output: 'cb'<br>Bug found!<!@!>40179<!@!>[Test, bobBuilder, Reverse]<br>Input: 'aDb'<br>Expected output: 'bDa'<br>Actual Output: 'bda'<br>Bug found!<!@!>

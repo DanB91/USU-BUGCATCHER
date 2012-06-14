@@ -1,0 +1,3 @@
+Reverse takes in a word and outputs it reversed.
+LINE 7: Starts after first character.
+LINE 19: Sets string to lower case.

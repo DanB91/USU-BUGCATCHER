@@ -7,7 +7,6 @@ var STOPPED = true;
 var PAUSED = false;
 var COUNTINGDOWN = false;
 
-
 //Starts or unpauses the timer for the competition.
 function startTimer()
 {
@@ -25,7 +24,7 @@ function pauseTimer()
 	if (!PAUSED && !STOPPED && !COUNTINGDOWN)
 	{
 		clearInterval(adminTimer);
-		document.getElementById('header-controls').innerHTML = '<img src="Images/start.gif" height="50" width="50" onclick=startCompetition(); />';
+		document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
 		PAUSED = true;
 	}
 }
@@ -40,13 +39,13 @@ function countdown()
     minutes--;
     COUNTINGDOWN = false;
   }
-  
   if (minutes < 0)
   {
     clearInterval(adminTimer);
     minutes = 0;
     seconds = 0;
     document.getElementById('header-timer').innerHTML="STOP!";
+    stopCompetition();
   }
   else
   {
@@ -60,13 +59,12 @@ function setTimer()
 {
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
-	setTimerXML = new XMLHttpRequest();
+		setTimerXML = new XMLHttpRequest();
 	}
 	else
 	{// code for IE6, IE5
-	setTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
+		setTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	
 	setTimerXML.onreadystatechange=function()
 	{
 		if (setTimerXML.readyState == 4 && setTimerXML.status == 200)
@@ -99,14 +97,24 @@ function updateTimer()
 //Initializes the timer.
 function createTimer()
 {
-	STOPPED = true;
-	PAUSED = false;
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		createTimerXML = new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		createTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
 	seconds = compSetTimeS;
 	minutes = compSetTimeM;
-        setTimer();
+
+	STOPPED = true;
+	PAUSED = false;
+	
 	if (seconds > 0)
 		COUNTINGDOWN = true;
-	//setTimer();
+	setTimer();  
 }
 
 //Inserts leading zeroes on the minutes and seconds for the timer

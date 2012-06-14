@@ -16,49 +16,97 @@ function setNavClass(selectedTab)
   document.getElementById(selectedTab).setAttribute("className","navAlt");
 }
 
-//This loads the JavaScript variable containing the HTML for the "Welcome" page for Admin.html
-function setAdminDefault()
-{
-  document.getElementById('Content').innerHTML=string_AdminDefault;
-}
-
 //This loads the JavaScript variable containing the HTML for the "Competition Setup" page for Admin.html
 //It also sets the "Competition Setup" menu tab to show as selected and unclickable
 function setCompetition()
 {
-  document.getElementById('Content').innerHTML=string_Setup;
-  setNavClass("navComp");
-  popProbSelectBox();
-  clearInterval(progUpdate);
+  insertHTML(0);
 }
 
 //This loads the JavaScript variable containing the HTML for the "Team Management" page for Admin.html
 //It also sets the "Team Management" menu tab to show as selected and unclickable
 function setManage()
 {
-  document.getElementById('Content').innerHTML=string_Manage;
-  loadManage();
-  setNavClass("navManage");
-  clearInterval(progUpdate);
+  insertHTML(1);
 }
 
 //This loads the JavaScript variable containing the HTML for the "Progress/Statistics" page for Admin.html
 //It also sets the "Progress/Statistics" menu tab to show as selected and unclickable
 function setProgress()
 {
-  document.getElementById('Content').innerHTML=string_ProgStat;
-  progUpdate = setInterval(showTableProg, 1000);
-  setNavClass("navProgress"); 
+  insertHTML(2);
 }
 
 //This loads the JavaScript variable containing the HTML for the "Hints" page for Admin.html
 //It also sets the "Hints" menu tab to show as selected and unclickable
 function setHints()
 {
-  document.getElementById('Content').innerHTML=string_Hints;
-  loadProblemNames();
-  setNavClass("navHints");
-  clearInterval(progUpdate);
+  insertHTML(3); 
+}
+
+//This gets the HTML code that needs to inserted via element.innerHTML
+function insertHTML(tabValue)
+{
+  var filePath = "";
+  switch(tabValue)
+  {
+    case 0:
+      filePath = "CompetitionSetup.html";
+      break;
+    case 1:
+      filePath = "TeamManagement.html";
+      break;
+    case 2:
+      filePath = "ProgressStatistics.html";
+      break;
+    case 3:
+      filePath = "Hints.html";
+      break;
+    default:
+  }
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    InsertHTMLhttp=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    InsertHTMLhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
   
+  InsertHTMLhttp.onreadystatechange=function()
+  {
+    if (InsertHTMLhttp.readyState == 4 && InsertHTMLhttp.status == 200)
+    {
+      document.getElementById('Content').innerHTML = InsertHTMLhttp.responseText;
+      switch(tabValue)
+      {
+        case 0:
+          //setNavClass("navComp");
+          popProbSelectBox();
+          clearInterval(progUpdate);
+          addedProbs = [];
+          break;
+        case 1:
+          //setNavClass("navManage");
+          loadManage();
+          clearInterval(progUpdate);
+          break;
+        case 2:
+          progUpdate = setInterval(showTableProg, 1000);
+          //setNavClass("navProgress"); 
+          break;
+        case 3:
+          loadProblemNames();
+          //setNavClass("navHints");
+          clearInterval(progUpdate); 
+          break;
+        default:
+          return;
+      }
+    }
+  }
+  
+  InsertHTMLhttp.open("GET","InsertHTML.php?filePath="+filePath,true);
+  InsertHTMLhttp.send();
 }
 

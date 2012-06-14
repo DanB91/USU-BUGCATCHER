@@ -29,7 +29,7 @@ if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')//If the competition ha
 	$row = mysql_fetch_array($result);
 	$started = $row['hasstarted'];
 	
-	if($rest <= $fileComp[$NumProbsCR] && $started == 1)//Displays the number of problems specified by the admin
+	if($started == 1)//Displays the number of problems specified by the admin
 	{
 	
 		$problemTxt = '';
@@ -45,9 +45,9 @@ if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')//If the competition ha
 		//echo "Didn't work";
 	}
 	else
-		echo "Once the compeition starts the requierments will be displayed here.";
+		echo "Once the competition starts the requirements will be displayed here.";
 }
 else
-	echo "You must be in a competition to view code and requierments.";
+	echo "You must be in a competition to view code and requirements.";
 	
 ?>

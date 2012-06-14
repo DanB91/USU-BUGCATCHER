@@ -1,6 +1,6 @@
-5
+10
 Blank
 0
-30
-HelloWorld,OddsEvens,FindPrimes,Converter,QuickAdd
+10
+Fibonacci,PowersOfTwo,Binary,SalePrice,Calculator,FindPrimes,Reverse,QuickAdd,OddsEvens,Encoder
 0

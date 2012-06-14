@@ -1,0 +1,6 @@
+3
+Blank
+0
+14
+Reverse,Calculator,QuickAdd
+0

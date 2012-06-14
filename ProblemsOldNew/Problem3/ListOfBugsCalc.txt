@@ -1,5 +1,0 @@
-1. switches first and second number on line 52
-2. Divide return the mod. Line 42
-3. Add only works with integers.
-4. Multiply doesn't work with doubles, multiplies too many times.
-5. subtracts the second number from the first.

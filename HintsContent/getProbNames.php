@@ -5,6 +5,7 @@
 $adminCompID = $_COOKIE['adminCompID'];
 if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')
 {
+  if(file_exists ("../Competitions/${adminCompID}/${adminCompID}.txt")){
     $file = file("../Competitions/${adminCompID}/${adminCompID}.txt");
     $problemNums = $file[0];
     $content = '<select name="HProbNum" id="HProbNum" size=5 class="Hselect" onchange=showPre(this.value);>';
@@ -17,6 +18,7 @@ if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')
 	
 	$content .= '</select>';
 	echo $content;
+   }
 }
 else 
 	echo "You must create a competition before you can send hints.";

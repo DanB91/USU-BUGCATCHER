@@ -1,0 +1,1 @@
+67664<!@!>[Test, AaronA, FindPrimes]<br>Input: '3'<br>Expected output: '2, 3'<br>Actual Output: '2'<br>Bug found!<!@!>

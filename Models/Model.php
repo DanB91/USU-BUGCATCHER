@@ -130,7 +130,98 @@ abstract class Model {
     }
     
 
+    
+    
     /**
+     * Gets the primary key value of this model
+     * @return int primary key
+     */
+    public function getPrimaryKeyValue()
+    {
+        return $this->values[$this->primaryKeyName];
+    }
+    
+    public function getPrimaryKeyName()
+    {
+        return $this->primaryKeyName;
+    }
+    
+    /**
+     *This function commits all of its fields to the database 
+     */
+    public function commitToDB()
+    {
+        $sql = 'UPDATE ' . $this->tableName . ' SET ';
+        $value; //used to hold a value of a field
+        
+        //get all field names and their values
+        foreach($this->types as $fieldName => $type)
+        {
+            //cannot change primary key
+            if($type === 'pk')
+                continue;
+            
+            
+            
+            
+            
+            if($this->$fieldName === NULL)
+            {
+                $value = 'NULL';
+            }
+            //field is a string, wrap the value in quotes
+            elseif($type === 's') 
+            {
+                $value = "'" . $this->$fieldName . "'";
+            }
+            //field is an int
+            elseif($type === 'i')
+            {
+                $value = $this->$fieldName;
+            }
+            //do not commit relations
+            elseif($type === 'a')
+            {
+                continue;
+            }
+            //field doesn't have a type, something went wrong...
+            else
+            {
+                throw new BugCatcherException('Trying to update a field that doesn\'t exist:' . $fieldName);
+            }
+            
+            $sql .= $fieldName . '=' . $value . ",";
+            
+            
+            
+        }
+        
+        //chop off the last comma
+        $sql = substr($sql, 0, -1);
+        
+        $sql .= ' WHERE ' . $this->primaryKeyName . ' = ' . $this->values[$this->primaryKeyName];
+         
+        if(!$this->connection->query($sql))
+            throw new BugCatcherException('Update query failed: ' . $this->connection->error);
+    }
+    
+    
+    /**
+     *
+     * @param Model $model
+     * @param type $tableName 
+     */
+    protected function createRelationToModel(Model $model, $tableName)
+    {
+        $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
+                ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
+        
+        if(!$this->connection->query($sql))
+            throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
+        
+    }
+    
+   /**
      * Loads all of the fields in
      * @throws Exception if query fails
      */
@@ -159,65 +250,10 @@ abstract class Model {
         {
             throw new BugCatcherException($this->uniqueFieldName . ' "'. $this->uniqueFieldValue . '" not found');
         }
-        $this->loadLinks();
+        
+        if($this->linkTables)
+            $this->loadLinks();
     }
-    
-    /**
-     *This function commits all of its fields to the database 
-     */
-    public function commitToDB()
-    {
-        $sql = 'UPDATE ' . $this->tableName . ' SET ';
-        $value; //used to hold a value of a field
-        
-        //get all field names and their values
-        foreach($this->types as $fieldName => $type)
-        {
-            //cannot change primary key
-            if($type === 'pk')
-                continue;
-            
-            $sql .= $fieldName . '=';
-            
-            
-            
-            if($this->$fieldName === NULL)
-            {
-                $value = 'NULL';
-            }
-            //field is a string, wrap the value in quotes
-            elseif($type === 's') 
-            {
-                $value = "'" . $this->$fieldName . "'";
-            }
-            //field is an int
-            elseif($type === 'i')
-            {
-                $value = $this->$fieldName;
-            }
-            //field doesn't have a type, something went wrong...
-            else
-            {
-                throw new BugCatcherException('Trying to update a field that doesn\'t exist:' . $fieldName);
-            }
-            
-            $sql .= $value . ",";
-            
-            
-        }
-        
-        //chop off the last comma
-        $sql = substr($sql, 0, -1);
-        
-        $sql .= ' WHERE ' . $this->primaryKeyName . ' = ' . $this->values[$this->primaryKeyName];
-         
-        if(!$this->connection->query($sql))
-            throw new BugCatcherException('Update query failed: ' . $this->connection->error);
-    }
-    
-    
-    
-    
 
 
 
@@ -274,7 +310,7 @@ abstract class Model {
                 continue;
 
             //the data from this table belongs in an array
-            $this->types[$row['Field']] = 'a';
+            $this->types[$row['Field'] . 's'] = 'a';
 
             $linkTableFieldName = $row['Field'];
         }

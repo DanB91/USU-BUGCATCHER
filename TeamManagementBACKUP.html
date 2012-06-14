@@ -1,0 +1,145 @@
+<html>
+<head>
+<title></title>
+
+<link rel="stylesheet" href="CSS/Admin.css" type="text/css" />
+<script language="javascript" src="Scripts/Admin.js"></script>
+<script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
+<script language="javascript" src="Scripts/AdminTimer.js"></script>
+<script language="javascript" src="Scripts/CountdownTimer.js"></script>
+
+<script language="javascript">
+var compSetLanguage = '';
+var compSetMode = '';
+var compSetProblems = '';
+var compSetHints = '';
+var compSetTime = '';
+var compSetID = '';
+</script>
+
+</head>
+
+<body onload=AdminLoadCheck();>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+<div id="container" class="gradient">
+	<div id="header">
+    <div id="header-logo"><img src="Images/BugCatcherLogo.png" /></div>
+    <div id="header-title"><h1>Administrator</h1></div>
+    <div id="header-controls">
+    	<img title="Start Competition" src="Images/start.gif" height="50" width="50" onclick=startCompetition(); /> 
+    </div>
+    <div id="header-remainingTime">
+      Time remaining
+      <p id="header-timer">00:00</p>
+    </div>
+  </div>
+	<div id="navigation" class="gradient">
+		<ul>
+			<li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" >Competition Setup</a></li>
+			<li><a id="navManage" class="navNormal" href="JavaScript:setManage()">Team Management</a></li>
+			<li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" >Progress/Statistics</a></li>
+			<li><a id="navHints" class="navNormal" href="JavaScript:setHints()" >Hints</a></li>
+      <li><a id="navFileReg" class="navNormal" href="JavaScript:setFileRegistration()" >File Registration</a></li>
+		</ul>
+	</div>
+	<div id="Content">
+<!--CONVERSION_STARTS_HERE-->
+    <div id="ManageMain" align=center>
+       <h2>Create Team</h2>
+      <form onSubmit="event.preventDefault(); addTeam(); return false;" method="get">
+        <p>Team Name:</p><input type="text" name="MTeamName" id="MTeamName"><br><br>
+        <input type="submit" value="Create Team" name="submit">
+      </form>
+      <hr>
+      <h2>Edit Team</h2>
+      <p>Select A Team:</p>
+      <div id="MTeamList"></div>
+		</div>
+		<div id="ManageRight">
+      <div align=center>
+        <h2>Team Information</h2>
+        <div id="MTeamTitle">Please select a team name.</div><br>
+        <div id="MTeamTable">
+          <div name="MStudent1" id="MStudent1" class="MStudentInfo">
+            <h3>Student 1</h3>
+            <form id="MForm1" onSubmit="event.preventDefault(); addRemoveStudent('Username_S1', 'Stud1'); return false;" method="get">
+              <label>Name:</label><br>
+              <div id="Member1">
+                <select name="Stud1" id="Stud1" class="MStudentSelect" onchange="currentSelection(this.value)">
+                <option>------Select a Name------</option>
+                </select>
+              </div>
+              <label>Username:</label><br>
+              <input type="text" name="Username_S1" id="Username_S1" value="BugMaster1337" class="Mtext" readonly="readonly"><br>
+              <label>School:</label><br>
+              <input type="text" name="School_S1" id="School_S1" value="Example University" class="Mtext" readonly="readonly"><br>
+              <label>State:</label><br>
+              <input type="text" name="State_S1" id="State_S1" value="NW" class="Mtext" readonly="readonly"><br>
+                  <input type="hidden" name="selectName" id="selectName" value="Stud1">
+              <input type="submit" value="Add" name="add1" id="add1" class="Mbutton">
+              <input type="submit" value="Remove" name="remove1" id="remove1" class="Mbutton">
+            </form>
+          </div>
+          <div name="MStudent2" id="MStudent2" class="MStudentInfo">
+            <h3>Student 2</h3>
+            <form id="MForm2" onSubmit="event.preventDefault(); addRemoveStudent('Username_S2', 'Stud2'); return false;" method="get">
+              <label>Name:</label><br>
+              <div id="Member2">
+                <select name="Stud2" id="Stud2" class="MStudentSelect" onchange="currentSelection(this)">
+                <option>------Select a Name------</option>
+                </select>
+              </div>
+              <label>Username:</label><br>
+              <input type="text" name="Username_S2" id="Username_S2" value="Insecticider" class="Mtext" readonly="readonly"><br>
+              <label>School:</label><br>
+              <input type="text" name="School_S2" id="School_S2" value="Example University" class="Mtext" readonly="readonly"><br>
+              <label>State:</label><br>
+              <input type="text" name="State_S2" id="State_S2" value="NW" class="Mtext" readonly="readonly"><br>
+                  <input type="hidden" name="selectName" id="selectName" value="Stud2">
+              <input type="submit" value="Add" name="add2" id="add2" class="Mbutton">
+              <input type="submit" value="Remove" name="remove2" id="remove2" class="Mbutton">
+            </form>
+          </div>
+          <div name="MStudent3" id="MStudent3" class="MStudentInfo">
+            <h3>Student 3</h3>
+            <form id="MForm3" onSubmit="event.preventDefault(); addRemoveStudent('Username_S3', 'Stud3'); return false;" method="get">
+              <label>Name:</label><br>
+              <div id="Member3">
+                <select name="Stud3" id="Stud3" class="MStudentSelect" onchange="currentSelection(this)">
+                <option>------Select a Name------</option>
+                </select>
+              </div>
+              <label>Username:</label><br>
+                <input type="text" name="Username_S3" id="Username_S3" value="DenverCoder9" class="Mtext" readonly="readonly"><br>
+              <label>School:</label><br>
+              <input type="text" name="School_S3" id="School_S3" value="Example University" class="Mtext" readonly="readonly"><br>
+              <label>State:</label><br>
+              <input type="text" name="State_S3" id="State_S3" value="NW" class="Mtext" readonly="readonly"><br>
+                 <input type="hidden" name="selectName" id="selectName" value="Stud3">
+              <input type="submit" value="Add" name="add3" id="add3" class="Mbutton">
+              <input type="submit" value="Remove" name="remove3" id="remove3" class="Mbutton">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--CONVERSION_ENDS_HERE-->
+	</div>
+	<div id="footer" class="gradient">
+  	<div id="adminCompID"></div>
+    <div id="copyright"><p></p></div>
+  </div>
+	<div class="nooverflow">&nbsp;</div>
+</div>
+
+</div></body>
+
+</html>

@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>Admin</title>
+
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+<script language="javascript" src="Scripts/Admin.js"></script>
+<script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
+<script language="javascript" src="Scripts/AdminTimer.js"></script>
+<script language="javascript" src="Scripts/CountdownTimer.js"></script>
+
+<script language="javascript">
+var compSetLanguage = '';
+var compSetMode = '';
+var compSetProblems = '';
+var compSetHints = '';
+var compSetTime = '';
+var compSetID = '';
+</script>
+
+</head>
+
+<body onload=AdminLoadCheck();>
+
+<div id="container" class="gradient">
+	<div id="header">
+    	<div id="header-remainingTime">
+          	Time remaining
+			<p id="header-timer">00:00</p>
+        </div><!--end header-remainingTime-->
+        <div id="header-controls">
+            <img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); /> 
+        </div><!--end header-controls-->        
+        <p id="adminHeader">Bug Catcher: Administrator</p>
+	</div><!--end header-->
+    
+	<div id="admenu">
+		<div id="navTabs" style="width: 583px; margin: 0 -200px 0 200px;">
+            <ul>
+                <li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Setup</h4></a></li>
+                <li><a id="navManage" class="navNormal" href="JavaScript:setManage()"><h4>Team Management</h4></a></li>
+                <li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" ><h4>Progress/Statistics</h4></a></li>
+                <li><a id="navHints" class="navNormal" href="JavaScript:setHints()" ><h4>Hints</h4></a></li>
+            </ul>
+		</div><!--end navTabs-->
+	</div><!--end navigation-->
+    
+	<div id="Content">
+<!--Do Not Delete The Comment Below This-->
+<!--CONVERSION_STARTS_HERE-->
+	<div id="temporaryBackgroundForCompSetup" style="background: url(Images/studentBody.png) repeat-y; width: 1000px;">
+    <div id="CompLeft">
+      <h2>Competition Settings</h2>
+      <div id="CsetupForm">
+        <form name="CompForm" id="CompForm" onSubmit="event.preventDefault(); createCompetition(); return false;" method="GET">
+          <u>Allow Code Coverage</u><br />
+          <div class="Cradio-container">
+            <input type="radio" class="Cradio-left" name="AllowCoverage" id="AllowCoverage" value="1" /> Yes
+            <input type="radio" class="Cradio-right" name="AllowCoverage" id="AllowCoverage" value="0" checked /> No
+          </div><br />
+      <u>Include Countdown</u><br />
+        <div class="Cradio-container">
+          <input type="radio" class="Cradio-left" name="IncludeCountdown" id="IncludeCountdown" value="1"/> Yes
+          <input type="radio" class="Cradio-right" name="IncludeCountdown" id="IncludeCountdown" value="0" checked /> No
+        </div><br />
+          <span class="reqField">&#10029;</span><u>Competition Time (mins)</u><br />
+          <input name="CompTime" id="CompTime" class="Ctext" /><br />
+
+          <u>Competition ID</u><br />
+          <input name="CompNameID" id="CompNameID" class="Ctext" /><br />
+   
+          <input type="submit" value="Setup Competition" name="CSetupButton" id="CSetupButton" class="Cbutton" /><br /><br />
+
+        </form>
+        <div id="CSetupError" class="Cerror-normal" style="width: 200px;"></div>
+      </div>
+    </div>
+    <div id="CompRight">
+      <h2>Problem Selection</h2>
+      <form>
+          <u>Available Problems</u><br />
+          <div id="ProblemsList">
+          <select name="ProblemsList" class="Cselect" size="8">
+          </select></div>
+
+          <u>Selected Problems</u><br />
+          <div id="SelectedProblems">
+          <select name="SelectedProblems" class="Cselect"  size="5">
+          </select></div>
+
+          <input type="submit" value="Move Up" name="CMoveUp" id="CMoveUp" class="Cbutton-small" onClick="event.preventDefault(); moveProbUp(SelectedProblemsGet.value)" />
+          <input type="submit" value="Move Down" name="CMoveDown" id="CMoveDown" class="Cbutton-small" onClick="event.preventDefault(); moveProbDown(SelectedProblemsGet.value)" />
+       </form>
+    </div>
+    <div id="CompMiddle">
+      <h2>Problem Preview</h2>
+      <div id="CPreview">
+        <textarea cols="54" rows="16" id="CTextArea" disabled></textarea>
+        <h4>Bugs</h4>
+        <textarea cols="54" rows="5" id="CBugArea" disabled></textarea>
+        <form onSubmit="event.preventDefault(); return false;" method="get">
+            <input type="submit" id="aBut" value="Add Problem" onClick="addProb(ProblemsListGet.value)" name="submit" class="Cbutton-preview"/>
+            <input type="submit" id="rBut" value="Remove Problem" onClick="removeProb(SelectedProblemsGet.value)" name="submit"  class="Cbutton-preview" />
+        </form>
+      </div>
+    </div>
+  </div>
+<!--CONVERSION_ENDS_HERE-->
+<!--Do Not Delete The Comment Above This-->
+	</div><!--end content-->
+    
+	<div id="footer" style="margin: 0 auto;">
+  		<div id="adminCompID"></div>
+    	<div id="copyright"><p></p></div>
+	</div><!--end footer-->
+	<div class="nooverflow"></div>
+</div><!--end container-->
+
+</body>
+
+</html>

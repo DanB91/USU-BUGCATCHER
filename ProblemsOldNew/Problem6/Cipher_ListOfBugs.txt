@@ -1,5 +1,0 @@
-List of Bugs:
-
-BUG 1:			Line 28		Doesn't catch number format exception.
-BUG 2:			Line 7		For loop ends too early, doesn't return last letter.
-BUG 3: 			Line 21		Doesn't check if shiftedChar is less than 0.

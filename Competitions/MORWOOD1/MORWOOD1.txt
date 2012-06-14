@@ -1,0 +1,6 @@
+7
+Blank
+1
+30
+QuickAdd,PowersOfTwo,GroupSum,Calculator,OddsEvens,Fibonacci,HelloWorld
+1

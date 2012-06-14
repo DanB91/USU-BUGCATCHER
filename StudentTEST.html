@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Bug Catcher</title>
+
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+<!--<link href="CSS/prettify.css" type="text/css" rel="stylesheet" />-->
+<script language="javascript" src="Scripts/Student.js"></script>
+<script language="javascript" src="Scripts/StudentTimer.js"></script>
+<script type="text/javascript" src="Scripts/Prettify/prettify.js"></script>
+
+</head>
+
+<body onload=initialize(); >
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
+
+<div id="container" class="gradient">
+	
+  <div id="header">      
+  	<div id="header-left">
+        	Time Remaining
+	  <h2 id="timer" style="color: #fff;">00:00</h2>
+   	</div><!--end header-left-->
+   	<div id="header-winningteams">
+            Top three teams will be displayed here.
+   	  </div><!--end header-winningteams-->
+   	  <p id="smHeader">Bug Catcher</p>
+      <div id="header-right">
+	    <div id="BugsFoundImage" style="height: 73px;"><img src="Images/bugfound.png" style="float: left;"/><h3 style="color: #c5c8ca">Bugs found:</h3><h2 id="BugsFoundText" style="color: #c5c8ca;">0</h2> </div>
+          	     
+    </div><!--end header-right-->
+                
+        <div id="header-logout-help">
+          	<a href="LogoutImpl.php"><h4>log out</h4></a>
+           	<a href="Test.txt" target="_blank" title="Help"><h4>help</h4></a>
+        </div><!--end header-logout-help-->
+	</div><!--end header-->
+    
+  	<div id="navigation">
+    	<div id="ReqLabel"><h4>Requirements</h4></div>
+        <!--<div id="navTabs">
+            <ul>
+                <li><div id="P1"><a class="navLeftMost" href="#"   onclick="event.preventDefault(); getReqAndProb(1, radio1.checked);"><div id="Prob1">Problem 1</div></a></div></li>
+                <li><div id="P2"><a class="navMiddle" href="#"     onclick="event.preventDefault(); getReqAndProb(2, radio1.checked);"><div id="Prob2">Problem 2</div></a></div></li>
+                <li><div id="P3"><a class="navMiddle" href="#"     onclick="event.preventDefault(); getReqAndProb(3, radio1.checked);"><div id="Prob3">Problem 3</div></a></div></li>
+                <li><div id="P4"><a class="navMiddle" href="#"     onclick="event.preventDefault(); getReqAndProb(4, radio1.checked);"><div id="Prob4">Problem 4</div></a></div></li>
+                <li><div id="P5"><a class="navRightMost" href="#"  onClick="event.preventDefault(); getReqAndProb(5, radio1.checked);"><div id="Prob5">Problem 5</div></a></div></li>
+            </ul>
+        </div><!--end navTabs-->
+        <div id="ProblemsLabel"><h4>Problems</h4></div>
+   		<div id="BugTestLabel"><h4>Bug Tester</h4></div>
+	</div><!--end navigation-->
+    
+    
+    <!--###################################################################################################-->
+    <!--#### ORDER OF THE COLUMNS MUST REMAIN THE SAME (studentleft, studentmiddle, then studentright) ####-->
+    <!--###################################################################################################-->
+    
+	<div id="content-container" class="studentBody">
+	  <div id="StudentLeft" align=center>
+        	
+          <div id="Requirements" align=left>
+                <div id="RequirementsList">
+                    <p>Please select a problem</p>
+                </div><!--end RequirementsList-->
+        </div><!-- end Requirements-->
+	  </div><!--end StudentLeft-->
+        
+        <div id="StudentMiddle" align=left>
+        	<img src="Images/darkArrow.png" id="arrow" />
+            <div id="StudentMiddleTop">
+                <form id="CoverageToggle">
+          			<input type="checkbox" name="Coverage" id="Coverage" onchange='coverage = !coverage;' />
+         			<label for="Coverage">Code Coverage</label>
+        		</form>
+            </div><!--end StudentMiddleTop-->
+            <div id="StudentMiddleBottom">
+                <div id="ProblemCode">
+                  <pre>Please select a problem</pre>
+                </div><!--end ProblemCode-->
+            </div><!--end StudentMiddleBottom-->
+        </div><!--end StudentMiddle-->
+        
+		<div id="StudentRight" align=center>
+        	<img src="Images/lightArrow.png" id="arrow" />
+            <div id="BugTesterDiv" title="No Problem Selected">
+            	<form onSubmit="event.preventDefault(); getBugTestInfo(testInput.value,testOutput.value);" id="BugTester" class="fields">
+                    <p>Test Input:</p>
+                    <input type="text" name="TestInput" id="testInput" class="Stext"/><br />
+                    <p>Expected Output:</p>
+                    <input type="text" name="TestOutput" id="testOutput" class="Stext"/><br />
+                    <input type="submit" value="t" id="testforBug" class="Sbutton"/>
+                </form>
+            </div><!--end BugTesterDiv-->
+            <p style="padding: 0 0 0 20px;">Results:</p>
+            <div id="ResultsList" align=left>
+               	You must be on a team
+            </div>
+            <div id="ChatBox">
+                <form id="ChatForm" class="fields" onSubmit="event.preventDefault(); instantMessaging(ChatInput.value);scrollResultsDown();">
+
+                    <input type="text" id="ChatInput" />
+                    <div id="Filters" align=left>
+                        <label>Show:</label><br />
+                        <input type="checkbox" name="hintFilterBox" id="hintFilterBox" />
+                        <label for="hintFilterBox">Hints</label>
+                        <input type="checkbox" name="chatFilterBox" id="chatFilterBox" />
+                        <label for="chatFilterBox">Chats</label>
+                        <input type="checkbox" name="testFilterBox" id="testFilterBox" />
+                        <label for="testFilterBox">All Tests</label>
+                	</div><!--Filters-->
+	        	</form>
+			</div><!--end ChatBox--><br />
+		</div><!--end StudentRight-->
+        
+        <div class="nooverflow"></div>
+        <div id="footer"></div>
+	</div><!--end content-container-->
+	<div class="nooverflow"></div>
+</div><!--end container-->
+
+</body>
+
+</html>

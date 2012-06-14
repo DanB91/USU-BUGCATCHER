@@ -1,0 +1,3 @@
+SalePrice returns the new price of an item give the original price and percent discount.
+LINE 15: Does not allow a discount of 0.
+LINE 18: Switches discount and price.

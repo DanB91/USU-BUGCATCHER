@@ -8,7 +8,7 @@ $username_str = $_GET['username'];
 $password_str = $_GET['password'];
 $accountType_str = $_GET['usertype'];
 
-
+$password_str = crypt($password_str, '$6$rw34ffd3');
 
 //Accesses the database and adds the user account into the database
 $connection = mysql_connect("localhost","guest","");
@@ -20,7 +20,7 @@ if ($accountType_str == 'admin')
 }
 else
 {//This is run if the user is registering for an student account
-  mysql_query("INSERT INTO accounts.students(username, password, firstname, lastname, school,state, sessionactive) VALUES ('$username_str', '$password_str', '$firstname_str', '$lastname_str', '$schoolname_str', '$state_str', 0)") or die (RegistrationFail());
+  mysql_query("INSERT INTO accounts.students(username, password, firstname, lastname, school, state, sessionactive) VALUES ('$username_str', '$password_str', '$firstname_str', '$lastname_str', '$schoolname_str', '$state_str', 0)") or die (RegistrationFail());
 }
 
 //This function is called whenever the insertion into the MySQL database fails

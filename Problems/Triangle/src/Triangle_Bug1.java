@@ -1,4 +1,4 @@
-//BUG 1 : LINE 10 right angle is set to 93
+//BUG 1 : LINE 8 right angle is set to 93
 
 
 public class Triangle_Bug1 {
@@ -43,7 +43,7 @@ public class Triangle_Bug1 {
     }
 	
     public static void main(String[] args) {        
-        
+       try{ 
         int arg1 = Integer.parseInt(args[0]);
         int arg2 = Integer.parseInt(args[1]);
         int arg3 = Integer.parseInt(args[2]);
@@ -51,6 +51,9 @@ public class Triangle_Bug1 {
         
         Triangle_Bug1 tr = new Triangle_Bug1(arg1, arg2, arg3);
         System.out.println(tr.findTriangleType());
+       } catch(Exception e){
+       	System.out.println("Error: Bad Input");
+       }
     }
 
 }

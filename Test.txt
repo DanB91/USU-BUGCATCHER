@@ -10,13 +10,13 @@ Logging In
 Once you have registered, you need to log in.  Enter the username and password you chose, then wait for the administrator to give you the competition ID.  Again, make sure the user type selected is student.  Then click "Log In".
 
 Teams
-Now that you have logged in, you need to be on a team to compete (it is possible to be a team all by yourself).  The administrator will create your teams, please wait patiently for further instructions from him.  When everyone is on a team, the administrator will begin the competition.
+Now that you have logged in, you need to be on a team to compete (it is possible to be on a team all by yourself).  The administrator will create your teams; please wait patiently for further instructions from him.  When everyone is on a team, the administrator will begin the competition.
 
 
 Competing
 
 Time Left
-There is a countdown timer in the top left corner, this displays how many minutes are left in the competition.  The competition administrator has the ability to pause this timer, if he does so, you will be unable to enter test cases until he resumes the competition.
+There is a countdown timer in the top left corner that displays how many minutes are left in the competition.  The competition administrator has the ability to pause this timer; if he does so, you will be unable to enter test cases until he resumes the competition.
 
 Requirements
 There is a requirements section on the left edge of the window.  This contains information about how the code in that problem should be working.  It also gives you instructions on how to format your input.
@@ -49,7 +49,7 @@ Bugs Found
 On the top banner, there is a number labeled "Bugs Found" this number represents the total number of bugs you have found so far.
 
 Scoring and Ranking
-The scores are based on how many bugs you find and how long it took you to find them.  The top three teams will be displayed near the top left corner.
+The scores are based on how many bugs you find and how long it takes you to find them.  The top three teams will be displayed near the top left corner.
 
 Logging out
 To log out, click the "Log Out" link in the top right corner.  Once you have logged out, you may log back in.

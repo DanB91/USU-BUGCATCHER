@@ -6,8 +6,9 @@ $comp = $_COOKIE['adminCompID'];
 //If it does the time stored in the file is given to the administrator to view
 if(file_exists("../Competitions/${comp}/".$comp."MasterTimer.txt"))
 {
-	$masterTimer = fopen("../Competitions/${compID}/".$comp."MasterTimer.txt","r");
+	$masterTimer = fopen("../Competitions/${comp}/".$comp."MasterTimer.txt","r");
 	echo fgets($masterTimer);
 	fclose($masterTimer);
 }
+
 ?>

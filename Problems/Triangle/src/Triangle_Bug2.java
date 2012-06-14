@@ -1,4 +1,4 @@
-//BUG 1 : LINE 30 doesn't return "not a triangle" if angles are less than 180
+//BUG 1 : LINE 28 doesn't return "not a triangle" if angles are less than 180
 
 
 public class Triangle_Bug2 {
@@ -43,7 +43,7 @@ public class Triangle_Bug2 {
     }
 	
     public static void main(String[] args) {        
-        
+       try{ 
         int arg1 = Integer.parseInt(args[0]);
         int arg2 = Integer.parseInt(args[1]);
         int arg3 = Integer.parseInt(args[2]);
@@ -51,5 +51,8 @@ public class Triangle_Bug2 {
         
         Triangle_Bug2 tr = new Triangle_Bug2(arg1, arg2, arg3);
         System.out.println(tr.findTriangleType());
+       } catch(Exception e){
+       	System.out.println("Error: Bad Input");
+       }
     }
 }

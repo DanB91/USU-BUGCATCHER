@@ -9,6 +9,7 @@ public class SalePrice_Oracle {
 	}
 	
 	public static void main(String[] args){
+	try{
 		double price = Double.parseDouble(args[0]);
 		double discount = Double.parseDouble(args[1]);
 		
@@ -18,5 +19,8 @@ public class SalePrice_Oracle {
 			double discountedPrice = SalePrice_Oracle.discountedPrice(price, discount);
 			System.out.println(discountedPrice);
 		}
+	} catch(Exception e){
+    	System.out.println("Error: Bad Input");
+    }
 	}
 }

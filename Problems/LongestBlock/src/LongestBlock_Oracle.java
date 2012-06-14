@@ -26,7 +26,11 @@ public class LongestBlock_Oracle {
 	}
 
 	public static void main(String[] args){
+		try{
 		int blockLength = findLongest(args[0]);
 		System.out.println(blockLength);
+		}catch(Exception e){
+	          System.out.println("Error: Bad Input");
+	  	}
 	}
 }

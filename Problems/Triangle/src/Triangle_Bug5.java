@@ -1,4 +1,4 @@
-//BUG 5 : LINE 25 doesn't return "Invalid input" if one of the angles is 0.
+//BUG 5 : LINE 23 doesn't return "Invalid input" if one of the angles is 0.
 
 
 public class Triangle_Bug5 {
@@ -43,7 +43,7 @@ public class Triangle_Bug5 {
     }
 	
     public static void main(String[] args) {        
-        
+      try{
         int arg1 = Integer.parseInt(args[0]);
         int arg2 = Integer.parseInt(args[1]);
         int arg3 = Integer.parseInt(args[2]);
@@ -51,6 +51,9 @@ public class Triangle_Bug5 {
         
         Triangle_Bug5 tr = new Triangle_Bug5(arg1, arg2, arg3);
         System.out.println(tr.findTriangleType());
+      } catch(Exception e){
+      	System.out.println("Error: Bad Input");
+      }
     }
 
 }

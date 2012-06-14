@@ -1,6 +1,6 @@
-5
+11
 Blank
 0
-60
-SalePrice,OddsEvens,FindPrimes,FindPrimes,FindPrimes
+20
+Fibonacci,PowersOfTwo,Binary,SalePrice,Calculator,FindPrimes,Reverse,QuickAdd,OddsEvens,Encoder,Reverse
 0

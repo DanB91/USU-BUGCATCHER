@@ -1,0 +1,1 @@
+39574<!@!>[Test, tnoble, SalePrice]<br>Input: '50 50'<br>Expected output: '25'<br>Actual output: '25.0'<br>Bug not found!<!@!>39582<!@!>[Test, tnoble, SalePrice]<br>Input: '100 1'<br>Expected output: '99'<br>Actual Output: '0.0'<br>Bug found!<!@!>39856<!@!>[Test, tnoble, SalePrice]<br>Input: '100 1'<br>Expected output: '99'<br>Actual Output: '0.0'<br>Bug already found!<!@!>

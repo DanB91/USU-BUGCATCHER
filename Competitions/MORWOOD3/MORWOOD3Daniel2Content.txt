@@ -1,0 +1,1 @@
+67707<!@!>[Test, danAdmin, HelloWorld]<br>Input: 'H'<br>Expected output: 'Hello, H!'<br>Actual Output: 'Hello,H!'<br>Bug found!<!@!>67819<!@!>[Test, danAdmin, QuickAdd]<br>Input: '2 4'<br>Expected output: '6'<br>Actual Output: '-2.0'<br>Bug found!<!@!>
