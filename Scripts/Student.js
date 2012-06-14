@@ -528,43 +528,24 @@ function getBugs()//Find Code ---------- BF1001
 //---------------------------------------------------------------------------------------
 function getBugTestInfo(str, str2)
 {
-	//alert("in getBugTestInfo");
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadBugTestInfo=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		loadBugTestInfo=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	loadBugTestInfo.onreadystatechange=function()
-	{
-		if (loadBugTestInfo.readyState==4 && loadBugTestInfo.status==200)
+        $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
+            function(html){
+                getBugs();     		
+		if (html.trim() == '1' && !recentlyLoged)
 		{
-			//alert(loadBugTestInfo.responseText);
-			getBugs();
-		
-			
-			if (loadBugTestInfo.responseText.trim() == '1' && !recentlyLoged)
-
-			{
-				bugFoundAnimation();
-			}
-			else
-			{
-				getProb(currProblem, coverage, currIndex);
-				recentlyLoged = false;
-			}
-
-			document.getElementById("testInput").value='';
-			document.getElementById("testOutput").value='';
-
+                    bugFoundAnimation();
 		}
-	}
+		else
+		{
+                    getProb(currProblem, coverage, currIndex);
+                    recentlyLoged = false;
+		}
 
-	loadBugTestInfo.open("GET","StudentContent/testCaseText.php?testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage  ,true);
-	loadBugTestInfo.send();
+		$("#testInput").val('');
+		$("#testOutput").val('');
+        });
+
+
 }
 
 //###################################################################################################//
