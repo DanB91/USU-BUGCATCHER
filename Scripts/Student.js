@@ -95,28 +95,13 @@ function instantMessaging(message)//Find Code ---------- G1003
 //Postcondition: Recieves the team content file and displays the contents
 function recieve()//Find Code ---------- G1004
 {
-	//alert("recieving now");
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadInfoRecieve=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		loadInfoRecieve=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	loadInfoRecieve.onreadystatechange=function()
-	{
-		if (loadInfoRecieve.readyState==4 && loadInfoRecieve.status==200)
-		{
-			var arr = JSON.parse(loadInfoRecieve.responseText);
-			document.getElementById("ResultsList").innerHTML=format(arr);
+        $.post('StudentContent/recieve.php', "string="+message, 
+        function(html){
+            		var arr = JSON.parse(html);
+			$("#ResultsList").html=format(arr);
 			if(doScrollDown)
 				scrollResultsDown();
-		}
-	}
-	loadInfoRecieve.open("GET","StudentContent/recieve.php",true);
-	loadInfoRecieve.send();
+        });
 }
 
 
@@ -218,82 +203,45 @@ function setCodeCoverageState()//Find Code ---------- G1005
 
 function loadStudentProblems()
 {
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		xmlloadStudentProblems=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		xmlloadStudentProblems=new ActiveXObject("Microsoft.XMLHTTP");
-	}
+    $.post('StudentContent/loadStudProbs.php', "", 
+        function(html){	
+            var arr = eval(html);
+            probNames = arr;
+            numberOfProblems = arr[0];
+            var numberOfColumns = Math.floor((numberOfProblems/10));
+            var lastProblemIndex = ((numberOfProblems-1)%10)+1;
 
-	xmlloadStudentProblems.onreadystatechange=function()
-	{
-		if (xmlloadStudentProblems.readyState == 4 && xmlloadStudentProblems.status == 200)
-		{
-			//document.getElementById('SelectedProblems').innerHTML=xmlloadStudentProblems.responseText;
+            if (numberOfProblems%10 != 0)
+            {
+                numberOfColumns++;
+            }
+                        
+            var problemLists = new Array();
+            var outputString = "";
+                        
+            for (var h=0; h<numberOfColumns; h++)
+            {
+                problemLists[h] = "<ul>\n";		
+                for (var k=0; k<10; k++)
+                {
+                    if(h == numberOfColumns-1 && k == lastProblemIndex)
+                    {
+                        k = 10;
+                    }
+                    else
+                    {
+                        var problemNumber = ((10*h)+k+1);
+                        problemLists[h] += "  <li><a href='JavaScript:getReqAndProb("+problemNumber;
+                        problemLists[h] += ", Coverage.checked);' >"+problemNumber+". "+probNames[problemNumber]+"</a></li>\n";
+                    }
+                }
 
-			var arr = eval(xmlloadStudentProblems.responseText);
-			probNames = arr;
-
-			numberOfProblems = arr[0];
-			var numberOfColumns = Math.floor((numberOfProblems/10));
-			var lastProblemIndex = ((numberOfProblems-1)%10)+1;
-
-			if (numberOfProblems%10 != 0)
-			{
-				numberOfColumns++;
-			}
-
-			var problemLists = new Array();
-			var outputString = "";
-
-			for (var h=0; h<numberOfColumns; h++)
-			{
-				problemLists[h] = "<ul>\n";		
-				for (var k=0; k<10; k++)
-				{
-					if(h == numberOfColumns-1 && k == lastProblemIndex)
-					{
-						k = 10;
-					}
-					else
-					{
-						var problemNumber = ((10*h)+k+1);
-						problemLists[h] += "  <li><a href='JavaScript:getReqAndProb("+problemNumber;
-						problemLists[h] += ", Coverage.checked);' >"+problemNumber+". "+probNames[problemNumber]+"</a></li>\n";
-					}
-				}
-
-				problemLists[h] += "</ul>\n\n";
-				outputString += problemLists[h];
-			}
-			PopUpShowingClass = "showing-"+numberOfColumns+"col";
-			document.getElementById("PopUpArea").innerHTML=outputString;
-			/*
-			   for(var i = 1; i <= arr[0]; i++)
-			   {
-			   document.getElementById("Prob" + i).innerHTML = arr[i];
-			   }           
-
-			   if(arr[0] < 5)
-			   {
-
-			   var t = 5 - arr[0];
-			   t = 5 - t + 1;
-			   for(var notInUse = t; notInUse <= 5; notInUse++)
-			   {
-			//document.getElementById("Prob" + notInUse).innerHTML = "<p></p>";
-			if(notInUse != 5)
-			document.getElementById("P" + notInUse).innerHTML = '<a class="navMiddle" ><p></p></a>';
-			else
-			document.getElementById("P" + notInUse).innerHTML = '<a class="navRightMost" ><p></p></a>';
-			}
-			}*/
-		}
-	}
-	xmlloadStudentProblems.open("GET","StudentContent/loadStudProbs.php",true);
-	xmlloadStudentProblems.send();
+                problemLists[h] += "</ul>\n\n";
+                outputString += problemLists[h];
+            }
+            PopUpShowingClass = "showing-"+numberOfColumns+"col";
+            $("#PopUpArea").html=outputString;
+        });
 }
 
 function displayHelp()
@@ -369,32 +317,18 @@ function getReqAndProb(index, cov)//Find Code ---------- PR1001
 //Postcondition: Displays the requirements of the problem that was selected.
 function getReq(str, index)//Find Code ---------- PR1002
 {
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadInfoGetReq=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		loadInfoGetReq=new ActiveXObject("Microsoft.XMLHTTP");
-	}
+    $.post('StudentContent/showCodeReq.php', "problem="+str + "&index=" + index, 
+        function(html){
+            if(hasFinished == 0)
+            {
+                $("#RequirementsList").html=html;
+            }
+            else
+            {
+                $("#RequirementsList").html="This competition has concluded";
+            }
 
-	loadInfoGetReq.onreadystatechange=function()
-	{
-		if (loadInfoGetReq.readyState==4 && loadInfoGetReq.status==200)
-		{
-			if(hasFinished == 0)
-			{
-				document.getElementById("RequirementsList").innerHTML=loadInfoGetReq.responseText;
-			}
-			else
-			{
-				document.getElementById("RequirementsList").innerHTML="This competition has concluded";
-			}
-
-		}
-	}
-	loadInfoGetReq.open("GET","StudentContent/showCodeReq.php?problem="+str + "&index=" + index,true);
-	loadInfoGetReq.send();
+        });
 }
 
 //This function is called in the function getReqAndProb look up 
@@ -487,147 +421,79 @@ function getAniState()
 
 //This function is called in the initialize function below
 function hasCompStarted()//Find Code ---------- C1001
-	//Precondition: Competition must be valid
-	//Postcondition: Checks to see if the competition has started and sets up the competition if the response text = 1
 {
+    //Precondition: Competition must be valid
+    //Postcondition: Checks to see if the competition has started and sets up the competition if the response text = 1
+    $.post('StudentContent/checkCompStart.php', "", 
+        function(html){	
+            if(html.trim() == 1)
+            {
 
-	//alert("recieving now");
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		sethasCompStartedXml=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		sethasCompStartedXml=new ActiveXObject("Microsoft.XMLHTTP");
-	}
+                clearInterval(t1);
 
-	sethasCompStartedXml.onreadystatechange=function()
-	{
-		if (sethasCompStartedXml.readyState==4 && sethasCompStartedXml.status==200)
-		{
-			//alert(sethasCompStartedXml.responseText);
-			if(sethasCompStartedXml.responseText == 1)
-			{
-
-				clearInterval(t1);
-
-				if(countDownState != 0)
-				{
-					playCountAni(); 
-				}
-				else
-				{
-					document.getElementById("testforBug").disabled = false;
-					document.getElementById("testInput").disabled = false;
-					document.getElementById("testOutput").disabled = false;
-					document.getElementById('ProblemCode').innerHTML= "The competition has started please select a problem.";
-				}
-			}
-			else
-			{
-				document.getElementById("testforBug").disabled = true;
-				document.getElementById("testInput").disabled = true;
-				document.getElementById("testOutput").disabled = true;
-			}
-		}
-	}
-	sethasCompStartedXml.open("GET","StudentContent/checkCompStart.php",true);
-	sethasCompStartedXml.send();
-
+                if(countDownState != 0)
+                {
+                    playCountAni(); 
+                }
+                else
+                {
+                    $("#testforBug").attr("disable", false);
+                    $("#testInput").attr("disable", false);
+                    $("#testOutput").attr("disable", false);
+                    $("#ProblemCode").html = "The competition has started please select a problem.";
+                }
+            }
+            else
+            {
+                $("#testforBug").attr("disable", true);
+                $("#testInput").attr("disable", true);
+                $("#testOutput").attr("disable", true);
+            }
+        });
 }
 
 function playCountAni()
 {
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		playCountAniXml=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		playCountAniXml=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	playCountAniXml.onreadystatechange=function()
-	{
-		if (playCountAniXml.readyState==4 && playCountAniXml.status==200)
-		{
-			// alert(playCountAniXml.responseText);
-			if(playCountAniXml.responseText == '1')
-			{
-				countAnimation();                  
-			}
-
-		}
-	}
-	playCountAniXml.open("GET","StudentContent/compareTime.php",true);
-	playCountAniXml.send();
+    $.post('StudentContent/compareTime.php', "", 
+        function(html){	
+            if (html.trim() == '1')
+            {
+                countAnimation();
+            }
+        });
 }
 
 function checkCompFinished()//Find Code ---------- C1003
 {
-
-	//alert("recieving now");
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		checkCompFinishedXml=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		checkCompFinishedXml=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	checkCompFinishedXml.onreadystatechange=function()
-	{
-		if (checkCompFinishedXml.readyState==4 && checkCompFinishedXml.status==200)
-		{
-			//alert(checkCompFinishedXml.responseText);
-			if(checkCompFinishedXml.responseText == 0)
-			{
-				//alert("The admin has disabled code coverage");
-				document.getElementById("testforBug").disabled = false;
-				document.getElementById("testInput").disabled = false;
-				document.getElementById("testOutput").disabled = false;
-			}
-			else
-			{
-				//alert(checkCompFinishedXml.responseText);
-				document.getElementById("testforBug").disabled = true;
-				document.getElementById("testInput").disabled = true;
-				document.getElementById("testOutput").disabled = true;
-				clearInterval(t1);
-				clearInterval(t3);
-				document.getElementById("ResultsList").innerHTML="This competition has concluded";
-				hasFinished = 1;
-				getReqAndProb(currProblem, coverage);
-			}
-		}
-	}
-	checkCompFinishedXml.open("GET","StudentContent/hasCompFinished.php",true);
-	checkCompFinishedXml.send();
-
+    $.post('StudentContent/hasCompFinished.php', "", 
+        function(html){	
+            if(html.trim() == 0)
+            {
+                //alert("The admin has disabled code coverage");
+                $("#testforBug").attr("disable", false);
+                $("#testInput").attr("disable", false);
+                $("#testOutput").attr("disable", false);
+            }
+            else
+            {
+                //alert(checkCompFinishedXml.responseText);
+                $("#testforBug").attr("disable", true);
+                $("#testInput").attr("disable", true);
+                $("#testOutput").attr("disable", true);
+                clearInterval(t1);
+                clearInterval(t3);
+                $("#ResultsList").html="This competition has concluded";
+                hasFinished = 1;
+                getReqAndProb(currProblem, coverage);
+            }
+        });
 }
 
 function changeOnLogID()
 {
-	if (window.XMLHttpRequest)
-	{
-		changeOnLogIDXML = new XMLHttpRequest();
-	}
-	else
-	{
-		changeOnLogIDXML = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	changeOnLogIDXML.onreadystatechange=function()
-	{
-		if (changeOnLogIDXML.readyState == 4 && changeOnLogIDXML.status == 200)
-		{
-
-
-		}
-	}
-	changeOnLogIDXML.open("GET","StudentContent/onLogCookiesChange.php",true);
-	changeOnLogIDXML.send();
+    $.post('StudentContent/onLogCookiesChange.php', "", 
+        function(html){	
+        });
 }
 
 //###################################################################################################//
@@ -805,30 +671,10 @@ swfCodeCount += '</object>';
 
 function getCurrentTeam()
 {
-	var getTeamXml;
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		getTeamXml=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		getTeamXml=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-
-	getTeamXml.onreadystatechange=function()
-	{
-
-		if (getTeamXml.readyState==4 && getTeamXml.status==200)
-		{
-			document.getElementById('smallerHeader').innerHTML= getTeamXml.responseText;
-
-		}
-
-
-	}
-
-	getTeamXml.open("GET","StudentContent/teamName.php",true);
-	getTeamXml.send();
+    $.post('StudentContent/teamName.php', "", 
+        function(html){	
+            $("#smallerHeader").html = html
+        });
 }
 
 function toggleCoverage(checkBoxObj)
