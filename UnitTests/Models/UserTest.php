@@ -52,24 +52,27 @@ class UserTest extends PHPUnit_Framework_TestCase {
        */
     }
     
-    public function testLogin()
-    {
-        $this->assertEquals(User::login('dansb', 'tedst'), FALSE);
-    }
     
     public function testRegister()
     {
-        //User::registerUser(array('username' => 'mid', 'password' => 'test', 'fname' => 'sid', 'lname' => 'b'));
+        //User::registerUser(array('username' => 'mid', 'password' => 'password', 'fname' => 'sid', 'lname' => 'b'));
     }
     
     public function testLoadLinks()
     {
-        var_dump($this->object->teamids);
+        //var_dump($this->object->teamids);
     }
+    
+    public function testLogin()
+    {
+        $this->assertNotEquals(User::login('mid', 'password'), FALSE);
+        
+    }
+    
     
     public function testAddToTeam()
     {
-        $this->object->addUserToTeam(new Team(1));
+        //$this->object->addUserToTeam(new Team(1));
     }
     
     

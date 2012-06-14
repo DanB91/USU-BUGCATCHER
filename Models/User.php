@@ -67,8 +67,11 @@ class User extends Model{
     public static function registerUser(array $registerData)
     {
         
-        foreach($registerData as &$value)
+        foreach($registerData as $fieldName => &$value)
         {
+            if($fieldName === 'password')
+                continue;
+            
             $value = "'" . $value . "'";
         }
         
