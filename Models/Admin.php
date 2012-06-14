@@ -22,6 +22,7 @@ class Admin extends Model{
         {
             if($fieldName === 'password')
                 continue;
+            
             $value = "'" . $value . "'";
         }
         
@@ -38,12 +39,12 @@ class Admin extends Model{
     {
         
         try{
-            $user = new User($username, 'username');
+            $admin = new Admin($username, 'username');
             
-            if($user->password !== crypt($password, SALT))
+            if($admin->password !== crypt($password, SALT))
                     return FALSE;
             
-            return $user;
+            return $admin;
         }
         catch(BugCatcherException $ex)
         {
