@@ -1,5 +1,0 @@
-50709<!@!>[Test, TheWinningTeam, QuickAdd]<br>Input: '1 1'<br>Expected output: '2'<br>Actual Output: '0.0'<br>Bug found!<!@!>50721<!@!>[Test, TheWinningTeam, Binary]<br>Input: '8'<br>Expected output: '1000'<br>Actual Output: '0111'<br>Bug found!<!@!>50776<!@!>[Test, TheWinningTeam, Reverse]<br>Input: 'Brady Moon'<br>Expected output: 'ydarB'<br>Actual Output: 'ydar'<br>Bug found!<!@!>50808<!@!>[Test, TheWinningTeam, PowersOfTwo]<br>Input: '3'<br>Expected output: '1 2 4'<br>Actual Output: '1 6 6'<br>Bug found!<!@!>50908<!@!>[Test, TheWinningTeam, Fibonacci]<br>Input: '4'<br>Expected output: '1 1 2 3'<br>Actual Output: '1 
-1 
-2 
-3 
-5'<br>Bug found!<!@!>

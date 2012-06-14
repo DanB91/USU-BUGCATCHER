@@ -1,6 +1,0 @@
-3
-Blank
-0
-20
-FindPrimes,GroupSum,QuickAdd
-0

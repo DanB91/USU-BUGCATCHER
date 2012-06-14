@@ -1,1 +1,0 @@
-49214<!@!>[Test, CoderGeek314, Converter]<br>Input: '10'<br>Expected output: '0:0:0:10'<br>Actual output: '0:0:0:10.0'<br>Bug not found!<!@!>49235<!@!>[Test, CoderGeek314, Converter]<br>Input: '10'<br>Expected output: '0:0:0:10.0'<br>Actual Output: '0:0:0:0.0'<br>Bug found!<!@!>

@@ -1,6 +1,0 @@
-1
-Blank
-0
-12
-SalePrice
-0

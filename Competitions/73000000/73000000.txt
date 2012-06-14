@@ -1,6 +1,0 @@
-3
-Blank
-0
-50
-PowersOfTwo,HelloWorld,QuickAdd
-0

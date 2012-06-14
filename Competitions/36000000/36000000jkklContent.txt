@@ -1,1 +1,0 @@
-66164<!@!>[Test, testud, QuickAdd]<br>Input: '1 2'<br>Expected output: '3'<br>Actual Output: '-1.0'<br>Bug found!<!@!>66202<!@!>[Test, testud, Reverse]<br>Input: 'asdf'<br>Expected output: 'fdsa'<br>Actual Output: 'fds'<br>Bug found!<!@!>

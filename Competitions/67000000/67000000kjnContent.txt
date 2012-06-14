@@ -1,7 +1,0 @@
-41213<!@!>[Test, testud2, LongestBlock]<br>Input: 'abcc'<br>Expected output: '2'<br>Actual Output: '1'<br>Bug found!<!@!>41225<!@!>[Test, testud2, LongestBlock]<br>Input: 'aaaaa'<br>Expected output: '5'<br>Actual Output: '6'<br>Bug found!<!@!>41240<!@!>[Test, testud2, LongestBlock]<br>Input: 'aaaaa'<br>Expected output: '5'<br>Actual Output: '4'<br>Bug already found!<!@!>41250<!@!>[Test, testud2, LongestBlock]<br>Input: '111'<br>Expected output: '3'<br>Actual Output: '2'<br>Bug already found!<!@!>41296<!@!>[Test, testud2, HelloWorld]<br>Input: 'j'<br>Expected output: 'Hello, j!'<br>Actual Output: 'Hello,j!'<br>Bug found!<!@!>41305<!@!>[Test, testud2, HelloWorld]<br>Input: 'k'<br>Expected output: 'Hello, k!'<br>Actual Output: 'Hello,k!'<br>Bug already found!<!@!>41316<!@!>[Test, testud2, QuickAdd]<br>Input: '1 2'<br>Expected output: '3'<br>Actual Output: '-1.0'<br>Bug found!<!@!>41325<!@!>[Test, testud2, QuickAdd]<br>Input: '-1 -1'<br>Expected output: '-2'<br>Actual Output: '0.0'<br>Bug already found!<!@!>41335<!@!>[Test, testud2, Fibonacci]<br>Input: '3'<br>Expected output: '1 1 2'<br>Actual Output: '1 
-1 
-2 
-3'<br>Bug found!<!@!>41351<!@!>[Test, testud2, Fibonacci]<br>Input: '3'<br>Expected output: '1 1 2'<br>Actual Output: '1 
-1 
-2 
-3'<br>Bug already found!<!@!>
