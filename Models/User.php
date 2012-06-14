@@ -16,6 +16,7 @@ require_once 'Team.php';
  * @author danielbokser
  */
 class User extends Model{
+  
     
     /**
      *Constructs a user using a given unique value 
