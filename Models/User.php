@@ -1,6 +1,7 @@
 <?php
 
 require_once 'Model.php';
+require_once 'Team.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -25,7 +26,12 @@ class User extends Model{
         parent::__construct('USERS', $value, $fieldName, array('STUDENT_TEAM_LINK'));
     }
     
-    
+    /*
+    public function addUserToTeam(Team $team)
+    {
+        $this->createRelationToModel($team, 'STUDENT_TEAM_LINK');
+    }
+    */
     
     /**
      * If user and password match, this method returns a user, else it returns false
