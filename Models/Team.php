@@ -28,6 +28,16 @@ class Team extends Model {
         
         Model::addRow('TEAMS', $registerData);
     }
+    
+    public function addTeamToCompetition(Competition $comp)
+    {
+        $this->createRelationToModel($comp, 'TEAM_COMPETITION_LINK');
+    }
+    
+    public function removeTeamFromCompetition(Competition $comp)
+    {
+	$this->removeRelationFromModel($comp, 'TEAM_COMPETITION_LINK');
+    }
 }
 
 ?>

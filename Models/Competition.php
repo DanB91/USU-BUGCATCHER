@@ -12,7 +12,7 @@ include_once 'Model.php';
  */
 class Competition extends Model{
     public function __construct($uniqueValue, $uniqueFieldName = FALSE) {
-        parent::__construct('TEAMS', $uniqueValue, $uniqueFieldName, array('STUDENT_TEAM_LINK', 'TEAM_COMPETITION_LINK'));
+        parent::__construct('COMPETITIONS', $uniqueValue, $uniqueFieldName, array('COMPETITION_PROBLEM_LINK', 'TEAM_COMPETITION_LINK'));
     }
     
     
