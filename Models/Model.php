@@ -130,6 +130,27 @@ abstract class Model {
         $this->values[$field] = $value;
     }
     
+    public function findInDB($tablename, array $data){
+	$sql= "SELECT * FROM " . $tablename . " WHERE " ;
+	
+	$and=false;
+	foreach($data as $fieldName => $value){
+	    if($and==false)
+		$and=true;
+	    else
+		$sql.=" AND ";
+	    
+	    $sql.=$fieldName . "=" . $value ;
+	}
+	
+	if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Select Failed: ' . $this->connection->error);
+	
+	if(($row = $result->fetch_assoc()))
+            return $row;
+        else
+            return false;
+    }
 
     
     
@@ -214,6 +235,9 @@ abstract class Model {
      */
     protected function createRelationToModel(Model $model, $tableName)
     {
+	$this->values[$model->primaryKeyName . "s"][]=$model->getPrimaryKeyValue();
+	$model->values[$this->primaryKeyName . "s"][]=$this->getPrimaryKeyValue();
+	
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
         
@@ -229,6 +253,18 @@ abstract class Model {
      */
     protected function removeRelationFromModel(Model $model, $tableName)
     {
+	foreach($this->values[$model->primaryKeyName . "s"] as $fieldName => $value){
+	    if($value==$this->getPrimaryKeyValue()){
+		unset($this->values[$model->primaryKeyName . "s"][$fieldName]);
+	    }
+	}
+	
+	foreach($model->values[$this->primaryKeyName . "s"] as $fieldName => $value){
+	    if($value==$model->getPrimaryKeyValue()){
+		unset($model->values[$this->primaryKeyName . "s"][$fieldName]);
+	    }
+	}
+	    
         $sql = 'DELETE FROM ' . $tableName . ' WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue()
 		. ' AND ' . $model->getPrimaryKeyName() . '=' . $model->getPrimaryKeyValue() ;
 
@@ -432,10 +468,9 @@ abstract class Model {
         $values .= ')';
         
         $sql .= $values;
-        
        
         $con = connectToDB();
-        
+	
         if(!$con->query($sql))
            throw new ModelAlreadyExistsException('Error inserting into database: ' . $con->error);
     }

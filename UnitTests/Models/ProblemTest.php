@@ -45,7 +45,8 @@ class ProblemTest extends PHPUnit_Framework_TestCase {
 	$competition=new Competition(1);
 	$this->assertSame($competition->compname, 'test');
 	$this->object->addProblemToCompetition($competition);
-	$this->assertSame($competition->problemids[0], '1');
+	$this->assertSame($competition->problemids, array('1'));
+	$this->assertSame($this->object->compids, array('1'));
     }
 
     /**
@@ -57,6 +58,7 @@ class ProblemTest extends PHPUnit_Framework_TestCase {
 	$this->assertSame($competition->compname, 'test');
 	$this->object->removeProblemFromCompetition($competition);
 	$this->assertSame($competition->problemids, array());
+	$this->assertSame($this->object->compids, array());
     }
 
 }

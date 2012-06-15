@@ -21,32 +21,12 @@ class Problem extends Model {
     
     public function addProblemToCompetition(Competition &$comp)
     {
-        $this->createRelationToModel($comp, 'COMPETITION_PROBLEM_LINK');
-	
-	$arr = array();// $comp->problemids;
-	foreach($comp->problemids as $fieldName => $value){
-	    $arr[]=$value;
-	}
-	$arr[]=$this->getPrimaryKeyValue();
-	
-	$comp->problemids = $arr;
-	
-	
+        $this->createRelationToModel($comp, 'COMPETITION_PROBLEM_LINK');	
     }
     
     public function removeProblemFromCompetition(Competition $comp)
     {
-	
 	$this->removeRelationFromModel($comp, 'COMPETITION_PROBLEM_LINK');
-	
-	$arr = array();// $comp->problemids;
-	foreach($comp->problemids as $fieldName => $value){
-	    if($value!=$this->getPrimaryKeyValue()){
-		$arr[]=$value;
-	    }
-	}
-	
-	$comp->problemids = $arr;
     }
 }
 
