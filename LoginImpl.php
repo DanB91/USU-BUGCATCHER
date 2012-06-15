@@ -22,10 +22,9 @@ if ($accountType_str == 'admin')
   {
 
         session_start();
-        $_SESSION['userid'] = $USER->userid;
+        $_SESSION['userid'] = $ADMIN->userid;
         $_SESSION['usertype'] = 'admin';
-        $_SESSION['username'] = $USER->username;
-       // echo "Pie";
+        $_SESSION['username'] = $ADMIN->username;
 
   }
 }
