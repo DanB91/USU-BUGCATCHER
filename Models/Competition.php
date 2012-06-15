@@ -15,9 +15,9 @@ class Competition extends Model{
         parent::__construct('COMPETITIONS', $uniqueValue, $uniqueFieldName, array('COMPETITION_PROBLEM_LINK', 'TEAM_COMPETITION_LINK'));
     }
     
-    public function getProblems()
-    {
-        
+    
+    public function getProblems(){
+	return $this->problemids;
     }
 }
 
