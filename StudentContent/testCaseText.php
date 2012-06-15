@@ -134,31 +134,6 @@ function writeToContentFile($stringToWrite, $contentFileName)
 
 }
 
-/*
-   Takes in the name of the problem and ouputs the array of filenames
-   that represent each bug in the problem
- */
-function getBugFileNames($problemName)
-{
-	$filesInDir = scandir("Problems/${problemName}");
-	$bugFilesInDir; //will hold the returned array will all the bug files in it
-	$i = 1; //index of return array
-
-	foreach($filesInDir as $key => $value)
-	{
-		//if the file is not a runnable bug file, remove it from the array
-		if(preg_match('/.*bug[\d]*\.jar/i', $value))
-		{
-			$bugFilesInDir[$i++] = $value;
-		}
-	}
-
-	return $bugFilesInDir;
-
-
-
-}
-
 
 //error handler
 function error($errNo, $errStr)
