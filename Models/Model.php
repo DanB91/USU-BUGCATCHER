@@ -98,6 +98,7 @@ abstract class Model {
         if(!isset($this->types[$field]))
             throw new BugCatcherException($field . ' is not an attribute of this table');
         
+	
         return $this->values[$field];
     }
     
@@ -213,8 +214,42 @@ abstract class Model {
      */
     protected function createRelationToModel(Model $model, $tableName)
     {
+	$this->values[$model->primaryKeyName . "s"][]=$model->getPrimaryKeyValue();
+	var_dump($this->values[$model->primaryKeyName . "s"]);
+	$model->values[$this->primaryKeyName . "s"][]=$this->getPrimaryKeyValue();
+	echo"comp";
+	var_dump($model->values[$this->primaryKeyName . "s"]);
+	
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
+        
+        if(!$this->connection->query($sql))
+            throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
+        
+    }
+    
+    /**
+     *
+     * @param Model $model
+     * @param type $tableName 
+     */
+    protected function removeRelationFromModel(Model $model, $tableName)
+    {
+	foreach($this->values[$model->primaryKeyName . "s"] as $fieldName => $value){
+	    if($value==$this->getPrimaryKeyValue()){
+		unset($this->values[$model->primaryKeyName . "s"][$fieldName]);
+	    }
+	}
+	
+	foreach($model->values[$this->primaryKeyName . "s"] as $fieldName => $value){
+	    if($value==$model->getPrimaryKeyValue()){
+		unset($model->values[$this->primaryKeyName . "s"][$fieldName]);
+	    }
+	}
+	    
+        $sql = 'DELETE FROM ' . $tableName . ' WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue()
+		. ' AND ' . $model->getPrimaryKeyName() . '=' . $model->getPrimaryKeyValue() ;
+
         
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
@@ -284,6 +319,7 @@ abstract class Model {
             
             $this->values[$linkTableFieldName . 's'] = $linkTableColumnValues;
             $linkTableColumnValues = array();
+	   // echo "table name: ".$linkTableFieldName."\n";
             
             
             
@@ -362,14 +398,14 @@ abstract class Model {
            {
                $fieldType = 'i';
            }
-           elseif (strpos($row['Type'], 'date') !== FALSE)
+           elseif (strpos($row['Type'], 'date') !== FALSE || strpos($row['Type'], 'timestamp') !== FALSE)
            {
                $fieldType = 's';
            }
            //the database contains a type we do not support
            else
            {
-               throw new BugCatcherException('Database contains a type we do not support');
+               throw new BugCatcherException('Database contains a type we do not support: '.$row['Type']);
            }
            
            $this->types[$row['Field']] = $fieldType;
