@@ -16,6 +16,9 @@ class Competition extends Model{
     }
     
     
+    public function getProblems(){
+	return $this->problemids;
+    }
 }
 
 

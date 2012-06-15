@@ -98,6 +98,7 @@ abstract class Model {
         if(!isset($this->types[$field]))
             throw new BugCatcherException($field . ' is not an attribute of this table');
         
+	
         return $this->values[$field];
     }
     
@@ -300,6 +301,7 @@ abstract class Model {
             
             $this->values[$linkTableFieldName . 's'] = $linkTableColumnValues;
             $linkTableColumnValues = array();
+	   // echo "table name: ".$linkTableFieldName."\n";
             
             
             

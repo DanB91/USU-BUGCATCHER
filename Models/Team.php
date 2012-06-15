@@ -38,6 +38,14 @@ class Team extends Model {
     {
 	$this->removeRelationFromModel($comp, 'TEAM_COMPETITION_LINK');
     }
+    
+    public function foundBugInCompetition(Bug $bug, Competition $comp){
+	$data=array('teamid', 'bugid', 'compid');
+	$data['teamid']=$this->getPrimaryKeyValue();
+	$data['bugid']=$bug->getPrimaryKeyValue();
+	$data['compid']=$comp->getPrimaryKeyValue();
+	Model::addRow("TEAM_FOUND_BUG", $data);
+    }
 }
 
 ?>
