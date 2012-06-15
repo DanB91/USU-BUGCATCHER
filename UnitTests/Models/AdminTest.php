@@ -18,7 +18,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        //$this->object = new Admin(1); 
+        $this->object = new Admin(3); 
     }
 
     /**
@@ -31,7 +31,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     
     public function testRegisterAdmin()
     {
-        Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
+        //Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
     }
     
     public function testFields()
@@ -42,6 +42,16 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     public function testLogin()
     {
         $this->assertNotEquals(Admin::login('admin', 'password'), FALSE);
+    }
+    
+    public function testAddCompetition()
+    {
+       // $this->object->createCompetion(array('compName' => 'fdioas'));
+    }
+    
+    public function testGetCompitions()
+    {
+        var_dump($this->object->getCompetitions());
     }
 
 }
