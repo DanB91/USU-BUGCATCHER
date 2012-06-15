@@ -1,6 +1,6 @@
 function loadIndex()
 {
-  setInterval(function() {getResetUserType();}, 100);
+  setInterval(function() {validateResetFields();}, 100);
 }
 
 //not in use in new (ie...easy) version.
@@ -42,27 +42,13 @@ function SendResetEmail()
 function resetPassword()
 {
     
-	var newPassOne = document.getElementById("NewPassword").value;
-	var newPassTwo = document.getElementById("NewPasswordConfirm").value;
-	
- 	if (window.XMLHttpRequest)
-  	{// code for IE7+, Firefox, Chrome, Opera, Safari
-  		xmlresetPassword=new XMLHttpRequest();
-  	}
-	else
-  	{// code for IE6, IE5
-  		xmlresetPassword=new ActiveXObject("Microsoft.XMLHTTP");
-  	}
-	xmlresetPassword.onreadystatechange=function()
-	{
- 		if (xmlresetPassword.readyState==4 && xmlresetPassword.status==200)
-    	{
-    		alert(xmlresetPassword.responseText);
-   		}
-	}
-	
-	xmlhttp.open("GET","ResetPassword.php?username="+username+"&email="+email+"&usertype="+actType,true);
-	xmlhttp.send();	
+	var newPassOne = $("#NewPassword").val();
+	var newPassTwo = $("#NewPasswordConfirm").val();
+        
+        $.post('ResetPassword.php', "username="+username+"&email="+email+"&usertype="+actType, 
+        function(html){
+            alert(html);
+        });	
 }
 
 function VerifyResetTwo()
@@ -75,7 +61,7 @@ function VerifyResetTwo()
     var resetPass = $("#Resetpassword").val();
     var confirmResetPass = $("#ConfirmResetpassword").val();
     var userType;
-	
+        	
     if(document.ResetFormTwo.Resetusertype[0].checked == true)
     {
         userType = "admin";
@@ -85,13 +71,13 @@ function VerifyResetTwo()
         userType = "student";
     }
 	
-    if (!resetPass == confirmResetPass)
+    if (!(resetPass == confirmResetPass))
     {
-        $("#ResetError").html="Passwords do not match. Please enter again.";
+        alert("Passwords do not match. Please enter again.");
     }
     else if (resetPass.length < 6)
     {
-        $("#ResetError").html="Password must be at least six characters.";	    
+        alert("Password must be at least six characters.");	    
     }
     else
     {
@@ -105,7 +91,7 @@ function VerifyResetTwo()
 
 var recentlyChanged;
 
-function getResetUserType()
+function validateResetFields()
 {
   if(document.ResetFormTwo.Resetusertype[0].checked == true)
   {
@@ -113,8 +99,8 @@ function getResetUserType()
     document.ResetFormTwo.Resetschoolname.value = 'N/A';
     document.ResetFormTwo.Resetschoolname.style.backgroundColor = '';
     recentlyChanged = true;
-    return false;
   }
+  
   else if(document.ResetFormTwo.Resetusertype[1].checked == true)
   {
     document.ResetFormTwo.Resetschoolname.disabled = false;
@@ -123,9 +109,7 @@ function getResetUserType()
     	document.ResetFormTwo.Resetschoolname.value = '';
     	recentlyChanged = false;
     }
-    return true;
   }
- 
   if (($("#Resetpassword").val().length < 6) && ($("#Resetpassword").val().length > 0))
   {
   	document.getElementById("Resetpassword").style.backgroundColor = '#E38686';
@@ -133,5 +117,55 @@ function getResetUserType()
   else if (document.getElementById("Resetpassword").value.length >= 6)
   {
   	document.getElementById("Resetpassword").style.backgroundColor = '#69AF69';
+  }
+  
+  
+   if (($("#Resetfirstname").val().length <= 20) && ($("#Resetfirstname").val().length > 0))
+  {
+  	document.getElementById("Resetfirstname").style.backgroundColor = '#69AF69';
+  }
+  else if (document.getElementById("Resetfirstname").value.length > 20)
+  {
+  	document.getElementById("Resetfirstname").style.backgroundColor = '#E38686';
+  } else
+  {
+      document.getElementById("Resetfirstname").style.backgroundColor = 'white';
+  }
+  
+  
+   if (($("#Resetlastname").val().length <= 20) && ($("#Resetlastname").val().length > 0))
+  {
+  	document.getElementById("Resetlastname").style.backgroundColor = '#69AF69';
+  }
+  else if (document.getElementById("Resetlastname").value.length > 20)
+  {
+  	document.getElementById("Resetlastname").style.backgroundColor = '#E38686';
+  } else
+  {
+    document.getElementById("Resetlastname").style.backgroundColor = 'white';
+  }
+    
+   if (($("#Resetschoolname").val().length <= 20) && ($("#Resetschoolname").val().length > 0))
+  {
+  	document.getElementById("Resetschoolname").style.backgroundColor = '#69AF69';
+  }
+  else if (document.getElementById("Resetschoolname").value.length > 20)
+  {
+  	document.getElementById("Resetschoolname").style.backgroundColor = '#E38686';
+  } else
+  {
+      document.getElementById("Resetschoolname").style.backgroundColor = 'white';
+  }
+      
+   if (($("#Resetusername").val().length <= 20) && ($("#Resetusername").val().length >= 5))
+  {
+  	document.getElementById("Resetusername").style.backgroundColor = '#69AF69';
+  }
+  else if ((document.getElementById("Resetusername").value.length > 0) &&(document.getElementById("Resetusername").value.length < 5))
+  {
+  	document.getElementById("Resetusername").style.backgroundColor = '#E38686';
+  } else
+  {
+      document.getElementById("Resetusername").style.backgroundColor = 'white';
   }
 }

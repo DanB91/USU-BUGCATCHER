@@ -98,6 +98,7 @@ abstract class Model {
         if(!isset($this->types[$field]))
             throw new BugCatcherException($field . ' is not an attribute of this table');
         
+	
         return $this->values[$field];
     }
     
@@ -221,6 +222,22 @@ abstract class Model {
         
     }
     
+    /**
+     *
+     * @param Model $model
+     * @param type $tableName 
+     */
+    protected function removeRelationFromModel(Model $model, $tableName)
+    {
+        $sql = 'DELETE FROM ' . $tableName . ' WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue()
+		. ' AND ' . $model->getPrimaryKeyName() . '=' . $model->getPrimaryKeyValue() ;
+
+        
+        if(!$this->connection->query($sql))
+            throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
+        
+    }
+    
    /**
      * Loads all of the fields in
      * @throws Exception if query fails
@@ -284,6 +301,7 @@ abstract class Model {
             
             $this->values[$linkTableFieldName . 's'] = $linkTableColumnValues;
             $linkTableColumnValues = array();
+	   // echo "table name: ".$linkTableFieldName."\n";
             
             
             
@@ -362,14 +380,14 @@ abstract class Model {
            {
                $fieldType = 'i';
            }
-           elseif (strpos($row['Type'], 'date') !== FALSE)
+           elseif (strpos($row['Type'], 'date') !== FALSE || strpos($row['Type'], 'timestamp') !== FALSE)
            {
                $fieldType = 's';
            }
            //the database contains a type we do not support
            else
            {
-               throw new BugCatcherException('Database contains a type we do not support');
+               throw new BugCatcherException('Database contains a type we do not support: '.$row['Type']);
            }
            
            $this->types[$row['Field']] = $fieldType;
