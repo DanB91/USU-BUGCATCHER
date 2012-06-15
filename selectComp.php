@@ -34,9 +34,8 @@ var compSetID = '';
 	</div><!--end header-->
     
 	<div id="admenu">
-		<div id="navTabs" style="width: 800px; margin: 0 -200px 0 200px;">
+		<div id="navTabs" style="width: 583px; margin: 0 -200px 0 200px;">
             <ul>
-                <li><a id="navSComp" class="navNormal" href="JavaScript:selectCompetition()" ><h4>Select Competition</h4></a></li>
                 <li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Setup</h4></a></li>
                 <li><a id="navManage" class="navNormal" href="JavaScript:setManage()"><h4>Team Management</h4></a></li>
                 <li><a id="navProgress" class="navNormal" href="JavaScript:setProgress()" ><h4>Progress/Statistics</h4></a></li>
@@ -45,10 +44,46 @@ var compSetID = '';
 		</div><!--end navTabs-->
 	</div><!--end navigation-->
     
-	<div id="Content"><br /><br /><h1 style="margin: 0 0 0 -250; color: #2f393f">Welcome to Bug Catcher!</h1>
-	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-	    
-    </div><!--end content-->
+	<div id="Content">
+<!--Do Not Delete The Comment Below This-->
+<!--CONVERSION_STARTS_HERE-->
+		<div id="CustomHeader" align=center>
+      <h2>Select Comp</h2>
+    </div>
+    <div id="PreDefHeader" align=center style="background: #D3FBA7; padding-left: 11px;">
+      <h2>Users in Comp</h2>
+    </div>
+		<div id="HintsLeft" align=center>
+      <p>Select a Competition:</p>
+      <select name="HProbNum" id="HProbNum" size=5 class="CSselect" onchange=showPre(this.value);>
+      </select>
+      <!--id="SendCustom"-->
+      <a class="button" onclick="selectCompetition()"><p>Control Competition</p></a>
+		</div>
+		<div id="HintsRight" align=center style="background: #D3FBA7; height: 380px; padding-left: 11px;">
+                    <br>
+                    <p>View of users in comp:</p><br>
+      <form onSubmit="event.preventDefault(); sendHintsCust(CustomHint.value); " method="get">
+                      <select name="HProbNum" id="HProbNum" size=5 class="CSselect" onchange=showPre(this.value);>
+              </select>
+        
+        
+      </form >
+                    <div id="HintsPreDefTop" style="background: #D3FBA7;">
+        <div id="HintsPreDefRight" style="background: #D3FBA7;">
+
+        </div>
+        <div id="HintsPreDefLeft" style="background: #D3FBA7;">
+
+        </div>
+      </div>
+      <div id="HintsPreDefBottom" style="background: #D3FBA7;">
+
+      </div>
+		</div>
+<!--CONVERSION_ENDS_HERE-->
+<!--Do Not Delete The Comment Above This-->
+	</div><!--end content-->
     
 	<div id="footer" style="margin: 0 auto;">
   		<div id="adminCompID"></div>
@@ -60,3 +95,6 @@ var compSetID = '';
 </body>
 
 </html>
+
+
+<?php echo "pie";?>
