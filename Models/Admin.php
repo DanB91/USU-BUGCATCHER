@@ -16,6 +16,36 @@ class Admin extends Model{
         parent::__construct('ADMINS', $uniqueValue, $uniqueFieldName);
     }
     
+    
+    /**
+     *Creates a competition with this admin as a creator.  
+     * When passing in data, do not pass in the 'user id'.  That is added automatically
+     * @param array $data data dictionary
+     */
+    public function createCompetion(array $data)
+    {
+        foreach($data as $fieldName => &$value)
+        {
+            if($fieldName === 'password')
+                continue;
+            
+            switch($fieldName)
+            {
+                case 'compName':
+                case 'description':
+                    $value = "'" . $value . "'";
+            }
+            
+        }
+        
+        
+        $data['userid'] = $this->getPrimaryKeyValue();
+        Model::addRow('COMPETITIONS', $data);
+    }
+
+
+
+
     public static function registerAdmin(array $registerData)
     {
         foreach($registerData as $fieldName => &$value)
