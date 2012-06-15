@@ -225,14 +225,6 @@ abstract class Model {
         
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
-	
-	/*	$arr = array();
-	foreach($comp->problemids as $fieldName => $value){
-	    $arr[]=$value;
-	}
-	$arr[]=$this->getPrimaryKeyValue();
-	
-	$comp->problemids = $arr;*/
         
     }
     
@@ -261,15 +253,6 @@ abstract class Model {
         
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
-	
-	/*$arr = array();
-	foreach($comp->problemids as $fieldName => $value){
-	    if($value!=$this->getPrimaryKeyValue()){
-		$arr[]=$value;
-	    }
-	}
-	
-	$comp->problemids = $arr;*/
         
     }
     
