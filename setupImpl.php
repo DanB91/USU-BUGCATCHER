@@ -2,6 +2,7 @@
 
 //require_once 'Mode/Admin.php';
 
+session_start();
 
 $nProbs = $_GET["numProbs"];
 $pArr = $_GET["problems"];
@@ -14,7 +15,7 @@ $joinable = $_GET["joinable"];
 $compTime = $_GET["CompTime"];
 $codeCov = $_GET["codeCov"];
 $inclCD = $_GET["inclCD"];
-//$ADMIN = $_SESSION['adminObject'];
+//$admin = $_SESSION['adminObject'];
 
 
 echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $desc . "\n" . "hidden: " . $hidden . "\n" . "compT: " . $compTime;
@@ -30,7 +31,6 @@ echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $d
 //                    "countdown" => $inclCD,
 //                    "joinable"=>$joinable);
 //
-//$admin = new Admin($userN, "username");
 //$admin->createCompetition($compData);
 //$admin->addProblems($pArr);
 //$compID = $admin->compID;

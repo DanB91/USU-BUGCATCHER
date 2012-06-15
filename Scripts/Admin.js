@@ -865,7 +865,7 @@ function getState(student, studentPosNum)//Find Code ---------- TM1013
     {
       if (getStateXML[studentPosNum].readyState==4 && getStateXML[studentPosNum].status==200)
       {		
-			document.getElementById("State_S"+studentPosNum).value=getStateXML[studentPosNum].responseText;
+            document.getElementById("State_S"+studentPosNum).value=getStateXML[studentPosNum].responseText;
       }
     }
     getStateXML[studentPosNum].open("GET","ManageContent/getStudentState.php?currStudent="+student,true);
