@@ -22,6 +22,14 @@ class TeamTest extends PHPUnit_Framework_TestCase {
         $this->object = new Team(1);
     }
 
+    public function testFields(){
+	$this->assertSame($this->object->teamname, 'team1');
+	$this->assertSame($this->object->teamleaderid, '1');
+	$this->assertSame($this->object->hidden, '1');
+	$this->assertSame($this->object->joinable, '0');
+	
+    }
+    
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -35,19 +43,26 @@ class TeamTest extends PHPUnit_Framework_TestCase {
      * @todo Implement testCreateTeam().
      */
     public function testCreateTeam() {
-        Team::createTeam(array('teamname' => 'team1', 'teamleaderid' => 1, 'hidden' => 1));
+        /*Team::createTeam(array('teamname' => 'A-team', 'teamleaderid' => 1, 'hidden' => 1));
+	$team = new Team(13);
+	$this->assertSame($team->teamname, 'A-team');
+	$this->assertSame($team->teamleaderid, '1');
+	$this->assertSame($team->hidden, '1');
+	$this->assertSame($team->joinable, '0');*/
     }
     
     public function testAddTeamToCompetition() {
 	$competition=new Competition(1);
 	$this->assertSame($competition->compname, 'test');
 	$this->object->addTeamToCompetition($competition);
+	$this->assertSame($competition->teamids[0], '1');
     }
 
     public function testRemoveTeamFromCompetition() {
 	$competition=new Competition(1);
 	$this->assertSame($competition->compname, 'test');
 	$this->object->removeTeamFromCompetition($competition);
+	$this->assertSame($competition->teamids, array());
     }
 
 }

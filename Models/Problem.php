@@ -23,7 +23,7 @@ class Problem extends Model {
     {
         $this->createRelationToModel($comp, 'COMPETITION_PROBLEM_LINK');
 	
-	$arr = array();// $comp->problemids;
+	$arr = array();
 	foreach($comp->problemids as $fieldName => $value){
 	    $arr[]=$value;
 	}
@@ -39,7 +39,7 @@ class Problem extends Model {
 	
 	$this->removeRelationFromModel($comp, 'COMPETITION_PROBLEM_LINK');
 	
-	$arr = array();// $comp->problemids;
+	$arr = array();
 	foreach($comp->problemids as $fieldName => $value){
 	    if($value!=$this->getPrimaryKeyValue()){
 		$arr[]=$value;
