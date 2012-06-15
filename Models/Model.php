@@ -423,7 +423,7 @@ abstract class Model {
            //the database contains a type we do not support
            else
            {
-               throw new BugCatcherException('Database contains a type we do not support: '.$row['Type']);
+               throw new BugCatcherException('Database contains a type we do not support: '.$row['Type'] . "\n");
            }
            
            $this->types[$row['Field']] = $fieldType;
