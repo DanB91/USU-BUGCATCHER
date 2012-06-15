@@ -57,7 +57,7 @@ var pingCount = 0;	  //Find Code ---------- GV1009
 var probNames;
 var currIndex;
 
-var recentlyLoged = true;
+var recentlyLogged = true;
 var countDownState = 0;
 
 var custTName;
@@ -85,9 +85,7 @@ function instantMessaging(message)//Find Code ---------- G1003
     $.post('StudentContent/instantMessging.php', "string="+message, 
         function(html){
             document.getElementById("ChatInput").value="";
-        });
-
-			
+        });			
 }
 
 //This function is called in the initialize function below
@@ -377,7 +375,6 @@ function getBugs()//Find Code ---------- BF1001
 {
     $.post('StudentContent/getBugsFound.php', "", 
         function(html){
-            getBugs();     		
             $("#BugsFoundText").html=html;
 
         });
@@ -387,21 +384,21 @@ function getBugs()//Find Code ---------- BF1001
 //---------------------------------------------------------------------------------------
 function getBugTestInfo(str, str2)
 {
-        $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
-            function(html){
-                getBugs();     		
-		if (html.trim() == '1' && !recentlyLoged)
-		{
-                    bugFoundAnimation();
-		}
-		else
-		{
-                    getProb(currProblem, coverage, currIndex);
-                    recentlyLoged = false;
-		}
+    $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
+        function(html){
+            getBugs();     		
+            if (html.trim() == '1' && !recentlyLogged)
+            {
+                bugFoundAnimation();
+            }
+            else
+            {
+                getProb(currProblem, coverage, currIndex);
+                recentlyLogged = false;
+            }
 
-		$("#testInput").val('');
-		$("#testOutput").val('');
+            $("#testInput").val('');
+            $("#testOutput").val('');
         });
 
 
@@ -564,7 +561,6 @@ function bugFoundAnimation()
 { 
 	if (!PLAYING)
 	{
-		//alert("begin play");
 		playVideo();
 		VideoInterval = setInterval(playVideo,3750);
 	}

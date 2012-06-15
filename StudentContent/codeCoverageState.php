@@ -4,16 +4,14 @@
 //0 indicates that the students are not allowed to use code coverage
 //1 indicates that code coverage is allowed
 
-
-
 $compID = $_COOKIE['compID'];
 $codeCovState = 2;
 
 if(isset($_COOKIE['compID']) && $_COOKIE['compID'] != '')//If the competition has been created
 {
-	$file = file("../Competitions/${compID}/${compID}.txt");//open the file as an array
+	$comp = new Competition($compID);//open the file as an array
 
-	if($file[$codeCovState] == 1)
+	if($comp->codeCov)
 		echo "SET";
 	else
 		echo "NOTSET";

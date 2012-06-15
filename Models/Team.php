@@ -28,6 +28,24 @@ class Team extends Model {
         
         Model::addRow('TEAMS', $registerData);
     }
+    
+    public function addTeamToCompetition(Competition $comp)
+    {
+	$this->createRelationToModel($comp, 'TEAM_COMPETITION_LINK');
+    }
+    
+    public function removeTeamFromCompetition(Competition $comp)
+    {
+	$this->removeRelationFromModel($comp, 'TEAM_COMPETITION_LINK');
+    }
+    
+    public function foundBugInCompetition(Bug $bug, Competition $comp){
+	$data=array('teamid', 'bugid', 'compid');
+	$data['teamid']=$this->getPrimaryKeyValue();
+	$data['bugid']=$bug->getPrimaryKeyValue();
+	$data['compid']=$comp->getPrimaryKeyValue();
+	Model::addRow("TEAM_FOUND_BUG", $data);
+    }  
 }
 
 ?>

@@ -8,7 +8,7 @@
  */
 function connectToDB() 
 {
-    $con = new mysqli('127.0.0.1', 'root', 'abc123');
+    $con = new mysqli('127.0.0.1', 'root', 'root');
     if($con->connect_error)    
         throw new Exception('Could not connect to Database: ' . $con->connect_error);
     

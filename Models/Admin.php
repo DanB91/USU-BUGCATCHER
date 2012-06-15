@@ -31,7 +31,7 @@ class Admin extends Model{
     
     /**
      * If username and password match, this method returns an admin object, else it returns false
-     * @param type $username username of the user
+     * @param type $username username of the admin
      * @param type $password plain text password of the user
      * @return boolean|\User the user itself if password matches the username (and username exists) , else false
      */
