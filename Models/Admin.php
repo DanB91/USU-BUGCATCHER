@@ -18,12 +18,43 @@ class Admin extends Model{
     
     public static function registerAdmin(array $registerData)
     {
-        foreach($registerData as &$value)
+        foreach($registerData as $fieldName => &$value)
         {
+            if($fieldName === 'password')
+                continue;
+            
             $value = "'" . $value . "'";
         }
         
         Model::addRow('ADMINS', $registerData);
+    }
+    
+    /**
+     * If username and password match, this method returns an admin object, else it returns false
+     * @param type $username username of the user
+     * @param type $password plain text password of the user
+     * @return boolean|\User the user itself if password matches the username (and username exists) , else false
+     */
+    public static function login($username, $password)
+    {
+        
+        try{
+            $admin = new Admin($username, 'username');
+            
+            if($admin->password !== crypt($password, SALT))
+                    return FALSE;
+            
+            return $admin;
+        }
+        catch(BugCatcherException $ex)
+        {
+            echo $ex->getMessage();
+            return FALSE;
+            
+        }
+        
+        
+        
     }
 }
 
