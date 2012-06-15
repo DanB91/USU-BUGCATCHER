@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 require_once 'Model.php';
+require_once 'Competition.php'; ;
 /**
  * Class the represents admin
  *
@@ -41,6 +42,24 @@ class Admin extends Model{
         
         $data['userid'] = $this->getPrimaryKeyValue();
         Model::addRow('COMPETITIONS', $data);
+    }
+    
+    
+    public function getCompetitions()
+    {
+        $retCompetitions = array();
+        
+        $sql = 'SELECT compid FROM COMPETITIONS WHERE userid =' . $this->getPrimaryKeyValue();
+        if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $this->connection->error);
+        
+        //create a competition object foreach associated compeition
+        while(($row = $result->fetch_assoc()))
+        {
+            $retCompetitions[] = new Competition($row['compid']);
+        }
+        
+        return $retCompetitions;
     }
 
 
