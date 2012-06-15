@@ -56,6 +56,7 @@ class TeamTest extends PHPUnit_Framework_TestCase {
 	$this->assertSame($competition->compname, 'test');
 	$this->object->addTeamToCompetition($competition);
 	$this->assertSame($competition->teamids[0], '1');
+	$this->assertSame($this->object->compids[0], '1');
     }
 
     public function testRemoveTeamFromCompetition() {
@@ -63,6 +64,7 @@ class TeamTest extends PHPUnit_Framework_TestCase {
 	$this->assertSame($competition->compname, 'test');
 	$this->object->removeTeamFromCompetition($competition);
 	$this->assertSame($competition->teamids, array());
+	$this->assertSame($this->object->compids, array());
     }
 
 }

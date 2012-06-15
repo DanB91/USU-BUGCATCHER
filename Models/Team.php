@@ -32,28 +32,11 @@ class Team extends Model {
     public function addTeamToCompetition(Competition $comp)
     {
 	$this->createRelationToModel($comp, 'TEAM_COMPETITION_LINK');
-	
-	$arr = array();
-	foreach($comp->teamids as $fieldName => $value){
-	    $arr[]=$value;
-	}
-	$arr[]=$this->getPrimaryKeyValue();
-	
-	$comp->teamids = $arr;
     }
     
     public function removeTeamFromCompetition(Competition $comp)
     {
 	$this->removeRelationFromModel($comp, 'TEAM_COMPETITION_LINK');
-	
-	$arr = array();
-	foreach($comp->teamids as $fieldName => $value){
-	    if($value!=$this->getPrimaryKeyValue()){
-		$arr[]=$value;
-	    }
-	}
-	
-	$comp->teamids = $arr;
     }
     
     public function foundBugInCompetition(Bug $bug, Competition $comp){
@@ -62,7 +45,7 @@ class Team extends Model {
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();
 	Model::addRow("TEAM_FOUND_BUG", $data);
-    }
+    }  
 }
 
 ?>

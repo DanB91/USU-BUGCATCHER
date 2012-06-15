@@ -214,11 +214,25 @@ abstract class Model {
      */
     protected function createRelationToModel(Model $model, $tableName)
     {
+	$this->values[$model->primaryKeyName . "s"][]=$model->getPrimaryKeyValue();
+	var_dump($this->values[$model->primaryKeyName . "s"]);
+	$model->values[$this->primaryKeyName . "s"][]=$this->getPrimaryKeyValue();
+	echo"comp";
+	var_dump($model->values[$this->primaryKeyName . "s"]);
+	
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
         
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
+	
+	/*	$arr = array();
+	foreach($comp->problemids as $fieldName => $value){
+	    $arr[]=$value;
+	}
+	$arr[]=$this->getPrimaryKeyValue();
+	
+	$comp->problemids = $arr;*/
         
     }
     
@@ -229,12 +243,33 @@ abstract class Model {
      */
     protected function removeRelationFromModel(Model $model, $tableName)
     {
+	foreach($this->values[$model->primaryKeyName . "s"] as $fieldName => $value){
+	    if($value==$this->getPrimaryKeyValue()){
+		unset($this->values[$model->primaryKeyName . "s"][$fieldName]);
+	    }
+	}
+	
+	foreach($model->values[$this->primaryKeyName . "s"] as $fieldName => $value){
+	    if($value==$model->getPrimaryKeyValue()){
+		unset($model->values[$this->primaryKeyName . "s"][$fieldName]);
+	    }
+	}
+	    
         $sql = 'DELETE FROM ' . $tableName . ' WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue()
 		. ' AND ' . $model->getPrimaryKeyName() . '=' . $model->getPrimaryKeyValue() ;
 
         
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Relation update query failed: ' . $this->connection->error);
+	
+	/*$arr = array();
+	foreach($comp->problemids as $fieldName => $value){
+	    if($value!=$this->getPrimaryKeyValue()){
+		$arr[]=$value;
+	    }
+	}
+	
+	$comp->problemids = $arr;*/
         
     }
     
