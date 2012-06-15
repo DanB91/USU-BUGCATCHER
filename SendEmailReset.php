@@ -43,7 +43,7 @@ if ($row['email'] == $email_str)
 }
 else
 {
-	die(ResetSendFail());
+	die (ResetSendFail());
 }
 
 
