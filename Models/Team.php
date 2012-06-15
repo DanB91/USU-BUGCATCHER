@@ -40,12 +40,24 @@ class Team extends Model {
     }
     
     public function foundBugInCompetition(Bug $bug, Competition $comp){
-	$data=array('teamid', 'bugid', 'compid');
+	$data=array();
 	$data['teamid']=$this->getPrimaryKeyValue();
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();
 	Model::addRow("TEAM_FOUND_BUG", $data);
-    }  
+    }
+    
+    public function hasFoundBugInCompetition(Bug $bug, Competition $comp){
+	$data=array();
+	$data['teamid']=$this->getPrimaryKeyValue();
+	$data['bugid']=$bug->getPrimaryKeyValue();
+	$data['compid']=$comp->getPrimaryKeyValue();
+	$result=$this->findInDB("TEAM_FOUND_BUG", $data);
+	if($result)
+	    return $result['timesolved'];
+	else
+	    return false;
+    }
 }
 
 ?>

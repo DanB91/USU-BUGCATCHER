@@ -130,6 +130,27 @@ abstract class Model {
         $this->values[$field] = $value;
     }
     
+    public function findInDB($tablename, array $data){
+	$sql= "SELECT * FROM " . $tablename . " WHERE " ;
+	
+	$and=false;
+	foreach($data as $fieldName => $value){
+	    if($and==false)
+		$and=true;
+	    else
+		$sql.=" AND ";
+	    
+	    $sql.=$fieldName . "=" . $value ;
+	}
+	
+	if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Select Failed: ' . $this->connection->error);
+	
+	if(($row = $result->fetch_assoc()))
+            return $row;
+        else
+            return false;
+    }
 
     
     
@@ -215,10 +236,7 @@ abstract class Model {
     protected function createRelationToModel(Model $model, $tableName)
     {
 	$this->values[$model->primaryKeyName . "s"][]=$model->getPrimaryKeyValue();
-	var_dump($this->values[$model->primaryKeyName . "s"]);
 	$model->values[$this->primaryKeyName . "s"][]=$this->getPrimaryKeyValue();
-	echo"comp";
-	var_dump($model->values[$this->primaryKeyName . "s"]);
 	
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
@@ -450,10 +468,9 @@ abstract class Model {
         $values .= ')';
         
         $sql .= $values;
-        
        
         $con = connectToDB();
-        
+	
         if(!$con->query($sql))
            throw new ModelAlreadyExistsException('Error inserting into database: ' . $con->error);
     }
