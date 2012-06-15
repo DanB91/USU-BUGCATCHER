@@ -12,6 +12,7 @@ $comp = $_SESSION['competitionObject'];
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
 $prob = new Problem($problemName);
+$teamID = $team->teamid;
 
 define(ROOT_DIRECTORY, 'Competitions/'.$comp->compid); //the root directory of the website
 chdir(ROOT_DIRECTORY);
@@ -28,7 +29,7 @@ elseif (count(preg_split('/[\n\r\t\s]/', $testInput, NULL, PREG_SPLIT_NO_EMPTY))
     trigger_error('Please select a problem');
 }
 
-$contentFileName = ($team->teamid) . "Content.txt"; //name of the content file
+$contentFileName = "$teamID/Content.txt"; //name of the content file
 ///////////////////////////////////
 //now to run the oracle
 $oraclePath = $prob->oraclepath;
@@ -67,7 +68,7 @@ foreach ($bugs as $index => $bug) {
     }
 }
 
-if (($lineNums = getExecutedLines($prob, $testInput, $team))) {
+if (($lineNums = getExecutedLines($prob, $testInput, $teamID))) {
     file_put_contents("$compID$teamID${problemName}Coverage.txt", implode("\n", $lineNums));
 }
 
@@ -83,7 +84,7 @@ echo $foundBug;
 //////functions//////////
 
 //returns an array of the line numbers of the executed lines of a program
-function getExecutedLines(Problem $prob, $testInput, Team $team)
+function getExecutedLines(Problem $prob, $testInput, $teamID)
 {
 
 
@@ -101,8 +102,6 @@ function getExecutedLines(Problem $prob, $testInput, Team $team)
 	//go through each element in outputted file by emma
 	foreach($greenLines as $element)
 	{
-
-
 		while($element->first_child())
 		{
 			$element = $element->first_child();
@@ -111,7 +110,6 @@ function getExecutedLines(Problem $prob, $testInput, Team $team)
 		
 		$lineNums[] = intval($element->innertext) - 1;
 		
-	
 	}
 
 		return $lineNums;
@@ -121,45 +119,6 @@ function getExecutedLines(Problem $prob, $testInput, Team $team)
 
 }
 
-//checks to see if the update failed, if so trigger an error
-function mySQLUpdate($update)
-{
-	if(!mysql_query($update))
-		trigger_error('Update failed:' . mysql_error());
-}
-
-
-//checks to see if the given line is in the given file
-function isLineInFile($line, $fileName)
-{
-	if(!file_exists($fileName))
-		return false;
-	
-	$fileContents = file($fileName);
-
-	if($fileContents)
-	{
-		foreach($fileContents as $fileLine)
-		{
-			if($line.PHP_EOL === $fileLine)
-				return true;
-		}
-	}
-
-	return false;
-}
-
-//gets the resulting array of a query
-function getMySQLResultArray($query)
-{
-	$result = mysql_query($query);
-
-	if(!$result)
-		trigger_error('Query Failed: ' . mysql_error());
-	
-
-	return mysql_fetch_array($result);
-}
 
 
 //writes the given string to the content file
