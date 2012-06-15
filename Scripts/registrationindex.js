@@ -63,7 +63,7 @@ function OnRegister()
     var RegistrationState = document.getElementById("Registrationstate").value;
     var RegistrationUsername = document.getElementById("Registrationusername").value;
     var RegistrationPassword = document.getElementById("Registrationpassword").value;
-
+    var RegistrationNickname = document.getElementById("RegistrationNickname").value;
     if (REGISTRATION_STUDENT)
     {
       var RegistrationUsertype = "student";
@@ -80,6 +80,7 @@ function OnRegister()
     RegistrationContent += "state="+RegistrationState+"&";
     RegistrationContent += "username="+RegistrationUsername+"&";
     RegistrationContent += "password="+RegistrationPassword+"&";
+    RegistrationContent += "nickname="+RegistrationNickname+"&";
     RegistrationContent += "usertype="+RegistrationUsertype;
     
     if (window.XMLHttpRequest)

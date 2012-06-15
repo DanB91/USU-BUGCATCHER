@@ -32,7 +32,7 @@ if ($row['email'] == $email_str)
 	
 	This email was generated automatically.";
 	
-	if (mail($email_str, $subject, $message, $from)
+	if (mail($email_str, $subject, $message, $from))
 	{
 		echo "Email sent to ".$email_str.". Please check your email and follow the link within to reset your password.";
 	}
@@ -43,7 +43,7 @@ if ($row['email'] == $email_str)
 }
 else
 {
-	die (ResetSendFail())
+	die (ResetSendFail());
 }
 
 
@@ -55,7 +55,7 @@ function encryptUser($user)
 
 function ResetSendFail()
 {
-	echo "Your username and/or email do not match our records. Please try again, or create a new account."
+	echo "Your username and/or email do not match our records. Please try again, or create a new account.";
 }
 
 
