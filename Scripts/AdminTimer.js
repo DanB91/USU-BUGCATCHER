@@ -73,8 +73,8 @@ function setTimer()
 		}
 	}
 	
-	setTimerXML.open("GET","AdminCompContent/setMasterTimer.php?adminCompID="+compSetID+"&time="+compSetTime,true);
-	setTimerXML.send();
+	//setTimerXML.open("GET","AdminCompContent/setMasterTimer.php?adminCompID="+compSetID+"&time="+compSetTime,true);
+	//setTimerXML.send();
 }
 
 //AJAX--Updates the competition timer file to sync with the admin.
@@ -90,8 +90,8 @@ function updateTimer()
 	}
 	
 	var TimerUpdateVars = "compID=" + compSetID + "&minutes=" + minutes + "&seconds=" + seconds;
-	updateTimerXML.open("GET","AdminCompContent/updateMasterTimer.php?"+TimerUpdateVars,true);
-	updateTimerXML.send();
+	//updateTimerXML.open("GET","AdminCompContent/updateMasterTimer.php?"+TimerUpdateVars,true);
+	//updateTimerXML.send();
 }
 
 //Initializes the timer.
@@ -108,13 +108,14 @@ function createTimer()
 
 	seconds = compSetTimeS;
 	minutes = compSetTimeM;
+        alert(compSetTimeM + " " + seconds);
 
 	STOPPED = true;
 	PAUSED = false;
 	
 	if (seconds > 0)
 		COUNTINGDOWN = true;
-	setTimer();  
+	//setTimer();  
 }
 
 //Inserts leading zeroes on the minutes and seconds for the timer

@@ -441,8 +441,8 @@ function createCompetition()//Find Code ---------- CS1011
   $.ajax({type: "GET", url:"setupImpl.php", data: contents, success:function(result){
         
         //alert(result);
-        compSetTimeM = Time.value;
-        compSetTime = Time.value;
+        compSetTimeM = Time;
+        compSetTime = Time;
         if (CountdownVal)
         	compSetTimeS = 10;
         else 

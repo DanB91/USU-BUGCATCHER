@@ -14,6 +14,8 @@ $joinable = $_GET["joinable"];
 $compTime = $_GET["CompTime"];
 $codeCov = $_GET["codeCov"];
 $inclCD = $_GET["inclCD"];
+//$ADMIN = $_SESSION['adminObject'];
+
 
 echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $desc . "\n" . "hidden: " . $hidden . "\n" . "compT: " . $compTime;
 
@@ -23,7 +25,6 @@ echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $d
 //                    "password" => $passwd,
 //                    "desciption" => $desc,
 //                    "hidden" => $hidden,
-//                    "userid" => $_COOKIE['adminUserID'],
 //                    "comptime" => $compTime,
 //                    "codecoverage" => $codeCov,
 //                    "countdown" => $inclCD,
