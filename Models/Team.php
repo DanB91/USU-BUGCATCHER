@@ -31,7 +31,7 @@ class Team extends Model {
     
     public function addTeamToCompetition(Competition $comp)
     {
-        $this->createRelationToModel($comp, 'TEAM_COMPETITION_LINK');
+	$this->createRelationToModel($comp, 'TEAM_COMPETITION_LINK');
     }
     
     public function removeTeamFromCompetition(Competition $comp)
@@ -45,7 +45,7 @@ class Team extends Model {
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();
 	Model::addRow("TEAM_FOUND_BUG", $data);
-    }
+    }  
 }
 
 ?>
