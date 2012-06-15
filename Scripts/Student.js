@@ -561,7 +561,6 @@ function bugFoundAnimation()
 { 
 	if (!PLAYING)
 	{
-		//alert("begin play");
 		playVideo();
 		VideoInterval = setInterval(playVideo,3750);
 	}
