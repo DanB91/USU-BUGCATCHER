@@ -18,7 +18,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new Admin(1); 
+        //$this->object = new Admin(1); 
     }
 
     /**
@@ -31,12 +31,17 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     
     public function testRegisterAdmin()
     {
-        //Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
+        Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
     }
     
     public function testFields()
     {
-        $this->assertSame($this->object->nickname, 'adz');
+        //$this->assertSame($this->object->nickname, 'adz');
+    }
+    
+    public function testLogin()
+    {
+        $this->assertNotEquals(Admin::login('admin', 'password'), FALSE);
     }
 
 }
