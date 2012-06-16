@@ -23,7 +23,7 @@ class Admin extends Model{
      * When passing in data, do not pass in the 'user id'.  That is added automatically
      * @param array $data data dictionary
      */
-    public function createCompetion(array $data)
+    public function createCompetition(array $data)
     {
         foreach($data as $fieldName => &$value)
         {

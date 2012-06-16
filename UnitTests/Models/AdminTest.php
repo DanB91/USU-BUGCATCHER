@@ -46,7 +46,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     
     public function testAddCompetition()
     {
-       // $this->object->createCompetion(array('compName' => 'fdioas'));
+        $this->object->createCompetition(array('compName' => 'ffdsoas'));
     }
     
     public function testGetCompitions()
