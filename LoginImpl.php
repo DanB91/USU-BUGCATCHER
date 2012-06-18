@@ -22,8 +22,10 @@ if ($accountType_str == 'admin')
   {
 
         session_start();
+       
         $_SESSION['usertype'] = 'admin';
         $_SESSION['adminObject'] = $ADMIN;
+         $_SESSION['test'] = 'test';
 
   }
 }

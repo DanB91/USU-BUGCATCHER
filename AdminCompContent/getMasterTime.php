@@ -1,4 +1,6 @@
 <?php
+require '../Models/User.php';
+require '../Models/Admin.php';
 //Gets the competition ID from the AJAX call
 //$comp = $_COOKIE['adminCompID'];
 
@@ -10,6 +12,10 @@
 	//echo fgets($masterTimer);
 	//fclose($masterTimer);
 //}
-echo "NOT SET";
+session_start();
+
+$ADMIN =  $_SESSION['adminObject'];
+echo $_SESSION['adminObject']->username . "<br>";
+echo $ADMIN->username;
 
 ?>

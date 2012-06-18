@@ -65,7 +65,7 @@ var compSetID = '';
                     <p>View of users in comp:</p><br>
       <form onSubmit="event.preventDefault(); sendHintsCust(CustomHint.value); " method="get">
                       <select name="HProbNum" id="HProbNum" size=5 class="CSselect" onchange=showPre(this.value);>
-              </select>
+              </select> 
         
         
       </form >
