@@ -21,7 +21,7 @@ function CreateForm()
       if (numberOfStudents > 0)
 	{
 		document.getElementById("PRTextArea").value=createFormXML.responseText;
-		$("#PRDownloadLink").html="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
+		$("#PRDownloadLink").html("<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>");
 		//document.getElementById("PRDownloadLink").innerHTML="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
 	}
     }});

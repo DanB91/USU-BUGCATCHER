@@ -23,7 +23,7 @@ function pauseTimerCD()
 	if (!PAUSED && !STOPPED)
 	{
 		clearInterval(adminTimer);
-		document.getElementById('header-controls').innerHTML = '<img src="Images/start.gif" height="50" width="50" onclick=startCompetition(); />';
+		$('#header-controls').html('<img src="Images/start.gif" height="50" width="50" onclick=startCompetition(); />');
 		PAUSED = true;
 	}
 }
@@ -43,11 +43,11 @@ function countdownCD()
     clearInterval(adminTimer);
     minutes = 0;
     seconds = 0;
-    document.getElementById('header-timer').innerHTML="STOP!";
+    $('#header-timer').html("STOP!");
   }
   else
   {
-    document.getElementById('header-timer').innerHTML=leadingZero(minutes) + ":" + leadingZero(seconds);
+    $('#header-timer').html(leadingZero(minutes) + ":" + leadingZero(seconds));
     updateTimer();
   }
 }
@@ -104,7 +104,7 @@ function createTimerCD()
 	PAUSED = true;
 	minutes=compSetTime;
 	seconds=0;
-	document.getElementById('header-timer').innerHTML=leadingZero(minutes) + ":" + leadingZero(seconds);
+	$('#header-timer').html(leadingZero(minutes) + ":" + leadingZero(seconds));
 	setTimer();
 }
 

@@ -162,7 +162,7 @@ function refreshProbList()
       
     content += '</select>';
     
-    document.getElementById('ProblemsList').innerHTML = content;
+    $('#ProblemsList').html(content);
      
     content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
       
@@ -203,7 +203,7 @@ function refreshProbList()
     }
     content += '</select>';
     
-    $('#SelectedProblems').html = content;
+    $('#SelectedProblems').html(content);
 }
 
 
@@ -465,7 +465,7 @@ function loadTeamNameList()//Find Code ---------- TM1002
         type: "GET", 
         url: "ManageContent/loadTeamNames.php", 
         success:function(result){
-            $("#MTeamList").html=result;
+            $("#MTeamList").html(result);
 
         }
     });
@@ -498,7 +498,7 @@ function addTeam()//Find Code ---------- TM1004
             MTeamName : MTN
         },
         success:function(result){
-            $("#MTeamList").html=result;
+            $("#MTeamList").html(result);
             $("#MTeamName").val('');
         }
     });
@@ -514,7 +514,7 @@ function removeTeam()//Find Code ---------- TM1005
 {	
     if (teamN=="")
     {
-        document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
+        $("#MTeamTitle").html("<p>Please select a team name.</p>");
         return;
     }
     
@@ -531,9 +531,10 @@ function removeTeam()//Find Code ---------- TM1005
 function showStudents(studentPosNum)//Find Code ---------- TM1006
 {
     
-    var showStudentsXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
+    //var showStudentsXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
     
-    if (window.XMLHttpRequest)
+    var getVars = "q="+teamN+"&selectName=Stud"+studentPosNum;
+    /*if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         showStudentsXML[studentPosNum]=new XMLHttpRequest();
     }
@@ -544,19 +545,20 @@ function showStudents(studentPosNum)//Find Code ---------- TM1006
     showStudentsXML[studentPosNum].onreadystatechange=function()
     {
         if (showStudentsXML[studentPosNum].readyState==4 && showStudentsXML[studentPosNum].status==200)
-        {
-            document.getElementById("Member"+studentPosNum).innerHTML=showStudentsXML[studentPosNum].responseText;
+        {*/
+    $.ajax({type: "GET", url: "ManageContent/loadStudentNames.php", data: getVars, success:function(result){
+            $("#Member"+studentPosNum).html(result);
             document.getElementById("Stud"+studentPosNum).disabled = false;
             document.getElementById("remove"+studentPosNum).disabled = true;
             document.getElementById("add"+studentPosNum).disabled = false;
             document.getElementById("Username_S"+studentPosNum).value = "N/A";
             document.getElementById("School_S"+studentPosNum).value = "N/A";
             document.getElementById("State_S"+studentPosNum).value = "N/A";
-        }
-    }
-    var getVars = "q="+teamN+"&selectName=Stud"+studentPosNum;
-    showStudentsXML[studentPosNum].open("GET","ManageContent/loadStudentNames.php?"+getVars,true);
-    showStudentsXML[studentPosNum].send();
+    }});
+        //}
+    //}
+    /*showStudentsXML[studentPosNum].open("GET","ManageContent/loadStudentNames.php?"+getVars,true);
+    showStudentsXML[studentPosNum].send();*/
     
 }
 
@@ -571,12 +573,12 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
     
     if (teamN=="")//If no team is currently selected
     {
-        $("#MTeamTitle").html="<p>Please select a team name.</p>";
+        $("#MTeamTitle").html("<p>Please select a team name.</p>");
         return;
     }
     else
     {
-        $("#MTeamTitle").html="Team "+teamN;//Places the team name below the Team Information heading in Team Management
+        $("#MTeamTitle").html("Team "+teamN);//Places the team name below the Team Information heading in Team Management
     }
     
     var studentPosNum = 1;
@@ -652,7 +654,7 @@ function loadStudName(studentName, studPos)//Find Code ---------- TM1008
 
     $.post('ManageContent/studentNameLoad.php', postVars, 
         function(html){
-            $("#"+member).html=html;
+            $("#"+member).html(html);
             $("#"+studPos).attr(disabled, true)
         });
 
@@ -665,12 +667,12 @@ function refreshTeamInfo(element)//Find Code ---------- TM1009
 {
   if (teamN=="")
   {
-    document.getElementById("MTeamTitle").innerHTML="<p>Please select a team name.</p>";
+    $("#MTeamTitle").html("<p>Please select a team name.</p>");
     return;
   }
   else
   {
-    document.getElementById("MTeamTitle").innerHTML="Team "+teamN;
+    $("#MTeamTitle").html("Team "+teamN);
   } 
       
 	if(document.getElementById("Stud1").disabled == false)
@@ -751,7 +753,7 @@ function addRemoveStudent(userN, studPos)//Find Code ---------- TM1014
   var removeSelected;
   var addSelected;
   var studentPosNum;
-  var xmladdRemoveStudenthttp = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
+  //var xmladdRemoveStudenthttp = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
   
   if(selectStud == "Stud1")
   {
@@ -819,7 +821,7 @@ function showTableProg()//Find Code ---------- PS1001
 {
     $.post('ProgressContent/progressImpl.php', "", 
         function(html){
-            $("#PTeamTables").html=html;
+            $("#PTeamTables").html(html);
 
         });
 
@@ -868,7 +870,7 @@ function showPre(str)//Find Code ---------- H1003
 	
     $.post('HintsContent/showPreDefHints.php', "hintPreDef="+str, 
         function(html){
-            $("#HintNum").html=html;
+            $("#HintNum").html(html);
         });
   
 }
@@ -880,7 +882,7 @@ function showPreHintText(str)//Find Code ---------- H1004
           
     $.post('HintsContent/showPreDefHintText.php', "problemSelected="+curProblemSelected+"&hintSelected="+str, 
         function(html){
-            $("#HintText").html=html;
+            $("#HintText").html(html);
         });      
 
 }
@@ -889,7 +891,7 @@ function showPreHintText(str)//Find Code ---------- H1004
 function sendHintPreDef()//Find Code ---------- H1005
 {
 
-    if (window.XMLHttpRequest)
+    /*if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
         xmlsendHintPreDefhttp=new XMLHttpRequest();
     }
@@ -901,22 +903,24 @@ function sendHintPreDef()//Find Code ---------- H1005
     xmlsendHintPreDefhttp.onreadystatechange=function()
     {
         if (xmlsendHintPreDefhttp.readyState==4 && xmlsendHintPreDefhttp.status==200)
-        {
-            document.getElementById("HintText").innerHTML=xmlsendHintPreDefhttp.responseText;
+        {*/
+    $.ajax({type: "GET", url:"HintsContent/sendPre.php", data: "problemSelected="+currProblemSelected + "&hintSlected=" + lastHintSelected, success:function(result){
+	    $("#HintText").html(result);
+    }});
             //document.getElementById("HintText").innerHTML=xmlsendHintPreDefhttp.responseText;
 
-        }
+        /*}
     }
 
     xmlsendHintPreDefhttp.open("GET","HintsContent/sendPre.php?problemSelected="+currProblemSelected + "&hintSlected=" + lastHintSelected,true);
-    xmlsendHintPreDefhttp.send();
+    xmlsendHintPreDefhttp.send();*/
 	 
 
 }
 
 function loadProblemNames()//Find Code ---------- H1006
 {
-	if (window.XMLHttpRequest)
+	/*if (window.XMLHttpRequest)
 	  {// code for IE7+, Firefox, Chrome, Opera, Safari
 		loadProblemNamesXML=new XMLHttpRequest();
 	  }
@@ -927,13 +931,15 @@ function loadProblemNames()//Find Code ---------- H1006
 	  loadProblemNamesXML.onreadystatechange=function()
 	  {
 		if (loadProblemNamesXML.readyState==4 && loadProblemNamesXML.status==200)
-		{
-		  document.getElementById("probNamesHints").innerHTML=loadProblemNamesXML.responseText;
-		}
+		{*/
+	$.ajax({type: "GET", url:"HintsContent/getProbNames.php", success:function(result){
+		  $("#probNamesHints").html(result);
+	}});
+		/*}
 	  }
 
 	  loadProblemNamesXML.open("GET","HintsContent/getProbNames.php",true);
-	  loadProblemNamesXML.send();
+	  loadProblemNamesXML.send();*/
 }
 
 //###################################################################################################//
@@ -950,7 +956,7 @@ function AdminLoadCheck()//Find Code ---------- USC1001
 //Since the master timer is synced with the administrators timer
 function getMasterTime()//Find Code ---------- USC1002
 {
-
+	/*
 	if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 		getTimerXML=new XMLHttpRequest();
@@ -963,21 +969,18 @@ function getMasterTime()//Find Code ---------- USC1002
 	getTimerXML.onreadystatechange=function()
 	{
 		if (getTimerXML.readyState==4 && getTimerXML.status==200)
-		{
-			var time = getTimerXML.responseText;
+		{*/
+    $.ajax({type: "GET", url:"AdminCompContent/getMasterTime.php", data: "compID="+compSetID, success:function(time){
 			  if (time.length > 3)
 			  {
 				  seconds = time.substring(time.length-2,time.length);
 				  minutes = time.substring(0,time.length-2);
-				  document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
+				  $("#header-timer").html(minutes+":"+seconds);
 			  }
-			  else
-			  {
-				  //A competition has not been created.
-			  }
-		}
+    }});
+		/*}
 	}
 	
 	getTimerXML.open("GET","AdminCompContent/getMasterTime.php?compID="+compSetID,true);
-	getTimerXML.send();
+	getTimerXML.send();*/
 }

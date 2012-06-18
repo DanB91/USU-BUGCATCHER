@@ -69,7 +69,7 @@ function insertHTML(tabValue)
       filePath = "selectComp.php";
       break;
     default:
-  }
+  }/*
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     InsertHTMLhttp=new XMLHttpRequest();
@@ -82,8 +82,9 @@ function insertHTML(tabValue)
   InsertHTMLhttp.onreadystatechange=function()
   {
     if (InsertHTMLhttp.readyState == 4 && InsertHTMLhttp.status == 200)
-    {
-      document.getElementById('Content').innerHTML = InsertHTMLhttp.responseText;
+    {*/
+$.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:function(result){
+      $('#Content').html(result);
       switch(tabValue)
       {
         case 0:
@@ -109,10 +110,12 @@ function insertHTML(tabValue)
         default:
           return;
       }
+}});
+      /*
     }
   }
   
   InsertHTMLhttp.open("GET","InsertHTML.php?filePath="+filePath,true);
-  InsertHTMLhttp.send();
+  InsertHTMLhttp.send();*/
 }
 

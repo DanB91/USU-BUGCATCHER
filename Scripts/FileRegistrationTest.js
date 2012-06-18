@@ -23,7 +23,7 @@ function CreateForm()
       if (numberOfStudents > 0)
 			{
 				//document.getElementById("PRTextArea").value=createFormXML.responseText;
-				$("#RFormDownload").html="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
+				$("#RFormDownload").html("<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>");
 				//document.getElementById("RFormDownload").innerHTML="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
 			}
     }});

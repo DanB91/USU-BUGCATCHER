@@ -74,7 +74,7 @@ function getWinningTeams()//Find Code ---------- G1001
 {      
     $.post('StudentContent/showWinningTeams.php', "", 
         function(html){
-            $("#header-winningteams").html=html;
+            $("#header-winningteams").html(html);
         });
 }
 
@@ -96,7 +96,7 @@ function recieve()//Find Code ---------- G1004
         $.post('StudentContent/recieve.php', "string="+message, 
         function(html){
             		var arr = JSON.parse(html);
-			$("#ResultsList").html=format(arr);
+			$("#ResultsList").html(format(arr));
 			if(doScrollDown)
 				scrollResultsDown();
         });
@@ -238,7 +238,7 @@ function loadStudentProblems()
                 outputString += problemLists[h];
             }
             PopUpShowingClass = "showing-"+numberOfColumns+"col";
-            $("#PopUpArea").html=outputString;
+            $("#PopUpArea").html(outputString);
         });
 }
 
@@ -319,11 +319,11 @@ function getReq(str, index)//Find Code ---------- PR1002
         function(html){
             if(hasFinished == 0)
             {
-                $("#RequirementsList").html=html;
+                $("#RequirementsList").html(html);
             }
             else
             {
-                $("#RequirementsList").html="This competition has concluded";
+                $("#RequirementsList").html("This competition has concluded");
             }
 
         });
@@ -340,13 +340,13 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
         
             if(hasFinished == 0)
             {
-                $("#ProblemCode").html="<pre class='prettyprint lang-java linenums'>"+html+"</pre>";
+                $("#ProblemCode").html("<pre class='prettyprint lang-java linenums'>"+html+"</pre>");
                 prettyPrint();
                 getToolTip(currProblem);
             }
             else
             {
-                $("#ProblemCode").html="This competition has concluded";
+                $("#ProblemCode").html("This competition has concluded");
             }
         });
 	
@@ -357,7 +357,7 @@ function getToolTip(str)
     $.post('StudentContent/getToolTip.php', "problem="+str, 
         function(html){	
             $("#BugTesterDiv").attr("title",html);
-            $("#ProblemName").html=str;
+            $("#ProblemName").html(str);
         });
 
 
@@ -375,7 +375,7 @@ function getBugs()//Find Code ---------- BF1001
 {
     $.post('StudentContent/getBugsFound.php', "", 
         function(html){
-            $("#BugsFoundText").html=html;
+            $("#BugsFoundText").html(html);
 
         });
 }
@@ -437,7 +437,7 @@ function hasCompStarted()//Find Code ---------- C1001
                     $("#testforBug").attr("disable", false);
                     $("#testInput").attr("disable", false);
                     $("#testOutput").attr("disable", false);
-                    $("#ProblemCode").html = "The competition has started please select a problem.";
+                    $("#ProblemCode").html ("The competition has started please select a problem.");
                 }
             }
             else
@@ -479,7 +479,7 @@ function checkCompFinished()//Find Code ---------- C1003
                 $("#testOutput").attr("disable", true);
                 clearInterval(t1);
                 clearInterval(t3);
-                $("#ResultsList").html="This competition has concluded";
+                $("#ResultsList").html("This competition has concluded");
                 hasFinished = 1;
                 getReqAndProb(currProblem, coverage);
             }
@@ -572,13 +572,13 @@ function playVideo()
 	if (!PLAYING)
 	{
 		//alert("play");
-		$("#ProblemCode").html = swfCode;
+		$("#ProblemCode").html (swfCode);
 		PLAYING = true;
 	}
 	else
 	{
 		getProb(currProblem, coverage, currIndex);
-		//$("#ProblemCode").html="";
+		//$("#ProblemCode").html("");
 		PLAYING = false;
 		clearInterval(VideoInterval);
 	}
@@ -627,12 +627,12 @@ function playVideoCount()
 		//var videoCode = "";
 		//document.getElementById("video").innerHTML=videoEmbedCode;
 		//swfobject.embedSWF("bugStomper.swf", "video", "75", "50", "9.0.0");
-		document.getElementById("ProblemCode").innerHTML = swfCodeCount;
+		$("#ProblemCode").html ( swfCodeCount);
 		PLAYINGCOUNT = true;
 	}
 	else
 	{
-		document.getElementById('ProblemCode').innerHTML= "The competition has started please select a problem.";
+		$('#ProblemCode').html("The competition has started please select a problem.");
 		document.getElementById("testforBug").disabled = false;
 		document.getElementById("testInput").disabled = false;
 		document.getElementById("testOutput").disabled = false;
@@ -669,7 +669,7 @@ function getCurrentTeam()
 {
     $.post('StudentContent/teamName.php', "", 
         function(html){	
-            $("#smallerHeader").html = html
+            $("#smallerHeader").html (html);
         });
 }
 

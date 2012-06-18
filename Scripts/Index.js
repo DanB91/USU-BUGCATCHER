@@ -93,7 +93,7 @@ function OnLogIn()
         }
         else
         {//There was some sort of error with trying to log in
-	    $("#LoginError").html=result;
+	    $("#LoginError").html(result);
           //document.getElementById("LoginError").innerHTML=loginXML.responseText;
         }
     }});
