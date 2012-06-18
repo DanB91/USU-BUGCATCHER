@@ -1,4 +1,4 @@
-if (window.XMLHttpRequest)
+/*if (window.XMLHttpRequest)
 {// code for IE7+, Firefox, Chrome, Opera, Safari
 	getFileNameXML=new XMLHttpRequest();
 }
@@ -13,7 +13,7 @@ getFileNameXML.send();
 getFileNameXML.onreadystatechange=function()
 {
 	if (getFileNameXML.readyState==4 && getFileNameXML.status==200)
-	{
+	{*/
 		if (window.XMLHttpRequest)
 		{// code for IE7+, Firefox, Chrome, Opera, Safari
 			getDocXML=new XMLHttpRequest();
