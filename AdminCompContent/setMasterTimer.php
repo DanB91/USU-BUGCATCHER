@@ -7,6 +7,10 @@ $compN = $_SESSION['compN'];
 //if($currComp->starttime == '0000-00-00 00:00:00')
 //    $currComp->starttime = time();
 //else
-    echo  $admin->getCompetitionByCompName($compN)->starttime;
+try
+{
+    echo  $admin->getCompetitionByCompName($compN);
+}
+catch(Exception $e) { echo $e; }
 
 ?>

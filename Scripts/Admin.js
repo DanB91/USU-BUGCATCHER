@@ -210,10 +210,10 @@ function refreshProbList()
 //Postcondition: Sets up files and does initial loading of problems available
 function popProbSelectBox()//Find Code ---------- CS1003
 {
-
+    
     $.ajax({type: "GET", url: "AdminCompContent/loadProblems.php", success:function(result){
 
-
+            
             availableProbs = eval(result);
             var index = availableProbs.indexOf(".");
             availableProbs.splice(index, 1);
