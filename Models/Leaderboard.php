@@ -20,7 +20,8 @@ class Leaderboard {
     
     private function load()
     {
-        $sql = 'SELECT * FROM TEAM_FOUND_BUG WHERE compid = ' . $this->competition->primaryKeyValue;
+        $sql = 'SELECT teamid, COUNT(bugid), SUM() as bugsfound FROM TEAM_FOUND_BUG WHERE compid = ' . $this->competition->primaryKeyValue . 
+                'GROUP BY teamid ORDER BY bugsfound DESC, ';
     }
 }
 
