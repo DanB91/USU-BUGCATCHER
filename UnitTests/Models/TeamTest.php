@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__) . '/../../Models/Team.php';
 require_once dirname(__FILE__) . '/../../Models/Competition.php';
+require_once dirname(__FILE__) . '/../../Models/Bug.php';
 
 /**
  * Test class for Team.
@@ -65,6 +66,19 @@ class TeamTest extends PHPUnit_Framework_TestCase {
 	$this->object->removeTeamFromCompetition($competition);
 	$this->assertSame($competition->teamids, array());
 	$this->assertSame($this->object->compids, array());
+    }
+    
+    public function testFoundBugInCompetition() {
+	$competition=new Competition(1);
+	$bug= new Bug(1);
+	$this->object->foundBugInCompetition($bug, $competition);
+    }
+    
+    public function testHasFoundBugInCompetition(){
+	$competition=new Competition(1);
+	$bug= new Bug(1);
+	$isFound = $this->object->hasFoundBugInCompetition($bug, $competition);
+	$this->assertNotEquals($isFound, false);
     }
 
 }

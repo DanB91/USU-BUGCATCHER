@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 require_once 'Model.php';
+require_once 'Competition.php'; ;
 /**
  * Class the represents admin
  *
@@ -16,6 +17,56 @@ class Admin extends Model{
         parent::__construct('ADMINS', $uniqueValue, $uniqueFieldName);
     }
     
+    
+    /**
+     *Creates a competition with this admin as a creator.  
+     * When passing in data, do not pass in the 'user id'.  That is added automatically
+     * @param array $data data dictionary
+     */
+    public function createCompetition(array $data)
+    {
+        foreach($data as $fieldName => &$value)
+        {
+            if($fieldName === 'password')
+                continue;
+            
+
+            
+            switch($fieldName)
+            {
+                case 'compName':
+                case 'description':
+                    $value = "'" . $value . "'";
+            }
+            
+        }
+        
+        
+        $data['userid'] = $this->getPrimaryKeyValue();
+        Model::addRow('COMPETITIONS', $data);
+    }
+    
+    
+    public function getCompetitions()
+    {
+        $retCompetitions = array();
+        
+        $sql = 'SELECT compid FROM COMPETITIONS WHERE userid =' . $this->getPrimaryKeyValue();
+        if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $this->connection->error);
+        
+        //create a competition object foreach associated compeition
+        while(($row = $result->fetch_assoc()))
+        {
+            $retCompetitions[] = new Competition($row['compid']);
+        }
+        
+        return $retCompetitions;
+    }
+
+
+
+
     public static function registerAdmin(array $registerData)
     {
         foreach($registerData as $fieldName => &$value)
