@@ -126,11 +126,11 @@ function bubblesort(arr){
 			}
 		}
 
-		for(var i=arr.length-j; i>j&&!swapped; i-=2)
+		for(i=arr.length-j; i>j&&!swapped; i-=2)
 		{
 			if(arr[i]<arr[i-2]){
 				swapped=true;
-				var temp=arr[i];
+				temp=arr[i];
 				arr[i]=arr[i-2];
 				arr[i-2]=temp;
 
