@@ -50,6 +50,8 @@ class Admin extends Model{
     public function getCompetitions()
     {
         $retCompetitions = array();
+        $this->connection = connectToDB();
+        
         
         $sql = 'SELECT compid FROM COMPETITIONS WHERE userid =' . $this->getPrimaryKeyValue();
         if(!$result = $this->connection->query($sql))
