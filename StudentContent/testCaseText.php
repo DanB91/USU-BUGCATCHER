@@ -1,9 +1,6 @@
 <?php
 
 include 'simple_html_dom.php';
-require_once 'Competition.php';
-require_once 'User.php';
-require_once 'Team.php';
 
 set_error_handler('error');
 

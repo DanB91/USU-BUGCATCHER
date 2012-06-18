@@ -1,7 +1,4 @@
 <?php
-require_once 'Competition.php';
-require_once 'User.php';
-require_once 'Team.php';
 
 //The purpose of this code is to display the top three teams
 //and their place in the competition.
@@ -13,15 +10,20 @@ require_once 'Team.php';
 
 $comp = $_SESSION['competitionObject'];
 $user = $_SESSION['userObject'];
-$userID = $user->userid;
-$teamName = $_SESSION['teamObject']->teamname;
+$userID = $user->userID;
 
-if(isset($_COOKIE["user"]) && $_COOKIE["user"] != NULL && isset($_COOKIE["competitionObject"]) && $_COOKIE["competitionObject"] != '')//if the competition has been created and the user is loged in correctly
+if(isset($_COOKIE["user"]) && $_COOKIE["user"] != NULL && isset($_COOKIE["competitionObject"]) && $_COOKIE["compID"] != '')//if the competition has been created and the user is loged in correctly
 {
-	$compID = $comp->compid;
+	$comp = strtolower($comp);
 	$count = 0;
 	$resultString = '';
 		
+		$con = mysql_connect('localhost', 'guest', '');
+		mysql_select_db("competition", $con);
+		$sql="SELECT * FROM ${comp}students WHERE userID ='${useID}'";
+		$result = mysql_query($sql);
+		$row = mysql_fetch_array($result);
+		$teamName = $row['teamName'];
 		
 		if($teamName != "")//If on a team
 		{
