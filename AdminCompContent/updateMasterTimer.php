@@ -1,4 +1,5 @@
 <?php
+session_start();
 //Timer variables and competition ID variable, needed to update the Master Timer on the server
 $minutes = $_GET['minutes'];
 $seconds = $_GET['seconds'];

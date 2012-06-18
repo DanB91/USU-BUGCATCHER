@@ -27,15 +27,20 @@ class Admin extends Model{
     {
         foreach($data as $fieldName => &$value)
         {
-            if($fieldName === 'password')
-                continue;
+//            if($fieldName === 'password')
+//                continue;
             
-            switch($fieldName)
-            {
-                case 'compName':
-                case 'description':
-                    $value = "'" . $value . "'";
-            }
+            if($fieldName == 'compname')
+                   $value = "'" . $value . "'";
+            elseif($fieldName == 'description')
+                   $value = "'" . $value . "'";
+            
+//            switch($fieldName)
+//            {
+//                case 'compName':
+//                case 'description':
+//                    $value = "'" . $value . "'";
+//            }
             
         }
         

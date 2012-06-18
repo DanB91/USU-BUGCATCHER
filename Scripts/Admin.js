@@ -432,6 +432,12 @@ function createCompetition()//Find Code ---------- CS1011
      $("#CSetupError").html("The competition time must be less than 1000 minutes.");
     return;
   }
+  
+  if(compName == "")
+  {
+      $("#CSetupError").html("Must have a competition name");
+    return;    
+  }
 
   var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
@@ -440,7 +446,7 @@ function createCompetition()//Find Code ---------- CS1011
   
   $.ajax({type: "GET", url:"setupImpl.php", data: contents, success:function(result){
         
-        //alert(result);
+        alert(result);
         compSetTimeM = Time;
         compSetTime = Time;
         if (CountdownVal)

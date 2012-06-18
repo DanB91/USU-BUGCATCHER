@@ -472,7 +472,7 @@ abstract class Model {
         $con = connectToDB();
 	
         if(!$con->query($sql))
-           throw new ModelAlreadyExistsException('Error inserting into database: ' . $con->error);
+           throw new ModelAlreadyExistsException("Error inserting into database: " ."${sql}".  $con->error);
     }
 }
 
