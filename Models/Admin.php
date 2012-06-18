@@ -63,7 +63,11 @@ class Admin extends Model{
         
         return $retCompetitions;
     }
-
+    
+    public function getCompetitionByCompName($compeitionName)
+    {   
+        return new Competition($compeitionName, 'compname');
+    }
 
 
 
