@@ -118,6 +118,7 @@ function refreshProbList()
     {
         $.ajax({
             url:"AdminCompContent/getDifficulty.php", 
+            data: {problem: availableProbs[i]},
             async: false, 
             success:function(result){     
                 difficulty = parseInt(result);
@@ -170,6 +171,7 @@ function refreshProbList()
         $.ajax({
             url:"AdminCompContent/getDifficulty.php", 
             async: false, 
+            data: {problem: addedProbs[i]},
             success:function(result){     
                 difficulty = parseInt(result); 
                   
@@ -459,24 +461,16 @@ function setEditable(studPos)//Find Code ---------- TM1001
 //which can found under select a team in Team Management.
 function loadTeamNameList()//Find Code ---------- TM1002
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlloadTeamNameListhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlloadTeamNameListhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlloadTeamNameListhttp.onreadystatechange=function()
-  {
-    if (xmlloadTeamNameListhttp.readyState==4 && xmlloadTeamNameListhttp.status==200)
-    {
+    $.ajax({
+        type: "GET", 
+        url: "ManageContent/loadTeamNames.php", 
+        success:function(result){
+            $("#MTeamList").html=result;
 
-        document.getElementById("MTeamList").innerHTML=xmlloadTeamNameListhttp.responseText;
-    }
-  }
-  xmlloadTeamNameListhttp.open("GET","ManageContent/loadTeamNames.php",true);
-  xmlloadTeamNameListhttp.send();
+        }
+    });
+
+    
 }
 
 //This function is referenced in AdminContentUpdate.js
@@ -495,27 +489,21 @@ function loadManage()//Find Code ---------- TM1003
 //Postcondition: Creates a team based on the name entered
 function addTeam()//Find Code ---------- TM1004
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    addTeamXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    addTeamXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  addTeamXML.onreadystatechange=function()
-  {
-    if (addTeamXML.readyState == 4 && addTeamXML.status == 200)
-    {
-      document.getElementById("MTeamList").innerHTML=addTeamXML.responseText;
-      document.getElementById("MTeamName").value='';
-    }
-  }
-  
-  var MTeamName = "MTeamName=" + document.getElementById("MTeamName").value;
-  addTeamXML.open("GET","ManageContent/createTeam.php?"+MTeamName,true);
-  addTeamXML.send();
+    var MTN = $("#MTeamName").val();
+
+    $.ajax({
+        type: "GET", 
+        url: "ManageContent/createTeam.php", 
+        data: {
+            MTeamName : MTN
+        },
+        success:function(result){
+            $("#MTeamList").html=result;
+            $("#MTeamName").val('');
+        }
+    });
+ 
+
 }
 
 //This function is currently not being used
@@ -526,26 +514,15 @@ function removeTeam()//Find Code ---------- TM1005
 {	
     if (teamN=="")
     {
-            document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
-            return;
+        document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
+        return;
     }
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-            removeTeamXML=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-            removeTeamXML=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    removeTeamXML.onreadystatechange=function()
-    {
-        if (removeTeamXML.readyState==4 && removeTeamXML.status==200)
-        {
-                loadTeamNameList();
-        }
-    }
-        removeTeamhttp.open("GET","ManageContent/removeTeam.php?"+"&team=" + teamN,true);
-        removeTeamhttp.send();
+    
+    $.post('ManageContent/removeTeam.php', "team="+teamN, 
+        function(){
+            loadTeamNameList();
+        });
+
 }
 
 //This function is called when there is no student in a position on a team
@@ -553,34 +530,34 @@ function removeTeam()//Find Code ---------- TM1005
 //Postcondition: Loads all the students that are in the database and are currently not on a team.
 function showStudents(studentPosNum)//Find Code ---------- TM1006
 {
-
-  var showStudentsXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    showStudentsXML[studentPosNum]=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    showStudentsXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  showStudentsXML[studentPosNum].onreadystatechange=function()
-  {
-    if (showStudentsXML[studentPosNum].readyState==4 && showStudentsXML[studentPosNum].status==200)
-    {
-      document.getElementById("Member"+studentPosNum).innerHTML=showStudentsXML[studentPosNum].responseText;
-      document.getElementById("Stud"+studentPosNum).disabled = false;
-      document.getElementById("remove"+studentPosNum).disabled = true;
-      document.getElementById("add"+studentPosNum).disabled = false;
-      document.getElementById("Username_S"+studentPosNum).value = "N/A";
-      document.getElementById("School_S"+studentPosNum).value = "N/A";
-      document.getElementById("State_S"+studentPosNum).value = "N/A";
+    
+    var showStudentsXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
+    
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        showStudentsXML[studentPosNum]=new XMLHttpRequest();
     }
-  }
-  var getVars = "q="+teamN+"&selectName=Stud"+studentPosNum;
-  showStudentsXML[studentPosNum].open("GET","ManageContent/loadStudentNames.php?"+getVars,true);
-  showStudentsXML[studentPosNum].send();
-
+    else
+    {// code for IE6, IE5
+        showStudentsXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    showStudentsXML[studentPosNum].onreadystatechange=function()
+    {
+        if (showStudentsXML[studentPosNum].readyState==4 && showStudentsXML[studentPosNum].status==200)
+        {
+            document.getElementById("Member"+studentPosNum).innerHTML=showStudentsXML[studentPosNum].responseText;
+            document.getElementById("Stud"+studentPosNum).disabled = false;
+            document.getElementById("remove"+studentPosNum).disabled = true;
+            document.getElementById("add"+studentPosNum).disabled = false;
+            document.getElementById("Username_S"+studentPosNum).value = "N/A";
+            document.getElementById("School_S"+studentPosNum).value = "N/A";
+            document.getElementById("State_S"+studentPosNum).value = "N/A";
+        }
+    }
+    var getVars = "q="+teamN+"&selectName=Stud"+studentPosNum;
+    showStudentsXML[studentPosNum].open("GET","ManageContent/loadStudentNames.php?"+getVars,true);
+    showStudentsXML[studentPosNum].send();
+    
 }
 
 //This function is called when a team name is clicked.
@@ -589,81 +566,57 @@ function showStudents(studentPosNum)//Find Code ---------- TM1006
 //Postcondition: The student's name, username, school, and state are returned and placed in the appropriate element on the team management page
 function loadStudentInfo(element)//Find Code ---------- TM1007
 {
+    
+    teamN = element.value;
+    
+    if (teamN=="")//If no team is currently selected
+    {
+        $("#MTeamTitle").html="<p>Please select a team name.</p>";
+        return;
+    }
+    else
+    {
+        $("#MTeamTitle").html="Team "+teamN;//Places the team name below the Team Information heading in Team Management
+    }
+    
+    var studentPosNum = 1;
+    var studPos = "Stud" + studentPosNum;
+    var getVars = "q="+teamN+"&studName="+studPos;
 
-  teamN = element.value;
-  
-  if (teamN=="")//If no team is currently selected
-  {
-    document.getElementById("MTeamTitle").innerHTML="<p>Please select a team name.</p>";
-    return;
-  }
-  else
-  {
-    document.getElementById("MTeamTitle").innerHTML="Team "+teamN;//Places the team name below the Team Information heading in Team Management
-  }
-	
-  var studPos;
-  var studentPosNum = 1;
-  
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	loadStudentsXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-	loadStudentsXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-	  loadStudentsXML.onreadystatechange=function()
-	  {
-		if (loadStudentsXML.readyState==4 && loadStudentsXML.status==200)
-		{
-		    if(studentPosNum <= MAX_STUDENT_ON_TEAM)
-			{
-			  
-					if(loadStudentsXML.responseText == '')
-					{
-						switch(studentPosNum)
-						{
-							case 1:
-								showStudents(studentPosNum);
-							break;
-							case 2:
-								showStudents(studentPosNum);
-							break;
-							case 3:
-								showStudents(studentPosNum);
-							break;
-						}
 
-					}
-					else
-					{
-						//alert(studentPosNum + " " + loadStudentsXML.responseText);
-					
-						
-						loadStudName(loadStudentsXML.responseText, studPos);
-						getUserName(loadStudentsXML.responseText, studentPosNum);
-						getSchool(loadStudentsXML.responseText, studentPosNum);
-						getState(loadStudentsXML.responseText, studentPosNum);
-						document.getElementById("remove"+studentPosNum).disabled = false;
-						document.getElementById("add"+studentPosNum).disabled = true;
-					}
-					
-				studentPosNum++;
-				studPos = "Stud" + studentPosNum;
-				var getVars = "q="+teamN+"&studName="+studPos;
-				loadStudentsXML.open("GET","ManageContent/getFullStudentName.php?"+getVars,true);
-				loadStudentsXML.send();
-			}
-			
-			
-		}
-	  }
-	  
-	  studPos = "Stud" + studentPosNum;
-	  var getVars = "q="+teamN+"&studName="+studPos;
-	  loadStudentsXML.open("GET","ManageContent/getFullStudentName.php?"+getVars,true);
-	  loadStudentsXML.send();
+    
+    $.post('ManageContent/getFullStudentName.php', getVars, 
+        function(html){
+            if(studentPosNum <= MAX_STUDENT_ON_TEAM)
+            {
+                if(html == '')
+                {
+                    switch(studentPosNum)
+                    {
+                        case 1:
+                            showStudents(studentPosNum);
+                            break;
+                        case 2:
+                            showStudents(studentPosNum);
+                            break;
+                        case 3:
+                            showStudents(studentPosNum);
+                            break;
+                    }
+                }
+                else
+                {
+                    loadStudName(html, studPos);
+                    getUserName(html, studentPosNum);
+                    getSchool(html, studentPosNum);
+                    getState(html, studentPosNum);
+                    $("#remove"+studentPosNum).attr(disabled, false);
+                    $("#add"+studentPosNum).attr(disabled, true); 
+                }
+            }
+        });
+
+    studentPosNum++;
 }
 
 //This function is called when a team is selected
