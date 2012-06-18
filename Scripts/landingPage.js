@@ -37,6 +37,16 @@ function joinComp()
 
 //Pre-Conditions:
 //Post-Conditions:
+function loadTeamInvites()
+{
+    $.post('loadTeamInvites.php', "", 
+        function(html){
+            $("#TeamInvitations").html(html);
+        });
+}
+
+//Pre-Conditions:
+//Post-Conditions:
 function createSTeam(tName)
 {
     $.post('createSTeam.php', "compS="+compSelected+"&tName="+tName, 
@@ -169,29 +179,34 @@ function search()
 //############################################################################//
 
 //
-function StartToMember()
+function StartToMember(teamID)
 {
-	$(document.getElementById("LandingView-Start")).hide();
-	$(document.getElementById("LandingView-Member")).show();
+    $("#LandingView-Start").hide();
+    $("#LandingView-Member").show();
+        
+    $.post('StudentContent/addMemberToTeam.php', "teamID="+teamID, 
+        function(){
+        });
+        
 }
 
 //
-function MemberToStart()
+function MemberLeaveTeam()
 {
-	$(document.getElementById("LandingView-Member")).hide();
-	$(document.getElementById("LandingView-Start")).show();
+	$("#LandingView-Member").hide();
+	$("#LandingView-Start").show();
 }
 
 //
 function StartToCaptain()
 {
-	$(document.getElementById("LandingView-Start")).hide();
-	$(document.getElementById("LandingView-Captain")).show();
+	$("#LandingView-Start").hide();
+	$("#LandingView-Captain").show();
 }
 
 //
-function CaptainToStart()
+function CaptainLeaveTeam()
 {
-	$(document.getElementById("LandingView-Captain")).hide();
-	$(document.getElementById("LandingView-Start")).show();
+	$("#LandingView-Captain").hide();
+	$("#LandingView-Start").show();
 }
