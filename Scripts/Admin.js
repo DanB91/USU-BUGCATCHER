@@ -403,7 +403,6 @@ function createCompetition()//Find Code ---------- CS1011
       HideCompVal = 1;
   else
       HideCompVal = 0;
-
   
   var TimeVal = Time;
   var length = addedProbs.length;
