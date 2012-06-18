@@ -30,6 +30,7 @@ $inclCD = $_GET["inclCD"];
 $admin = $_SESSION['adminObject'];
 
 
+
 echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $desc . "\n" . "hidden: " . $hidden . "\n" . "compT: " . $compTime;
 
 
@@ -45,7 +46,8 @@ echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $d
 
 try {
     
-$_SESSION['currComp'] = $admin->createCompetition($compData);
+$admin->createCompetition($compData);
+$_SESSION['compN'] = $compN;
 }
 catch(Exception $e){ echo $e;  }
 
