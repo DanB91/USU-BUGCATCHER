@@ -2,10 +2,11 @@ function loadTeamInfo(str)
 {
   if (str.length == 0)
   {
-    document.getElementById("TeamTable").innerHTML="";
+    $("#TeamTable").html="";
+    //document.getElementById("TeamTable").innerHTML="";
     return;
   } 
-  if (window.XMLHttpRequest)
+  /*if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     loadInfoXML=new XMLHttpRequest();
   }
@@ -17,13 +18,16 @@ function loadTeamInfo(str)
   loadInfoXML.onreadystatechange=function()
   {
     if (loadInfoXML.readyState==4 && loadInfoXML.status==200)
-    {
-      document.getElementById("TeamTable").innerHTML=loadInfoXML.responseText;
+    {*/
+    $.ajax({type: "GET", url:"manageImpl2.php", data: "q="+str, success:function(result){
+	    $("#TeamTable").html=result;
+    }});
+    /*document.getElementById("TeamTable").innerHTML=loadInfoXML.responseText;
     }
   }
   
   loadInfoXML.open("GET","manageImpl2.php?q="+str,true);
-  loadInfoXML.send();
+  loadInfoXML.send();*/
 }
 
 function addTeam()
