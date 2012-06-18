@@ -737,6 +737,7 @@ option.difficulty4{
 	float: right;
 	width: 230px;
 	display: inline;
+        /*height: 300;*/
 /*	border-left: 9px solid #779853;*/
 }
 
@@ -1021,10 +1022,6 @@ td.PStats{
     padding: 0px;
     width: 264px;}
 
-#HintsPreDefRight p{
-    margin: 0;
-    padding-bottom: 0px;
-    padding-top: 20px;}
 
 #HintsPreDefLeft{
     display: inline;
@@ -1034,12 +1031,6 @@ td.PStats{
     padding: 0px;
     width: 264px;}
 
-#HintsPreDefLeft p{
-    margin: 0;
-    padding-bottom: 0px;
-    padding-top: 20px;
-}
-
 #HintsPreDefBottom{
     display: inline;
     float: right;
@@ -1048,11 +1039,6 @@ td.PStats{
     width: 540px;
 }
 
-#HintsPreDefBottom p{
-    margin: 0;
-    padding-bottom: 0px;
-	padding-top: 20px;
-}
 	  
 .Hselect{
 	background: #fff;
@@ -1381,3 +1367,13 @@ a.button:hover p{
       line-height: 0;
 }
 /* --- end Buttons --- */
+/* --- Up Comp Selection --- */
+.CSselect{
+	background: #fff;
+	border:1px solid #afcb91;
+    margin: 0px;
+    padding: 7px;
+    width:80%;
+    height:50%;
+    padding-right: 100px;
+}

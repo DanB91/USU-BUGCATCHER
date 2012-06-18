@@ -24,7 +24,7 @@ if ($accountType_str == 'admin')
 
         );
        ADMIN::registerAdmin($ADMIN);
-       print_r($ADMIN);
+       //print_r($ADMIN);
     }catch(Exception $e ){
         $success = false;
         RegistrationFail();
@@ -43,7 +43,7 @@ else
         'password' => $password_str,   
         );
         USER::registerUser($USERARRAY);
-        print_r($USERARRAY);
+        //print_r($USERARRAY);
     }catch(Exception $e ){
         $success = false;
         RegistrationFail();

@@ -43,7 +43,10 @@ function setHints()
 {
   insertHTML(3); 
 }
-
+function selectCompetition()
+{
+  insertHTML(4); 
+}
 //This gets the HTML code that needs to inserted via element.innerHTML
 function insertHTML(tabValue)
 {
@@ -61,6 +64,9 @@ function insertHTML(tabValue)
       break;
     case 3:
       filePath = "Hints.html";
+      break;
+    case 4:
+      filePath = "selectComp.php";
       break;
     default:
   }
