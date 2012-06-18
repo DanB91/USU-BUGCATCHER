@@ -23,7 +23,7 @@ function loadComps()
     }
   }
   
-  xmlloadCompshttp.open("GET","loadAvailComps.php",true)
+  xmlloadCompshttp.open("GET","adminLoadAvailComps.php",true)
   xmlloadCompshttp.send();
 }
 
