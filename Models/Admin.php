@@ -31,10 +31,10 @@ class Admin extends Model{
                 continue;
             
 
-            
+           
             switch($fieldName)
             {
-                case 'compName':
+                case 'compname':
                 case 'description':
                     $value = "'" . $value . "'";
             }
