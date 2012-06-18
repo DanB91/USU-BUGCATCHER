@@ -772,66 +772,38 @@ function addRemoveStudent(userN, studPos)//Find Code ---------- TM1014
 		studentPosNum = 3;
   }
 
-  if(document.getElementById(removeSelected).disabled)
-  {
-	  if(currentStudent == "------Select a Name------" || currentStudent == '')
-	  {
-		alert("That is not a valid selection");
-	  }
-	  else
-	  {
-		if (window.XMLHttpRequest)
-		{// code for IE7+, Firefox, Chrome, Opera, Safari
-		  xmladdRemoveStudenthttp[studentPosNum]=new XMLHttpRequest();
-		}
-		else
-		{// code for IE6, IE5
-		  xmladdRemoveStudenthttp[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmladdRemoveStudenthttp[studentPosNum].onreadystatechange=function()
-		{
-		  if (xmladdRemoveStudenthttp[studentPosNum].readyState==4 && xmladdRemoveStudenthttp[studentPosNum].status==200)
-		  {
-		    //refreshTeamInfo(selectElement);
-		    document.getElementById(selectStud).disabled=true;
-			document.getElementById(addSelected).disabled=true;
-			document.getElementById(removeSelected).disabled=false;
-			refreshTeamInfo(selectElement);
+    if(document.getElementById(removeSelected).disabled)
+    {
+        if(currentStudent == "------Select a Name------" || currentStudent == '')
+        {
+            alert("That is not a valid selection");
+        }
+        else
+        {
+            $.post('ManageContent/placeStudentOnTeam.php', "userN="+selectUser + "$team="+teamN+"&studNum="+selectStud, 
+                function(html){
+                    //refreshTeamInfo(selectElement);
+                    $("#"+selectStud).attr(disabled, true);
+                    $("#"+addSelected).attr(disabled, true);
+                    $("#"+removeSelected).attr(disabled, false);
+                    refreshTeamInfo(selectElement);
+                });
+
+
+            currentStudent='------Select a Name------';
 		
-		  }
-		}
-		
-		xmladdRemoveStudenthttp[studentPosNum].open("GET","ManageContent/placeStudentOnTeam.php?userN="+selectUser + "&team=" + teamN + "&studNum="+selectStud,true);
-		xmladdRemoveStudenthttp[studentPosNum].send();
-		currentStudent='------Select a Name------';
-		
-	  }
-  }
+        }
+    }
   else 
   {
-		if (window.XMLHttpRequest)
-		{// code for IE7+, Firefox, Chrome, Opera, Safari
-		  xmladdRemoveStudenthttp[studentPosNum]=new XMLHttpRequest();
-		}
-		else
-		{// code for IE6, IE5
-		  xmladdRemoveStudenthttp[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmladdRemoveStudenthttp[studentPosNum].onreadystatechange=function()
-		{
-		  if (xmladdRemoveStudenthttp[studentPosNum].readyState==4 && xmladdRemoveStudenthttp[studentPosNum].status==200)
-		  {
-		    //alert(xmladdRemoveStudenthttp[studentPosNum].responseText);
-			
-			setEditable(selectStud);
-			refreshTeamInfo(selectElement);
-		  }
-		}
-		xmladdRemoveStudenthttp[studentPosNum].open("GET","ManageContent/removeStudentFromTeam.php?userN="+selectUser + "&team=" + teamN + "&studNum="+selectStud,true);
-		xmladdRemoveStudenthttp[studentPosNum].send();
-		currentStudent='------Select a Name------';
+        $.post('ManageContent/removeStudentFromTeam.php', "userN="+selectUser + "&team=" + teamN + "&studNum="+selectStud, 
+            function(html){
+                setEditable(selectStud);
+                refreshTeamInfo(selectElement);
+            });
+        currentStudent='------Select a Name------';
 	
-  }
+    }
 	
 }
 
@@ -845,23 +817,12 @@ function addRemoveStudent(userN, studPos)//Find Code ---------- TM1014
 //Postcondition: Load's the Progress and Statistics table
 function showTableProg()//Find Code ---------- PS1001
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function()
-  {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      document.getElementById("PTeamTables").innerHTML=xmlhttp.responseText;
-    }
-  }
-  xmlhttp.open("GET","ProgressContent/progressImpl.php",true);
-  xmlhttp.send();
+    $.post('ProgressContent/progressImpl.php', "", 
+        function(html){
+            $("#PTeamTables").html=html;
+
+        });
+
 }
 
 //###################################################################################################//
@@ -873,36 +834,18 @@ function showTableProg()//Find Code ---------- PS1001
 //Postcondition: Sets hintsEnabled to the correct value
 function setHintState()//Find Code ---------- H1001
 {
-	//alert("recieving now");
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    setHintStateXml=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    setHintStateXml=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  setHintStateXml.onreadystatechange=function()
-  {
-    if (setHintStateXml.readyState==4 && setHintStateXml.status==200)
-    {
-       if(setHintStateXml.responseText != "SET")
-	   {
-			hintsEnabled = false;
-			// alert("Hints: " + setHintStateXml.responseText);
-			// document.getElementById("SendPreDef").disabled = true;
-			// document.getElementById("SendCustom").disabled = true;
-			// document.getElementById("CustomHint").disabled = true;
-			// document.getElementById("HHintNum").disabled = true;
-			// document.getElementById("hintCountClear").disabled = true;
-	   }
-	   else
-		hintsEnabled = true;
-    }
-  }
-  setHintStateXml.open("GET","HintsContent/hintsState.php",true);
-  setHintStateXml.send();
+    $.post('HintsContent/hintsState.php', "", 
+        function(html){
+            
+            if(html != "SET")
+            {
+                hintsEnabled = false;
+            }
+            else
+                hintsEnabled = true;
+
+        });
+
 }
 
 //This function is referenced in Content_Hints.js
@@ -910,79 +853,35 @@ function setHintState()//Find Code ---------- H1001
 //Postcondition: Sends the custom hint to the compeition content file located in competitions folder
 function sendHintsCust(str)//Find Code ---------- H1002
 {
+    $.post('HintsContent/sendCustom.php', "customHint="+str, 
+        function(html){
+            $("#CustomHint").val('');
+        });
 
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            document.getElementById("CustomHint").value='';
-        }
-    }
-
-    xmlhttp.open("GET","HintsContent/sendCustom.php?customHint="+str,true);
-    xmlhttp.send();
 	
 }
 
 function showPre(str)//Find Code ---------- H1003
 {
 	
-  currProblemSelected = str;
+    currProblemSelected = str;
 	
-
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    showPreXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    showPreXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  showPreXML.onreadystatechange=function()
-  {
-    if (showPreXML.readyState==4 && showPreXML.status==200)
-    {
-      document.getElementById("HintNum").innerHTML=showPreXML.responseText;
-    }
-  }
-
-  showPreXML.open("GET","HintsContent/showPreDefHints.php?hintPreDef="+str,true);
-  showPreXML.send();
+    $.post('HintsContent/showPreDefHints.php', "hintPreDef="+str, 
+        function(html){
+            $("#HintNum").html=html;
+        });
   
 }
 
 function showPreHintText(str)//Find Code ---------- H1004
 {
 
-	  lastHintSelected = str;
-	  if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-		showPreTextXML=new XMLHttpRequest();
-	  }
-	  else
-	  {// code for IE6, IE5
-		showPreTextXML=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	  showPreTextXML.onreadystatechange=function()
-	  {
-		if (showPreTextXML.readyState==4 && showPreTextXML.status==200)
-		{
-				document.getElementById("HintText").innerHTML=showPreTextXML.responseText;
-                                //alert(showPreTextXML.responseText);
-		   
-		}
-	  }
-
-	  showPreTextXML.open("GET","HintsContent/showPreDefHintText.php?problemSelected="+currProblemSelected + "&hintSelected=" + str,true);
-	  showPreTextXML.send();
+    lastHintSelected = str;
+          
+    $.post('HintsContent/showPreDefHintText.php', "problemSelected="+curProblemSelected+"&hintSelected="+str, 
+        function(html){
+            $("#HintText").html=html;
+        });      
 
 }
 
