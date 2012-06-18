@@ -1,5 +1,6 @@
 var compSelected;
 
+
 //Pre-Conditions:
 //Post-Conditions:
 function loadComps()
@@ -17,12 +18,12 @@ function loadComps()
   {
     if (xmlloadCompshttp.readyState == 4 && xmlloadCompshttp.status == 200)
     {
-				document.getElementById("LandingCompSelect").innerHTML = xmlloadCompshttp.responseText;
-				compSelected = "";
+        document.getElementById('temp').innerHTML = xmlloadCompshttp.responseText;
+        compSelected = "";
     }
   }
   
-  xmlloadCompshttp.open("GET","loadAvailComps.php",true)
+  xmlloadCompshttp.open("GET","adminLoadAvailComps.php",true)
   xmlloadCompshttp.send();
 }
 
@@ -175,7 +176,7 @@ function getCompInfo()
 
 //Pre-Conditions:
 //Post-Conditions:
-function showCompInfo(str,page)
+function showCompInfo(str)
 {
   compSelected = str;
   getCompInfo();
@@ -187,55 +188,4 @@ function search()
 {
 }
 
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
-//############################################################################//
 
-//############################################################################//
-//#                          jQuery Sliding Scripts                          #//
-//############################################################################//
-
-//
-function StartToMember()
-{
-	$(document.getElementById("LandingView-Start")).hide();
-	$(document.getElementById("LandingView-Member")).show();
-}
-
-//
-function MemberToStart()
-{
-	$(document.getElementById("LandingView-Member")).hide();
-	$(document.getElementById("LandingView-Start")).show();
-}
-
-//
-function StartToCaptain()
-{
-	$(document.getElementById("LandingView-Start")).hide();
-	$(document.getElementById("LandingView-Captain")).show();
-}
-
-//
-function CaptainToStart()
-{
-	$(document.getElementById("LandingView-Captain")).hide();
-	$(document.getElementById("LandingView-Start")).show();
-}
