@@ -8,10 +8,11 @@
 //The team with the most time and or most bugs will be declared the winning team.
 //See Student.js for more details
 
-	$comp = $_COOKIE['compID'];
-	$useID = $_COOKIE['userID'];
+$comp = $_SESSION['competitionObject'];
+$user = $_SESSION['userObject'];
+$userID = $user->userID;
 
-if(isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '' && isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')//if the competition has been created and the user is loged in correctly
+if(isset($_COOKIE["user"]) && $_COOKIE["user"] != NULL && isset($_COOKIE["competitionObject"]) && $_COOKIE["compID"] != '')//if the competition has been created and the user is loged in correctly
 {
 	$comp = strtolower($comp);
 	$count = 0;

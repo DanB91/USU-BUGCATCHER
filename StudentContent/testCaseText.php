@@ -13,6 +13,7 @@ $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
 $prob = new Problem($problemName);
 $teamID = $team->teamid;
+$username = $user->username;
 
 define(ROOT_DIRECTORY, 'Competitions/'.$comp->compid); //the root directory of the website
 chdir(ROOT_DIRECTORY);
@@ -41,7 +42,7 @@ $bugs = $prob->bugs;
 $foundBug = '0'; //will test to see if the user found a bug 
 $alreadyFoundBug = false; //tests to see if the bug is already found
 $output = $oracle;
-foreach ($bugs as $index => $bug) {
+foreach ($bugs as $bug) {
 
     $filePath = $bug->filepath;
     $buggyOutput = trim(shell_exec("java -jar ${filePath} ${testInput}"));
@@ -77,6 +78,7 @@ if ($alreadyFoundBug && !$foundBug) {
 } else if (!$foundBug) {
     writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual output: '$oracle'<br>Bug not found!", $contentFileName);
 }
+
 
 echo $foundBug;
 
