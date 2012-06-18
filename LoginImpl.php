@@ -22,10 +22,10 @@ if ($accountType_str == 'admin')
   {
 
         session_start();
-        $_SESSION['userid'] = $USER->userid;
+       
         $_SESSION['usertype'] = 'admin';
-        $_SESSION['username'] = $USER->username;
-       // echo "Pie";
+        $_SESSION['adminObject'] = $ADMIN;
+         $_SESSION['test'] = 'test';
 
   }
 }
@@ -50,9 +50,8 @@ else
   else
   {//Username was found and the password is correct
     session_start();
-    $_SESSION['userid'] = $USER->userid;
     $_SESSION['usertype'] = 'student';
-    $_SESSION['username'] = $USER->username;
+    $_SESSION['userObject'] = $USER;
     //echo "Pie";
 
   }
