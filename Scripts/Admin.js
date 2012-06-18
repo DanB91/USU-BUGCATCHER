@@ -83,162 +83,125 @@ var compSetTime;
 //Postcondition: Starts the competition
 function startCompetition() //Find Code ---------- CS1001
 {
-    $.ajax({url:"AdminCompContent/StartCompetition.php", success:function(){     
-        //Need to write a new countdown function
-        $("#header-controls").html('<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />');
-        //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();    
-    }});
+    $.ajax({
+        url:"AdminCompContent/StartCompetition.php", 
+        success:function(){     
+            //Need to write a new countdown function
+            $("#header-controls").html('<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />');
+            //alert(xmlstartCompetitionhttp.responseText);
+            startTimer();    
+        }
+    });
 }
 
 function stopCompetition()
 {
-    $.ajax({url:"AdminCompContent/StopCompetition.php", success:function(){     
-        //Need to write a new countdown function
-        $("#header-controls").html('<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />');
-        //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();   
-    }});
+    $.ajax({
+        url:"AdminCompContent/StopCompetition.php", 
+        success:function(){     
+            //Need to write a new countdown function
+            $("#header-controls").html('<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />');
+            //alert(xmlstartCompetitionhttp.responseText);
+            startTimer();   
+        }
+    });
 }       
         
 
 function refreshProbList()
 {
     
-      var content = '<select name="ProblemsList" id="ProblemsListGet" class="Cselect" size="8" onchange="showProbPreview(this)">';
-      var difficulty;
-      var pSBD = new Array(); //problems sorted by difficulty
-      for(var i = 0; i < availableProbs.length; i++)
-      {
-            if (window.XMLHttpRequest)
-                    {// code for IE7+, Firefox, Chrome, Opera, Safari
-                            xmlGetDifficulty=new XMLHttpRequest();
-                    }
-                    else
-                    {// code for IE6, IE5
-                    xmlGetDifficulty=new ActiveXObject("Microsoft.XMLHTTP");
-                    }
-
-                    xmlGetDifficulty.onreadystatechange=function()
-                    {
-                    if (xmlGetDifficulty.readyState == 4 && xmlGetDifficulty.status == 200)
-                    {
-                        
-//                    alert("problem=" + availableProbs[i]);
-//                    var content = "problem=" + availableProbs[i];
-//
-//                    $.ajax({type: "GET", url: "AdminCompContent/getDifficulty.php", data: content, success:function(result){
-//                            difficulty = parseInt(result);
-//                            alert(result);
-//                            if(pSBD[difficulty] == undefined)
-//                            {
-//                                    pSBD[difficulty] = new Array();
-//                            }
-//                            pSBD[difficulty].push(availableProbs[i]);
-//                    }});
-
-
-
-                        difficulty = parseInt(xmlGetDifficulty.responseText);
-
-                        if(pSBD[difficulty] == undefined)
-                        {
-                                pSBD[difficulty] = new Array();
-                        }
-                        pSBD[difficulty].push(availableProbs[i]);
-
-
-                                //content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"'>" + availableProbs[i] + "</option>"; 
-                    }
-
-                    }
-            xmlGetDifficulty.open("GET","AdminCompContent/getDifficulty.php?problem="+availableProbs[i],false);
-            xmlGetDifficulty.send();
-  			
-
-  			
-      }
-      var diffStr = '';
-      for(var difficulty = 0; difficulty < pSBD.length; difficulty++)
-      {
-	if(pSBD[difficulty] == undefined)
-		continue;
+    var content = '<select name="ProblemsList" id="ProblemsListGet" class="Cselect" size="8" onchange="showProbPreview(this)">';
+    var difficulty;
+    var pSBD = new Array(); //problems sorted by difficulty
+    for(var i = 0; i < availableProbs.length; i++)
+    {
+        $.ajax({
+            url:"AdminCompContent/getDifficulty.php", 
+            async: false, 
+            success:function(result){     
+                difficulty = parseInt(result);
+                if(pSBD[difficulty] == undefined)
+                {
+                    pSBD[difficulty] = new Array();
+                }
+                pSBD[difficulty].push(availableProbs[i]);
+            }
+        });			
+    }
+    var diffStr = '';
+    for(var difficulty = 0; difficulty < pSBD.length; difficulty++)
+    {
+        if(pSBD[difficulty] == undefined)
+            continue;
       
-      	for(var prob = 0; prob < pSBD[difficulty].length; prob++)
-      	{
+        for(var prob = 0; prob < pSBD[difficulty].length; prob++)
+        {
             switch(difficulty)
             {
                 case 0:
-                        diffStr = ' - Very Easy';
-                        break;
+                    diffStr = ' - Very Easy';
+                    break;
                 case 1:
-                                diffStr = ' - Easy';
-                                break;
+                    diffStr = ' - Easy';
+                    break;
                 case 2:
-                        diffStr = ' - Medium';
-                                break;
+                    diffStr = ' - Medium';
+                    break;
                 case 3:
-                                diffStr = ' - Hard';
-                        break;
+                    diffStr = ' - Hard';
+                    break;
                 case 4:
-                        diffStr = ' - Very Hard';
-                        break;
+                    diffStr = ' - Very Hard';
+                    break;
             }
             content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + pSBD[difficulty][prob] + "'>" + pSBD[difficulty][prob] + diffStr +"</option>"; 
-      	}
-      }
+        }
+    }
       
-      content += '</select>';
+    content += '</select>';
     
-     document.getElementById('ProblemsList').innerHTML = content;
+    document.getElementById('ProblemsList').innerHTML = content;
      
-     content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
+    content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
       
-     for(i = 0; i < addedProbs.length; i++)
-     {
-        if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlGetDifficultyTwo=new XMLHttpRequest();
-        }
-        else
-        {// code for IE6, IE5
-        xmlGetDifficultyTwo=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        xmlGetDifficultyTwo.onreadystatechange=function()
-        {
-            if (xmlGetDifficultyTwo.readyState == 4 && xmlGetDifficultyTwo.status == 200)
-            {
-                difficulty = parseInt(xmlGetDifficultyTwo.responseText); 
+    for(i = 0; i < addedProbs.length; i++)
+    {
+        $.ajax({
+            url:"AdminCompContent/getDifficulty.php", 
+            async: false, 
+            success:function(result){     
+                difficulty = parseInt(result); 
+                  
                 var diffStr = '';
                 switch (difficulty)
                 {
                     case 0:
-                            diffStr = ' - Very Easy';
-                            break;
+                        diffStr = ' - Very Easy';
+                        break;
                     case 1:
-                                    diffStr = ' - Easy';
-                                    break;
+                        diffStr = ' - Easy';
+                        break;
                     case 2:
-                            diffStr = ' - Medium';
-                                    break;
+                        diffStr = ' - Medium';
+                        break;
                     case 3:
-                                    diffStr = ' - Hard';
-                            break;
+                        diffStr = ' - Hard';
+                        break;
                     case 4:
-                            diffStr = ' - Very Hard';
-                            break;    					
+                        diffStr = ' - Very Hard';
+                        break;    					
                 }
-            content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
-            }
-        }
-            xmlGetDifficultyTwo.open("GET","AdminCompContent/getDifficulty.php?problem="+addedProbs[i],false);
-            xmlGetDifficultyTwo.send();   
+                content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
 
-      }
-      content += '</select>';
+            }
+        });
+
+
+    }
+    content += '</select>';
     
-     document.getElementById('SelectedProblems').innerHTML = content;
+    $('#SelectedProblems').html = content;
 }
 
 
