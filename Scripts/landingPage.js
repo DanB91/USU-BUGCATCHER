@@ -63,10 +63,10 @@ function createSTeam(tName)
 //Post-Conditions:
 function mSetCookie(c_name,value,exdays)
 {
-var exdate=new Date();
-exdate.setDate(exdate.getDate() + exdays);
-var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-document.cookie=c_name + "=" + c_value;
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+    document.cookie=c_name + "=" + c_value;
 }
 
 //Pre-Conditions:
@@ -75,7 +75,7 @@ function getCompInfo()
 {
   var loopCount = 1;
   var displayOutput = "";
-            
+         
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     getCompInfoXML=new XMLHttpRequest();
