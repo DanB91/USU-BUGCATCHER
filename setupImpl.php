@@ -14,7 +14,7 @@ set_error_handler('error_handler');
 
 require_once "Models/Admin.php";
 
-session_start();
+//session_start();
 
 $nProbs = $_GET["numProbs"];
 $pArr = $_GET["problems"];
@@ -27,8 +27,16 @@ $hidden = $_GET["hidden"];
 $compTime = $_GET["CompTime"];
 $codeCov = $_GET["codeCov"];
 $inclCD = $_GET["inclCD"];
-$admin = $_SESSION['adminObject'];
-
+//$admin = $_SESSION['adminObject'];
+try
+{
+   $admin = new Admin(3); 
+}
+catch(Exception $e)
+{
+    echo $e->getMessage();
+    
+}
 
 echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $desc . "\n" . "hidden: " . $hidden . "\n" . "compT: " . $compTime;
 
@@ -45,12 +53,9 @@ echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $d
 
 try {
     
-$_SESSION['currComp'] =  $admin->createCompetition($compData);
-
-
+$admin->createCompetition($compData);
 }
 catch(Exception $e){ echo $e;  }
-
 
 
 
