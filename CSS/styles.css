@@ -227,6 +227,175 @@ li {
 	margin: 0 auto;
 }
 
+/* -------------------- Landing Page Layout --------------------*/
+.LV-Sections ,.LV-Sections div {
+	margin: 0px;
+	padding: 0px;
+}
+
+.LV-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+}
+
+.LV-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	text-align: center;
+}
+/*--------------------------------------------------------------*/
+#LandingView-Start {
+	background-color: #cdefa9;
+	border-bottom: 2px solid #000;
+	height: 640px;
+	margin: 0px;
+	padding: 0px;
+	width: 1000px;
+}
+
+#LVS-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 300px;
+}
+
+#LVS-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 691px;
+}
+
+#LVS-CreateTeam {
+	width: 300px;
+}
+/*--------------------------------------------------------------*/
+#LandingView-Member {
+	background-color: #cdefa9;
+	border-bottom: 2px solid #000;
+	height: 640px;
+	margin: 0px;
+	padding: 0px;
+	width: 1000px;
+}
+
+#LVM-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 661px;
+}
+
+#TeamMember1 {
+	margin-left: 35px;
+	margin-right: 20px;
+	float: left;
+}
+
+#TeamMember2 {
+	margin-left: 20px;
+	margin-right: 35px;
+	float: left;
+}
+
+#LVM-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 330px;
+}
+/*--------------------------------------------------------------*/
+#LandingView-Captain {
+	background-color: #cdefa9;
+	height: 640px;
+	margin: 0px;
+	padding: 0px;
+	width: 1000px;
+}
+
+#LVC-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 300px;
+}
+
+#LVC-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 691px;
+}
+
+#LVC-LeftBottom {
+	float: left;
+	text-align: center;
+	width: 300px;
+}
+/*--------------------------------------------------------------*/
+#LandingLeft {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 300px;
+}
+
+#LandingLeft p{
+	text-align: center;
+}
+
+#LandingLeft-Top {
+	float: left;
+	text-align: center;
+	width: 300px;
+}
+
+#LandingLeft-Bottom {
+	float: left;
+	text-align: center;
+	width: 300px;
+}
+
+#LandingLeft-Bottom p{
+	text-align: left;
+}
+
+#LandingRight {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 691px;
+}
+
+#LandingRight p{
+	text-align: center;
+}
+
+#Landing-CompList {
+	float: left;
+	text-align: center;
+	width: 340px;
+}
+
+#Landing-CompInfo {
+	float: left;
+	text-align: center;
+	width: 340px;
+}
+
 /* -------------------- Student Layout --------------------*/
 .studentBody {
 	background: url('../Images/studentBody.png') repeat-y;

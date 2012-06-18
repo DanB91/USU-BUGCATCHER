@@ -73,8 +73,8 @@ function setTimer()
 		}
 	}
 	
-	setTimerXML.open("GET","AdminCompContent/setMasterTimer.php?adminCompID="+compSetID+"&time="+compSetTime,true);
-	setTimerXML.send();
+	//setTimerXML.open("GET","AdminCompContent/setMasterTimer.php?adminCompID="+compSetID+"&time="+compSetTime,true);
+	//setTimerXML.send();
 }
 
 //AJAX--Updates the competition timer file to sync with the admin.

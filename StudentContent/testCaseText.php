@@ -7,6 +7,16 @@ define(ROOT_DIRECTORY, 'C:\Dropbox\htdocs\NewDesign'); //the root directory of t
 ///////////////////
 set_error_handler('error');
 
+$testInput = mysql_real_escape_string(trim($_POST["testInput"])); //sanitizes input
+$testOutput = mysql_real_escape_string(trim($_POST["testOutput"])); //sanitizes output
+$isCoverage = $_POST["codeCov"]; //boolean for coverage
+$problemName = $_POST["problem"];
+$comp = $_SESSION['competitionObject'];
+$user = $_SESSION['userObject'];
+$team = $_SESSION['teamObject'];
+$prob = new Problem($problemName);
+$teamID = $team->teamid;
+$username = $user->username;
 
 /////error checks and defining variables///////
 $con = mysql_connect('localhost','guest','') or	trigger_error('Could not connect' . mysql_error());
@@ -74,14 +84,8 @@ foreach($bugFilesInProblemDir as $index => $filePath)
 
 $foundBug = '0'; //will test to see if the user found a bug 
 $alreadyFoundBug = false; //tests to see if the bug is already found
-$output = '';
-foreach($buggyOutputs as $index => $bO)
-{
-	//if the supplied output is not equal to the oracle output, obviously the student did not find the bug
-	if($oracle != $testOutput)
-	{
-		break;
-	}
+$output = $oracle;
+foreach ($bugs as $bug) {
 
 	$bugName = "bug $index";
 
@@ -156,6 +160,7 @@ else if(!$foundBug)
 {
 	writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual output: '$oracle'<br>Bug not found!", $contentFileName);
 }
+
 
 echo $foundBug;
 

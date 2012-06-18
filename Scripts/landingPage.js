@@ -1,117 +1,72 @@
 var compSelected;
 
-
 //Pre-Conditions:
 //Post-Conditions:
 function loadComps()
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlloadCompshttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlloadCompshttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlloadCompshttp.onreadystatechange=function()
-  {
-    if (xmlloadCompshttp.readyState == 4 && xmlloadCompshttp.status == 200)
-    {
-        document.getElementById('temp').innerHTML = xmlloadCompshttp.responseText;
-        compSelected = "";
-    }
-  }
-  
-  xmlloadCompshttp.open("GET","loadAvailComps.php",true)
-  xmlloadCompshttp.send();
+    $.post('loadAvailComps.php', "", 
+        function(html){
+            $("#LandingCompSelect").html(html);
+            compSelected = "";
+        });
 }
 
 //Pre-Conditions:
 //Post-Conditions:
 function joinComp()
 {
-    //
-    //
-    //
-    //alert(compSelected);
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmljoinComphttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmljoinComphttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmljoinComphttp.onreadystatechange=function()
-  {
-    if (xmljoinComphttp.readyState == 4 && xmljoinComphttp.status == 200)
-    {
-        var t = xmljoinComphttp.responseText.trim();
-       // alert(t);
-        if(t == '1')
-        {
-            var studTName = prompt("This competition has started please enter your team name.");
-            while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
+    $.post('joinComp.php', "compS="+compSelected, 
+        function(html){
+
+            var t = html.trim();
+            if(t == '1')
             {
-              studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
+                var studTName = prompt("This competition has started please enter your team name.");
+                while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
+                {
+                    studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
+                }
+                if(studTName != null)
+                    createSTeam(studTName);
             }
-            if(studTName != null)
-                createSTeam(studTName);
-        }
-        else{
-            window.location = "Student.html";
-		}
-    }
-  }
-  xmljoinComphttp.open("GET","joinComp.php?compS="+compSelected,true);
-  xmljoinComphttp.send();
+            else{
+                window.location = "Student.html";
+            }
+        });
 }
 
 //Pre-Conditions:
 //Post-Conditions:
 function createSTeam(tName)
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlcreateSTeamhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlcreateSTeamhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlcreateSTeamhttp.onreadystatechange=function()
-  {
-    if (xmlcreateSTeamhttp.readyState == 4 && xmlcreateSTeamhttp.status == 200)
-    {
-        var t = xmlcreateSTeamhttp.responseText.trim();
-        //alert(t);
-        if(t == '1')
-        {
-            //alert("2compID: "+compSelected);
-            window.location = "Student.html";
-        }
-        else
-        {
-            alert("Team already exists");
-        }
-    }
-  }
-  mSetCookie('tName',tName,365);
-  xmlcreateSTeamhttp.open("GET","createSTeam.php?compS=" + compSelected + "&tName=" + tName,true);
-  xmlcreateSTeamhttp.send();
+    $.post('createSTeam.php', "compS="+compSelected+"&tName="+tName, 
+        function(html){
+
+            var t = html.trim();
+            //alert(t);
+            if(t == '1')
+            {
+                //alert("2compID: "+compSelected);
+                window.location = "Student.html";
+            }
+            else
+            {
+                alert("Team already exists");
+            }
+
+        });
+
+    mSetCookie('tName',tName,365);
 }
 
 //Pre-Conditions:
 //Post-Conditions:
 function mSetCookie(c_name,value,exdays)
 {
-var exdate=new Date();
-exdate.setDate(exdate.getDate() + exdays);
-var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-document.cookie=c_name + "=" + c_value;
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+    document.cookie=c_name + "=" + c_value;
 }
 
 //Pre-Conditions:
@@ -120,7 +75,7 @@ function getCompInfo()
 {
   var loopCount = 1;
   var displayOutput = "";
-            
+         
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     getCompInfoXML=new XMLHttpRequest();
@@ -176,7 +131,7 @@ function getCompInfo()
 
 //Pre-Conditions:
 //Post-Conditions:
-function showCompInfo(str)
+function showCompInfo(str,page)
 {
   compSelected = str;
   getCompInfo();
@@ -188,4 +143,55 @@ function search()
 {
 }
 
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
 
+//############################################################################//
+//#                          jQuery Sliding Scripts                          #//
+//############################################################################//
+
+//
+function StartToMember()
+{
+	$(document.getElementById("LandingView-Start")).hide();
+	$(document.getElementById("LandingView-Member")).show();
+}
+
+//
+function MemberToStart()
+{
+	$(document.getElementById("LandingView-Member")).hide();
+	$(document.getElementById("LandingView-Start")).show();
+}
+
+//
+function StartToCaptain()
+{
+	$(document.getElementById("LandingView-Start")).hide();
+	$(document.getElementById("LandingView-Captain")).show();
+}
+
+//
+function CaptainToStart()
+{
+	$(document.getElementById("LandingView-Captain")).hide();
+	$(document.getElementById("LandingView-Start")).show();
+}

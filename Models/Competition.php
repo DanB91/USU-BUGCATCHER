@@ -19,6 +19,18 @@ class Competition extends Model{
     public function getProblems(){
 	return $this->problemids;
     }
+    
+    public function getTeams()
+    {
+        $retArray = array();
+        
+	foreach($this->teamids as $id)
+            $retArray[] = new Team ($id);
+            
+        return $retArray;
+    }
+    
+    
 }
 
 

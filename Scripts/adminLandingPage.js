@@ -86,7 +86,13 @@ function CS_joinComp()
             var studTName = prompt("This competition has started please enter your team name.");
             while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
             {
-              studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
+                var studTName = prompt("This competition has started. Please enter your team name.");
+                while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
+                {
+                    studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
+                }
+                if(studTName != null)
+                    createSTeam(studTName);
             }
             if(studTName != null)
                 createSTeam(studTName);
@@ -105,35 +111,20 @@ function CS_joinComp()
 //Post-Conditions:
 function CS_createSTeam(tName)
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlcreateSTeamhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlcreateSTeamhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlcreateSTeamhttp.onreadystatechange=function()
-  {
-    if (xmlcreateSTeamhttp.readyState == 4 && xmlcreateSTeamhttp.status == 200)
-    {
-        var t = xmlcreateSTeamhttp.responseText.trim();
-        //alert(t);
-        if(t == '1')
-        {
-            //alert("2compID: "+compSelected);
-            window.location = "Student.html";
-        }
-        else
-        {
-            alert("Team already exists");
-        }
-    }
-  }
-  mSetCookie('tName',tName,365);
-  xmlcreateSTeamhttp.open("GET","createSTeam.php?compS=" + compSelected + "&tName=" + tName,true);
-  xmlcreateSTeamhttp.send();
+    $.post('createSTeam.php', "compS="+compSelected+"&tName="+tName, 
+        function(html){
+            var t = html.trim();
+            if(t == '1')
+            {
+                window.location = "Student.html";
+            }
+            else
+            {
+                alert("Team already exists");
+            }
+        });
+    mSetCookie('tName',tName,365);
+
 }
 
 //Pre-Conditions:
