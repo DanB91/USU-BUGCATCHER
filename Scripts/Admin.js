@@ -709,7 +709,6 @@ function getUserName(student, studentPosNum)//Find Code ---------- TM1011
     $.post('ManageContent/getStudentUserName.php', "curStudent="+student, 
         function(html){
             $("#Username_S"+studentPosNum).val(html);
-
         });		
 }
 
@@ -719,25 +718,12 @@ function getUserName(student, studentPosNum)//Find Code ---------- TM1011
 function getSchool(student, studentPosNum)//Find Code ---------- TM1012
 {
 
-	var getSchoolXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-	
-	if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      getSchoolXML[studentPosNum]=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      getSchoolXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    getSchoolXML[studentPosNum].onreadystatechange=function()
-    {
-      if (getSchoolXML[studentPosNum].readyState==4 && getSchoolXML[studentPosNum].status==200)
-      {
-			document.getElementById("School_S"+studentPosNum).value=getSchoolXML[studentPosNum].responseText;
-      }
-    }
-    getSchoolXML[studentPosNum].open("GET","ManageContent/getStudentSchool.php?currStudent="+student,true);
-    getSchoolXML[studentPosNum].send();
+    var getSchoolXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
+    $.post('ManageContent/getStudentSchool.php', "curStudent="+student, 
+        function(html){
+            $("#School_S"+studentPosNum).val(html);
+        });		
+
 }
 
 //This function is called when a team has a student in a given position.
@@ -746,25 +732,11 @@ function getSchool(student, studentPosNum)//Find Code ---------- TM1012
 function getState(student, studentPosNum)//Find Code ---------- TM1013
 {
 
-	var getStateXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-
-	if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      getStateXML[studentPosNum]=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      getStateXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    getStateXML[studentPosNum].onreadystatechange=function()
-    {
-      if (getStateXML[studentPosNum].readyState==4 && getStateXML[studentPosNum].status==200)
-      {		
-            document.getElementById("State_S"+studentPosNum).value=getStateXML[studentPosNum].responseText;
-      }
-    }
-    getStateXML[studentPosNum].open("GET","ManageContent/getStudentState.php?currStudent="+student,true);
-    getStateXML[studentPosNum].send();
+    var getStateXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
+    $.post('ManageContent/getStudentState.php', "curStudent="+student, 
+        function(html){
+            $("#State_S"+studentPosNum).val(html);
+        });
 }
 
 //This function is referenced in Content_Manage.js
