@@ -16,6 +16,6 @@ session_start();
 
 $ADMIN =  $_SESSION['adminObject'];
 echo $_SESSION['adminObject']->username . "<br>";
-echo $ADMIN->username;
+echo $ADMIN->username . "wer";
 
 ?>

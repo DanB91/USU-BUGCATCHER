@@ -49,12 +49,17 @@ class Admin extends Model{
     
     public function getCompetitions()
     {
+        
         $retCompetitions = array();
         
-        $sql = 'SELECT compid FROM COMPETITIONS WHERE userid =' . $this->getPrimaryKeyValue();
-        if(!$result = $this->connection->query($sql))
-               throw new BugCatcherException('Query Failed: ' . $this->connection->error);
+        $this->connection = connectToDB();
+        $sql = 'SELECT compid FROM COMPETITIONS WHERE userid =' . $this->getPrimaryKeyValue() ;
         
+        mysql_query('SELECT compid FROM COMPETITIONS WHERE userid = 5');
+        
+        if(!($result = $this->connection->query($sql)))
+               throw new BugCatcherException('Query Failed: ' . $this->connection->error);
+       
         //create a competition object foreach associated compeition
         while(($row = $result->fetch_assoc()))
         {

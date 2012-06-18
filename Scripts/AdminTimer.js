@@ -10,23 +10,23 @@ var COUNTINGDOWN = false;
 //Starts or unpauses the timer for the competition.
 function startTimer()
 {
-    if (STOPPED || (!STOPPED && PAUSED))
-    {
-            adminTimer = setInterval(function() {countdown();},1000);
-            STOPPED = false;
-            PAUSED = false;
-    }
+	if (STOPPED || (!STOPPED && PAUSED))
+	{
+		adminTimer = setInterval(function() {countdown();},1000);
+		STOPPED = false;
+		PAUSED = false;
+	}
 }
 
 //Pauses the timer for the competition.
 function pauseTimer()
 {
-    if (!PAUSED && !STOPPED && !COUNTINGDOWN)
-    {
-            clearInterval(adminTimer);
-            document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
-            PAUSED = true;
-    }
+	if (!PAUSED && !STOPPED && !COUNTINGDOWN)
+	{
+		clearInterval(adminTimer);
+		document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
+		PAUSED = true;
+	}
 }
 
 //Counts down the competition timer.
@@ -73,8 +73,8 @@ function setTimer()
 		}
 	}
 	
-//	setTimerXML.open("GET","AdminCompContent/setMasterTimer.php?adminCompID="+compSetID+"&time="+compSetTime,true);
-//	setTimerXML.send();
+	setTimerXML.open("GET","AdminCompContent/setMasterTimer.php?adminCompID="+compSetID+"&time="+compSetTime,true);
+	setTimerXML.send();
 }
 
 //AJAX--Updates the competition timer file to sync with the admin.
@@ -90,8 +90,8 @@ function updateTimer()
 	}
 	
 	var TimerUpdateVars = "compID=" + compSetID + "&minutes=" + minutes + "&seconds=" + seconds;
-	//updateTimerXML.open("GET","AdminCompContent/updateMasterTimer.php?"+TimerUpdateVars,true);
-	//updateTimerXML.send();
+	updateTimerXML.open("GET","AdminCompContent/updateMasterTimer.php?"+TimerUpdateVars,true);
+	updateTimerXML.send();
 }
 
 //Initializes the timer.
@@ -108,14 +108,13 @@ function createTimer()
 
 	seconds = compSetTimeS;
 	minutes = compSetTimeM;
-        alert(compSetTimeM + " " + seconds);
 
 	STOPPED = true;
 	PAUSED = false;
 	
 	if (seconds > 0)
 		COUNTINGDOWN = true;
-	//setTimer();  
+	setTimer();  
 }
 
 //Inserts leading zeroes on the minutes and seconds for the timer

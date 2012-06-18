@@ -3,38 +3,69 @@ var compSelected;
 
 //Pre-Conditions:
 //Post-Conditions:
-function loadComps()
+function CS_loadAdminComps()
 {
+
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlloadCompshttp=new XMLHttpRequest();
+    CSloadCompshttp=new XMLHttpRequest();
   }
   else
   {// code for IE6, IE5
-    xmlloadCompshttp=new ActiveXObject("Microsoft.XMLHTTP");
+    CSloadCompshttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
   
-  xmlloadCompshttp.onreadystatechange=function()
+  CSloadCompshttp.onreadystatechange=function()
   {
-    if (xmlloadCompshttp.readyState == 4 && xmlloadCompshttp.status == 200)
+    if (CSloadCompshttp.readyState == 4 && CSloadCompshttp.status == 200)
     {
-        document.getElementById('temp').innerHTML = xmlloadCompshttp.responseText;
+        
+        document.getElementById('CompetitionSelection').innerHTML = CSloadCompshttp.responseText;
         compSelected = "";
     }
   }
   
-  xmlloadCompshttp.open("GET","adminLoadAvailComps.php",true)
-  xmlloadCompshttp.send();
+  CSloadCompshttp.open("GET","adminLoadAvailComps.php",true)
+  CSloadCompshttp.send();
 }
 
 //Pre-Conditions:
 //Post-Conditions:
-function joinComp()
+function CS_joinComp()
 {
     //
     //
     //
-    //alert(compSelected);
+    if(compSelected == ""){
+        alert("Please select a competition");
+    }
+    else{
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            CSSelectloadCompshttp=new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            CSSelectloadCompshttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        CSSelectloadCompshttp.onreadystatechange=function()
+        {
+            if (CSSelectloadCompshttp.readyState == 4 && CSSelectloadCompshttp.status == 200)
+            {
+
+                document.getElementById('CScontrol').innerHTML = CSSelectloadCompshttp.responseText;
+                compSelected = "";
+            }
+        }
+
+        CSSelectloadCompshttp.open("GET","adminLoadAvailCompSelect.php?compID="+compSelected,true);
+        CSSelectloadCompshttp.send();  
+        alert("You now control this compeitiion");
+        
+    }
+    
+  /*
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     xmljoinComphttp=new XMLHttpRequest();
@@ -67,11 +98,12 @@ function joinComp()
   }
   xmljoinComphttp.open("GET","joinComp.php?compS="+compSelected,true);
   xmljoinComphttp.send();
+    */
 }
 
 //Pre-Conditions:
 //Post-Conditions:
-function createSTeam(tName)
+function CS_createSTeam(tName)
 {
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -106,7 +138,7 @@ function createSTeam(tName)
 
 //Pre-Conditions:
 //Post-Conditions:
-function mSetCookie(c_name,value,exdays)
+function CS_mSetCookie(c_name,value,exdays)
 {
 var exdate=new Date();
 exdate.setDate(exdate.getDate() + exdays);
@@ -116,8 +148,32 @@ document.cookie=c_name + "=" + c_value;
 
 //Pre-Conditions:
 //Post-Conditions:
-function getCompInfo()
+function CS_getCompInfo()
 {
+   if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    CSloadCompshttp=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    CSloadCompshttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  
+  CSloadCompshttp.onreadystatechange=function()
+  {
+    if (CSloadCompshttp.readyState == 4 && CSloadCompshttp.status == 200)
+    {
+        document.getElementById('CScontrol').innerHTML ="";
+        document.getElementById('displayAdminCompInfo').innerHTML = CSloadCompshttp.responseText;
+        
+    }
+  }
+  
+  CSloadCompshttp.open("GET","adminLoadAvailCompsPreview.php?compID="+compSelected,true)
+  CSloadCompshttp.send();
+  /*
+  
+  
   var loopCount = 1;
   var displayOutput = "";
             
@@ -144,14 +200,14 @@ function getCompInfo()
             displayOutput += "Competition ID: " + compSelected;
             displayOutput += "\n\nCompetition Length: " + mins + " mins\n";
             loopCount++;
-            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+0,true)
+            getCompInfoXML.open("GET","StudentContent/AdminCompInfo.php?compID="+compSelected+"&fileLine="+0,true)
             getCompInfoXML.send();
             break;
           case 2:
             var probs = getCompInfoXML.responseText;
             displayOutput += "\nNumber of Problems: " + probs + "\n";
             loopCount++;
-            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+2,true)
+            getCompInfoXML.open("GET","StudentContent/AdminCompInfo.php?compID="+compSelected+"&fileLine="+2,true)
             getCompInfoXML.send();
             break;
           case 3:
@@ -165,26 +221,27 @@ function getCompInfo()
               coverage="Yes";
             }
             displayOutput += "\nCode Coverage Allowed: " + coverage;
-            document.getElementById('displayInfo').value = displayOutput;
+            document.getElementById('displayAdminCompInfo').value = displayOutput;
             break;
           default:
             break;
         }
     }
   }
+  */
 }
 
 //Pre-Conditions:
 //Post-Conditions:
-function showCompInfo(str)
+function CS_showCompAInfo(str)
 {
   compSelected = str;
-  getCompInfo();
+  CS_getCompInfo();
 }
 
 //Pre-Conditions:
 //Post-Conditions:
-function search()
+function CS_search()
 {
 }
 
