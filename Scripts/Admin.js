@@ -647,26 +647,14 @@ function loadStudName(studentName, studPos)//Find Code ---------- TM1008
   {
 	//document.getElementById("txtHint").innerHTML="";
 	return;
-  } 
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	loadStudNameXML=new XMLHttpRequest();
   }
-  else
-  {// code for IE6, IE5
-	loadStudNameXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  loadStudNameXML.onreadystatechange=function()
-  {
-	if (loadStudNameXML.readyState==4 && loadStudNameXML.status==200)
-	{
-			document.getElementById(member).innerHTML=loadStudNameXML.responseText;
-			document.getElementById(studPos).disabled = true;
-	}
-  }
-  var getVars = "q="+studentName+"&studName="+studPos;
-  loadStudNameXML.open("GET","ManageContent/studentNameLoad.php?"+getVars,true);
-  loadStudNameXML.send();
+    var postVars = "q="+studentName+"&studName="+studPos;
+
+    $.post('ManageContent/studentNameLoad.php', postVars, 
+        function(html){
+            $("#"+member).html=html;
+            $("#"+studPos).attr(disabled, true)
+        });
 
 }
 
@@ -716,28 +704,13 @@ function currentSelection(element, currentStudPos)//Find Code ---------- TM1010
 //Postcondition: Places the student's username in the correct field on the Team Management page
 function getUserName(student, studentPosNum)//Find Code ---------- TM1011
 {
-	var userN;
-	var getUserNameXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-	
-	if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      getUserNameXML[studentPosNum]=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      getUserNameXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    getUserNameXML[studentPosNum].onreadystatechange=function()
-    {
-      if (getUserNameXML[studentPosNum].readyState==4 && getUserNameXML[studentPosNum].status==200)
-      {
-			document.getElementById("Username_S"+studentPosNum).value=getUserNameXML[studentPosNum].responseText;
+    var userN;
+    var getUserNameXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
+    $.post('ManageContent/getStudentUserName.php', "curStudent="+student, 
+        function(html){
+            $("#Username_S"+studentPosNum).val(html);
 
-      }
-    }
-	
-	getUserNameXML[studentPosNum].open("GET","ManageContent/getStudentUserName.php?currStudent="+student,true);
-    getUserNameXML[studentPosNum].send();
+        });		
 }
 
 //This function is called when a team has a student in a given position.
