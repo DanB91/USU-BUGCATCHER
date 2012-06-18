@@ -495,24 +495,30 @@ function setEditable(studPos)//Find Code ---------- TM1001
 //which can found under select a team in Team Management.
 function loadTeamNameList()//Find Code ---------- TM1002
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlloadTeamNameListhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlloadTeamNameListhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlloadTeamNameListhttp.onreadystatechange=function()
-  {
-    if (xmlloadTeamNameListhttp.readyState==4 && xmlloadTeamNameListhttp.status==200)
-    {
-
-        document.getElementById("MTeamList").innerHTML=xmlloadTeamNameListhttp.responseText;
-    }
-  }
-  xmlloadTeamNameListhttp.open("GET","ManageContent/loadTeamNames.php",true);
-  xmlloadTeamNameListhttp.send();
+//  if (window.XMLHttpRequest)
+//  {// code for IE7+, Firefox, Chrome, Opera, Safari
+//    xmlloadTeamNameListhttp=new XMLHttpRequest();
+//  }
+//  else
+//  {// code for IE6, IE5
+//    xmlloadTeamNameListhttp=new ActiveXObject("Microsoft.XMLHTTP");
+//  }
+//  xmlloadTeamNameListhttp.onreadystatechange=function()
+//  {
+//    if (xmlloadTeamNameListhttp.readyState==4 && xmlloadTeamNameListhttp.status==200)
+//    {
+        
+        $.ajax({type: "GET", url: "ManageContent/loadTeamNames.php", success:function(result){
+                
+                $("#MTeamList").html(result);
+                
+        }});
+//
+//        document.getElementById("MTeamList").innerHTML=xmlloadTeamNameListhttp.responseText;
+//    }
+//  }
+//  xmlloadTeamNameListhttp.open("GET","ManageContent/loadTeamNames.php",true);
+//  xmlloadTeamNameListhttp.send();
 }
 
 //This function is referenced in AdminContentUpdate.js
