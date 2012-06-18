@@ -12,10 +12,14 @@ function startTimer()
 {
 	if (STOPPED || (!STOPPED && PAUSED))
 	{
+                $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(response){ alert(response); } });
+                
 		adminTimer = setInterval(function() {countdown();},1000);
 		STOPPED = false;
 		PAUSED = false;
 	}
+        
+       // $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){} });
 }
 
 //Pauses the timer for the competition.
