@@ -5,7 +5,7 @@ function loadIndex()
  // document.getElementById("StateSelection").innerHTML=string_states;
   setInterval(function() { ValidateLoginForms(); }, 100);
   
-    if (window.XMLHttpRequest)
+   /* if (window.XMLHttpRequest)
     {
       loadIndexXML = new XMLHttpRequest();
     }
@@ -15,7 +15,9 @@ function loadIndex()
     }
     
     loadIndexXML.open("GET","onLogCookies.php",true);
-    loadIndexXML.send();
+    loadIndexXML.send();*/
+    $.ajax({type: "GET", url:"onLogCookies.php", success:function(){
+    }});	  
  
 }
 
@@ -45,7 +47,7 @@ function OnLogIn()
     
   if (LOGIN_INPUTS_VALID)
   {//The Login inputs are all valid
-    var loginXML;
+    //var loginXML;
     
     var LoginUsername = document.getElementById("Loginusername");
     var LoginPassword = document.getElementById("Loginpassword");
@@ -63,7 +65,7 @@ function OnLogIn()
     LoginContent += "password="+login_new_pass_str+"&";
     LoginContent += "usertype="+LoginUsertype;
  
-    if (window.XMLHttpRequest)
+    /*if (window.XMLHttpRequest)
     {
       loginXML = new XMLHttpRequest();
     }
@@ -75,8 +77,10 @@ function OnLogIn()
     loginXML.onreadystatechange=function()
     {
       if (loginXML.readyState == 4 && loginXML.status == 200)
-      {
-        if (loginXML.responseText == "")
+      {*/
+    $.ajax({type: "GET", url:"LoginImpl.php", data: LoginContent, success:function(result){
+        //if (loginXML.responseText == "")
+	if(result == "")
         {
           if (LoginUsertype == "student")
           {//Redirects the user to "Student.html"
@@ -89,13 +93,15 @@ function OnLogIn()
         }
         else
         {//There was some sort of error with trying to log in
-          document.getElementById("LoginError").innerHTML=loginXML.responseText;
+	    $("#LoginError").html=result;
+          //document.getElementById("LoginError").innerHTML=loginXML.responseText;
         }
+    }});
       }
-    }
+    /*}
     loginXML.open("GET","LoginImpl.php?"+LoginContent,true);
     loginXML.send();
-  }
+  }*/
   return true;
 }
 

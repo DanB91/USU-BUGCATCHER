@@ -4,7 +4,7 @@ var compID = "1234abcd";
 function CreateForm()
 {
 	var numberOfStudents = document.getElementById("PRnumStudents").value;
-	if (window.XMLHttpRequest)
+/*	if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     createFormXML=new XMLHttpRequest();
   }
@@ -16,22 +16,25 @@ function CreateForm()
   createFormXML.onreadystatechange=function()
   {
     if (createFormXML.readyState==4 && createFormXML.status==200)
-    {
+    {*/
+    $.ajax({type: "GET", url:"PreRegTemplate.php", data: "numberOfStudents="+numberOfStudents, success:function(){
       if (numberOfStudents > 0)
-			{
-				document.getElementById("PRTextArea").value=createFormXML.responseText;
-				document.getElementById("PRDownloadLink").innerHTML="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
-			}
-    }
+	{
+		document.getElementById("PRTextArea").value=createFormXML.responseText;
+		$("#PRDownloadLink").html="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
+		//document.getElementById("PRDownloadLink").innerHTML="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
+	}
+    }});
+    /*}
   }
   
   createFormXML.open("GET","PreRegTemplate.php?numberOfStudents="+numberOfStudents,true);
-  createFormXML.send();
+  createFormXML.send();*/
 }
 
 function UploadFile()
 {
-	if (window.XMLHttpRequest)
+	/*if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     uploadFileXML=new XMLHttpRequest();
   }
@@ -43,18 +46,20 @@ function UploadFile()
   uploadFileXML.onreadystatechange=function()
   {
     if (uploadFileXML.readyState==4 && uploadFileXML.status==200)
-    {
-			alert(uploadFileXML.responseText);
-    }
-  }
-  
+    {*/
+    $.ajax({type: "GET", url:"UploadRegistrationFile.php", data: "compID="+compID, success:function(result){
+	alert(result);
+	//alert(uploadFileXML.responseText);
+    }});
+  /*}
+
   uploadFileXML.open("GET","UploadRegistrationFile.php?compID="+compID,true);
-  uploadFileXML.send();
+  uploadFileXML.send();*/
 }
 
 function loadPrintPreview(element)
 {
-	var compID = element.options[element.selectedIndex].text;
+	/*var compID = element.options[element.selectedIndex].text;
 	if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     printPreviewXML=new XMLHttpRequest();
@@ -67,7 +72,10 @@ function loadPrintPreview(element)
   printPreviewXML.open("GET","RegistrationTemplates/"+compID+".xml",false);
 	printPreviewXML.send();
 	
-	showPreview(printPreviewXML.responseXML);
+	showPreview(printPreviewXML.responseXML);*/
+    $.ajax({type: "GET", url:"RegistrationTemplates/"+compID+".xml", success:function(result){
+	    showPreview(result);
+    }});
 }
 
 function showPreview(xmlDoc)

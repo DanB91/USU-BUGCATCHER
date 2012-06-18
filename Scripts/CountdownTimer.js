@@ -55,7 +55,7 @@ function countdownCD()
 //AJAX--Sets the initial value/time of the timer.
 function setTimerCD()
 {
-	if (window.XMLHttpRequest)
+	/*if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
 	setTimerXML = new XMLHttpRequest();
 	}
@@ -67,30 +67,34 @@ function setTimerCD()
 	setTimerXML.onreadystatechange=function()
 	{
 		if (setTimerXML.readyState == 4 && setTimerXML.status == 200)
-		{
+		{*/
+    $.ajax({type: "GET", url:"AdminCompContent/setCountdownTimer.php", data: "compID="+compSetID+"&time="+compSetTime, success:function(result){
 			//alert(setTimerXML.responseText);
-		}
+    }});
+		/*}
 	}
 	
 	setTimerXML.open("GET","AdminCompContent/setCountdownTimer.php?compID="+compSetID+"&time="+compSetTime,true);
-	setTimerXML.send();
+	setTimerXML.send();*/
 }
 
 //AJAX--Updates the competition timer file to sync with the admin.
 function updateTimerCD()
 {
-	if (window.XMLHttpRequest)
+	/*if (window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
     updateTimerXML = new XMLHttpRequest();
 	}
 	else
 	{// code for IE6, IE5
     updateTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
-	}
+	}*/
 	
 	var TimerUpdateVars = "compID=" + compSetID + "&minutes=" + minutes + "&seconds=" + seconds;
-	updateTimerXML.open("GET","AdminCompContent/updateCountdownTimer.php?"+TimerUpdateVars,true);
-	updateTimerXML.send();
+	$.ajax({type: "GET", url:"AdminCompContent/updateCountdownTimer.php", data: TimerUpdateVars, success:function(){
+	}});
+	/*updateTimerXML.open("GET","AdminCompContent/updateCountdownTimer.php?"+TimerUpdateVars,true);
+	updateTimerXML.send();*/
 }
 
 //Initializes the timer.
