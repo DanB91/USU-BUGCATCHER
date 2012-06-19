@@ -53,10 +53,20 @@ class Team extends Model {
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();
 	$result=$this->findInDB("TEAM_FOUND_BUG", $data);
-	if($result)
-	    return $result['timesolved'];
+	if(($row = $result->fetch_assoc()))
+	    return $row['timesolved'];
 	else
 	    return false;
+    }
+    
+    public function getNumberOfStudentsOnTeam(){
+	$data['teamid']=$this->getPrimaryKeyValue();
+	$result=$this->findInDB("STUDENT_TEAM_LINK", $data);
+	$numStudents=0;
+	while(($row = $result->fetch_assoc())){
+	    $numStudents++;
+	}
+	return $numStudents;
     }
 }
 

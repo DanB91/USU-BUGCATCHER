@@ -146,10 +146,7 @@ abstract class Model {
 	if(!$result = $this->connection->query($sql))
                throw new BugCatcherException('Select Failed: ' . $this->connection->error);
 	
-	if(($row = $result->fetch_assoc()))
-            return $row;
-        else
-            return false;
+        return $result;
     }
 
     
