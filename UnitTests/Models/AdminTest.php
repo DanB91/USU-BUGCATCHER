@@ -31,7 +31,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     
     public function testRegisterAdmin()
     {
-        //Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
+        Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
     }
     
     public function testFields()

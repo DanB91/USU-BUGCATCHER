@@ -1,17 +1,21 @@
 <?php
-    $compArray =  $_SESSION['adminObject']->avaiableComp;
+    require 'Models/Admin.php';
+    session_start();
     
-    $content = "<select size='15' onclick='showCompInfo(this.value)' style='width:150px;'>";
+    $compArray =   $_SESSION['adminObject']->getCompetitions();
+    
+    $content = "<select size='15' onclick='CS_showCompAInfo(this.value)' style='width:150px;'>";
     //$competitions = array();
     foreach( $compArray as $value )
     {
-        $content .= "<option value='${compArray['compid']}'>${$compArray['compName']}</option>"; 
+        $content .= "<option value='$value->compid'>$value->compname</option>"; 
         //array_push($competitions, $row['compID']);
     }
     
     $content .= "</select>";
     
     echo $content;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.

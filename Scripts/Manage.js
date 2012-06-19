@@ -2,10 +2,11 @@ function loadTeamInfo(str)
 {
   if (str.length == 0)
   {
-    document.getElementById("TeamTable").innerHTML="";
+    $("#TeamTable").html("");
+    //document.getElementById("TeamTable").innerHTML="";
     return;
   } 
-  if (window.XMLHttpRequest)
+  /*if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     loadInfoXML=new XMLHttpRequest();
   }
@@ -17,18 +18,21 @@ function loadTeamInfo(str)
   loadInfoXML.onreadystatechange=function()
   {
     if (loadInfoXML.readyState==4 && loadInfoXML.status==200)
-    {
-      document.getElementById("TeamTable").innerHTML=loadInfoXML.responseText;
+    {*/
+    $.ajax({type: "GET", url:"manageImpl2.php", data: "q="+str, success:function(result){
+	    $("#TeamTable").html(result);
+    }});
+    /*document.getElementById("TeamTable").innerHTML=loadInfoXML.responseText;
     }
   }
   
   loadInfoXML.open("GET","manageImpl2.php?q="+str,true);
-  loadInfoXML.send();
+  loadInfoXML.send();*/
 }
 
 function addTeam()
 {
-  if (window.XMLHttpRequest)
+  /*if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     addTeamXML=new XMLHttpRequest();
   }
@@ -40,19 +44,24 @@ function addTeam()
   addTeamXML.onreadystatechange=function()
   {
     if (addTeamXML.readyState == 4 && addTeamXML.status == 200)
-    {
-      document.getElementById("TeamList").innerHTML=addTeamXML.responseText;
+    {*/
+    var TeamName = "teamName=" + document.getElementById("teamName").value;
+    
+    $.ajax({type: "GET", url:"manageImpl.php", data: TeamName, success:function(result){
+      $("#TeamList").html(result);
       document.getElementById("teamName").value='';
-    }
+    }});
+    /*}
   }
   
-  var TeamName = "teamName=" + document.getElementById("teamName").value;
+ 
   addTeamXML.open("GET","manageImpl.php?"+TeamName,true);
-  addTeamXML.send();
+  addTeamXML.send();*/
 }
 
 function loadTeamNames()
 {
+    /*
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     loadTeamsXML=new XMLHttpRequest();
@@ -65,10 +74,12 @@ function loadTeamNames()
   loadTeamsXML.onreadystatechange=function()
   {
     if (loadTeamsXML.readyState==4 && loadTeamsXML.status==200)
-    {
-      document.getElementById("TeamList").innerHTML=loadTeamsXML.responseText;
-    }
+    {*/
+    $.ajax({type: "GET", url:"manageImpl3.php", success:function(result){
+      $("#TeamList").html(result);
+    }});
+    /*}
   }
   loadTeamsXML.open("GET","manageImpl3.php",true);
-  loadTeamsXML.send();
+  loadTeamsXML.send();*/
 }

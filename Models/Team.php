@@ -18,6 +18,11 @@ class Team extends Model {
         parent::__construct('TEAMS', $uniqueValue, $uniqueFieldName, array('STUDENT_TEAM_LINK', 'TEAM_COMPETITION_LINK'));
     }
     
+    /**
+     *
+     * @param array $registerData
+     * @return \Team the team you have created
+     */
     public static function createTeam(array $registerData)
     {
         
@@ -27,6 +32,8 @@ class Team extends Model {
         }
         
         Model::addRow('TEAMS', $registerData);
+        
+        return new Team($registerData['teamname'], 'teamname');
     }
     
     public function addTeamToCompetition(Competition $comp)
@@ -40,24 +47,12 @@ class Team extends Model {
     }
     
     public function foundBugInCompetition(Bug $bug, Competition $comp){
-	$data=array();
+	$data=array('teamid', 'bugid', 'compid');
 	$data['teamid']=$this->getPrimaryKeyValue();
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();
 	Model::addRow("TEAM_FOUND_BUG", $data);
-    }
-    
-    public function hasFoundBugInCompetition(Bug $bug, Competition $comp){
-	$data=array();
-	$data['teamid']=$this->getPrimaryKeyValue();
-	$data['bugid']=$bug->getPrimaryKeyValue();
-	$data['compid']=$comp->getPrimaryKeyValue();
-	$result=$this->findInDB("TEAM_FOUND_BUG", $data);
-	if($result)
-	    return $result['timesolved'];
-	else
-	    return false;
-    }
+    }  
 }
 
 ?>

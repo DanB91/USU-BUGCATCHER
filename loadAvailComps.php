@@ -1,6 +1,8 @@
 <?php
+    //echo " test";
+    
     session_start();
-    $compArray =  $_SESSION['adminObject']->getCompetitions;
+    $compArray =  $_SESSION['adminObject']->getCompetitions();
     
     $content = "<select size='15' onclick='showCompInfo(this.value)' style='width:150px;'>";
     //$competitions = array();
@@ -13,6 +15,7 @@
     $content .= "</select>";
     
     echo $content;
+
 //    session_start();
 //    $_SESSION['compList'] = $competitions;
 ?>
