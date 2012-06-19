@@ -41,13 +41,14 @@ echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $d
                     "hidden" => $hidden,
                     "duration" => $compTime,
                     "codecoverage" => 0,
-                    "countdown" => $inclCD);
+                    "countdown" => $inclCD
+                   );
 
 
 try {
     
 $admin->createCompetition($compData);
-$_SESSION['compN'] = $compN;
+setcookie("compN", $compN, time() + 60 * 60 * 24 * 30);//  $_SESSION['compN'] = $compN;
 }
 catch(Exception $e){ echo $e;  }
 
