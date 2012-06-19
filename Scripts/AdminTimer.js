@@ -54,7 +54,7 @@ function countdown()
   }
   else
   {
-    document.getElementById('header-timer').innerHTML=leadingZero(minutes) + ":" + leadingZero(seconds);
+    document.getElementById('header-timer').innerHTML=minutes + ":" + leadingZero(seconds);
     updateTimer();
   }
 }
