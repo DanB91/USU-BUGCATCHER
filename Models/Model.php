@@ -224,7 +224,16 @@ abstract class Model {
             throw new BugCatcherException('Update query failed: ' . $this->connection->error);
     }
     
-    
+    public function removeFromDB()
+    {
+        $sql = 'DELETE FROM ' . $this->tableName . ' WHERE ' . $this->getPrimaryKeyName()
+                . ' = ' . $this->getPrimaryKeyValue();
+        
+        if(!$this->connection->query($sql))
+            throw new BugCatcherException('Delet query failed: ' . $this->connection->error);
+    }
+
+
     /**
      *
      * @param Model $model
@@ -401,7 +410,9 @@ abstract class Model {
            }
            
            
-           if (strpos($row['Type'], 'text') !== FALSE || strpos($row['Type'], 'char') !== FALSE)
+           if (strpos($row['Type'], 'text') !== FALSE || strpos($row['Type'], 'char') !== FALSE ||
+                   strpos($row['Type'], 'date') !== FALSE || strpos($row['Type'], 'timestamp') !== FALSE ||
+                   strpos($row['Type'], 'enum') !== FALSE)
            {
                
                $fieldType = 's';
@@ -413,10 +424,7 @@ abstract class Model {
            {
                $fieldType = 'i';
            }
-           elseif (strpos($row['Type'], 'date') !== FALSE || strpos($row['Type'], 'timestamp') !== FALSE)
-           {
-               $fieldType = 's';
-           }
+           
            //the database contains a type we do not support
            else
            {

@@ -75,7 +75,10 @@ class UserTest extends PHPUnit_Framework_TestCase {
         //$this->object->addUserToTeam(new Team(1));
     }
     
-    
+    public function testSendInvite()
+    {
+        $this->object->sendTeamInviteToUser('', $user);
+    }
 
 }
 
