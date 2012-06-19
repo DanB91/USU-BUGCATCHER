@@ -1,7 +1,7 @@
 <?php
 //Used to set the duration time of cookies to a month
-require 'Models/User.php';
-require 'Models/Admin.php';
+require_once "header.php";
+session_start();
 $duration=time()+60*60*24*30;
 
 //Variables used to store the information from the login form
@@ -21,7 +21,6 @@ if ($accountType_str == 'admin')
   else
   {
 
-        session_start();
        
         $_SESSION['usertype'] = 'admin';
         $_SESSION['adminObject'] = $ADMIN;
@@ -49,7 +48,7 @@ else
   }
   else
   {//Username was found and the password is correct
-    session_start();
+  
     $_SESSION['usertype'] = 'student';
     $_SESSION['userObject'] = $USER;
     //echo "Pie";
