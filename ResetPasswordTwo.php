@@ -14,7 +14,7 @@ if ($accountType_str == 'admin')
 {
 	$admin = new Admin($username_str, "username");
 	if (($admin->fname == $firstname_str)&&($admin->lname == $lastname_str))
-	{echo "here";
+	{
 		$admin->password = $newPass_str;
                 $admin->commitToDB();
 		echo "Your password has been reset. You may now log in.";
@@ -31,7 +31,6 @@ else
 	{
 		$user->password = $newPass_str;
                 $user->commitToDB();
-                echo ($newPass_str);
 		echo "Your password has been reset. You may now log in.";
 	}
 	else

@@ -19,7 +19,7 @@ function SendResetEmail()
 		actType = "student";
 	}
 	
- 	if (window.XMLHttpRequest)
+ 	/*if (window.XMLHttpRequest)
   	{// code for IE7+, Firefox, Chrome, Opera, Safari
   		xmlsendEmail=new XMLHttpRequest();
   	}
@@ -30,13 +30,15 @@ function SendResetEmail()
 	xmlsendEmail.onreadystatechange=function()
 	{
  		if (xmlsendEmail.readyState==4 && xmlsendEmail.status==200)
-    	{
-    		alert(xmlsendEmail.responseText);
-   		}
+    	{*/
+	$.ajax({type: "GET", url:"SendEmailReset.php", data: "username="+username+"&email="+email+"&usertype="+actType, success:function(result){
+    		alert(result);
+	}});
+   		/*}
 	}
 	
 	xmlsendEmail.open("GET","SendEmailReset.php?username="+username+"&email="+email+"&usertype="+actType,true);
-	xmlsendEmail.send();
+	xmlsendEmail.send();*/
 }
 
 function resetPassword()

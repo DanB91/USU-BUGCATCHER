@@ -30,7 +30,10 @@ class User extends Model{
     
     public function addUserToTeam(Team $team)
     {
+	if($team->getNumberOfStudentsOnTeam()==3)
+	    return false;
         $this->createRelationToModel($team, 'STUDENT_TEAM_LINK');
+	return true;
     }
     
     
@@ -76,6 +79,8 @@ class User extends Model{
         }
         
         Model::addRow('USERS', $registerData);
+        
+        return new User($registerData['username'], 'username');
     }
     
     
