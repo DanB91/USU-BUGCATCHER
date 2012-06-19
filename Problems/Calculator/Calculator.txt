@@ -1,5 +1,4 @@
 
-
 public class Calculator{
 
 	public static double doTheMath(double num1, double num2, String sign){
@@ -17,7 +16,7 @@ public class Calculator{
 
 	public static double doAdd(double num1, double num2){
 		double answer = num1;
-		for (int i = 0; i&ltnum2; i++)
+		for (int i = 0; i<num2; i++)
 			answer++;
 		return answer;
 	}

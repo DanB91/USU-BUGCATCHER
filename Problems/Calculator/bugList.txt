@@ -1,5 +1,5 @@
-Calculator takes an integer, an operation string, and an integer, and returns the result of that operation.
-LINE 10: Switches num1 and num2.
-LINE 36: Takes the mod instead of dividing.
+Calculator takes an integer, an operation string, and an integer, and returns the result of that operation.1)
+LINE 10: Switches num1 and num2.2)
+LINE 36: Takes the mod instead of dividing.3)
 LINE 22: doAdd only works on integers due to for loop.
-LINE 31: multiplies by num2 twice.
+4)LINE 31: multiplies by num2 twice.5) No "try...catch" in code to catch input errors.

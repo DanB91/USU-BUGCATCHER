@@ -6,4 +6,4 @@
 <br/>
 4. The Nth number is the number input by the user.
 <br/>
-5. This program does not accept integers greater than or equal to 30.
+5. This program does not accept integers greater than 30.  If the entered integer is greater, the program will output: "Error: Input too large."

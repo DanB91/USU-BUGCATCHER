@@ -2,4 +2,4 @@
 <br/>
 2.It will list the powers of in ascending order starting with 2^0 and ending with 2^N-1.
 <br/>
-3.Only works if 0 <= N < 31 since 2^31 overflows an int.
+3.Only works if 0 <= N <= 20.

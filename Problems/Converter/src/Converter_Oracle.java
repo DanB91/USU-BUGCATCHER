@@ -39,8 +39,16 @@ public class Converter_Oracle {
     public static void main(String[] args) {
         try{
             double num = Double.parseDouble(args[0]);
+            if(num>-1){
+                
             String answer = convertSecsToTime(num);
             System.out.println(answer);
+            
+            }else{
+                
+                System.out.println("Error: Input must be positive.");
+            
+        }
         }catch(Exception e){
             System.out.println("Error: Bad Input");
         }

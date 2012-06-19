@@ -2,7 +2,7 @@
 
 public class FindPrimes_Oracle {
 	
-	public static String listPrimes(int max){
+	public static String listPrimes(double max){
 		String primes = "";
 		boolean isFirst = true;
 		
@@ -27,8 +27,16 @@ public class FindPrimes_Oracle {
 	
     public static void main(String[] args){
         try{
-            int maximum = Integer.parseInt(args[0]);
+            double maximum = Integer.parseInt(args[0]);
+            if(maximum <= 2000000000){
+                if(Math.floor(maximum) == maximum){
             System.out.println(listPrimes(maximum));
+                }else{
+                    System.out.println("Error: Input must be an integer.");
+                }
+            }else{
+                System.out.println("Error: Input must be less than or equal to 2000000000.");
+            }
         }catch(Exception e){
             System.out.println("Error: Bad Input");
         }

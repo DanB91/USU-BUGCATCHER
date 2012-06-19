@@ -1,8 +1,17 @@
 public class BinaryOracle { 
 	public static void main(String[] args) { 
-		try{
+	try{
+	
+            double input = Double.parseDouble(args[0]);
+            
+            if(input <= 2147483647){//checks to see if input is too large
+                
+            if(input > -1){//checks for positive inputs
+                
+            if (Math.floor(input)==input) {
+                        
 			// read in the command-line argument
-			int n = Integer.parseInt(args[0]);
+			double n = input;
 
 			// set v to the largest power of two that is <= n
 			int v = 1;
@@ -29,12 +38,22 @@ public class BinaryOracle {
 			}
 
 			System.out.println();
-
-		}
-
-		catch(Exception e)
-		{
-			System.out.println("Error: Bad Input");
-		}
+            }else{
+                
+            	System.out.println("Error: Input must be an integer.");
+            }
+            }else{
+                
+                System.out.print("Error: Input must be a positive integer.");
+            }
+            }else{
+        	
+        	System.out.print("Error: Input is too large.");
+            }
+		
+	}catch(Exception e){
+            
+		System.out.println("Error: Bad Input. Input must be a positive integer within the range.");
+	}
 	}
 }
