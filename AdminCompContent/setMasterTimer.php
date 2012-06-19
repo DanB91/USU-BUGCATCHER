@@ -1,16 +1,17 @@
 <?php
+require_once '../header.php';
 session_start();
-//Variable to create the Master Timer file and to write the starting competition time to it
-$admin = $_SESSION['adminObject'];
-$compN = $_SESSION['compN'];
 
-//if($currComp->starttime == '0000-00-00 00:00:00')
-//    $currComp->starttime = time();
-//else
-try
+$admin = $_SESSION['adminObject'];
+$compN = $_COOKIE['compN'];
+
+//Store the start time of the competition in the db
+if($admin->getCompetitionByCompName($compN)->starttime === '0000-00-00 00:00:00')
 {
-    echo  $admin->getCompetitionByCompName($compN);
+    $temp = $admin->getCompetitionByCompName($compN);
+    $temp->starttime = date("Y-m-d H:i:s");
+    $temp->commitToDB();
+    //echo $admin->getCompetitionByCompName($compN)->starttime;
 }
-catch(Exception $e) { echo $e; }
 
 ?>
