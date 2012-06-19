@@ -37,13 +37,22 @@ function joinComp()
 
 //Pre-Conditions:
 //Post-Conditions:
+function loadTeamInvites()
+{
+    $.post('loadTeamInvites.php', "", 
+        function(html){
+            $("#TeamInvitations").html(html);
+        });
+}
+
+//Pre-Conditions:
+//Post-Conditions:
 function createSTeam(tName)
 {
     $.post('createSTeam.php', "compS="+compSelected+"&tName="+tName, 
         function(html){
 
             var t = html.trim();
-            //alert(t);
             if(t == '1')
             {
                 //alert("2compID: "+compSelected);
@@ -169,29 +178,71 @@ function search()
 //############################################################################//
 
 //
-function StartToMember()
+function StartToMember(teamID)
 {
-	$(document.getElementById("LandingView-Start")).hide();
-	$(document.getElementById("LandingView-Member")).show();
+        
+    $.post('StudentContent/addMemberToTeam.php', "teamID="+teamID, 
+        function(html){
+            if (html.trim() == '1')
+            {
+                $("#LandingView-Start").hide();
+                $("#LandingView-Member").show();  
+            }
+            else
+                alert(html);
+        });
+        
 }
 
 //
-function MemberToStart()
+function MemberLeaveTeam()
 {
-	$(document.getElementById("LandingView-Member")).hide();
-	$(document.getElementById("LandingView-Start")).show();
+	$("#LandingView-Member").hide();
+	$("#LandingView-Start").show();
+
+    $.post('StudentContent/leaveTeam.php',"captain=false", 
+        function(){
+        });
 }
 
 //
 function StartToCaptain()
 {
-	$(document.getElementById("LandingView-Start")).hide();
-	$(document.getElementById("LandingView-Captain")).show();
+
+        
+    var teamName = $("#LandingTeamName").val();
+    var inviteOne = $("#LandingInvite1").val();
+    var inviteTwo = $("#LandingInvite2").val();
+            
+    $.post('StudentContent/captainCreateTeam.php', "newTeam=true&teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        function(html){
+            if (html.trim() == '1')
+            {
+                $("#LandingView-Start").hide();
+                $("#LandingView-Captain").show();  
+            }
+            else
+                alert(html);
+        });
+        
 }
 
 //
-function CaptainToStart()
+function CaptainLeaveTeam()
 {
-	$(document.getElementById("LandingView-Captain")).hide();
-	$(document.getElementById("LandingView-Start")).show();
+	$("#LandingView-Captain").hide();
+	$("#LandingView-Start").show();
+        
+            $.post('StudentContent/leaveTeam.php',"captain=true", 
+        function(){
+        });
+}
+
+function sendInvites()
+{
+       var inviteOne = $("#LandingInvite1").val();
+        var inviteTwo = $("#LandingInvite2").val();
+         $.post('StudentContent/captainCreateTeam.php', "newTeam=false&teamName=none&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        function(){
+        });
 }
