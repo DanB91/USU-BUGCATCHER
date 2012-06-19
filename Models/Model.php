@@ -280,7 +280,7 @@ abstract class Model {
         $this->getFieldTypes();
         
         //if the unique value is is a string, enclose it in quotes
-        $searchValue = ($this->types[$this->uniqueFieldName] === 's') ? "'" . $this->uniqueFieldValue . "'" : 
+        $searchValue = ($this->types[$this->uniqueFieldName] === 's' && $this->uniqueFieldValue[0]!="'") ? "'" . $this->uniqueFieldValue . "'" : 
             $this->uniqueFieldValue;
         
         if(!$result = $this->connection->query('SELECT * FROM ' . $this->tableName . ' WHERE ' . $this->uniqueFieldName

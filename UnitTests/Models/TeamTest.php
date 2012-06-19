@@ -2,6 +2,7 @@
 
 require_once dirname(__FILE__) . '/../../Models/Team.php';
 require_once dirname(__FILE__) . '/../../Models/Competition.php';
+require_once dirname(__FILE__) . '/../../Models/Bug.php';
 
 /**
  * Test class for Team.
@@ -23,9 +24,9 @@ class TeamTest extends PHPUnit_Framework_TestCase {
     }
 
     public function testFields(){
-	$this->assertSame($this->object->teamname, 'team1');
-	$this->assertSame($this->object->teamleaderid, '1');
-	$this->assertSame($this->object->hidden, '1');
+	$this->assertSame($this->object->teamname, 'testTeam');
+	$this->assertSame($this->object->teamleaderid, '21');
+	$this->assertSame($this->object->hidden, '0');
 	$this->assertSame($this->object->joinable, '0');
 	
     }
@@ -43,28 +44,46 @@ class TeamTest extends PHPUnit_Framework_TestCase {
      * @todo Implement testCreateTeam().
      */
     public function testCreateTeam() {
-        /*Team::createTeam(array('teamname' => 'A-team', 'teamleaderid' => 1, 'hidden' => 1));
-	$team = new Team(13);
+        Team::createTeam(array('teamname' => 'A-team', 'teamleaderid' => 10, 'hidden' => 1));
+	$team = new Team(28);
 	$this->assertSame($team->teamname, 'A-team');
-	$this->assertSame($team->teamleaderid, '1');
+	$this->assertSame($team->teamleaderid, '10');
 	$this->assertSame($team->hidden, '1');
-	$this->assertSame($team->joinable, '0');*/
+	$this->assertSame($team->joinable, '0');
     }
     
     public function testAddTeamToCompetition() {
-	$competition=new Competition(1);
-	$this->assertSame($competition->compname, 'test');
+	$competition=new Competition(20);
+	$this->assertSame($competition->compname, '123');
 	$this->object->addTeamToCompetition($competition);
-	$this->assertSame($competition->teamids[0], '1');
-	$this->assertSame($this->object->compids[0], '1');
+	//$this->assertSame($competition->teamids[0], '1');
+	//$this->assertSame($this->object->compids[0], '1');
     }
 
     public function testRemoveTeamFromCompetition() {
-	$competition=new Competition(1);
-	$this->assertSame($competition->compname, 'test');
+	$competition=new Competition(20);
+	$this->assertSame($competition->compname, '123');
 	$this->object->removeTeamFromCompetition($competition);
-	$this->assertSame($competition->teamids, array());
-	$this->assertSame($this->object->compids, array());
+	//$this->assertSame($competition->teamids, array());
+	//$this->assertSame($this->object->compids, array());
+    }
+    
+    public function testFoundBugInCompetition(){
+	$bug=new Bug(1);
+	$comp=new Competition(20);
+	$this->object->foundBugInCompetition($bug, $comp);
+    }
+    
+    public function testHasFoundBugInCompetition(){
+	$bug=new Bug(1);
+	$comp=new Competition(20);
+	$time=$this->object->hasFoundBugInCompetition($bug, $comp);
+	echo $time;
+	
+    }
+    
+    public function testGetNumberOfStudentsOnTeam(){
+	$this->assertSame($this->object->getNumberOfStudentsOnTeam(), 1);
     }
 
 }

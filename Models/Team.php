@@ -32,7 +32,6 @@ class Team extends Model {
         }
         
         Model::addRow('TEAMS', $registerData);
-        
         return new Team($registerData['teamname'], 'teamname');
     }
     
