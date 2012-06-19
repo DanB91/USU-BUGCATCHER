@@ -9,23 +9,18 @@
 //See Student.js for more details
 
 $comp = $_SESSION['competitionObject'];
+$compID = $comp->compid;
 $user = $_SESSION['userObject'];
 $userID = $user->userID;
+$team = $_SESSION['teamObject'];
 
-if(isset($_COOKIE["user"]) && $_COOKIE["user"] != NULL && isset($_COOKIE["competitionObject"]) && $_COOKIE["compID"] != '')//if the competition has been created and the user is loged in correctly
+if(isset($_COOKIE["user"]) && $_COOKIE["user"] != NULL && isset($_COOKIE["competitionObject"]) && $_COOKIE["competitionObject"] != NULL)//if the competition has been created and the user is loged in correctly
 {
-	$comp = strtolower($comp);
+	$compID = strtolower($compID);
 	$count = 0;
 	$resultString = '';
 		
-		$con = mysql_connect('localhost', 'guest', '');
-		mysql_select_db("competition", $con);
-		$sql="SELECT * FROM ${comp}students WHERE userID ='${useID}'";
-		$result = mysql_query($sql);
-		$row = mysql_fetch_array($result);
-		$teamName = $row['teamName'];
-		
-		if($teamName != "")//If on a team
+		if($team->teamname != "")//If on a team
 		{
 		
 			$results = mysql_query("SELECT * FROM ${comp}teams ORDER BY bugsFound DESC,totaltimefound DESC LIMIT 3");

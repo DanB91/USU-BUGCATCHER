@@ -39,9 +39,16 @@ public class Converter_Bug3 {
     public static void main(String[] args) {
         try{
             double num = Double.parseDouble(args[0]);
+             if(num>-1){
+                
             String answer = convertSecsToTime(num);
             System.out.println(answer);
-        }catch(Exception e){
+            
+            }else{
+                
+                System.out.println("Error: Input must be positive.");
+            
+        }}catch(Exception e){
             System.out.println("Error: Bad Input");
         }
     }
