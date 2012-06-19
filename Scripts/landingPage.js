@@ -181,11 +181,16 @@ function search()
 //
 function StartToMember(teamID)
 {
-    $("#LandingView-Start").hide();
-    $("#LandingView-Member").show();
         
     $.post('StudentContent/addMemberToTeam.php', "teamID="+teamID, 
-        function(){
+        function(html){
+            if (html.trim() == '1')
+            {
+                $("#LandingView-Start").hide();
+                $("#LandingView-Member").show();  
+            }
+            else
+                alert(html);
         });
         
 }
@@ -200,8 +205,23 @@ function MemberLeaveTeam()
 //
 function StartToCaptain()
 {
-	$("#LandingView-Start").hide();
-	$("#LandingView-Captain").show();
+
+        
+    var teamName = $("#LandingTeamName").val();
+    var inviteOne = $("#LandingInvite1").val();
+    var inviteTwo = $("#LandingInvite2").val();
+            
+    $.post('StudentContent/captainCreateTeam.php', "teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        function(html){
+            if (html.trim() == '1')
+            {
+                $("#LandingView-Start").hide();
+                $("#LandingView-Captain").show();  
+            }
+            else
+                alert(html);
+        });
+        
 }
 
 //
