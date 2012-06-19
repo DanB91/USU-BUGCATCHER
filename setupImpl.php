@@ -1,14 +1,12 @@
 <?php
 
-function exception_handler($exception) {
-  echo "Uncaught exception: " , $exception->getMessage(), "\n";
-}
+//require_once 'Mode/Admin.php';
 
-set_exception_handler('exception_handler');
+//set_exception_handler('exception_handler');
 
-function error_handler($errno, $err) {
-  echo "Uncaught err: " , $err, "\n";
-}
+//function error_handler($errno, $err) {
+//  echo "Uncaught err: " , $err, "\n";
+//}
 
 set_error_handler('error_handler');
 
@@ -23,7 +21,7 @@ $compN = $_GET["compN"];
 $passwd = $_GET["passwd"];
 $desc = $_GET["desc"];
 $hidden = $_GET["hidden"];
-//$joinable = $_GET["joinable"];
+$joinable = $_GET["joinable"];
 $compTime = $_GET["CompTime"];
 $codeCov = $_GET["codeCov"];
 $inclCD = $_GET["inclCD"];

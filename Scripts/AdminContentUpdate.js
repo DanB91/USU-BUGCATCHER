@@ -66,10 +66,10 @@ function insertHTML(tabValue)
       filePath = "Hints.html";
       break;
     case 4:
-      filePath = "selectComp.php";
+      filePath = "selectComp.html";
       break;
     default:
-  }
+  }/*
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     InsertHTMLhttp=new XMLHttpRequest();
@@ -82,8 +82,9 @@ function insertHTML(tabValue)
   InsertHTMLhttp.onreadystatechange=function()
   {
     if (InsertHTMLhttp.readyState == 4 && InsertHTMLhttp.status == 200)
-    {
-      document.getElementById('Content').innerHTML = InsertHTMLhttp.responseText;
+    {*/
+$.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:function(result){
+      $('#Content').html(result);
       switch(tabValue)
       {
         case 0:
@@ -106,13 +107,19 @@ function insertHTML(tabValue)
           //setNavClass("navHints");
           clearInterval(progUpdate); 
           break;
+        case 4:
+         
+          CS_loadAdminComps();
+          break;
         default:
           return;
       }
+}});
+      /*
     }
   }
   
   InsertHTMLhttp.open("GET","InsertHTML.php?filePath="+filePath,true);
-  InsertHTMLhttp.send();
+  InsertHTMLhttp.send();*/
 }
 
