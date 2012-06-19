@@ -1,5 +1,5 @@
 <?php
-require_once TeamInvite.php;
+require_once "header.php";
 
 $user = $_SESSION['userObject'];
 $invites = $user->getTeamInvites();

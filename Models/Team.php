@@ -46,7 +46,7 @@ class Team extends Model {
     }
     
     public function foundBugInCompetition(Bug $bug, Competition $comp){
-	$data=array();
+	$data=array('teamid', 'bugid', 'compid');
 	$data['teamid']=$this->getPrimaryKeyValue();
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();

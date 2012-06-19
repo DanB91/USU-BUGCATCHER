@@ -233,7 +233,10 @@ abstract class Model {
     protected function createRelationToModel(Model $model, $tableName)
     {
 	$this->values[$model->primaryKeyName . "s"][]=$model->getPrimaryKeyValue();
+	var_dump($this->values[$model->primaryKeyName . "s"]);
 	$model->values[$this->primaryKeyName . "s"][]=$this->getPrimaryKeyValue();
+	echo"comp";
+	var_dump($model->values[$this->primaryKeyName . "s"]);
 	
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
@@ -420,7 +423,7 @@ abstract class Model {
            //the database contains a type we do not support
            else
            {
-               throw new BugCatcherException('Database contains a type we do not support: '.$row['Type'] . "\n");
+               throw new BugCatcherException('Database contains a type we do not support: '.$row['Type']);
            }
            
            $this->types[$row['Field']] = $fieldType;
@@ -465,11 +468,12 @@ abstract class Model {
         $values .= ')';
         
         $sql .= $values;
+        
        
         $con = connectToDB();
-	
+        
         if(!$con->query($sql))
-           throw new ModelAlreadyExistsException("Error inserting into database: " ."${sql}".  $con->error);
+           throw new ModelAlreadyExistsException('Error inserting into database: ' . $con->error);
     }
 }
 

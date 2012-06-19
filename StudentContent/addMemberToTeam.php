@@ -1,9 +1,6 @@
 <?php
 
-require_once "Team.php";
-require_once "User.php";
-require_once "TeamInvite.php";
-require_once "Competition.php";
+require_once "header.php";
 
 $inviteID = $_POST['inviteID'];
 $invite = new Invite($inviteID);

@@ -112,8 +112,7 @@ function OnRegister()
 
 function setStateSelectStyle(bgcolor)
 {
-  var stateElement = $("#Registrationstate");
-  stateElement.style.backgroundColor = bgcolor;
+  var stateElement = document.getElementById("Registrationstate");
   for(var i = 0; i < stateElement.options.length; i++)
   {
     stateElement.options[i].style.backgroundColor = '';

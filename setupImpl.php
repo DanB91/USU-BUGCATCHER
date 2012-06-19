@@ -12,7 +12,7 @@ set_error_handler('error_handler');
 
 require_once "Models/Admin.php";
 
-//session_start();
+session_start();
 
 $nProbs = $_GET["numProbs"];
 $pArr = $_GET["problems"];
@@ -25,16 +25,9 @@ $joinable = $_GET["joinable"];
 $compTime = $_GET["CompTime"];
 $codeCov = $_GET["codeCov"];
 $inclCD = $_GET["inclCD"];
-//$admin = $_SESSION['adminObject'];
-try
-{
-   $admin = new Admin(3); 
-}
-catch(Exception $e)
-{
-    echo $e->getMessage();
-    
-}
+$admin = $_SESSION['adminObject'];
+
+
 
 echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $desc . "\n" . "hidden: " . $hidden . "\n" . "compT: " . $compTime;
 
@@ -46,12 +39,14 @@ echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $d
                     "hidden" => $hidden,
                     "duration" => $compTime,
                     "codecoverage" => 0,
-                    "countdown" => $inclCD);
+                    "countdown" => $inclCD
+                   );
 
 
 try {
     
 $admin->createCompetition($compData);
+setcookie("compN", $compN, time() + 60 * 60 * 24 * 30);//  $_SESSION['compN'] = $compN;
 }
 catch(Exception $e){ echo $e;  }
 
