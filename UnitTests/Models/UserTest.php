@@ -80,7 +80,10 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	
     }
     
-    
+    public function testSendInvite()
+    {
+        $this->object->sendTeamInviteToUser('', $user);
+    }
 
 }
 

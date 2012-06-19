@@ -2,6 +2,7 @@
 
 require_once 'Model.php';
 require_once 'Team.php';
+require_once 'TeamInvite.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -36,6 +37,35 @@ class User extends Model{
 	return true;
     }
     
+    
+    
+    public function sendTeamInviteToUser(Team $team, User $user)
+    {
+        TeamInvite::createTeamInvite(array('senderid' => $this->getPrimaryKeyValue(), 'teamid' => $team->getPrimaryKeyValue(),
+            'receiverid' => $user->getPrimaryKeyValue()));
+    }
+    
+   
+    public function getTeamInvites(){
+        
+        $retInvites = array();
+        $this->connection = connectToDB();
+        
+        
+        $sql = 'SELECT teaminviteid FROM TEAM_INVITES WHERE receiverid =' . $this->getPrimaryKeyValue();
+        if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $this->connection->error);
+        
+        
+        while(($row = $result->fetch_assoc()))
+        {
+            $retInvites[] = new TeamInvite($row['teaminviteid']);
+        }
+        
+        return $retInvites;   
+    }
+
+
     
     /**
      * If user and password match, this method returns a user, else it returns false
@@ -82,6 +112,8 @@ class User extends Model{
         
         return new User($registerData['username'], 'username');
     }
+    
+    
     
     
     
