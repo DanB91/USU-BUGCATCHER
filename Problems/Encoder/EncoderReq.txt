@@ -1,5 +1,5 @@
-1. Encode takes a word and an integer. The word represents the message to be encrypted, and the integer is the amount to shift each letter of the string by in the alphabet.
+1. Encode takes a word and an integer. The word represents the message to be encrypted, and the integer is the amount each letter of the string is shifted by in the alphabet.
 <br/>
-For example, Encoder "abc 4" would return "efg" and Encoder ABC -1 would return ZAB
+For example, Encoder "abcd 4" would return "efgh" and Encoder ABC -1 would return ZAB
 <br/>
 2. The encoder should maintain capitalization and accept any integer. 

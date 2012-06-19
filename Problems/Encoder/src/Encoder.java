@@ -1,7 +1,7 @@
 
 
 public class Encoder{
-   public static String encrypt(String toEncrypt, int shift){
+   public static String encrypt(String toEncrypt, double shift){
       char[] letterArray = toEncrypt.toCharArray();
       char[] encryptedLetterArray = new char[letterArray.length];
 		
@@ -12,9 +12,9 @@ public class Encoder{
       return new String(encryptedLetterArray);
    }
 	
-   public static char encryptChar(char letter, int shift){
+   public static char encryptChar(char letter, double shift){
       if (Character.isLowerCase(letter)){
-         int shiftedLetter = (letter - 'a') + shift;
+         double shiftedLetter = (letter - 'a') + shift;
          if (shiftedLetter < 0) 
             shiftedLetter += 26;
          else 
@@ -23,7 +23,7 @@ public class Encoder{
          return (char) (shiftedLetter + 'a');
       }
       else {
-         int shiftedLetter = (letter - 'A') + shift;
+         double shiftedLetter = (letter - 'A') + shift;
          if (shiftedLetter <= 0)
             shiftedLetter += 26;
          else

@@ -1,5 +1,4 @@
 
-
 public class Calculator_Oracle {
 
 	public static double doTheMath(double num1, double num2, String sign)
