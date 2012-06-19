@@ -86,7 +86,7 @@ function OnLogIn()
         {
           if (LoginUsertype == "student")
           {//Redirects the user to "Student.html"
-            window.location = "testLandingPage.html";
+            window.location = "StudentLanding.html";
           }
           if (LoginUsertype == "admin")
           {//Redirects the user to "Admin.html"
