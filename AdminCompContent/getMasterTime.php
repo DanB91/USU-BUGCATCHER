@@ -1,3 +1,4 @@
+
 <?php
 
 require_once '../header.php';
@@ -133,3 +134,12 @@ else
 else
     echo "STOP!";
 ?>
+
+<?php
+session_start();
+//Gets the competition ID from the AJAX call
+$comp = $_COOKIE['adminCompID'];
+
+
+?>
+
