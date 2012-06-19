@@ -79,6 +79,8 @@ class User extends Model{
         }
         
         Model::addRow('USERS', $registerData);
+        
+        return new User($registerData['username'], 'username');
     }
     
     
