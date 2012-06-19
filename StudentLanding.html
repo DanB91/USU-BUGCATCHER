@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload=loadComps();>
+<body onload='loadComps();loadTeamInvites();'>
 
 <div id="headerSplash"></div>
 <div id="content" style="margin: 0 auto; width: 1000px;">
@@ -23,10 +23,10 @@
   <div id="LandingView-Start" class="LV-Sections">
     <div id="LVS-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
       <p id="smallerHeader" style="color:#000;">Team Invites</p>
-      <div id="TeamInvitations"><select size=5><option selected>View Team Invites Here</option></select></div>
+      <div id="TeamInvitations"><select id ="InviteSelectBox" size=5><option selected>View Team Invites Here</option></select></div>
       <!--        <input type="submit" value="Refresh" >-->
       <a class="button"><p>Refresh</p></a> <!-- onClick="joinTeam()"-->
-      <a class="button" onClick="StartToMember();"><p>Join Team</p></a>
+      <a class="button" onClick="StartToMember(InviteSelectBox.options[InviteSelectBox.selectedIndex].value);"><p>Join Team</p></a>
     </div><!--end LVS-Left-->
         
     <div id="LVS-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->

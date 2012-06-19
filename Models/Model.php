@@ -130,6 +130,24 @@ abstract class Model {
         $this->values[$field] = $value;
     }
     
+    public function findInDB($tablename, array $data){
+	$sql= "SELECT * FROM " . $tablename . " WHERE " ;
+	
+	$and=false;
+	foreach($data as $fieldName => $value){
+	    if($and==false)
+		$and=true;
+	    else
+		$sql.=" AND ";
+	    
+	    $sql.=$fieldName . "=" . $value ;
+	}
+	
+	if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Select Failed: ' . $this->connection->error);
+	
+        return $result;
+    }
 
     
     
@@ -265,7 +283,7 @@ abstract class Model {
         $this->getFieldTypes();
         
         //if the unique value is is a string, enclose it in quotes
-        $searchValue = ($this->types[$this->uniqueFieldName] === 's') ? "'" . $this->uniqueFieldValue . "'" : 
+        $searchValue = ($this->types[$this->uniqueFieldName] === 's' && $this->uniqueFieldValue[0]!="'") ? "'" . $this->uniqueFieldValue . "'" : 
             $this->uniqueFieldValue;
         
         if(!$result = $this->connection->query('SELECT * FROM ' . $this->tableName . ' WHERE ' . $this->uniqueFieldName
