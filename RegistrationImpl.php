@@ -1,6 +1,5 @@
 <?php
-require 'Models/User.php';
-require 'Models/Admin.php';
+require_once "header.php";
 //Stores the values of the information provided by the user in the registration fields on the homepage
 $firstname_str = $_GET['firstname'];
 $lastname_str = $_GET['lastname'];

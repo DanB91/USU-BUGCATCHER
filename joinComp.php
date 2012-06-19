@@ -1,4 +1,5 @@
 <?php
+require_once "header.php";
 $duration=time()+60*60*24*30;
 
 $compSelected = $_GET['compS'];
