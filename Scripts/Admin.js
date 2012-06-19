@@ -120,7 +120,8 @@ function refreshProbList()
             url:"AdminCompContent/getDifficulty.php", 
             data: {problem: availableProbs[i]},
             async: false, 
-            success:function(result){     
+            success:function(result){    
+                
                 difficulty = parseInt(result);
                 if(pSBD[difficulty] == undefined)
                 {
@@ -173,6 +174,7 @@ function refreshProbList()
             async: false, 
             data: {problem: addedProbs[i]},
             success:function(result){     
+              
                 difficulty = parseInt(result); 
                   
                 var diffStr = '';
@@ -203,7 +205,7 @@ function refreshProbList()
     }
     content += '</select>';
     
-    $('#SelectedProblems').html = content;
+    $('#SelectedProblems').html(content);
 }
 
 
@@ -400,7 +402,7 @@ function createCompetition()//Find Code ---------- CS1011
   
   if(compName == "")
   {
-      $("#CSetupError").html("Must have a competition name");
+      $("#CSetupError").html("Competition must be given a name");
     return;    
   }
 
@@ -411,7 +413,7 @@ function createCompetition()//Find Code ---------- CS1011
   
   $.ajax({type: "GET", url:"setupImpl.php", data: contents, success:function(result){
         
-        alert(result);
+        //alert(result);
         compSetTimeM = Time;
         compSetTime = Time;
         if (CountdownVal)
@@ -961,23 +963,25 @@ function getMasterTime()//Find Code ---------- USC1002
 	}
 	
 	getTimerXML.onreadystatechange=function()
-	{
-		if (getTimerXML.readyState==4 && getTimerXML.status==200)
-		{
-			var time = getTimerXML.responseText;
-			  if (time.length > 3)
-			  {
-				  seconds = time.substring(time.length-2,time.length);
-				  minutes = time.substring(0,time.length-2);
-				  document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
-			  }
-			  else
-			  {
-				  //A competition has not been created.
-			  }
-		}
+        {
+            if (getTimerXML.readyState==4 && getTimerXML.status==200)
+            {
+                var time = getTimerXML.responseText;
+                //alert(getTimerXML.responseText);
+                if (time.length > 3)
+                {
+                        seconds = time.substring(time.length-2,time.length);
+                        minutes = time.substring(0,time.length-2);
+                        document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
+                        startTimer();
+                }
+                else
+                {
+                        //A competition has not been created.
+                }
+            }
 	}
 	
-	getTimerXML.open("GET","AdminCompContent/getMasterTime.php?compID="+compSetID,true);
+	getTimerXML.open("GET","AdminCompContent/getMasterTime.php",true);
 	getTimerXML.send();
 }
