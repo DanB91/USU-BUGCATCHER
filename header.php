@@ -1,10 +1,10 @@
 <?php
 require_once "Models/Admin.php";
-require_once "Model/Team.php";
-require_once "Model/User.php";
-require_once "Model/TeamInvite.php";
-require_once "Model/Competition.php";
-require_once "Model/Problem.php";
+require_once "Models/Team.php";
+require_once "Models/User.php";
+require_once "Models/TeamInvite.php";
+require_once "Models/Competition.php";
+require_once "Models/Problem.php";
 header('Content-type: text/html');
 
 ?>
