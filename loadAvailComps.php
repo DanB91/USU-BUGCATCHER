@@ -1,5 +1,5 @@
 <?php
-    //echo " test";
+require_once "header.php";
     
     session_start();
     $compArray =  $_SESSION['adminObject']->getCompetitions();
