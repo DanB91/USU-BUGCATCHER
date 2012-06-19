@@ -47,12 +47,34 @@ class Team extends Model {
     }
     
     public function foundBugInCompetition(Bug $bug, Competition $comp){
-	$data=array('teamid', 'bugid', 'compid');
+	$data=array();
 	$data['teamid']=$this->getPrimaryKeyValue();
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();
 	Model::addRow("TEAM_FOUND_BUG", $data);
-    }  
+    }
+    
+    public function hasFoundBugInCompetition(Bug $bug, Competition $comp){
+	$data=array();
+	$data['teamid']=$this->getPrimaryKeyValue();
+	$data['bugid']=$bug->getPrimaryKeyValue();
+	$data['compid']=$comp->getPrimaryKeyValue();
+	$result=$this->findInDB("TEAM_FOUND_BUG", $data);
+	if(($row = $result->fetch_assoc()))
+	    return $row['timesolved'];
+	else
+	    return false;
+    }
+    
+    public function getNumberOfStudentsOnTeam(){
+	$data['teamid']=$this->getPrimaryKeyValue();
+	$result=$this->findInDB("STUDENT_TEAM_LINK", $data);
+	$numStudents=0;
+	while(($row = $result->fetch_assoc())){
+	    $numStudents++;
+	}
+	return $numStudents;
+    }
 }
 
 ?>
