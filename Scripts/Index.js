@@ -78,7 +78,7 @@ function OnLogIn()
     {
       if (loginXML.readyState == 4 && loginXML.status == 200)
       {*/
-    $.ajax({type: "GET", url:"LoginImpl.php", data: LoginContent, success:function(result){
+    $.ajax({type: "GET", async: true, url:"LoginImpl.php", data: LoginContent, success:function(result){
         //if (loginXML.responseText == "")
 	if(result == "")
         {
