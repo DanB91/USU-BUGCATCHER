@@ -66,7 +66,7 @@ function insertHTML(tabValue)
       filePath = "Hints.html";
       break;
     case 4:
-      filePath = "selectComp.php";
+      filePath = "selectComp.html";
       break;
     default:
   }/*
@@ -106,6 +106,10 @@ $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:f
           loadProblemNames();
           //setNavClass("navHints");
           clearInterval(progUpdate); 
+          break;
+        case 4:
+         
+          CS_loadAdminComps();
           break;
         default:
           return;

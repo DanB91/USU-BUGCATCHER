@@ -90,8 +90,8 @@ function updateTimer()
 	}
 	
 	var TimerUpdateVars = "compID=" + compSetID + "&minutes=" + minutes + "&seconds=" + seconds;
-	//updateTimerXML.open("GET","AdminCompContent/updateMasterTimer.php?"+TimerUpdateVars,true);
-	//updateTimerXML.send();
+	updateTimerXML.open("GET","AdminCompContent/updateMasterTimer.php?"+TimerUpdateVars,true);
+	updateTimerXML.send();
 }
 
 //Initializes the timer.
@@ -108,14 +108,13 @@ function createTimer()
 
 	seconds = compSetTimeS;
 	minutes = compSetTimeM;
-        alert(compSetTimeM + " " + seconds);
 
 	STOPPED = true;
 	PAUSED = false;
 	
 	if (seconds > 0)
 		COUNTINGDOWN = true;
-	//setTimer();  
+	setTimer();  
 }
 
 //Inserts leading zeroes on the minutes and seconds for the timer
