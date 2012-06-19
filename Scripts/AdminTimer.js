@@ -12,14 +12,14 @@ function startTimer()
 {
 	if (STOPPED || (!STOPPED && PAUSED))
 	{
-                $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(response){ alert(response); } });
+                $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){ } });
                 
 		adminTimer = setInterval(function() {countdown();},1000);
 		STOPPED = false;
 		PAUSED = false;
 	}
         
-       // $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){} });
+        $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){} });
 }
 
 //Pauses the timer for the competition.
@@ -31,6 +31,7 @@ function pauseTimer()
 		document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
 		PAUSED = true;
 	}
+        
 }
 
 //Counts down the competition timer.
