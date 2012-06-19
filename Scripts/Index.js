@@ -81,8 +81,6 @@ function OnLogIn()
 
     $.ajax({type: "GET", async: true, url:"LoginImpl.php", data: LoginContent, success:function(result){
 
-    $.ajax({type: "GET", url:"LoginImpl.php", data: LoginContent, success:function(result){
-
         //if (loginXML.responseText == "")
 	if(result == "")
         {
