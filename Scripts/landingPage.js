@@ -53,7 +53,6 @@ function createSTeam(tName)
         function(html){
 
             var t = html.trim();
-            //alert(t);
             if(t == '1')
             {
                 //alert("2compID: "+compSelected);
@@ -200,6 +199,10 @@ function MemberLeaveTeam()
 {
 	$("#LandingView-Member").hide();
 	$("#LandingView-Start").show();
+
+    $.post('StudentContent/leaveTeam.php',"captain=false", 
+        function(){
+        });
 }
 
 //
@@ -211,7 +214,7 @@ function StartToCaptain()
     var inviteOne = $("#LandingInvite1").val();
     var inviteTwo = $("#LandingInvite2").val();
             
-    $.post('StudentContent/captainCreateTeam.php', "teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+    $.post('StudentContent/captainCreateTeam.php', "newTeam=true&teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
         function(html){
             if (html.trim() == '1')
             {
@@ -229,4 +232,17 @@ function CaptainLeaveTeam()
 {
 	$("#LandingView-Captain").hide();
 	$("#LandingView-Start").show();
+        
+            $.post('StudentContent/leaveTeam.php',"captain=true", 
+        function(){
+        });
+}
+
+function sendInvites()
+{
+       var inviteOne = $("#LandingInvite1").val();
+        var inviteTwo = $("#LandingInvite2").val();
+         $.post('StudentContent/captainCreateTeam.php', "newTeam=false&teamName=none&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        function(){
+        });
 }

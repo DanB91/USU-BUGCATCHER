@@ -6,10 +6,10 @@ $invites = $user->getTeamInvites();
 $html = '';
 
 foreach($invites as $invite){
-    $teamID = $invite->teamid;
-    $team = new Team(teamid);
-    $html += "<option value=\'${teamID}\' ondblclick=\'StartToMember(this.value);\'>";
-    $html += $team->teamname;
+    $inviteID = $invite->teaminviteid;
+    $team = new Team($invite->teamid);
+    $html += "<option value=\'${inviteID}\' ondblclick=\'StartToMember(this.value);\'>";
+    $html += ($team->teamname);
     $html += "</option>";
 }
 
