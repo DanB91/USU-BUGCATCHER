@@ -146,10 +146,36 @@ function showCompInfo(str,page)
   getCompInfo();
 }
 
-//Pre-Conditions:
-//Post-Conditions:
-function search()
+//refreshMember1 and 2 display the information about other team members on refresh.
+//refreshMember1 displays them for a regular user
+function refreshMember1()
 {
+    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=false", 
+        function(html){
+            var members = html.split(",");
+            var counter = 1;
+            for (m in members)
+                {
+                    $("#TMandC"+counter).html(m);
+                    counter++;
+                }
+
+        });
+}
+
+//refreshMember2 displays them for the team captain.
+function refreshMember2()
+{
+    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
+        function(html){
+            var members = html.split(",");
+            var counter = 1;
+            for(m in members)
+                {
+                    $("#TM"+counter).html(m);
+                    counter++;
+                }
+        });
 }
 
 //############################################################################//
@@ -188,6 +214,7 @@ function StartToMember(inviteID)
                 $("#LandingView-Start").hide();
                 $("#LandingView-Member").show();
                 loadComps();
+                refreshMember2();
             }
             else
                 alert(html);
