@@ -30,7 +30,7 @@ class Competition extends Model{
         return $retArray;
     }
     
-    public static function getJoinableCompetions()
+    public static function getJoinableCompetitions()
     {
         $retComps = array();
         
