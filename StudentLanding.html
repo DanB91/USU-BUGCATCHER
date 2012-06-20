@@ -57,30 +57,28 @@
       <form id="TeamMember1" class="form">
       <div class="formHeader"><h3 class="formHeadText">Teammate #1 (captain)</h3></div>
       <fieldset>
-        <p>Teammate Info #1</p>
-        <p></p>
-        <p>Teammate Info #2</p>
-        <p></p>
-        <p>Teammate Info #3</p>
-        <p></p>
-        <a class="button" onClick="refreshMember2();"><p>Refresh</p></a>
+        <p>Username</p>
+        <p id="TMandC1"></p>
+        <p>First Name</p>
+        <p id="TMandC2"></p>
+        <p>Last Name</p>
+        <p id="TMandC3"></p>
       </fieldset>
       </form>
       
       <form id="TeamMember2" class="form">
       <div class="formHeader"><h3 class="formHeadText">Teammate #2</h3></div>
       <fieldset>
-        <p>Teammate Info #1</p>
-        <p></p>
-        <p>Teammate Info #2</p>
-        <p></p>
-        <p>Teammate Info #3</p>
-        <p></p>
-        <a class="button" onClick="refreshMember2();"><p>Refresh</p></a>
+        <p>Username</p>
+        <p id="TMandC4"></p>
+        <p>First Name</p>
+        <p id="TMandC5"></p>
+        <p>Last Name</p>
+        <p id="TMandC6"></p>
       </fieldset>
       </form>
-      
-      <a class="button" onClick="MemberLeaveTeam();"><p>Leave Team</p></a>
+      <a class="button" onClick="refreshMember1();"><p>Refresh</p></a>
+      <a class="button" onClick="MemberLeaveTeam(); loadTeamInvites();"><p>Leave Team</p></a>
         
     </div><!--end LVM-Left-->
     
@@ -103,19 +101,21 @@
   <div id="LandingView-Captain" class="LV-Sections">
     <div id="LVC-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
         <form class="form">
-        <div class="formHeader"><h3 class="formHeadText">Team Name</h3></div>
+        <div class="formHeader"><h3 class="formHeadText" id="TeamName2">Team Name</h3></div>
         <fieldset>
           <p>Teammate #1</p>
+          <p id="TM1"></p>
           <p>Teammate #2</p>
+          <p id="TM2"></p>
           <!--<p>Username to Invite 1</p>
             <input type="text" id="LandingInvite3" />
           <p>Username to Invite 2</p>
             <input type="text" id="LandingInvite4" class="Itext" />-->
           <!--<a class="button" onClick="sendMoreInvites();"><p>Send Invites</p></a>-->
-          <a class="button" onClick="refreshTeammates();"><p>Refresh</p></a>
+          <a class="button" onClick="refreshMember2();"><p>Refresh</p></a>
         </fieldset>
         </form>
-        <a class="button" onClick="CaptainLeaveTeam();"><p>Leave Team</p></a>
+        <a class="button" onClick="CaptainLeaveTeam();loadTeamInvites();"><p>Leave Team</p></a>
     </div><!--end LVC-Left-->
     
     <div id="LVC-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
