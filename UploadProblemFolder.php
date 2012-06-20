@@ -1,8 +1,9 @@
 <?php
+require '../../Models/Admin.php';
 //Variablse needed for Problem Upload
-$originalFileName = $_FILES["file"]["name"];
 $fileName = "";
-$AdminUsername = $_COOKIE['adminUserName'];
+session_start();
+$AdminUsername = $_SESSION['adminObject']->username;
 
 //Checks to see if the file is over 100Kb
 if ($_FILES["file"]["size"] > 102400)

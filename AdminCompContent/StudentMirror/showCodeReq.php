@@ -3,7 +3,9 @@
 //for the code that they are debugging such as how to enter test cases 
 //and a description of how the program functions.
 
-$AdminUsername = $_COOKIE['adminUserName'];
+require '../../Models/Admin.php';
+session_start();
+$AdminUsername = $_SESSION['adminObject']->username;
 $problem = $_GET["problem"];
 
 if(!file_exists("../../Uploads/${AdminUsername}/Problems/${problem}/${problem}Req.txt"))

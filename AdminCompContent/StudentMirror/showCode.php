@@ -6,7 +6,9 @@
 
 set_error_handler('error');
 
-$AdminUsername = $_COOKIE['adminUserName'];
+require '../../Models/Admin.php';
+session_start();
+$AdminUsername = $_SESSION['adminObject']->username;
 $problem = $_GET["problem"];
 $coverage = trim($_GET["coverage"]);
 //$compID = $_COOKIE['compID'];
