@@ -41,15 +41,14 @@ class Competition extends Model{
         
         $connection = connectToDB();
         
-        $sql = 'SELECT compid FROM COMPETITIONS WHERE hidden = 0';
+        $sql = 'SELECT compid FROM COMPETITIONS WHERE hidden = 0 and notjoinable = 0';
         if(!$result = $connection->query($sql))
                throw new BugCatcherException('Query Failed: ' . $connection->error);
         
           
         
         while(($row = $result->fetch_assoc()))
-        {
-            echo $row['compid'];
+        {          
             $retComps[] = new Competition($row['compid']);
         }
         

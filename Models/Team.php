@@ -1,5 +1,6 @@
 <?php
 require_once 'Model.php';
+require_once 'User.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -74,6 +75,25 @@ class Team extends Model {
 	}
 	return $numStudents;
     }
+    
+    public function getUsers()
+    {
+        $retArray = array();
+        
+        foreach($this->userids as $userid)
+        {
+            $retArray[] = new User($userid);
+        }
+        
+        return $retArray;
+    }
+    
+    public function getTeamLeader()
+    {
+        return new User($this->teamleaderid);
+    }
 }
+
+
 
 ?>

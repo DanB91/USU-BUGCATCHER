@@ -81,20 +81,28 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	$this->assertFalse($fourthUser->addUserToTeam(new Team(1)));*/
 	
     }
-    
+//    
+//
+//    public function testSendInvite()
+//    {
+//	$team=new Team(1);
+//	$user=new User(20);
+//        $this->object->sendTeamInviteToUser($team, $user);
+//    }
+//    
+//    public function testGetUsersTeams(){
+//	$arr=$this->object->getUsersTeams();
+//    }
+//    
+//    
+//    
+//
 
-    public function testSendInvite()
+    
+    public function testGetUserInvites()
     {
-	$team=new Team(1);
-	$user=new User(20);
-        $this->object->sendTeamInviteToUser($team, $user);
+        var_dump($this->object->getTeamInvites());
     }
-    
-    public function testGetUsersTeams(){
-	$arr=$this->object->getUsersTeams();
-    }
-
-
 }
 
 ?>
