@@ -1,9 +1,10 @@
 <?php
 
-require_once dirname(__FILE__) ."/../header.php";
+require_once "../header.php";
+
 session_start();
 $inviteID = $_POST['inviteID'];
-$invite = new Invite($inviteID);
+$invite = new TeamInvite($inviteID);
 $team = new Team($invite->teamid);
 
 if (isset($_SESSION['userObject']) && ($_SESSION['userObject'] != NULL)) {

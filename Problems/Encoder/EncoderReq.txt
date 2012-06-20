@@ -3,3 +3,7 @@
 For example, Encoder "abcd 4" would return "efgh" and Encoder ABC -1 would return ZAB
 <br/>
 2. The encoder should maintain capitalization and accept any integer. 
+<br/>
+3. If the second input is not an integer it will output, "Error: Input for shift must be an integer."
+<br/>
+4. Other invalid inputs will output, "Error: Bad Input".

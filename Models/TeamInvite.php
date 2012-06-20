@@ -23,14 +23,14 @@ class TeamInvite extends Model {
 	$data['teamid']=$this->teamid;
 	Model::addRow('STUDENT_TEAM_LINK', $data);
 	
-	$sql = 'DELETE FROM TEAM_INVITES WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue();
+	$sql = 'DELETE FROM TEAM_INVITES WHERE teaminviteid=' . $this->getPrimaryKeyValue();
 
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Invite update query failed: ' . $this->connection->error);
     }
     
     public function decline(){
-	$sql = 'DELETE FROM TEAM_INVITES WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue();
+	$sql = 'DELETE FROM TEAM_INVITES WHERE teaminviteid=' . $this->getPrimaryKeyValue();
 
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Invite update query failed: ' . $this->connection->error);
