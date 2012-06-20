@@ -18,7 +18,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new User(10);
+        $this->object = new User(18);
     }
 
     /**
@@ -80,10 +80,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	
     }
     
-    public function testSendInvite()
-    {
-        $this->object->sendTeamInviteToUser('', $user);
-    }
+    
 
 }
 

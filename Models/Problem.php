@@ -19,7 +19,7 @@ class Problem extends Model {
         parent::__construct('PROBLEMS', $uniqueValue, $uniqueFieldName, array('COMPETITION_PROBLEM_LINK'));
     }
     
-    public function addProblemToCompetition(Competition &$comp)
+    public function addProblemToCompetition(Competition $comp)
     {
         $this->createRelationToModel($comp, 'COMPETITION_PROBLEM_LINK');	
     }

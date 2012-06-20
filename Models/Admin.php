@@ -22,8 +22,10 @@ class Admin extends Model{
      *Creates a competition with this admin as a creator.  
      * When passing in data, do not pass in the 'user id'.  That is added automatically
      * @param array $data data dictionary
+     * @param array $problems problems to add to Competition, must be problem objects!
+     * @return Competition the competition object
      */
-    public function createCompetition(array $data)
+    public function createCompetition(array $data, array $problems)
     {
         foreach($data as $fieldName => &$value)
         {
@@ -44,6 +46,15 @@ class Admin extends Model{
         
         $data['userid'] = $this->getPrimaryKeyValue();
         Model::addRow('COMPETITIONS', $data);
+        
+        $newComp = new Competition($data['compname'], 'compname');
+        
+        foreach($problems as $problem)
+        {
+            $problem->addProblemToCompetition($newComp);
+        }
+        
+        return $newComp;
     }
     
     

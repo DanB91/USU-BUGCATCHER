@@ -30,6 +30,27 @@ class Competition extends Model{
         return $retArray;
     }
     
+    public static function getJoinableCompetions()
+    {
+        $retComps = array();
+        
+        $connection = connectToDB();
+        
+        $sql = 'SELECT compid FROM COMPETITIONS WHERE hidden = 0';
+        if(!$result = $connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $connection->error);
+        
+          
+        
+        while(($row = $result->fetch_assoc()))
+        {
+            echo $row['compid'];
+            $retComps[] = new Competition($row['compid']);
+        }
+        
+        return $retComps;   
+    }
+    
     
 }
 
