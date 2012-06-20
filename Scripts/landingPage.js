@@ -166,6 +166,11 @@ function refreshMember1()
 //refreshMember2 displays them for the team captain.
 function refreshMember2()
 {
+        $.post('StudentContent/teamName.php', "", 
+        function(html){
+            $("#TeamName2").html(html);
+        });
+    
     $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
         function(html){
             var members = html.split(",");
