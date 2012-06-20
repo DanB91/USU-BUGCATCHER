@@ -178,10 +178,10 @@ function search()
 //############################################################################//
 
 //
-function StartToMember(teamID)
+function StartToMember(inviteID)
 {
         
-    $.post('StudentContent/addMemberToTeam.php', "teamID="+teamID, 
+    $.post('StudentContent/addMemberToTeam.php', "inviteID="+inviteID, 
         function(html){
             if (html.trim() == '1')
             {
