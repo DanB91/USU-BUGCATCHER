@@ -148,6 +148,13 @@ abstract class Model {
 	
         return $result;
     }
+    
+    public function update()
+    {
+        $this->values = array();
+        $this->types = array();
+        $this->load();
+    }
 
     
     
