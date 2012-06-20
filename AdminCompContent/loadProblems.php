@@ -1,4 +1,5 @@
 <?php
+/*
     session_start();
     require '../Models/Problem.php';
     require '../Models/Competition.php';
@@ -14,6 +15,9 @@
             array_push($fContents,$value1->problemname);
         }   
     }
+ * 
+ */
+       $fContent = array("pie");
     echo json_encode($fContents);
      
     
