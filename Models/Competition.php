@@ -17,7 +17,12 @@ class Competition extends Model{
     
     
     public function getProblems(){
-	return $this->problemids;
+	$arr=array();
+	
+	foreach($this->problemids as $id)
+	    $arr[]=new Problem($id);
+	
+	return $arr;
     }
     
     public function getTeams()
