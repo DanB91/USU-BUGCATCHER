@@ -7,4 +7,19 @@ require_once "Models/Competition.php";
 require_once "Models/Problem.php";
 header('Content-type: text/html');
 
+function exceptionHandler($exception) {
+  echo "Uncaught exception: " , $exception->getMessage(), "\n";
+  die();
+}
+
+set_exception_handler('exceptionHandler');
+
+function errorHandler($errNo, $errStr)
+{
+  echo "Error: " , "[$errNo] ", $errStr, "\n";
+  die();
+}
+
+set_error_handler('errorHandler');
+
 ?>
