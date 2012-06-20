@@ -158,7 +158,7 @@ function refreshMember1()
             var counter = 1;
             for (m in members)
                 {
-                    $("#TMandC"+counter).html(m);
+                    $("#TMandC"+counter).html(members[m]);
                     counter++;
                 }
 
@@ -179,7 +179,7 @@ function refreshMember2()
             var counter = 1;
             for(m in members)
                 {
-                    $("#TM"+counter).html(m);
+                    $("#TM"+counter).html(members[m]);
                     counter++;
                 }
         });

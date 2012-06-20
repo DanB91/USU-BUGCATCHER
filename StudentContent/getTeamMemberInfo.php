@@ -11,7 +11,8 @@ if ($user != NULL && $team != NULL) {
     if ($isCaptain) {
         $members = $team->getUsers();
         foreach ($members as $member) {
-            $memberInfo .= $member->username . ",";
+            if ($member->userid != $user->userid)
+                $memberInfo .= $member->username . ",";
         }
     } else {
         $leader = $team->getTeamLeader();
