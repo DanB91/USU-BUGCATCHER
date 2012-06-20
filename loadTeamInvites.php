@@ -16,7 +16,7 @@ if ($user != NULL) {
     if (count($invites) != 0) {
         echo $html;
     } else {
-        echo "<option>" . $user->username . "</option>";
+        echo "<option>No invites pending.</option>";
     }
 }
 else
