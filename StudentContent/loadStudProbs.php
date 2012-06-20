@@ -1,6 +1,8 @@
 <?php
+require_once "../header.php";
+session_start();
 
-$comp = $_COOKIE['compID'];
+$comp = $_SESSION['compObject'];
 
 $fnameComp = "../Competitions/${comp}/${comp}.txt";
 $compArr = file($fnameComp);

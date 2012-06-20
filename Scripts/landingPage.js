@@ -15,24 +15,25 @@ function loadComps()
 //Post-Conditions:
 function joinComp()
 {
-    $.post('joinComp.php', "compS="+compSelected, 
-        function(html){
+    $.ajax({ type:"GET", url:'joinComp.php', data:"compS="+compSelected, 
+        success: function(html){
 
             var t = html.trim();
-            if(t == '1')
+            if(t != '1')
             {
-                var studTName = prompt("This competition has started please enter your team name.");
+		alert("something bad happened when adding your team to the competition, too bad for you sucka");
+               /* var studTName = prompt("This competition has started please enter your team name.");
                 while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
                 {
                     studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
                 }
                 if(studTName != null)
-                    createSTeam(studTName);
+                    createSTeam(studTName);*/
             }
             else{
                 window.location = "Student.html";
             }
-        });
+        }});
 }
 
 //Pre-Conditions:

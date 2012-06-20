@@ -1,9 +1,10 @@
 <?php
-
-if(isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '' && isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')
+require_once "../header.php";
+session_start();
+$team=$_SESSION['teamObject'];
+if($team->teamname!="")
 {
-	$teamName = $_SESSION['teamname'];
-        echo $teamName;
+    echo $team->teamname;
 }
-else echo 'Student not in competition';
+else echo 'Student not on team';
 ?>

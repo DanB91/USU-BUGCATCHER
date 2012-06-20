@@ -16,6 +16,7 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
       if($isNewTeam){
         $registerData = array("teamname" => $teamName, "teamleaderid" => $user->userid);
         $team = Team::createTeam($registerData);
+	$user->addUserToTeam($team);
         $_SESSION['teamObject'] = $team;
       } else $team = $_SESSION['teamObject'];
       
@@ -30,7 +31,7 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
         }
         
         echo 1;
-    } catch (ModelAlreadyExistsException $e) {
+    } catch (BugCatcherException $e) {
         echo "Team name already exists. Please choose a new team name.";
     }
         
