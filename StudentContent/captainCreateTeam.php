@@ -1,5 +1,7 @@
 <?php
-require_once "header.php";
+
+require_once "../header.php";
+
 session_start();
 $user = $_SESSION['userObject'];
 $teamName = $_POST['teamName'];
@@ -14,6 +16,7 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
       if($isNewTeam){
         $registerData = array("teamname" => $teamName, "teamleaderid" => $user->userid);
         $team = Team::createTeam($registerData);
+	$user->addUserToTeam($team);
         $_SESSION['teamObject'] = $team;
       } else $team = $_SESSION['teamObject'];
       
@@ -26,12 +29,12 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
             $invitee2 = new User($invite1, "username");
             $user->sendTeamInviteToUser($team, $invitee2);           
         }
+        
         echo 1;
-    } catch (ModelAlreadyExistsException $e) {
+    } catch (BugCatcherException $e) {
         echo "Team name already exists. Please choose a new team name.";
     }
-    
-    
-    
+        
 }
+else echo "You must be logged in to create a new team";
 ?>

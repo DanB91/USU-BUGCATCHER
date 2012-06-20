@@ -1,4 +1,4 @@
 Pig latin translates a word into pig latin by moving the first letter or sound to the end and adding -ay.
-LINE 19: Missing check for the letter i.
-LINE 22: Doesn't include the second letter in the new version.
-LINE 24: Doesn't return -ay after a single letter word.
+1)LINE 19: Missing check for the letter i.
+2)LINE 22: Doesn't include the second letter in the new version.
+3)LINE 24: Doesn't return -ay after a single letter word.

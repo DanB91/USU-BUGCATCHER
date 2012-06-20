@@ -56,7 +56,7 @@ class User extends Model{
         if(!$result = $this->connection->query($sql))
                throw new BugCatcherException('Query Failed: ' . $this->connection->error);
         
-        
+          
         while(($row = $result->fetch_assoc()))
         {
             $retInvites[] = new TeamInvite($row['teaminviteid']);

@@ -19,7 +19,7 @@ class Problem extends Model {
         parent::__construct('PROBLEMS', $uniqueValue, $uniqueFieldName, array('COMPETITION_PROBLEM_LINK'));
     }
     
-    public function addProblemToCompetition(Competition &$comp)
+    public function addProblemToCompetition(Competition $comp)
     {
         $this->createRelationToModel($comp, 'COMPETITION_PROBLEM_LINK');	
     }
@@ -27,6 +27,26 @@ class Problem extends Model {
     public function removeProblemFromCompetition(Competition $comp)
     {
 	$this->removeRelationFromModel($comp, 'COMPETITION_PROBLEM_LINK');
+    }
+    
+    public static function getAllProblems()
+    {
+        $retProbs = array();
+        
+        $connection = connectToDB();
+        
+        $sql = 'SELECT problemid FROM PROBLEMS';
+        if(!$result = $connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $connection->error);
+        
+          
+        
+        while(($row = $result->fetch_assoc()))
+        {          
+            $retProbs[] = new Problem($row['problemid']);
+        }
+        
+        return $retProbs;   
     }
 }
 

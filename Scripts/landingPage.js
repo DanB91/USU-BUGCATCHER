@@ -1,10 +1,11 @@
 var compSelected;
 
+
 //Pre-Conditions:
 //Post-Conditions:
 function loadComps()
 {
-    $.post('loadAvailComps.php', "", 
+    $.post('StudentContent/loadAvailComps.php', "", 
         function(html){
             $("#LandingCompSelect").html(html);
             compSelected = "";
@@ -15,33 +16,34 @@ function loadComps()
 //Post-Conditions:
 function joinComp()
 {
-    $.post('joinComp.php', "compS="+compSelected, 
-        function(html){
+    $.ajax({ type:"GET", url:'joinComp.php', data:"compS="+compSelected, 
+        success: function(html){
 
             var t = html.trim();
-            if(t == '1')
+            if(t != '1')
             {
-                var studTName = prompt("This competition has started please enter your team name.");
+		alert("something bad happened when adding your team to the competition, too bad for you sucka");
+               /* var studTName = prompt("This competition has started please enter your team name.");
                 while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
                 {
                     studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
                 }
                 if(studTName != null)
-                    createSTeam(studTName);
+                    createSTeam(studTName);*/
             }
             else{
                 window.location = "Student.html";
             }
-        });
+        }});
 }
 
 //Pre-Conditions:
 //Post-Conditions:
 function loadTeamInvites()
 {
-    $.post('loadTeamInvites.php', "", 
+    $.post('StudentContent/loadTeamInvites.php', "", 
         function(html){
-            $("#TeamInvitations").html(html);
+            $("#InviteSelectBox").html(html);
         });
 }
 
@@ -146,10 +148,41 @@ function showCompInfo(str,page)
   getCompInfo();
 }
 
-//Pre-Conditions:
-//Post-Conditions:
-function search()
+//refreshMember1 and 2 display the information about other team members on refresh.
+//refreshMember1 displays them for a regular user
+function refreshMember1()
 {
+    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=false", 
+        function(html){
+            var members = html.split(",");
+            var counter = 1;
+            for (m in members)
+                {
+                    $("#TMandC"+counter).html(m);
+                    counter++;
+                }
+
+        });
+}
+
+//refreshMember2 displays them for the team captain.
+function refreshMember2()
+{
+        $.post('StudentContent/teamName.php', "", 
+        function(html){
+            $("#TeamName2").html(html);
+        });
+    
+    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
+        function(html){
+            var members = html.split(",");
+            var counter = 1;
+            for(m in members)
+                {
+                    $("#TM"+counter).html(m);
+                    counter++;
+                }
+        });
 }
 
 //############################################################################//
@@ -178,15 +211,16 @@ function search()
 //############################################################################//
 
 //
-function StartToMember(teamID)
+function StartToMember(inviteID)
 {
         
-    $.post('StudentContent/addMemberToTeam.php', "teamID="+teamID, 
+    $.post('StudentContent/addMemberToTeam.php', "inviteID="+inviteID, 
         function(html){
             if (html.trim() == '1')
             {
-                $("#LandingView-Start").hide();
-                $("#LandingView-Member").show();  
+                window.location = "teamManagementM.html";
+                loadComps();
+                refreshMember2();
             }
             else
                 alert(html);
@@ -197,12 +231,11 @@ function StartToMember(teamID)
 //
 function MemberLeaveTeam()
 {
-	$("#LandingView-Member").hide();
-	$("#LandingView-Start").show();
 
     $.post('StudentContent/leaveTeam.php',"captain=false", 
         function(){
         });
+    window.location = "StudentLanding.html";
 }
 
 //
@@ -214,28 +247,31 @@ function StartToCaptain()
     var inviteOne = $("#LandingInvite1").val();
     var inviteTwo = $("#LandingInvite2").val();
             
-    $.post('StudentContent/captainCreateTeam.php', "newTeam=true&teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
-        function(html){
+    $.ajax({
+        type: "POST",
+        url:'StudentContent/captainCreateTeam.php', 
+        data:"newTeam=true&teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        success: function(html){
             if (html.trim() == '1')
             {
-                $("#LandingView-Start").hide();
-                $("#LandingView-Captain").show();  
+                window.location = "teamManagementC.html";
+                loadComps();
             }
             else
                 alert(html);
-        });
+        }
+    });
         
 }
 
 //
 function CaptainLeaveTeam()
 {
-	$("#LandingView-Captain").hide();
-	$("#LandingView-Start").show();
         
             $.post('StudentContent/leaveTeam.php',"captain=true", 
         function(){
         });
+        window.location = "StudentLanding.html";
 }
 
 function sendInvites()

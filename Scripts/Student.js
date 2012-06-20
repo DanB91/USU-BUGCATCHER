@@ -202,7 +202,7 @@ function setCodeCoverageState()//Find Code ---------- G1005
 function loadStudentProblems()
 {
     $.post('StudentContent/loadStudProbs.php', "", 
-        function(html){	
+        function(html){
             var arr = eval(html);
             probNames = arr;
             numberOfProblems = arr[0];

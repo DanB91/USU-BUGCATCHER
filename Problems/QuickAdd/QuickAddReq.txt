@@ -1,3 +1,5 @@
 1. QuickAdd takes in two numbers and returns their sum.
 <br/>
 2. QuickAdd may take integers or decimal representations.
+<br/>
+3. Invalid inputs will output, "Error: Bad Input".

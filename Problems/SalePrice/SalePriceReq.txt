@@ -1,3 +1,8 @@
 1. SalePrice takes in two numbers - an original price, and a percent discount. It outputs the new price after applying that discount. If given 100 and 9, for example, it will output 91.0 
 <br/>
 2. If the discount is strictly less than 0 or strictly greater than 100, SalePrice will output "Discount must be between 0 and 100".
+<br/>
+3. The price must be less than 2000000000.  If not, it will output, "Error: the price must be less than $2000000000."
+<br/>
+4. Any other invalid inputs will output, "Error: Bad Input".
+<br/>

@@ -1,19 +1,15 @@
 <?php
+require_once "../header.php";
+session_start();
 
-$comp = $_COOKIE['compID'];
+$comp = $_SESSION['compObject'];
+$problems=$comp->getProblems();
 
-$fnameComp = "../Competitions/${comp}/${comp}.txt";
-$compArr = file($fnameComp);
-$numProbs = $compArr[0];
-$problems = 4;
-        
-$probsArr = explode(",", $compArr[$problems]);
+$probContent[0] = count($problems);
 
-$probContent[0] = array($numProbs);
-
-for($i = 0; $i < $numProbs; $i++)
+foreach($problems as $problem)
 {
-  array_push($probContent, $probsArr[$i]);
+  array_push($probContent, $problem->problemname);
 }
 
 $r = json_encode($probContent);

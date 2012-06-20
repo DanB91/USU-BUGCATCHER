@@ -1,3 +1,11 @@
 1. OddsandEvens takes a string, which should be either "odd" or "even" and an integer separated by a space.
 <br/>
 2. It returns the number of odd or even digits in the integer, respectively.
+<br/>
+3. If the first input is not either "odd" or "even" it will output, "Error: First input must be either 'even' or 'odd'."
+<br/>
+4. If the second input is not an integer it will output, "Error: Second input must be an integer."
+<br/>
+5. If the second input is not less than 2000000000 it will output, "Error: Second input must be an integer less than or equal to 2000000000."
+<br/>
+6. All other invalid inputs will output, "Error: Bad Input". 

@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload='loadComps();loadTeamInvites();'>
+<body onload='loadTeamInvites();'>
 
 <div id="headerSplash"></div>
 <div id="content" style="margin: 0 auto; width: 1000px;">
@@ -23,21 +23,21 @@
   <div id="LandingView-Start" class="LV-Sections">
     <div id="LVS-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
       <p id="smallerHeader" style="color:#000;">Team Invites</p>
-      <div id="TeamInvitations"><select id ="InviteSelectBox" size=5><option selected>View Team Invites Here</option></select></div>
+      <div id="TeamInvitations"><select name ="InviteSelectBox" id="InviteSelectBox" size=5><option selected>View Team Invites Here</option></select></div>
       <!--        <input type="submit" value="Refresh" >-->
-      <a class="button"><p>Refresh</p></a> <!-- onClick="joinTeam()"-->
+      <a class="button" onClick="loadTeamInvites();"><p>Refresh</p></a>
       <a class="button" onClick="StartToMember(InviteSelectBox.options[InviteSelectBox.selectedIndex].value);"><p>Join Team</p></a>
     </div><!--end LVS-Left-->
         
-    <div id="LVS-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
+    <div id="LVS-Right" class="LV-Right"> <!--style="float: left; width:600px; margin: 30px 0 0 50px;">-->
     
         <form id="LVS-CreateTeam" class="form">
         <div class="formHeader"><h3 class="formHeadText">Create a Team</h3></div>
         <fieldset>
           <p>Team Name</p>
-            <input type="text" id="LandingTeamName" />
+            <input type="text" id="LandingTeamName" class="Itext"/>
           <p>Username to Invite 1</p>
-            <input type="text" id="LandingInvite1" />
+            <input type="text" id="LandingInvite1" class="Itext" />
           <p>Username to Invite 2</p>
             <input type="text" id="LandingInvite2" class="Itext" />
           <a class="button" onClick="StartToCaptain();"><p>Create Team</p></a>
@@ -46,102 +46,6 @@
       
     </div><!--end LVS-Right-->
   </div><!--end LandingView-Start-->
-
-    <!--#####################################################################-->
-    <!--#####################################################################-->
-    <!--#####################################################################-->
-
-  <div id="LandingView-Member" class="LV-Sections">
-    <div id="LVM-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
-        
-      <form id="TeamMember1" class="form">
-      <div class="formHeader"><h3 class="formHeadText">Teammate #1 (captain)</h3></div>
-      <fieldset>
-        <p>Teammate Info #1</p>
-        <p></p>
-        <p>Teammate Info #2</p>
-        <p></p>
-        <p>Teammate Info #3</p>
-        <p></p>
-        <a class="button" onClick="refreshMember2();"><p>Refresh</p></a>
-      </fieldset>
-      </form>
-      
-      <form id="TeamMember2" class="form">
-      <div class="formHeader"><h3 class="formHeadText">Teammate #2</h3></div>
-      <fieldset>
-        <p>Teammate Info #1</p>
-        <p></p>
-        <p>Teammate Info #2</p>
-        <p></p>
-        <p>Teammate Info #3</p>
-        <p></p>
-        <a class="button" onClick="refreshMember2();"><p>Refresh</p></a>
-      </fieldset>
-      </form>
-      
-      <a class="button" onClick="MemberLeaveTeam();"><p>Leave Team</p></a>
-        
-    </div><!--end LVM-Left-->
-    
-    <div id="LVM-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
-      
-      <div id="Landing-CompInfo">
-        <p id="smallerHeader" style="color:#000;">Competition Information</p>
-        <div><textarea rows="10" cols="30" id="LVM-CompInfo"></textarea></div>
-        <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
-        <a class="button" onClick="refreshCompInfo()"><p>Refresh</p></a>
-      </div>
-    </div><!--end LVM-Right-->
-  </div><!--end LandingView-Member-->
-	<script language="javascript">
-		$(document.getElementById("LandingView-Member")).hide();
-  </script>     <!--#####################################################################-->
-    <!--#####################################################################-->
-    <!--#####################################################################-->
-
-  <div id="LandingView-Captain" class="LV-Sections">
-    <div id="LVC-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
-        <form class="form">
-        <div class="formHeader"><h3 class="formHeadText">Team Name</h3></div>
-        <fieldset>
-          <p>Teammate #1</p>
-          <p>Teammate #2</p>
-          <p>Username to Invite 1</p>
-            <input type="text" id="LandingInvite1" />
-          <p>Username to Invite 2</p>
-            <input type="text" id="LandingInvite2" class="Itext" />
-          <a class="button" onClick="sendInvites();"><p>Send Invites</p></a>
-          <a class="button" onClick="refreshTeammates();"><p>Refresh</p></a>
-        </fieldset>
-        </form>
-        <a class="button" onClick="CaptainLeaveTeam();"><p>Leave Team</p></a>
-    </div><!--end LVC-Left-->
-    
-    <div id="LVC-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
-    
-      <div id="Landing-CompList">
-        <p id="smallerHeader" style="color:#000;">Available Competitions</p>
-        <div id="LandingCompSelect">Press refresh</div>
-        <!--        <input type="submit" value="Refresh" >-->
-        <a class="button" onClick="loadComps()"><p>Refresh</p></a>
-      </div>
-      
-      <div id="Landing-CompInfo">
-        <p id="smallerHeader" style="color:#000;">Competition Information</p>
-        <div><textarea rows="10" cols="30" id="displayInfo"></textarea></div>
-        <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
-        <a class="button" onClick="joinComp()"><p>Join Competition</p></a>
-      </div>
-      
-    </div><!--end LVC-Right-->
-  </div><!--end LandingView-Captain-->
-  <script language="javascript">
-		$(document.getElementById("LandingView-Captain")).hide();
-  </script> 
-    <!--#####################################################################-->
-    <!--#####################################################################-->
-    <!--#####################################################################-->
     
   <div class="nooverflow"></div>
   

@@ -2,36 +2,15 @@ var compID = "S6GEX329";
 
 function CreateForm()
 {
-	var numberOfStudents = parseInt(document.getElementById("RNumStudents").value);
-	numberOfStudents += (numberOfStudents%3)-1;
+    var numberOfStudents = parseInt(document.getElementById("RNumStudents").value);
+    numberOfStudents += (numberOfStudents%3)-1;
 	
-/*	if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    createFormXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    createFormXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  createFormXML.onreadystatechange=function()
-  {
-    
-    if (createFormXML.readyState==4 && createFormXML.status==200)
-    {*/
     $.ajax({type: "GET", url:"AdminCompContent/RegistrationTemplate.php", data: "numberOfStudents="+numberOfStudents, success:function(){
-      if (numberOfStudents > 0)
-			{
-				//document.getElementById("PRTextArea").value=createFormXML.responseText;
-				$("#RFormDownload").html("<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>");
-				//document.getElementById("RFormDownload").innerHTML="<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>";
-			}
+	if (numberOfStudents > 0){
+	    //document.getElementById("PRTextArea").value=createFormXML.responseText;
+	    $("#RFormDownload").html("<a href='RegistrationTemplates/Template"+numberOfStudents+".xml'>Right click here and select 'save link as...' to download the form.</a>");
+	}
     }});
-    /*}
-  }
-  
-  createFormXML.open("GET","AdminCompContent/RegistrationTemplate.php?numberOfStudents="+numberOfStudents,true);
-  createFormXML.send();*/
 }
 
 function UploadFile()

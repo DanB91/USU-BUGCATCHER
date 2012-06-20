@@ -3,3 +3,5 @@
 2. It accepts as input a simple math problem in the format "1 plus 1". It accepts plus, minus, over and times as operators.
 <br />
 3. The user can enter whole numbers "8 times 4" or numbers with decimals "8.4 over 2.2".
+<br/>
+4. Invalid inputs will output, "Error: Bad Input".
