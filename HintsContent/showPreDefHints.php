@@ -2,10 +2,10 @@
 
 $preDefHint = $_GET['hintPreDef'];
 
-if(!file_exists("C:\DropBox\htdocs\NewDesign\HintsContent\Hints\PreDefHints\\${preDefHint}.txt"))
+if(!file_exists("../../USU-BUGCATCHER/HintsContent/Hints/PreDefHints/${preDefHint}.txt"))
    return;
 
-$fileCust=file("C:\DropBox\htdocs\NewDesign\HintsContent\Hints\PreDefHints\\${preDefHint}.txt",FILE_IGNORE_NEW_LINES);
+$fileCust=file("../../USU-BUGCATCHER/HintsContent/Hints/PreDefHints/${preDefHint}.txt",FILE_IGNORE_NEW_LINES);
 
 $hintNum = "<select name='HHintNum' size=7 class='Hselect' id='hintCountClear' onclick=showPreHintText(this.value);>";
 
