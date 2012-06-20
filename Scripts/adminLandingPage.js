@@ -1,4 +1,4 @@
-var compSelected;
+var compSelected = "";
 
 
 //Pre-Conditions:

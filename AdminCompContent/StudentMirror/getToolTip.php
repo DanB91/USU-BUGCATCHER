@@ -6,7 +6,9 @@
 
 
 $problem = $_GET["problem"];
-$AdminUsername = $_COOKIE['adminUserName'];
+require '../../Models/Admin.php';
+session_start();
+$AdminUsername = $_SESSION['adminObject']->username;
 
 if(!file_exists(".../Uploads/${AdminUsername}/Problems/${problem}/${problem}Ex.txt"))
 {

@@ -5,7 +5,9 @@
 //The code also loads in any hints or messages from the admin.
 
 
-$AdminUsername = $_COOKIE['adminUserName'];
+require '../../Models/Admin.php';
+session_start();
+$AdminUsername = $_SESSION['adminObject']->username;
 
 	
 		$contents=file("../../Uploads/".$AdminUsername."/TempCompetition/Content.txt",FILE_IGNORE_NEW_LINES);//Open the file in an array

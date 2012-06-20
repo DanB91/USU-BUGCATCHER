@@ -7,7 +7,9 @@ $testInput  = mysql_real_escape_string(trim($_GET["testInput"])); //sanitizes in
 $testOutput =  mysql_real_escape_string(trim($_GET["testOutput"])); //sanitizes output
 $isCoverage = $_GET["codeCov"]; //boolean for coverage
 $problemName = $_GET["problemNum"];
-$AdminUsername 	= $_COOKIE['adminUserName'];
+require '../../Models/Admin.php';
+session_start();
+$AdminUsername = $_SESSION['adminObject']->username;
 //$compID 	= $_COOKIE['compID'];
 //$userID		= $_COOKIE['userID'];
 
