@@ -46,6 +46,11 @@ function setTesting()
 //This gets the HTML code that needs to inserted via element.innerHTML
 function insertHTML(tabValue)
 {
+    document.getElementById("navTabs-Competition").setAttribute("class","navTabs-subMenu-hidden");
+    document.getElementById("navTabs-Competition").setAttribute("className","navTabs-subMenu-hidden");
+    document.getElementById("navTabs-Problems").setAttribute("class","navTabs-subMenu-hidden");
+    document.getElementById("navTabs-Problems").setAttribute("className","navTabs-subMenu-hidden");
+
   var filePath = "";
   switch(tabValue)
   {
@@ -118,6 +123,10 @@ $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:f
         default:
           return;
       }
+        document.getElementById("navTabs-Competition").setAttribute("class","navTabs-subMenu-visible");
+        document.getElementById("navTabs-Competition").setAttribute("className","navTabs-subMenu-visible");
+        document.getElementById("navTabs-Problems").setAttribute("class","navTabs-subMenu-visible");
+        document.getElementById("navTabs-Problems").setAttribute("className","navTabs-subMenu-visible");
 }});
 }
 

@@ -207,6 +207,7 @@ li {
 	width: 1000px;
 	height: 79px;
 	margin: 0 auto;
+        overflow: hidden;
 }
 
 /* -------------------- Landing Page Layout --------------------*/
