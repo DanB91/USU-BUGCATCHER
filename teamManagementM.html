@@ -1,0 +1,72 @@
+<html>
+
+<head>
+<title></title>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script language="javascript" src="Scripts/landingPage.js"></script>
+<script language="javascript" src="Scripts/jquery.js"></script>
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body onload=''>
+
+<div id="headerSplash"></div>
+<div id="content" style="margin: 0 auto; width: 1000px;">
+    
+    <!--#####################################################################-->
+    <!--#####################################################################-->
+    <!--#####################################################################-->
+    
+  <div id="LandingView-Member" class="LV-Sections">
+    <div id="LVM-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
+        
+      <form id="TeamMember1" class="form">
+      <div class="formHeader"><h3 class="formHeadText">Teammate #1 (captain)</h3></div>
+      <fieldset>
+        <p>Username</p>
+        <p id="TMandC1"></p>
+        <p>First Name</p>
+        <p id="TMandC2"></p>
+        <p>Last Name</p>
+        <p id="TMandC3"></p>
+      </fieldset>
+      </form>
+      
+      <form id="TeamMember2" class="form">
+      <div class="formHeader"><h3 class="formHeadText">Teammate #2</h3></div>
+      <fieldset>
+        <p>Username</p>
+        <p id="TMandC4"></p>
+        <p>First Name</p>
+        <p id="TMandC5"></p>
+        <p>Last Name</p>
+        <p id="TMandC6"></p>
+      </fieldset>
+      </form>
+      <a class="button" onClick="refreshMember1();"><p>Refresh</p></a>
+      <a class="button" onClick="MemberLeaveTeam(); loadTeamInvites();"><p>Leave Team</p></a>
+        
+    </div><!--end LVM-Left-->
+    
+    <div id="LVM-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
+      
+      <div id="Landing-CompInfo">
+        <p id="smallerHeader" style="color:#000;">Competition Information</p>
+        <div><textarea rows="10" cols="30" id="LVM-CompInfo"></textarea></div>
+        <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
+        <a class="button" onClick="refreshCompInfo()"><p>Refresh</p></a>
+      </div>
+    </div><!--end LVM-Right-->
+  </div><!--end LandingView-Member-->
+
+  <div class="nooverflow"></div>
+  
+</div><!--end content-->
+<div id="footer" style="margin: 0 auto;"></div>
+
+</body>
+
+</html>

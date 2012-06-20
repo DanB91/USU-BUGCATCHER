@@ -1,10 +1,11 @@
 var compSelected;
 
+
 //Pre-Conditions:
 //Post-Conditions:
 function loadComps()
 {
-    $.post('loadAvailComps.php', "", 
+    $.post('StudentContent/loadAvailComps.php', "", 
         function(html){
             $("#LandingCompSelect").html(html);
             compSelected = "";
@@ -40,7 +41,7 @@ function joinComp()
 //Post-Conditions:
 function loadTeamInvites()
 {
-    $.post('loadTeamInvites.php', "", 
+    $.post('StudentContent/loadTeamInvites.php', "", 
         function(html){
             $("#InviteSelectBox").html(html);
         });
@@ -217,8 +218,7 @@ function StartToMember(inviteID)
         function(html){
             if (html.trim() == '1')
             {
-                $("#LandingView-Start").hide();
-                $("#LandingView-Member").show();
+                window.location = "teamManagementM.html";
                 loadComps();
                 refreshMember2();
             }
@@ -231,12 +231,11 @@ function StartToMember(inviteID)
 //
 function MemberLeaveTeam()
 {
-	$("#LandingView-Member").hide();
-	$("#LandingView-Start").show();
 
     $.post('StudentContent/leaveTeam.php',"captain=false", 
         function(){
         });
+    window.location = "StudentLanding.html";
 }
 
 //
@@ -255,8 +254,7 @@ function StartToCaptain()
         success: function(html){
             if (html.trim() == '1')
             {
-                $("#LandingView-Start").hide();
-                $("#LandingView-Captain").show(); 
+                window.location = "teamManagementC.html";
                 loadComps();
             }
             else
@@ -269,12 +267,11 @@ function StartToCaptain()
 //
 function CaptainLeaveTeam()
 {
-	$("#LandingView-Captain").hide();
-	$("#LandingView-Start").show();
         
             $.post('StudentContent/leaveTeam.php',"captain=true", 
         function(){
         });
+        window.location = "StudentLanding.html";
 }
 
 function sendInvites()
