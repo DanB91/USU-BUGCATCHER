@@ -1,6 +1,6 @@
 <?php
 require_once "header.php";
-
+session_start();
 $user = $_SESSION['userObject'];
 $invites = $user->getTeamInvites();
 $html = '';

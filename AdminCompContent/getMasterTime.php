@@ -7,8 +7,7 @@ session_start();
 $admin = $_SESSION['adminObject'];
 $compN = $_COOKIE['compN'];
 
-if($admin->getCompetitionByCompName($compN)->hasfinish === 1)
-{
+
     $duration = $admin->getCompetitionByCompName($compN)->duration;
     
     $startTime = $admin->getCompetitionByCompName($compN)->starttime;
@@ -56,6 +55,9 @@ function getMinsSecs()
     
     
 }
+
+if($admin->getCompetitionByCompName($compN)->hasfinish === 1)
+{
 
 if($admin->getCompetitionByCompName($compN)->starttime !== '0000-00-00 00:00:00')
 {
@@ -135,11 +137,4 @@ else
     echo "STOP!";
 ?>
 
-<?php
-session_start();
-//Gets the competition ID from the AJAX call
-$comp = $_COOKIE['adminCompID'];
-
-
-?>
 

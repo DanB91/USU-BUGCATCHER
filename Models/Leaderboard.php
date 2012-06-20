@@ -23,13 +23,16 @@ class Leaderboard {
         $this->load();
     }
     
-    public function update()
-    {
-        $this->load();
-    }
     
+    /**
+     * Updates the leaderboard and returns an array of team stats sorted by place
+     * Access the each value  array using 
+     * $array['teamName']
+     * @return type 
+     */
     public function getStats()
     {
+        $this->load();
         return $this->teamsStats;
     }
     

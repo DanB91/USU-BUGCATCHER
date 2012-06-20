@@ -81,14 +81,12 @@ function OnLogIn()
 
     $.ajax({type: "GET", async: true, url:"LoginImpl.php", data: LoginContent, success:function(result){
 
-    $.ajax({type: "GET", url:"LoginImpl.php", data: LoginContent, success:function(result){
-
         //if (loginXML.responseText == "")
 	if(result == "")
         {
           if (LoginUsertype == "student")
           {//Redirects the user to "Student.html"
-            window.location = "testLandingPage.html";
+            window.location = "StudentLanding.html";
           }
           if (LoginUsertype == "admin")
           {//Redirects the user to "Admin.html"

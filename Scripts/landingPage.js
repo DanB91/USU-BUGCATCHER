@@ -33,11 +33,6 @@ function joinComp()
                 window.location = "Student.html";
             }
         });
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> e8a42aeeb52a6c7c92b930250a76487a98c4eb04
 }
 
 //Pre-Conditions:
@@ -48,10 +43,6 @@ function loadTeamInvites()
         function(html){
             $("#TeamInvitations").html(html);
         });
-<<<<<<< HEAD
->>>>>>> e8a42aeeb52a6c7c92b930250a76487a98c4eb04
-=======
->>>>>>> e8a42aeeb52a6c7c92b930250a76487a98c4eb04
 }
 
 //Pre-Conditions:
@@ -62,13 +53,6 @@ function createSTeam(tName)
         function(html){
 
             var t = html.trim();
-<<<<<<< HEAD
-<<<<<<< HEAD
-            //alert(t);
-=======
->>>>>>> e8a42aeeb52a6c7c92b930250a76487a98c4eb04
-=======
->>>>>>> e8a42aeeb52a6c7c92b930250a76487a98c4eb04
             if(t == '1')
             {
                 //alert("2compID: "+compSelected);
