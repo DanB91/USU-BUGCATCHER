@@ -10,6 +10,7 @@ if ($user != NULL && $team != NULL) {
     $memberInfo = '';
     if ($isCaptain) {
         $members = $team->getUsers();
+        var_dump($team->userids);
         foreach ($members as $member) {
             if ($member->userid != $user->userid)
                 $memberInfo .= $member->username . ",";
