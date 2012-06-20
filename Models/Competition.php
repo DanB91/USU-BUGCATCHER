@@ -55,7 +55,24 @@ class Competition extends Model{
         return $retComps;   
     }
     
+    public function hasStarted(){
+	if($this->starttime=="0000-00-00 00:00:00")
+	    return false;
+	return true;
+    }
     
+    
+    public function hasCompleted(){
+	if($this->hasfinish==0)
+	    return false;
+	return true;
+    }
+    
+    public function isPaused(){
+	if($this->pauseState=="0000-00-00 00:00:00")
+	    return false;
+	return true;
+    }
 }
 
 

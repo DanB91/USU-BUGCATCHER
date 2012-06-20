@@ -241,11 +241,9 @@ abstract class Model {
      */
     protected function createRelationToModel(Model $model, $tableName)
     {
+	$this->connection = connectToDB();
 	$this->values[$model->primaryKeyName . "s"][]=$model->getPrimaryKeyValue();
-	var_dump($this->values[$model->primaryKeyName . "s"]);
 	$model->values[$this->primaryKeyName . "s"][]=$this->getPrimaryKeyValue();
-	echo"comp";
-	var_dump($model->values[$this->primaryKeyName . "s"]);
 	
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';

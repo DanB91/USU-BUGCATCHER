@@ -501,7 +501,11 @@ function changeOnLogID()
 //Precondition: None
 //Postcondtion: Sets up the student side
 function initialize()//Find Code ---------- I1000
-{
+{   $.post('StudentContent/teamName.php', "", 
+        function(html){	
+            alert(html);
+        });
+    
 	loadStudentProblems();
 	setCodeCoverageState();
 	prettyPrint();
