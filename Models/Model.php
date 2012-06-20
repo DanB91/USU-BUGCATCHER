@@ -151,9 +151,11 @@ abstract class Model {
     
     public function update()
     {
+        $this->connection = connectToDB();
         $this->values = array();
         $this->types = array();
         $this->load();
+        
     }
 
     

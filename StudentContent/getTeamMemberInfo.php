@@ -4,13 +4,13 @@ require_once dirname(__FILE__) . "/../header.php";
 session_start();
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
+$team->update();
 $isCaptain = $_POST['isCaptain'];
 
 if ($user != NULL && $team != NULL) {
     $memberInfo = '';
     if ($isCaptain) {
         $members = $team->getUsers();
-        var_dump($team->userids);
         foreach ($members as $member) {
             if ($member->userid != $user->userid)
                 $memberInfo .= $member->username . ",";
