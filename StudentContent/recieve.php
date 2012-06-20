@@ -3,27 +3,19 @@
 
 //The purpose of this code is to load the chat file that was built in instantMessaging.php and push the contents to the appropriate users.
 //The code also loads in any hints or messages from the admin.
+//require_once "../header.php";
+ 
+session_start();
+$comp = $_SESSION['compObject'];
+$user = $_SESSION['userObject'];
+$team = $_SESSION['teamObject'];
 
 
-$compID = $_COOKIE['compID'];
-$userID		= $_COOKIE['userID'];
-
-if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '' && isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '')//If the competition has been created and the user is correctly logged in
+if($comp['compid'] && $user['userid'])
 {
-
-	$con = mysql_connect("localhost","guest","");
-	mysql_select_db("competition", $con);
-
-	$sql="SELECT * FROM ${compID}students WHERE userID = '".$userID."'";
-	$result = mysql_query($sql);
-	$row = mysql_fetch_array($result);
-	$onTeam = $row['onTeam'];
-	$userName = $row['username'];
-	
-	if($onTeam == '1')//If the student is on a team
+	if($team['teamid'])//If the student is on a team
 	{
-	
-		$teamName = $row['teamName'];
+		/*$teamName = $row['teamName'];
 		$contents=file("../Competitions/${compID}/${compID}${teamName}Content.txt",FILE_IGNORE_NEW_LINES);//Open the file in an array
 		$hints = file("../Competitions/${compID}/${compID}Content.txt", FILE_IGNORE_NEW_LINES);//Open the file in an array
 		
@@ -54,11 +46,14 @@ if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '' && isset($_COOKIE["user
 				else
 					$i++;
 		}
-		
+		*/
+	    echo "here";
+		$arrayToReturn=array();
+		$arrayToReturn[]="Nothing yet";
 		$arrayToReturn = json_encode($arrayToReturn);
-
+		
 		echo $arrayToReturn;//Echo back the arrayToReturn see student.js for more details.
-		mysql_close($con);
+		//mysql_close($con);
 	}
 	else
 		echo "You must be on a team";
