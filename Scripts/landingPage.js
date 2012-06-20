@@ -152,16 +152,14 @@ function showCompInfo(str,page)
 //refreshMember1 displays them for a regular user
 function refreshMember1()
 {
+            $.post('StudentContent/teamName.php', "", 
+        function(html){
+            $("#TeamName3").html(html);
+        });
+        
     $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=false", 
         function(html){
-            var members = html.split(",");
-            var counter = 1;
-            for (m in members)
-                {
-                    $("#TMandC"+counter).html(members[m]);
-                    counter++;
-                }
-
+            $("#Members").html(html);
         });
 }
 
@@ -176,13 +174,6 @@ function refreshMember2()
     $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
         function(html){
             $("#TMS").html(html);
-//            var members = html.split(",");
-//            var counter = 1;
-//            for(m in members)
-//                {
-//                    $("#TM"+counter).html(members[m]);
-//                    counter++;
-//                }
         });
 }
 
