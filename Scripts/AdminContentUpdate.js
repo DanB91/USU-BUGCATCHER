@@ -1,52 +1,48 @@
 //Variable to store the interval information for updating the information in the competition's "Progress & Statistics" table
 var progUpdate;
 
-//Changes the HTML Class of the navigation items based on whether they are selected or not
-function setNavClass(selectedTab)
-{
-  document.getElementById("navComp").setAttribute("class","navNormal");
-  document.getElementById("navComp").setAttribute("className","navNormal");
-  document.getElementById("navManage").setAttribute("class","navNormal");
-  document.getElementById("navManage").setAttribute("className","navNormal");
-  document.getElementById("navProgress").setAttribute("class","navNormal");
-  document.getElementById("navProgress").setAttribute("className","navNormal");
-  document.getElementById("navHints").setAttribute("class","navNormal");
-  document.getElementById("navHints").setAttribute("className","navNormal");
-  document.getElementById(selectedTab).setAttribute("class","navAlt");
-  document.getElementById(selectedTab).setAttribute("className","navAlt");
-}
-
-//This loads the JavaScript variable containing the HTML for the "Competition Setup" page for Admin.html
-//It also sets the "Competition Setup" menu tab to show as selected and unclickable
-function setCompetition()
+//
+function setSetup()
 {
   insertHTML(0);
 }
 
-//This loads the JavaScript variable containing the HTML for the "Team Management" page for Admin.html
-//It also sets the "Team Management" menu tab to show as selected and unclickable
-function setManage()
+//
+function setSelection()
 {
   insertHTML(1);
 }
 
-//This loads the JavaScript variable containing the HTML for the "Progress/Statistics" page for Admin.html
-//It also sets the "Progress/Statistics" menu tab to show as selected and unclickable
-function setProgress()
+//
+function setManage()
 {
   insertHTML(2);
 }
 
-//This loads the JavaScript variable containing the HTML for the "Hints" page for Admin.html
-//It also sets the "Hints" menu tab to show as selected and unclickable
+//
+function setProgress()
+{
+  insertHTML(3);
+}
+
+//
 function setHints()
 {
-  insertHTML(3); 
+  insertHTML(4);
 }
-function selectCompetition()
+
+//
+function setUpload()
 {
-  insertHTML(4); 
+	insertHTML(5);
 }
+
+//
+function setTesting()
+{
+  insertHTML(6);
+}
+
 //This gets the HTML code that needs to inserted via element.innerHTML
 function insertHTML(tabValue)
 {
@@ -56,33 +52,27 @@ function insertHTML(tabValue)
     case 0:
       filePath = "CompetitionSetup.html";
       break;
-    case 1:
+		case 1:
+			filePath = "selectComp.html";
+			break;
+    case 2:
       filePath = "TeamManagement.html";
       break;
-    case 2:
+    case 3:
       filePath = "ProgressStatistics.html";
       break;
-    case 3:
+    case 4:
       filePath = "Hints.html";
       break;
-    case 4:
-      filePath = "selectComp.html";
+		case 5:
+			filePath = "ProblemUpload.html";
+			break;
+		case 6:
+      filePath = "CustomProblemTesting.html";
       break;
     default:
-  }/*
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    InsertHTMLhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    InsertHTMLhttp=new ActiveXObject("Microsoft.XMLHTTP");
   }
   
-  InsertHTMLhttp.onreadystatechange=function()
-  {
-    if (InsertHTMLhttp.readyState == 4 && InsertHTMLhttp.status == 200)
-    {*/
 $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:function(result){
       $('#Content').html(result);
       switch(tabValue)
@@ -91,12 +81,14 @@ $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:f
           //setNavClass("navComp");
           popProbSelectBox();
           clearInterval(progUpdate);
+					clearInterval(t3);
           addedProbs = [];
           break;
         case 1:
           //setNavClass("navManage");
           loadManage();
           clearInterval(progUpdate);
+					clearInterval(t3);
           break;
         case 2:
           progUpdate = setInterval(showTableProg, 1000);
@@ -105,21 +97,27 @@ $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:f
         case 3:
           loadProblemNames();
           //setNavClass("navHints");
-          clearInterval(progUpdate); 
+          clearInterval(progUpdate);
+					clearInterval(t3);
           break;
-        case 4:
-         
-          CS_loadAdminComps();
+				case 4:
+          getCustomProblems();
+          //setNavClass("navHints");
+          clearInterval(progUpdate);
+					clearInterval(t3);
           break;
+				case 5:
+					clearInterval(progUpdate);
+					clearInterval(t3);
+					break;
+				case 6:
+					clearInterval(progUpdate);
+					getCustomProblems();
+					t3 = setInterval(receive,1000);
+					break;
         default:
           return;
       }
 }});
-      /*
-    }
-  }
-  
-  InsertHTMLhttp.open("GET","InsertHTML.php?filePath="+filePath,true);
-  InsertHTMLhttp.send();*/
 }
 
