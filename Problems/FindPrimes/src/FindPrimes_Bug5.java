@@ -1,5 +1,4 @@
 //Error: Does not check to see if a number was input; no ,try, catch
-//NEEDS TO BE FIXED
 
 public class FindPrimes_Bug5 {
 	

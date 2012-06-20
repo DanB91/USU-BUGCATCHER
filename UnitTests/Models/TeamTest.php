@@ -86,7 +86,6 @@ class TeamTest extends PHPUnit_Framework_TestCase {
 	$this->assertSame($this->object->getNumberOfStudentsOnTeam(), 1);
     }
 
-
 }
 
 ?>

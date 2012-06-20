@@ -19,23 +19,6 @@ function createStudentTimer()
 //Get the current competition time from the server and displays it
 function getTime()
 {
-	/*var getTimeXML;
-	
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		getTimeXML=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		getTimeXML=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	getTimeXML.onreadystatechange=function()
-	{
-		if (getTimeXML.readyState==4 && getTimeXML.status==200)
-		{
-			var time = getTimeXML.responseText;*/
-    //getTimeXML.open("GET","StudentContent/updateStudentTimer.php?compID="+timer_compID,true);
 	$.ajax({type: "GET", url:"StudentContent/updateStudentTimer.php", data: "compID="+timer_compID, success:function(time){
 	    currentTime = time;
 	    if(currentTime-lastTimeChecked >= 30)
@@ -65,22 +48,11 @@ function getTime()
 		    seconds = time.substring(time.length-2,time.length);
 		    minutes = time.substring(0,time.length-2);
 		    $("#timer").html(minutes+":"+seconds);
-		    //document.getElementById("timer").innerHTML=minutes+":"+seconds;
-	    }
-	    else
-	    {
-	    //A competition has not been created.
 	    }
 	    if(time < 0001)//Check if comp has finished
 	    {
 		    checkCompFinished();
 		    $("#timer").html("STOP!");
-		    //document.getElementById("timer").innerHTML="STOP!";
 	    }
 	}});
-	/*	}
-	}
-	
-	getTimeXML.open("GET","StudentContent/updateStudentTimer.php?compID="+timer_compID,true);
-	getTimeXML.send();	*/
 }

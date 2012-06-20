@@ -4,20 +4,7 @@ function loadIndex()
 {
  // document.getElementById("StateSelection").innerHTML=string_states;
   setInterval(function() { ValidateLoginForms(); }, 100);
-  
-   /* if (window.XMLHttpRequest)
-    {
-      loadIndexXML = new XMLHttpRequest();
-    }
-    else
-    {
-      loadIndexXML = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    
-    loadIndexXML.open("GET","onLogCookies.php",true);
-    loadIndexXML.send();*/
-    $.ajax({type: "GET", url:"onLogCookies.php", success:function(){
-    }});	  
+  $.ajax({type: "GET", url:"onLogCookies.php", success:function(){}});	  
  
 }
 
@@ -65,30 +52,14 @@ function OnLogIn()
     LoginContent += "password="+login_new_pass_str+"&";
     LoginContent += "usertype="+LoginUsertype;
  
-    /*if (window.XMLHttpRequest)
-    {
-      loginXML = new XMLHttpRequest();
-    }
-    else
-    {
-      loginXML = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    
-    loginXML.onreadystatechange=function()
-    {
-      if (loginXML.readyState == 4 && loginXML.status == 200)
-      {*/
 
     $.ajax({type: "GET", async: true, url:"LoginImpl.php", data: LoginContent, success:function(result){
-
-    $.ajax({type: "GET", url:"LoginImpl.php", data: LoginContent, success:function(result){
-
-        //if (loginXML.responseText == "")
+	    
 	if(result == "")
         {
           if (LoginUsertype == "student")
           {//Redirects the user to "Student.html"
-            window.location = "testLandingPage.html";
+            window.location = "StudentLanding.html";
           }
           if (LoginUsertype == "admin")
           {//Redirects the user to "Admin.html"
@@ -98,14 +69,9 @@ function OnLogIn()
         else
         {//There was some sort of error with trying to log in
 	    $("#LoginError").html(result);
-          //document.getElementById("LoginError").innerHTML=loginXML.responseText;
         }
     }});
-      }
-    /*}
-    loginXML.open("GET","LoginImpl.php?"+LoginContent,true);
-    loginXML.send();
-  }*/
+  }
   return true;
 }
 

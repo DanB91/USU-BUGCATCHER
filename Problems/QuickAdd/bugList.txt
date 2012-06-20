@@ -1,2 +1,3 @@
 QuickAdd adds two numbers.
-LINE 9: Subtracts instead of adding.
+2)LINE 9: Subtracts instead of adding.
+3)Does not have "try...catch" to catch input errors.

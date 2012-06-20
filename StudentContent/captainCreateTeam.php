@@ -1,6 +1,10 @@
 <?php
-require_once "header.php";
+//require_once "header.php";
+require_once "../Models/Team.php";
+require_once "../Models/User.php";
+require_once "../Models/TeamInvite.php";
 
+session_start();
 $user = $_SESSION['userObject'];
 $teamName = $_POST['teamName'];
 $invite1 = $_POST['inviteOne'];

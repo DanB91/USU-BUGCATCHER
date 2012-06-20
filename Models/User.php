@@ -114,6 +114,17 @@ class User extends Model{
     }
     
     
+    public function getUsersTeams(){
+	$data['userid']=$this->getPrimaryKeyValue();
+	$result=$this->findInDB("STUDENT_TEAM_LINK", $data);
+	$teamArr= array();
+	while(($row = $result->fetch_assoc())){
+	    $teamArr[]=new Team($row['teamid']);
+	}
+	return $teamArr;
+    }
+    
+    
     
     
     

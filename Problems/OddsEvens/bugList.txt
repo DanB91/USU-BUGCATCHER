@@ -1,4 +1,7 @@
 OddsEvens takes either "odd" or "even" and an int and returns the number of odd or even digits in that int.
-LINE 9: Increments the odd digit counter by 2.
-LINE 19: Mods by the wrong number.
-LINE 5: Doesn't count the final digit if it's a 1
+1)LINE 9: Increments the odd digit counter by 2.
+2)LINE 19: Mods by the wrong number.
+3)LINE 5: Doesn't count the final digit if it's a 1
+4)Does not check if second input is an integer
+5)Does not check if first input is "odd" or "even"
+6)Does not check if second input is within the range

@@ -1,5 +1,4 @@
 //Error: does not check to see if input is a number; no try,catch
-//NEEDS TO BE FIXED
 public class Fibonaccibug2 {
 
    public static void main(String[] args) { 
