@@ -30,6 +30,7 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
             $invitee2 = new User($invite1, "username");
             $user->sendTeamInviteToUser($team, $invitee2);           
         }
+        
         echo 1;
     } catch (ModelAlreadyExistsException $e) {
         echo "Team name already exists. Please choose a new team name.";

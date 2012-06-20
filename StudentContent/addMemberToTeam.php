@@ -7,7 +7,7 @@ $invite = new Invite($inviteID);
 $team = new Team($invite->teamid);
 
 if (isset($_SESSION['userObject']) && ($_SESSION['userObject'] != NULL)) {
-//store team in session object.
+
 
         $invite->accept();
         $_SESSION['teamObject'] = $team;
