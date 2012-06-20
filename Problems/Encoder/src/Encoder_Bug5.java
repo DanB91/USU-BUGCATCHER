@@ -37,8 +37,9 @@ public class Encoder_Bug5 {
 	}
 	
     public static void main(String[] args){
-        String toEncrypt = args[0];
         try{
+            String toEncrypt = args[0];
+        
             double shift = Double.parseDouble(args[1]);
             String encrypted = encrypt(toEncrypt, shift);
             System.out.println(encrypted);

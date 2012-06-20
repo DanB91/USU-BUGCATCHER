@@ -1,6 +1,8 @@
 Converter takes a number of seconds and returns the equivalent amount of time in the form days:hours:minutes:seconds.
-LINE 10: secondsSpillover is set to false.
-LINE 6: Seconds initialized to 0.
-LINE 27: Number of hours is 60 instead of 24.
-LINE 12: Returns error if given 0.
-LINE 25: When minutes go past 60, hours decrement instead of incrementing.
+1)LINE 10: secondsSpillover is set to false.
+2)LINE 6: Seconds initialized to 0.
+3)LINE 27: Number of hours is 60 instead of 24.
+4)LINE 12: Returns error if given 0.
+5)LINE 25: When minutes go past 60, hours decrement instead of incrementing.
+6)No "try...catch" to catch errors in inputs.
+7)Does not check if input is positive.
