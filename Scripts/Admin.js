@@ -127,7 +127,7 @@ function stopCompetition()
         //Need to write a new countdown function
         document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />';
         //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();
+        
     }
   }
   //Don't start competition until the countdown timer reaches zero.
@@ -169,7 +169,7 @@ function refreshProbList()
       	{
       		switch(difficulty)
       		{
-      			case 0: 
+      			case 0:
       				diffStr = ' - Very Easy';
       				break;
       			case 1:
@@ -274,7 +274,7 @@ function addProb(problem)//Find Code ---------- CS1004
       //document.getElementById('CSetupError').innerHTML = "You cannot have more than 5 problems in a competition.";
       //return;
   //}
-  alert("Called");
+  //alert("Called");
   
   if(problem == '')
   {
@@ -416,56 +416,24 @@ function createCompetition()//Find Code ---------- CS1011
 
   //STOPPED = true;
   
-  var setupXML;
+
   var CodeCov = document.forms.CompForm.AllowCoverage;
   var inclCD = document.forms.CompForm.IncludeCountdown;
+  var hidden = document.forms.CompForm.HideComp;
   var Time = document.getElementById("CompTime");
+  var compName = $("#CompName").val();
+  var compDesc = $("#CompDesc").val();
+  var passwd = $("#PassWord").val();
   var CountdownVal;
+  var CodeCovVal;
+  var HideCompVal;
   
-//  if(inclCD[0].checked == true)
-//      CountdownVal = 1;
-//  else
-//      CountdownVal = 0; 
       
-//  if (window.XMLHttpRequest)
-//  {
-//    setupXML = new XMLHttpRequest();
-//  }
-//  else
-//  {
-//    setupXML = new ActiveXObject("Microsoft.XMLHTTP");
-//  }
-// 
-//  
-//  setupXML.onreadystatechange=function()
-//  {
-//    if (setupXML.readyState == 4 && setupXML.status == 200)
-//    {
-//      //if (setupXML.responseText.length == 8)
-//      //{
-//
-//        compSetID = setupXML.responseText;
-//                       
-//        
-//        //compSetHints = Hints.options[Hints.selectedIndex].text;
-//        //Hints.value = 1;
-//		compSetTimeM = Time.value;
-//                compSetTime = Time.value;
-//        if (CountdownVal)
-//        	compSetTimeS = 10;
-//        else 
-//        	compSetTimeS = 0;
-//        Time.value = '';
-//        //setCompCookies();
-//        createTimer();
-//        document.getElementById('adminCompID').innerHTML = "<p>" + "Competition ID: " +setupXML.responseText + "</p>";
-//      //}
-//
-//    }
-//    
-//  }
-  
-   
+  if(hidden[0].checked == true)
+      HideCompVal = 1;
+  else
+      HideCompVal = 0;
+      
   if(CodeCov[0].checked == true)
       CodeCovVal = 1;
   else
@@ -480,8 +448,6 @@ function createCompetition()//Find Code ---------- CS1011
   var length = addedProbs.length;
   
 
-  
-  alert(" ");
   if(length <= 0)
   {
     document.getElementById('CSetupError').innerHTML = "You must select at least one problem before you can setup a competition.";
@@ -493,7 +459,7 @@ function createCompetition()//Find Code ---------- CS1011
     document.getElementById('CSetupError').innerHTML = "You must enter a valid number for time(mins) before you can setup a competition.";
     return;    
   }
-alert("called");  
+ 
   if(TimeVal <= 0)
   {
      document.getElementById('CSetupError').innerHTML = "You must enter a valid number for time(mins) before you can setup a competition.";
@@ -510,19 +476,20 @@ alert("called");
   if(compName == "")
   {
       $("#CSetupError").html("Competition must be given a name");
-    return;    
+      return;    
   }
 
   var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
   
- 
+  
    
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
-        alert(result);
-        compSetTimeM = Time;
-        compSetTime = Time;
+        
+        compSetTimeM = TimeVal;
+        
+        compSetTime = TimeVal;
         if (CountdownVal)
         	compSetTimeS = 10;
         else 
@@ -530,6 +497,7 @@ alert("called");
         Time.value = '';
         //setCompCookies();
         createTimer();
+        stopTimer();
         $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
 
         
@@ -1265,37 +1233,34 @@ function AdminLoadCheck()//Find Code ---------- USC1001
 //Since the master timer is synced with the administrators timer
 function getMasterTime()//Find Code ---------- USC1002
 {
+    
+    $.ajax({url: "AdminCompContent/getMasterTime.php", success:function(result){
 
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		getTimerXML=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		getTimerXML=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	getTimerXML.onreadystatechange=function()
+        var time;
+        time = $.trim(result);
+        //alert(result);
+       
+        if(!isNaN(time))
         {
-            if (getTimerXML.readyState==4 && getTimerXML.status==200)
+            if (time.length > 3)
             {
-                var time = getTimerXML.responseText;
-                //alert(getTimerXML.responseText);
-                if (time.length > 3)
-                {
-                        seconds = time.substring(time.length-2,time.length);
-                        minutes = time.substring(0,time.length-2);
-                        document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
-                        startTimer();
-                }
-                else
-                {
-                        //A competition has not been created.
-                }
+
+                    seconds = time.substring(time.length-2,time.length);
+                    minutes = time.substring(0,time.length-2);
+                    document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
+                     startTimerOnRefresh(); 
             }
-	}
-	
-	getTimerXML.open("GET","AdminCompContent/getMasterTime.php",true);
-	getTimerXML.send();
+            else
+            {
+                    //A competition has not been created.
+            }
+        }
+        else if(time == "paused")
+            {document.getElementById("header-timer").innerHTML="paused!";  startTimerOnRefresh();}
+        else
+            document.getElementById("header-timer").innerHTML="STOP!";
+
+    }});
+           
 }
 

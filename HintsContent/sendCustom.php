@@ -20,8 +20,6 @@ if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')//If competit
 	fwrite($file, $customHint);
 	fwrite($file, "<!@!>");//Write the delemeter to the file
 	fclose($file);
-}
-else
-	echo "You must create a competition before you can submit hints";
 
+}
 ?>

@@ -2,9 +2,7 @@
 
 
 
-$adminCompID = $_COOKIE['adminCompID'];
-if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')
-{
+
   if(file_exists ("../Competitions/${adminCompID}/${adminCompID}.txt")){
     $file = file("../Competitions/${adminCompID}/${adminCompID}.txt");
     $problemNums = $file[0];
@@ -19,8 +17,6 @@ if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')
 	$content .= '</select>';
 	echo $content;
    }
-}
-else 
-	echo "You must create a competition before you can send hints.";
+
 
 ?>

@@ -10,28 +10,67 @@ var COUNTINGDOWN = false;
 //Starts or unpauses the timer for the competition.
 function startTimer()
 {
-	if (STOPPED || (!STOPPED && PAUSED))
-	{
-                $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){ } });
-                
-		adminTimer = setInterval(function() {countdown();},1000);
-		STOPPED = false;
-		PAUSED = false;
-	}
-        
+    if (STOPPED || (!STOPPED && PAUSED))
+    {   
+       
         $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){} });
+        
+        if(PAUSED)
+        {
+            $.ajax({url: "AdminCompContent/unPause.php", success:function(){ } });
+            getMasterTime();
+            STOPPED = false;
+            PAUSED = false;
+        }
+        else
+        {
+             adminTimer = setInterval(function() {countdown();},1000);
+             STOPPED = false;
+        }
+        
+       
+    } 
+}
+
+function startTimerOnRefresh()
+{
+    
+    $.ajax({url: "AdminCompContent/getPauseState.php", success:function(result){
+
+        if(result != "paused")
+        {
+            adminTimer = setInterval(function() {countdown();},1000);
+            document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
+            STOPPED = false;
+            PAUSED = false;
+        }
+        else
+        {
+            PAUSED = true;
+            document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
+        }
+    } }); 
+        
+     
 }
 
 //Pauses the timer for the competition.
 function pauseTimer()
 {
-	if (!PAUSED && !STOPPED && !COUNTINGDOWN)
-	{
-		clearInterval(adminTimer);
-		document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
-		PAUSED = true;
-	}
-        
+    if (!PAUSED && !STOPPED && !COUNTINGDOWN)
+    {
+            clearInterval(adminTimer);
+            document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
+            PAUSED = true;
+            $.ajax({url: "AdminCompContent/pauseTimer.php", success:function(){} }); 
+    }  
+}
+
+//Stops the timer with out setting pause.
+function stopTimer()
+{
+        clearInterval(adminTimer);
+        document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';	
 }
 
 //Counts down the competition timer.
@@ -59,28 +98,7 @@ function countdown()
   }
 }
 
-//AJAX--Sets the initial value/time of the timer.
-function setTimer()
-{
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		setTimerXML = new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		setTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	setTimerXML.onreadystatechange=function()
-	{
-		if (setTimerXML.readyState == 4 && setTimerXML.status == 200)
-		{
-			//alert(setTimerXML.responseText);
-		}
-	}
-	
-	//setTimerXML.open("GET","AdminCompContent/setMasterTimer.php?adminCompID="+compSetID+"&time="+compSetTime,true);
-	//setTimerXML.send();
-}
+
 
 //AJAX--Updates the competition timer file to sync with the admin.
 function updateTimer()
@@ -102,24 +120,16 @@ function updateTimer()
 //Initializes the timer.
 function createTimer()
 {
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		createTimerXML = new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		createTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
-	}
 
-	seconds = compSetTimeS;
-	minutes = compSetTimeM;
+    seconds = compSetTimeS;
+    minutes = compSetTimeM;
+    
+    STOPPED = true;
+    PAUSED = false;
 
-	STOPPED = true;
-	PAUSED = false;
-	
-	if (seconds > 0)
-		COUNTINGDOWN = true;
-	setTimer();  
+    if (seconds > 0)
+            COUNTINGDOWN = true;
+   
 }
 
 //Inserts leading zeroes on the minutes and seconds for the timer

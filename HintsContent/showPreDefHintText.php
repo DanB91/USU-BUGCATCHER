@@ -3,10 +3,7 @@
 $problemSelected = $_GET['problemSelected'];
 $hintSelected = $_GET['hintSelected'];
 
-//if(!file_exists("C:\DropBox\htdocs\NewDesign\HintsContent\Hints\PreDefHints\\${problemSelected}.txt"))
-    //return;
-
-$fileCust=file("C:\DropBox\htdocs\NewDesign\HintsContent\Hints\PreDefHints\\${problemSelected}.txt",FILE_IGNORE_NEW_LINES);
+$fileCust=file("../../USU-BUGCATCHER/HintsContent/Hints/PreDefHints/${problemSelected}.txt",FILE_IGNORE_NEW_LINES);
 
 $hintsSoFar = 0;//Used to count the hints since it is possible that hints may span multiple lines
 $foundHint = false;
