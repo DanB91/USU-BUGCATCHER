@@ -25,6 +25,4 @@ function errorHandler($errNo, $errStr)
 
 set_error_handler('errorHandler');
 
-
-session_start();
 ?>
