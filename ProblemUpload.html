@@ -1,0 +1,87 @@
+<html>
+<head>
+<title>Admin</title>
+
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+<script language="javascript" src="Scripts/Admin.js"></script>
+<script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
+<script language="javascript" src="Scripts/adminLandingPage.js"></script>
+<script language="javascript" src="Scripts/AdminProblemTesting.js"></script>
+<script language="javascript" src="Scripts/AdminTimer.js"></script>
+<script language="javascript" src="Scripts/CountdownTimer.js"></script>
+
+<script language="javascript">
+var compSetLanguage = '';
+var compSetMode = '';
+var compSetProblems = '';
+var compSetHints = '';
+var compSetTime = '';
+var compSetID = '';
+</script>
+
+</head>
+
+<body onload=AdminLoadCheck();>
+
+<div id="container" class="gradient">
+	<div id="header">
+    	<div id="header-remainingTime">
+          	Time remaining
+			<p id="header-timer">00:00</p>
+        </div><!--end header-remainingTime-->
+        <div id="header-controls">
+            <img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); /> 
+        </div><!--end header-controls-->        
+        <p id="adminHeader">Bug Catcher: Administrator</p>
+        <div id="header-logout-help">
+          	<a href="LogoutImpl.php"><h4>log out</h4></a>
+           	<a href="StudentHelp.html" target="_blank" title="Help"><h4>help</h4></a>
+        </div><!--end header-logout-help-->
+
+	</div><!--end header-->
+    
+	<div id="admenu">
+		<div id="navTabs">
+            <ul>
+                <li id="navTabs-Competition" class="navTabs-subMenu"><h4 class="navTabs-label">Competition Management</h4>
+                    <ul id="navTabs-compSubMenu">
+                    	<li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Setup</h4></a></li>
+                      <li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Control</h4></a></li>
+                    </ul></li>
+                <li><a class="navTabs-link" id="navManage" href="JavaScript:setManage()"><h4>Team Management</h4></a></li>
+                <li><a class="navTabs-link" id="navProgress" href="JavaScript:setProgress()" ><h4>Progress/Statistics</h4></a></li>
+                <li><a class="navTabs-link" id="navHints" href="JavaScript:setHints()" ><h4>Hints</h4></a></li>
+                <li id="navTabs-Problems" class="navTabs-subMenu-visible"><h4 class="navTabs-label">Custom Problems</h4>
+                    <ul id="navTabs-probSubMenu">
+                    	<li><a id="navHints" class="navNormal" href="JavaScript:setUpload()" ><h4>Problem Upload</h4></a></li>
+                      <li><a id="navHints" class="navNormal" href="JavaScript:setTesting()" ><h4>Problem Testing</h4></a></li>
+                    </ul></li>
+            </ul>
+		</div><!--end navTabs-->
+	</div><!--end navigation-->
+    
+	<div id="Content">
+<!--Do Not Delete The Comment Below This-->
+<!--CONVERSION_STARTS_HERE-->
+		<h2>Upload Custom Problems</h2>
+        <form action="UploadProblemFolder.php" method="post" enctype="multipart/form-data" target="CP_Target">
+            <p id="smallerHeader" style="color: #000;">Filename:</p>
+            <div id="uploadWrapper"><input type="file" name="file" id="file" /></div>
+            <br />
+            <input type="submit" value="Upload Problem" name="CP_Upload" id="CP_Upload" />
+        </form>
+        <iframe id="CP_Target" name="CP_Target" src="#" style="width:0;height:0;border:0px solid #000;"></iframe>
+<!--CONVERSION_ENDS_HERE-->
+<!--Do Not Delete The Comment Above This-->
+	</div><!--end content-->
+    
+	<div id="footer" style="margin: 0 auto;">
+  		<div id="adminCompID"></div>
+    	<div id="copyright"><p></p></div>
+	</div><!--end footer-->
+	<div class="nooverflow"></div>
+</div><!--end container-->
+
+</body>
+
+</html>

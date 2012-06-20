@@ -1,0 +1,172 @@
+<html>
+<head>
+<title>Admin</title>
+
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+<script language="javascript" src="Scripts/Admin.js"></script>
+<script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
+<script language="javascript" src="Scripts/adminLandingPage.js"></script>
+<script language="javascript" src="Scripts/AdminProblemTesting.js"></script>
+<script language="javascript" src="Scripts/AdminTimer.js"></script>
+<script language="javascript" src="Scripts/CountdownTimer.js"></script>
+
+<script language="javascript">
+var compSetLanguage = '';
+var compSetMode = '';
+var compSetProblems = '';
+var compSetHints = '';
+var compSetTime = '';
+var compSetID = '';
+</script>
+
+</head>
+
+<body onload=AdminLoadCheck();>
+
+<div id="container" class="gradient">
+	<div id="header">
+    	<div id="header-remainingTime">
+          	Time remaining
+			<p id="header-timer">00:00</p>
+        </div><!--end header-remainingTime-->
+        <div id="header-controls">
+            <img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); /> 
+        </div><!--end header-controls-->        
+        <p id="adminHeader">Bug Catcher: Administrator</p>
+        <div id="header-logout-help">
+          	<a href="LogoutImpl.php"><h4>log out</h4></a>
+           	<a href="StudentHelp.html" target="_blank" title="Help"><h4>help</h4></a>
+        </div><!--end header-logout-help-->
+
+	</div><!--end header-->
+    
+	<div id="admenu">
+		<div id="navTabs">
+            <ul>
+                <li id="navTabs-Competition" class="navTabs-subMenu"><h4 class="navTabs-label">Competition Management</h4>
+                    <ul id="navTabs-compSubMenu">
+                    	<li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Setup</h4></a></li>
+                      <li><a id="navComp" class="navNormal" href="JavaScript:setCompetition()" ><h4>Competition Control</h4></a></li>
+                    </ul></li>
+                <li><a class="navTabs-link" id="navManage" href="JavaScript:setManage()"><h4>Team Management</h4></a></li>
+                <li><a class="navTabs-link" id="navProgress" href="JavaScript:setProgress()" ><h4>Progress/Statistics</h4></a></li>
+                <li><a class="navTabs-link" id="navHints" href="JavaScript:setHints()" ><h4>Hints</h4></a></li>
+                <li id="navTabs-Problems" class="navTabs-subMenu-visible"><h4 class="navTabs-label">Custom Problems</h4>
+                    <ul id="navTabs-probSubMenu">
+                    	<li><a id="navHints" class="navNormal" href="JavaScript:setUpload()" ><h4>Problem Upload</h4></a></li>
+                      <li><a id="navHints" class="navNormal" href="JavaScript:setTesting()" ><h4>Problem Testing</h4></a></li>
+                    </ul></li>
+            </ul>
+		</div><!--end navTabs-->
+	</div><!--end navigation-->
+    
+	<div id="Content" style="width: 1000px;">
+    
+    <!--###################################################################################################-->
+    <!--#### ORDER OF THE COLUMNS MUST REMAIN THE SAME (studentleft, studentmiddle, then studentright) ####-->
+    <!--###################################################################################################-->
+
+<!--Do Not Delete The Comment Below This-->
+<!--CONVERSION_STARTS_HERE-->
+<style>
+#ProblemsList{
+			/*background: url(Images/footer.png);*/
+			/*background: #7A9D54;*/
+			background: #ccc;
+			border: 6px solid #505C66;
+			margin: 0px;
+			padding: 0px;
+			position: relative;
+				left: -9px;
+				top: -12px;
+			width: 272px;}
+
+#HidePopUp{
+			height: 70px;
+			margin: 0px;
+			padding: 0px;
+			position: absolute;
+					left: 0px;
+					top: 0px;
+			width: 274px;
+			z-index: 50;}
+</style>
+
+    <div id="StudentLeft" align=center style="background: #D3FBA7; height: 575px; width: 230px;">
+          
+          <div id="Requirements" align=left>
+                <div id="RequirementsList">
+                    <p>Requirements</p>
+                </div><!--end RequirementsList-->
+        </div><!-- end Requirements-->
+    </div><!--end StudentLeft-->
+        
+    <div id="StudentMiddle" align=left style="background: #D3FBA7; border-left: 10px solid #779853; border-right: 10px solid #779853; height: 575px;">
+      <img src="Images/darkArrow.png" id="arrow" style="z-index: 10;" /><img src="Images/lightArrow.png" id="arrow" style="float: right; position: relative; left: 21px; z-index: 10;" />
+        <div id="StudentMiddleTop">
+          <a id="ProblemsListLink" href="JavaScript:showProblemsList();" title="Click to view the list of problems" class="button"><p style="font-size: 20px; margin-right:18px">select problem</p></a>
+            <div id="popParent">
+            		<div id="HidePopUp" onClick="JavaScript:showProblemsList();"></div>
+                <div id="PopUpArea" class="PUA-hidden" >Hello!</div><!--onClick="JavaScript:showProblemsList();"-->
+            </div><!--end popParent-->
+        </div><!--end StudentMiddleTop-->
+        
+        <div id="ProblemName">Problem Name</div><br /><br />
+      
+        <form id="CoverageToggle">
+            <input type="checkbox" name="Coverage" id="Coverage" onchange='toggleCoverage(this);' />
+            <label for="Coverage">Code Coverage</label>
+        </form>
+  
+        <div id="StudentMiddleBottom">
+            <div id="ProblemCode">
+              <pre>Problem Source Code</pre>
+            </div><!--end ProblemCode-->
+        </div><!--end StudentMiddleBottom-->
+    </div><!--end StudentMiddle-->
+        
+    <div id="StudentRight" align=center style="background: #D3FBA7; height: 575px; width: 232px;">
+          <!--<img src="Images/lightArrow.png" id="arrow" />-->
+            <div id="BugTesterDiv" title="No Problem Selected">
+              <form onSubmit="event.preventDefault(); getBugTestInfo(testInput.value,testOutput.value);" id="BugTester" class="fields">
+                    <p>Test Input:</p>
+                    <input type="text" name="TestInput" id="testInput" class="Stext"/><br />
+                    <p>Expected Output:</p>
+                    <input type="text" name="TestOutput" id="testOutput" class="Stext"/><br />
+                    <input type="submit" value="t" id="testforBug" class="Sbutton"/>
+                </form>
+            </div><!--end BugTesterDiv-->
+            <p style="padding: 0 0 0 20px;">Results:</p>
+            <div id="ResultsList" align=left>
+            </div>
+            <div id="ChatBox">
+                <form id="ChatForm" class="fields" onSubmit="event.preventDefault(); instantMessaging(ChatInput.value);scrollResultsDown();">
+
+                    <input type="text" id="ChatInput" />
+                    <div id="Filters" align=left>
+                        <label>Show:</label><br />
+                        <input type="checkbox" name="hintFilterBox" id="hintFilterBox" checked  />
+                        <label for="hintFilterBox">Hints</label>
+                        <input type="checkbox" name="chatFilterBox" id="chatFilterBox" checked  />
+                        <label for="chatFilterBox">Chats</label>
+                        <input type="checkbox" name="testFilterBox" id="testFilterBox" checked />
+                        <label for="testFilterBox">All Tests</label>
+                        <br /><a onClick="clearSavedResults();"><u style="color: blue; cursor: pointer;">Clear Saved Results</u></a>
+                  </div><!--Filters-->
+            </form>
+      </div><!--end ChatBox--><br /> <br /><br /><br />
+    </div><!--end StudentRight-->
+<!--CONVERSION_ENDS_HERE-->
+<!--Do Not Delete The Comment Above This-->
+  </div><!--end content-->
+  
+	<div id="footer" style="margin: 0 auto;">
+  		<div id="adminCompID"></div>
+    	<div id="copyright"><p></p></div>
+	</div><!--end footer-->
+	<div class="nooverflow"></div>
+</div><!--end container-->
+
+</body>
+
+</html>

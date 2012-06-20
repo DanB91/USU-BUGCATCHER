@@ -659,11 +659,15 @@ li {
 	width: 200px;
 }
 
+/*################################################################################*/
+/*################################################################################*/
+
 #admenu {
 	width: 1000px;
 	height: 48px;
 	margin: 0 auto;
 	background: url('../Images/admenu.png') repeat-x;
+	overflow-y: visible;
 	text-align:center;
 }
 
@@ -672,13 +676,132 @@ li {
 	padding: 0;
 }
 
-#admenu li {
-	text-align:center;	
+#admenu li{
+	float: left;
+	margin: 0px;
+	text-align:center;
 }
 
-#admenu a:hover {
-	color:#2f393f;	
+.navTabs-subMenu-visible{
+	float: left;
+	height: 48px;
+	overflow-y: visible;
+	text-align:center;
 }
+
+.navTabs-subMenu-hidden{
+	float: left;
+	height: 48px;
+	overflow-y: hidden;
+	text-align:center;
+}
+
+#navTabs{
+	height: 48px;
+	width: 883px;
+	margin: 0 -100px 0 70px;"
+}
+
+.navTabs-label{
+}
+
+.navTabs-link{
+	height: 48px;
+	overflow-y: hidden;
+}
+
+#navTabs a{
+	display: inline;
+	float: left;
+	text-decoration: none;
+	color: #fff;
+}
+
+#navTabs a:hover{
+	/*background: url(../Images/admenuHover.png);
+	color: #2f393f;
+	color: #000;*/
+}
+
+#navTabs h4{
+	display: inline;
+	float: left;
+	padding: 14px 18px 14px 18px;
+	text-decoration: none;
+	color: #fff;
+}
+
+#navTabs li ul{
+	position: relative;
+		left: 0px;
+		top: -96px;
+	z-index: -30;
+}
+
+#navTabs li:hover ul{
+	position: relative;
+		left: 0px;
+		top: 0px;
+	z-index: 100;
+}
+
+#navTabs li:hover ul.navTabs-SubNormal{
+	position: relative;
+		left: 0px;
+		top: -96px;
+	z-index: -30;
+}
+
+#navTabs li:hover ul.navTabs-SubHover{
+	position: relative;
+		left: 0px;
+		top: 0px;
+	z-index: 100;
+}
+
+#navTabs li ul li{
+	background: url(../Images/admenu.png) repeat-x;
+	clear: left;
+	width: 100%;
+}
+
+#navTabs li:hover a{
+	width: 100%;
+}
+
+#navTabs li:hover h4{
+	color: #fdd794;
+}
+
+a.navTabs-link:hover{
+	background: url(../Images/admenuSubHover3.png);
+}
+
+#navTabs li:hover h4.navTabs-label{
+	background: url(../Images/admenuHover.png);
+	color: #fff;
+}
+
+#navTabs li:hover li h4{
+	background: url(../Images/admenu.png);
+	color: #fff;
+	width: 100%;
+}
+
+#navTabs li li h4:hover{
+	background: url(../Images/admenuSubHover3.png);
+	color: #fdd794;
+	/*color: #2f393f;*/
+	width: 100%;
+}
+
+#navTabs li li h4{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+/*################################################################################*/
+/*################################################################################*/
 
 #header-remainingTime {
 	color: #fff;
@@ -1376,4 +1499,22 @@ a.button:hover p{
     width:80%;
     height:50%;
     padding-right: 100px;
+}
+
+#file {
+	border: 2px solid #779853;
+	background-color:#fffded;
+	padding:0px;
+	width: 220px; 
+}
+
+#CP_Upload {
+	background: url('../Images/uploadProblemBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
 }
