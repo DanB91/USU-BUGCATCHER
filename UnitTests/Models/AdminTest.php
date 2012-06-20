@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../../Models/Admin.php';
+require_once dirname(__FILE__) . '/../../Models/Problem.php';
 
 /**
  * Test class for Admin.
@@ -18,7 +19,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        //$this->object = new Admin(1); 
+        $this->object = new Admin(5); 
     }
 
     /**
@@ -31,7 +32,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     
     public function testRegisterAdmin()
     {
-        Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
+        //Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
     }
     
     public function testFields()
@@ -43,6 +44,23 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     {
         $this->assertNotEquals(Admin::login('admin', 'password'), FALSE);
     }
+    
+    public function testAddCompetition()
+    {
+        $this->object->createCompetition(array('compname' => 'jgifd'), array(new Problem(2), new Problem(5)));
+    }
+    
+    public function testGetCompitions()
+    {
+        //var_dump($this->object->getCompetitions());
+    }
+    
+     public function testGetCompitionsByName()
+    {
+        var_dump($this->object->getCompetitionByCompName("123")->starttime);
+    }
+    
+   
 
 }
 

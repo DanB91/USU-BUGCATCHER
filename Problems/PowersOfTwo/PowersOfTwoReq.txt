@@ -2,4 +2,12 @@
 <br/>
 2.It will list the powers of in ascending order starting with 2^0 and ending with 2^N-1.
 <br/>
-3.Only works if 0 <= N < 31 since 2^31 overflows an int.
+3.Only works if 0 <= N <= 20.
+<br/>
+4. If the input is not positive, it will output, "Error: Input must be positive."
+<br/>
+5. If the input is not an integer, it will output,"Error: Input must be an integer."
+<br/>
+6.If the input is greater than 20, it will output, "Error: Input must be a positive number less than or equal to 20."
+<br/>
+7.All other invalid inputs will output, "Error: Bad Input".

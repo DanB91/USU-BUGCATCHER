@@ -18,7 +18,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $this->object = new User(0);
+
+        $this->object = new User(18);
+
     }
 
     /**
@@ -33,7 +35,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
     {
         
         
-        $this->assertSame('dansbok', $this->object->username);
+        $this->assertSame('student', $this->object->username);
         //echo $this->object->password . "\n";
         
     }
@@ -65,18 +67,42 @@ class UserTest extends PHPUnit_Framework_TestCase {
     
     public function testLogin()
     {
-        $this->assertNotEquals(User::login('mid', 'password'), FALSE);
+        //$this->assertNotEquals(User::login('mid', 'password'), FALSE);
         
     }
     
     
     public function testAddToTeam()
     {
-        //$this->object->addUserToTeam(new Team(1));
+        /*$this->assertTrue($this->object->addUserToTeam(new Team(1)));
+	$anotherUser=new User(18);
+	$fourthUser= new User(24);
+	$this->assertTrue($anotherUser->addUserToTeam(new Team(1)));
+	$this->assertFalse($fourthUser->addUserToTeam(new Team(1)));*/
+	
     }
-    
-    
+//    
+//
+//    public function testSendInvite()
+//    {
+//	$team=new Team(1);
+//	$user=new User(20);
+//        $this->object->sendTeamInviteToUser($team, $user);
+//    }
+//    
+//    public function testGetUsersTeams(){
+//	$arr=$this->object->getUsersTeams();
+//    }
+//    
+//    
+//    
+//
 
+    
+    public function testGetUserInvites()
+    {
+        var_dump($this->object->getTeamInvites());
+    }
 }
 
 ?>

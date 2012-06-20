@@ -1,15 +1,14 @@
 <?php
-require 'Models/User.php';
-require 'Models/Admin.php';
+require_once "header.php";
 //Stores the values of the information provided by the user in the registration fields on the homepage
-$firstname_str = $_GET['firstname'];
-$lastname_str = $_GET['lastname'];
-$schoolname_str = $_GET['schoolname'];
-$state_str = $_GET['state'];
-$username_str = $_GET['username'];
-$adminnickname_str = $_GET['nickname'];
-$password_str = $_GET['password'];
-$accountType_str = $_GET['usertype'];
+$firstname_str = $_REQUEST['firstname'];
+$lastname_str = $_REQUEST['lastname'];
+$schoolname_str = $_REQUEST['schoolname'];
+$state_str = $_REQUEST['state'];
+$username_str = $_REQUEST['username'];
+$adminnickname_str = $_REQUEST['nickname'];
+$password_str = $_REQUEST['password'];
+$accountType_str = $_REQUEST['usertype'];
 
 //Accesses the database and adds the user account into the database
 $success = true;
@@ -24,6 +23,11 @@ if ($accountType_str == 'admin')
 
         );
        ADMIN::registerAdmin($ADMIN);
+       mkdir("Uploads/${username_str}",777); //Not sure if this line is redundant or not.
+	mkdir("Uploads/${username_str}/Problems",777);
+	mkdir("Uploads/${username_str}/TempCompetition",777);
+	fclose(fopen("Uploads/${username_str}/TempCompetition/Content.txt","w+"));
+	copy("Problems/emma.jar","Uploads/${username_str}/Problems/emma.jar");
        //print_r($ADMIN);
     }catch(Exception $e ){
         $success = false;
@@ -43,8 +47,7 @@ else
         'password' => $password_str,   
         );
         USER::registerUser($USERARRAY);
-        //print_r($USERARRAY);
-    }catch(Exception $e ){
+    }catch(Exception $e){
         $success = false;
         RegistrationFail();
     }

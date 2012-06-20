@@ -1,0 +1,69 @@
+<html>
+
+<head>
+<title></title>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script language="javascript" src="Scripts/landingPage.js"></script>
+<script language="javascript" src="Scripts/jquery.js"></script>
+<link rel="stylesheet" href="CSS/styles.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+</head>
+
+<body onload='loadComps();refreshMember2();'>
+
+<div id="headerSplash"></div>
+<div id="content" style="margin: 0 auto; width: 1000px;">
+    
+
+  <div id="LandingView-Captain" class="LV-Sections">
+    <div id="LVC-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
+        <form class="form">
+        <div class="formHeader"><h3 class="formHeadText" id="TeamName2">Team Name</h3></div>
+        <fieldset>
+          <p>Teammate #1</p>
+          <p id="TM1"></p>
+          <p>Teammate #2</p>
+          <p id="TM2"></p>
+          <!--<p>Username to Invite 1</p>
+            <input type="text" id="LandingInvite3" />
+          <p>Username to Invite 2</p>
+            <input type="text" id="LandingInvite4" class="Itext" />-->
+          <!--<a class="button" onClick="sendMoreInvites();"><p>Send Invites</p></a>-->
+          <a class="button" onClick="refreshMember2();"><p>Refresh</p></a>
+        </fieldset>
+        </form>
+        <a class="button" onClick="CaptainLeaveTeam();loadTeamInvites();"><p>Leave Team</p></a>
+    </div><!--end LVC-Left-->
+    
+    <div id="LVC-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
+    
+      <div id="Landing-CompList">
+        <p id="smallerHeader" style="color:#000;">Available Competitions</p>
+        <div id="LandingCompSelect">Loading...</div>
+        <!--        <input type="submit" value="Refresh" >-->
+        <a class="button" onClick="loadComps()"><p>Refresh</p></a>
+      </div>
+      
+      <div id="Landing-CompInfo">
+        <p id="smallerHeader" style="color:#000;">Competition Information</p>
+        <div><textarea rows="10" cols="30" id="displayInfo"></textarea></div>
+        <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
+        <a class="button" onClick="joinComp()"><p>Join Competition</p></a>
+      </div>
+      
+    </div><!--end LVC-Right-->
+  </div><!--end LandingView-Captain-->
+    <!--#####################################################################-->
+    <!--#####################################################################-->
+    <!--#####################################################################-->
+    
+  <div class="nooverflow"></div>
+  
+</div><!--end content-->
+<div id="footer" style="margin: 0 auto;"></div>
+
+</body>
+
+</html>

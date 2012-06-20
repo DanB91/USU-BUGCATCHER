@@ -2,10 +2,10 @@
 
 public class OddsEvens_Oracle {
 	
-	public static int oddDigits(int number){
+	public static int oddDigits(double number){
 		int oddCounter = 0;
 		while (number > 0){
-			int isOdd = number % 10;
+			double isOdd = number % 10;
 			if ((isOdd % 2) != 0){
 				oddCounter++;
 			}
@@ -14,10 +14,10 @@ public class OddsEvens_Oracle {
 		return oddCounter;
 	}
 	
-	public static int evenDigits(int number){
+	public static int evenDigits(double number){
 		int evenCounter = 0;
 		while (number > 0){
-			int isEven = number % 10;
+			double isEven = number % 10;
 			if ((isEven % 2) == 0){
 				evenCounter++;
 			}
@@ -28,12 +28,23 @@ public class OddsEvens_Oracle {
 	
 	public static void main(String[] args){
 	try{
-			int num = Integer.parseInt(args[1]);
+			double num = Integer.parseInt(args[1]);
+                        if(num<=2000000000){
+                            if(Math.floor(num)==num){
 			if (args[0].equals("even")){
 				System.out.println(OddsEvens_Oracle.evenDigits(num));
 			} else if (args[0].equals("odd")){
 				System.out.println(OddsEvens_Oracle.oddDigits(num));
-			}
+			                                
+                        }else{
+                            System.out.println("Error: First input must be either 'even' or 'odd'.");
+                        }
+                            }else{
+                                System.out.println("Error: Second input must be an integer.");
+                            }
+                        }else{
+                            System.out.println("Error: Second input must be an integer less than or equal to 2000000000. ");
+                        }
 	}catch(Exception e){
     	System.out.println("Error: Bad Input");
     }

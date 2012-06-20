@@ -5,113 +5,79 @@ var compSelected;
 //Post-Conditions:
 function loadComps()
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlloadCompshttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlloadCompshttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlloadCompshttp.onreadystatechange=function()
-  {
-    if (xmlloadCompshttp.readyState == 4 && xmlloadCompshttp.status == 200)
-    {
-        document.getElementById('temp').innerHTML = xmlloadCompshttp.responseText;
-        compSelected = "";
-    }
-  }
-  
-  xmlloadCompshttp.open("GET","loadAvailComps.php",true)
-  xmlloadCompshttp.send();
+    $.post('StudentContent/loadAvailComps.php', "", 
+        function(html){
+            $("#LandingCompSelect").html(html);
+            compSelected = "";
+        });
 }
 
 //Pre-Conditions:
 //Post-Conditions:
 function joinComp()
 {
-    //
-    //
-    //
-    //alert(compSelected);
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmljoinComphttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmljoinComphttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmljoinComphttp.onreadystatechange=function()
-  {
-    if (xmljoinComphttp.readyState == 4 && xmljoinComphttp.status == 200)
-    {
-        var t = xmljoinComphttp.responseText.trim();
-       // alert(t);
-        if(t == '1')
-        {
-            var studTName = prompt("This competition has started please enter your team name.");
-            while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
+    $.ajax({ type:"GET", url:'joinComp.php', data:"compS="+compSelected, 
+        success: function(html){
+
+            var t = html.trim();
+            if(t != '1')
             {
-              studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
+		alert("something bad happened when adding your team to the competition, too bad for you sucka");
+               /* var studTName = prompt("This competition has started please enter your team name.");
+                while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
+                {
+                    studTName = prompt("Team name contained invalid characters. Please enter a different team name.");
+                }
+                if(studTName != null)
+                    createSTeam(studTName);*/
             }
-            if(studTName != null)
-                createSTeam(studTName);
-        }
-        else{
-            window.location = "Student.html";
-		}
-    }
-  }
-  xmljoinComphttp.open("GET","joinComp.php?compS="+compSelected,true);
-  xmljoinComphttp.send();
+            else{
+                window.location = "Student.html";
+            }
+        }});
+}
+
+//Pre-Conditions:
+//Post-Conditions:
+function loadTeamInvites()
+{
+    $.post('StudentContent/loadTeamInvites.php', "", 
+        function(html){
+            $("#InviteSelectBox").html(html);
+        });
 }
 
 //Pre-Conditions:
 //Post-Conditions:
 function createSTeam(tName)
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlcreateSTeamhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlcreateSTeamhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlcreateSTeamhttp.onreadystatechange=function()
-  {
-    if (xmlcreateSTeamhttp.readyState == 4 && xmlcreateSTeamhttp.status == 200)
-    {
-        var t = xmlcreateSTeamhttp.responseText.trim();
-        //alert(t);
-        if(t == '1')
-        {
-            //alert("2compID: "+compSelected);
-            window.location = "Student.html";
-        }
-        else
-        {
-            alert("Team already exists");
-        }
-    }
-  }
-  mSetCookie('tName',tName,365);
-  xmlcreateSTeamhttp.open("GET","createSTeam.php?compS=" + compSelected + "&tName=" + tName,true);
-  xmlcreateSTeamhttp.send();
+    $.post('createSTeam.php', "compS="+compSelected+"&tName="+tName, 
+        function(html){
+
+            var t = html.trim();
+            if(t == '1')
+            {
+                //alert("2compID: "+compSelected);
+                window.location = "Student.html";
+            }
+            else
+            {
+                alert("Team already exists");
+            }
+
+        });
+
+    mSetCookie('tName',tName,365);
 }
 
 //Pre-Conditions:
 //Post-Conditions:
 function mSetCookie(c_name,value,exdays)
 {
-var exdate=new Date();
-exdate.setDate(exdate.getDate() + exdays);
-var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-document.cookie=c_name + "=" + c_value;
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+    document.cookie=c_name + "=" + c_value;
 }
 
 //Pre-Conditions:
@@ -120,7 +86,7 @@ function getCompInfo()
 {
   var loopCount = 1;
   var displayOutput = "";
-            
+         
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     getCompInfoXML=new XMLHttpRequest();
@@ -176,16 +142,143 @@ function getCompInfo()
 
 //Pre-Conditions:
 //Post-Conditions:
-function showCompInfo(str)
+function showCompInfo(str,page)
 {
   compSelected = str;
   getCompInfo();
 }
 
-//Pre-Conditions:
-//Post-Conditions:
-function search()
+//refreshMember1 and 2 display the information about other team members on refresh.
+//refreshMember1 displays them for a regular user
+function refreshMember1()
 {
+    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=false", 
+        function(html){
+            var members = html.split(",");
+            var counter = 1;
+            for (m in members)
+                {
+                    $("#TMandC"+counter).html(m);
+                    counter++;
+                }
+
+        });
 }
 
+//refreshMember2 displays them for the team captain.
+function refreshMember2()
+{
+        $.post('StudentContent/teamName.php', "", 
+        function(html){
+            $("#TeamName2").html(html);
+        });
+    
+    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
+        function(html){
+            var members = html.split(",");
+            var counter = 1;
+            for(m in members)
+                {
+                    $("#TM"+counter).html(m);
+                    counter++;
+                }
+        });
+}
 
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+//############################################################################//
+
+//############################################################################//
+//#                          jQuery Sliding Scripts                          #//
+//############################################################################//
+
+//
+function StartToMember(inviteID)
+{
+        
+    $.post('StudentContent/addMemberToTeam.php', "inviteID="+inviteID, 
+        function(html){
+            if (html.trim() == '1')
+            {
+                window.location = "teamManagementM.html";
+                loadComps();
+                refreshMember2();
+            }
+            else
+                alert(html);
+        });
+        
+}
+
+//
+function MemberLeaveTeam()
+{
+
+    $.post('StudentContent/leaveTeam.php',"captain=false", 
+        function(){
+        });
+    window.location = "StudentLanding.html";
+}
+
+//
+function StartToCaptain()
+{
+
+        
+    var teamName = $("#LandingTeamName").val();
+    var inviteOne = $("#LandingInvite1").val();
+    var inviteTwo = $("#LandingInvite2").val();
+            
+    $.ajax({
+        type: "POST",
+        url:'StudentContent/captainCreateTeam.php', 
+        data:"newTeam=true&teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        success: function(html){
+            if (html.trim() == '1')
+            {
+                window.location = "teamManagementC.html";
+                loadComps();
+            }
+            else
+                alert(html);
+        }
+    });
+        
+}
+
+//
+function CaptainLeaveTeam()
+{
+        
+            $.post('StudentContent/leaveTeam.php',"captain=true", 
+        function(){
+        });
+        window.location = "StudentLanding.html";
+}
+
+function sendInvites()
+{
+       var inviteOne = $("#LandingInvite1").val();
+        var inviteTwo = $("#LandingInvite2").val();
+         $.post('StudentContent/captainCreateTeam.php', "newTeam=false&teamName=none&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        function(){
+        });
+}

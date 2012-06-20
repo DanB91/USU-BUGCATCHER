@@ -2,20 +2,12 @@
 //Sets the intervals for JavaScript validation of the Login and Registration fields
 function loadIndex()
 {
-  document.getElementById("StateSelection").innerHTML=string_states;
-  setInterval(function() { ValidateRegistrationForms(); }, 100);
-  
-    if (window.XMLHttpRequest)
-    {
-      loadIndexXML = new XMLHttpRequest();
-    }
-    else
-    {
-      loadIndexXML = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    
-    loadIndexXML.open("GET","onLogCookies.php",true);
-    loadIndexXML.send();
+  $("#StateSelection").html(string_states);
+  setInterval(function() {ValidateRegistrationForms();}, 100);
+
+    $.post('onLogCookies.php', "", 
+        function(){
+        });
  
 }
 
@@ -57,13 +49,13 @@ function OnRegister()
   {
     var registrationXML;
     
-    var RegistrationFirstname = document.getElementById("Registrationfirstname").value;
-    var RegistrationLastname = document.getElementById("Registrationlastname").value;
-    var RegistrationSchool = document.getElementById("Registrationschoolname").value;
-    var RegistrationState = document.getElementById("Registrationstate").value;
-    var RegistrationUsername = document.getElementById("Registrationusername").value;
-    var RegistrationPassword = document.getElementById("Registrationpassword").value;
-    var RegistrationNickname = document.getElementById("RegistrationNickname").value;
+    var RegistrationFirstname = $("#Registrationfirstname").val();
+    var RegistrationLastname = $("#Registrationlastname").val();
+    var RegistrationSchool = $("#Registrationschoolname").val();
+    var RegistrationState = $("#Registrationstate").val();
+    var RegistrationUsername = $("#Registrationusername").val();
+    var RegistrationPassword = $("#Registrationpassword").val();
+    var RegistrationNickname = $("#RegistrationNickname").val();
     if (REGISTRATION_STUDENT)
     {
       var RegistrationUsertype = "student";
@@ -83,58 +75,44 @@ function OnRegister()
     RegistrationContent += "nickname="+RegistrationNickname+"&";
     RegistrationContent += "usertype="+RegistrationUsertype;
     
-    if (window.XMLHttpRequest)
-    {
-      registrationXML = new XMLHttpRequest();
-    }
-    else
-    {
-      registrationXML = new ActiveXObject("Microsoft.XMLHTTP");
-    }
     
-    registrationXML.onreadystatechange=function()
-    {
-      if (registrationXML.readyState == 4 && registrationXML.status == 200)
-      {
-        if (registrationXML.responseText == "")
-        {
-          if (RegistrationUsertype == "admin")
-          {
-            alert("Registration as Administrator was successful!");
-            window.location = "index.html";
-          }
-          if (RegistrationUsertype == "student")
-          {
-            alert("Registration as Student was successful!");
-            window.location = "index.html";
-          }
-          document.getElementById("Registrationfirstname").value = '';
-          document.getElementById("Registrationlastname").value = '';
-          document.getElementById("Registrationschoolname").value = '';
-          document.getElementById("Registrationstate").selectedIndex = 0;
-          //document.RegistrationForm.Registrationstate.style.backgroundColor = '';
-          document.getElementById("Registrationusername").value = '';
-          document.getElementById("Registrationpassword").value = '';
-        }
-        else
-        {
-          alert(registrationXML.responseText);
+        $.post('RegistrationImpl.php', RegistrationContent, 
+            function(html){
+            
+                if (html == "")
+                {
+                    if (RegistrationUsertype == "admin")
+                    {
+                        alert("Registration as Administrator was successful!");
+                        window.location = "index.html";
+                    }
+                    if (RegistrationUsertype == "student")
+                    {
+                        alert("Registration as Student was successful!");
+                        window.location = "index.html";
+                    }
+                    $("#Registrationfirstname").val('');
+                    $("#Registrationlastname").val('');
+                    $("#Registrationschoolname").val('');
+                    $("#Registrationstate").selectedIndex = 0;
+                    $("#Registrationusername").val('');
+                    $("#Registrationpassword").val('');
+                }
+                else
+                {
+                    alert(html);
          
-        }
-      }
+                }
+            });
+
     }
-    
-    registrationXML.open("GET","RegistrationImpl.php?"+RegistrationContent,true);
-    registrationXML.send();
-  }
-  return true;
+    return true;
 }
 
 
 function setStateSelectStyle(bgcolor)
 {
   var stateElement = document.getElementById("Registrationstate");
-  stateElement.style.backgroundColor = bgcolor;
   for(var i = 0; i < stateElement.options.length; i++)
   {
     stateElement.options[i].style.backgroundColor = '';
@@ -150,7 +128,7 @@ function getRegistrationUserType()
     document.RegistrationForm.Registrationstate.disabled = true;
     registration_tempSchoolName_str = document.RegistrationForm.Registrationschoolname.value;
     registration_tempState_index = Registrationstate.selectedIndex;
-    document.RegistrationForm.Registrationschoolname.value = 'N/A';
+    document.RegistrationForm.Registrationschoolname.value='N/A';
     Registrationstate.selectedIndex = 0;
     document.RegistrationForm.Registrationschoolname.style.backgroundColor = '';
     document.RegistrationForm.Registrationstate.style.backgroundColor = '';
@@ -225,12 +203,12 @@ function ValidateRegistrationForms()
     REGISTRATION_STUDENT = getRegistrationUserType();
   }
   
-  registration_new_first_str = document.getElementById("Registrationfirstname").value;
-  registration_new_last_str = document.getElementById("Registrationlastname").value;
-  registration_new_school_str = document.getElementById("Registrationschoolname").value;
-  registration_new_state_str = document.getElementById("Registrationstate").value;
-  registration_new_user_str = document.getElementById("Registrationusername").value;
-  registration_new_pass_str = document.getElementById("Registrationpassword").value;
+  registration_new_first_str = $("#Registrationfirstname").val();
+  registration_new_last_str = $("#Registrationlastname").val();
+  registration_new_school_str = $("#Registrationschoolname").val();
+  registration_new_state_str = $("#Registrationstate").val();
+  registration_new_user_str = $("#Registrationusername").val();
+  registration_new_pass_str = $("#Registrationpassword").val();
   
   REGISTRATION_INPUT_VALID = isValid_RegistrationField('Registrationfirstname', registration_old_first_str, registration_new_first_str, 1, 20);
   REGISTRATION_INPUT_VALID *= isValid_RegistrationField('Registrationlastname', registration_old_last_str, registration_new_last_str, 1, 20);
@@ -248,5 +226,5 @@ function ValidateRegistrationForms()
   registration_old_state_str = registration_new_state_str;
   registration_old_user_str = registration_new_user_str;
   registration_old_pass_str = registration_new_pass_str;
-  registration_prev_state_selected = document.getElementById("Registrationstate").selectedIndex;
+  registration_prev_state_selected = Document.getElementById("Registrationstate").selectedIndex;
 }

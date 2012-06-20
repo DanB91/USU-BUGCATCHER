@@ -21,20 +21,27 @@ class TeamInvite extends Model {
     public function accept(){
 	$data['userid']=$this->receiverid;
 	$data['teamid']=$this->teamid;
-	$this->addRow('STUDENT_TEAM_LINK', $data);
+	Model::addRow('STUDENT_TEAM_LINK', $data);
 	
-	$sql = 'DELETE FROM TEAM_INVITES WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue();
+	$sql = 'DELETE FROM TEAM_INVITES WHERE teaminviteid=' . $this->getPrimaryKeyValue();
 
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Invite update query failed: ' . $this->connection->error);
     }
     
     public function decline(){
-	$sql = 'DELETE FROM TEAM_INVITES WHERE ' .  $this->primaryKeyName . '=' . $this->getPrimaryKeyValue();
+	$sql = 'DELETE FROM TEAM_INVITES WHERE teaminviteid=' . $this->getPrimaryKeyValue();
 
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Invite update query failed: ' . $this->connection->error);
     }
+    
+    public static function createTeamInvite(array $data)
+    {
+        Model::addRow('TEAM_INVITES', $data);
+    }
+    
+    
     
 }
 

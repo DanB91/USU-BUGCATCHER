@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Database/Connection.php';
+require_once dirname(__FILE__) . '/../Database/Connection.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -23,13 +23,16 @@ class Leaderboard {
         $this->load();
     }
     
-    public function update()
-    {
-        $this->load();
-    }
     
+    /**
+     * Updates the leaderboard and returns an array of team stats sorted by place
+     * Access the each value  array using 
+     * $array['teamName']
+     * @return type 
+     */
     public function getStats()
     {
+        $this->load();
         return $this->teamsStats;
     }
     

@@ -28,6 +28,7 @@ $inclCD = $_GET["inclCD"];
 $admin = $_SESSION['adminObject'];
 
 
+
 echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $desc . "\n" . "hidden: " . $hidden . "\n" . "compT: " . $compTime;
 
 
@@ -38,17 +39,16 @@ echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $d
                     "hidden" => $hidden,
                     "duration" => $compTime,
                     "codecoverage" => 0,
-                    "countdown" => $inclCD);
+                    "countdown" => $inclCD
+                   );
 
 
 try {
     
-  $admin->createCompetition($compData);
-
-
+$admin->createCompetition($compData);
+setcookie("compN", $compN, time() + 60 * 60 * 24 * 30);//  $_SESSION['compN'] = $compN;
 }
 catch(Exception $e){ echo $e;  }
-
 
 
 

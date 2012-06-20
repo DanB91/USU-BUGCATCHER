@@ -1,7 +1,7 @@
 
 
 public class Encoder_Oracle {
-	public static String encrypt(String toEncrypt, int shift){
+	public static String encrypt(String toEncrypt, double shift){
 		char[] letterArray = toEncrypt.toCharArray();
 		char[] encryptedLetterArray = new char[letterArray.length];
 		
@@ -13,10 +13,10 @@ public class Encoder_Oracle {
 		return new String(encryptedLetterArray);
 	}
 	
-	public static char encryptChar(char letter, int shift){
+	public static char encryptChar(char letter, double shift){
 		if (Character.isLowerCase(letter))
 		{
-			int shiftedLetter = (letter - 'a') + shift;
+			double shiftedLetter = (letter - 'a') + shift;
 			if (shiftedLetter < 0) 
 				shiftedLetter += 26;
 			else 
@@ -26,7 +26,7 @@ public class Encoder_Oracle {
 		}
 		else 
 		{
-			int shiftedLetter = (letter - 'A') + shift;
+			double shiftedLetter = (letter - 'A') + shift;
 			if (shiftedLetter < 0)
 				shiftedLetter += 26;
 			else
@@ -37,11 +37,16 @@ public class Encoder_Oracle {
 	}
 	
     public static void main(String[] args){
-        String toEncrypt = args[0];
         try{
-            int shift = Integer.parseInt(args[1]);
+        String toEncrypt = args[0];
+       
+            double shift = Double.parseDouble(args[1]);
+            if (Math.floor(shift)==shift) {
             String encrypted = encrypt(toEncrypt, shift);
             System.out.println(encrypted);
+        }else{
+        	System.out.println("Error: Input for shift must be an integer.");
+        }
         }catch(Exception e){
             System.out.println("Error: Bad Input");
         }

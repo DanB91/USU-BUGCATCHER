@@ -22,8 +22,10 @@ class Admin extends Model{
      *Creates a competition with this admin as a creator.  
      * When passing in data, do not pass in the 'user id'.  That is added automatically
      * @param array $data data dictionary
+     * @param array $problems problems to add to Competition, must be problem objects!
+     * @return Competition the competition object
      */
-    public function createCompetition(array $data)
+    public function createCompetition(array $data, array $problems)
     {
         foreach($data as $fieldName => &$value)
         {
@@ -44,22 +46,28 @@ class Admin extends Model{
         
         $data['userid'] = $this->getPrimaryKeyValue();
         Model::addRow('COMPETITIONS', $data);
+        
+        $newComp = new Competition($data['compname'], 'compname');
+        
+        foreach($problems as $problem)
+        {
+            $problem->addProblemToCompetition($newComp);
+        }
+        
+        return $newComp;
     }
     
     
     public function getCompetitions()
     {
-        
         $retCompetitions = array();
-        
         $this->connection = connectToDB();
-        $sql = 'SELECT compid FROM COMPETITIONS WHERE userid =' . $this->getPrimaryKeyValue() ;
         
-        mysql_query('SELECT compid FROM COMPETITIONS WHERE userid = 5');
         
-        if(!($result = $this->connection->query($sql)))
+        $sql = 'SELECT compid FROM COMPETITIONS WHERE userid =' . $this->getPrimaryKeyValue();
+        if(!$result = $this->connection->query($sql))
                throw new BugCatcherException('Query Failed: ' . $this->connection->error);
-       
+        
         //create a competition object foreach associated compeition
         while(($row = $result->fetch_assoc()))
         {
@@ -68,7 +76,11 @@ class Admin extends Model{
         
         return $retCompetitions;
     }
-
+    
+    public function getCompetitionByCompName($compeitionName)
+    {   
+        return new Competition($compeitionName, 'compname');
+    }
 
 
 

@@ -1,1 +1,5 @@
-LINE12: powerOfTwo = 2 * powerOfTwo;
+Outputs N powers of two in ascending order.
+1)LINE12: powerOfTwo = 2 * powerOfTwo;
+2)Does not check if input is an integer
+3)Does not have "try...catch" to catch input errors
+4)Does not check if int is within range

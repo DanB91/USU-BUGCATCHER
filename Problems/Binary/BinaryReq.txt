@@ -1,9 +1,18 @@
 1. This program converts a decimal(base 10) number to its binary(base 2) equivalent.
-<br\>
-2. To convert decimal to binary:
-<br\>
+<br/>
+2. The number must be a positive integer and it cannot be greater than 2147483647.
+<br/>
+3. To convert decimal to binary:
+<br/>
 i. Divide decimal number by 2.
 ii. The remainder, either 1 or 0, will be the rightmost number in binary number.
 iii.  Take the new whole decimal number, divide by 2, and add this remainder(1 or 0) to the left of the previous remaineder.
 iv. Continue until you do not get a whole number when you divide.
-
+<br/>
+4. If input is not an integer it will output, "Error: Input must be an integer."
+<br/>
+5. If input is not positive it will output, "Error: Input must be a positive integer."
+<br/>
+6. If input is too large it will output,"Error: Input is too large."
+<br/>
+7. Other invalid inputs will output, "Error: Bad Input. Input must be a positive integer within the range."

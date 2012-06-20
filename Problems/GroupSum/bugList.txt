@@ -1,4 +1,5 @@
 GroupSum takes a list of integers, and returns true if the first one can be output from the sum of a subset of the latter.
-LINE 17: For-loop does not include last integer.
-LINE 6: Should be strict inequality, not <=.
-LINE 9: Skips to start+2, so it only returns true if all subset members are adjacent.
+1)LINE 17: For-loop does not include last integer.
+2)LINE 6: Should be strict inequality, not <=.
+3)LINE 9: Skips to start+2, so it only returns true if all subset members are adjacent.
+4)Does not include "try...catch" to catch input errors

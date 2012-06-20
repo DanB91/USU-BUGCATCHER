@@ -23,7 +23,7 @@ function pauseTimerCD()
 	if (!PAUSED && !STOPPED)
 	{
 		clearInterval(adminTimer);
-		document.getElementById('header-controls').innerHTML = '<img src="Images/start.gif" height="50" width="50" onclick=startCompetition(); />';
+		$('#header-controls').html('<img src="Images/start.gif" height="50" width="50" onclick=startCompetition(); />');
 		PAUSED = true;
 	}
 }
@@ -43,11 +43,11 @@ function countdownCD()
     clearInterval(adminTimer);
     minutes = 0;
     seconds = 0;
-    document.getElementById('header-timer').innerHTML="STOP!";
+    $('#header-timer').html("STOP!");
   }
   else
   {
-    document.getElementById('header-timer').innerHTML=leadingZero(minutes) + ":" + leadingZero(seconds);
+    $('#header-timer').html(leadingZero(minutes) + ":" + leadingZero(seconds));
     updateTimer();
   }
 }
@@ -55,42 +55,17 @@ function countdownCD()
 //AJAX--Sets the initial value/time of the timer.
 function setTimerCD()
 {
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-	setTimerXML = new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-	setTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	setTimerXML.onreadystatechange=function()
-	{
-		if (setTimerXML.readyState == 4 && setTimerXML.status == 200)
-		{
-			//alert(setTimerXML.responseText);
-		}
-	}
-	
-	setTimerXML.open("GET","AdminCompContent/setCountdownTimer.php?compID="+compSetID+"&time="+compSetTime,true);
-	setTimerXML.send();
+    $.ajax({type: "GET", url:"AdminCompContent/setCountdownTimer.php", data: "compID="+compSetID+"&time="+compSetTime, success:function(result){
+	//alert(setTimerXML.responseText);
+    }});
 }
 
 //AJAX--Updates the competition timer file to sync with the admin.
 function updateTimerCD()
-{
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-    updateTimerXML = new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-    updateTimerXML = new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	var TimerUpdateVars = "compID=" + compSetID + "&minutes=" + minutes + "&seconds=" + seconds;
-	updateTimerXML.open("GET","AdminCompContent/updateCountdownTimer.php?"+TimerUpdateVars,true);
-	updateTimerXML.send();
+{	
+    var TimerUpdateVars = "compID=" + compSetID + "&minutes=" + minutes + "&seconds=" + seconds;
+	$.ajax({type: "GET", url:"AdminCompContent/updateCountdownTimer.php", data: TimerUpdateVars, success:function(){
+    }});
 }
 
 //Initializes the timer.
@@ -100,7 +75,7 @@ function createTimerCD()
 	PAUSED = true;
 	minutes=compSetTime;
 	seconds=0;
-	document.getElementById('header-timer').innerHTML=leadingZero(minutes) + ":" + leadingZero(seconds);
+	$('#header-timer').html(leadingZero(minutes) + ":" + leadingZero(seconds));
 	setTimer();
 }
 

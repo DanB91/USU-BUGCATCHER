@@ -1,16 +1,18 @@
 <?php
 
-$adminCompID = $_COOKIE['adminCompID'];
+require_once '../header.php';
+session_start();
 
-if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != '')
-{
-	$con = mysql_connect("localhost", "guest", "");
-	mysql_select_db("competition", $con);
-	$sql = "UPDATE usedids SET hasfinished='1' WHERE compID='${adminCompID}'";
-	mysql_query($sql);
-	
-}
-else
-	echo "You are not logged in.";
+$admin = $_SESSION['adminObject'];
+$compN = $_COOKIE['compN'];
+
+//Store the start time of the competition in the db
+
+
+    $temp = $admin->getCompetitionByCompName($compN);
+    $temp->hasfinish = 1;
+    $temp->commitToDB();
+    //echo $admin->getCompetitionByCompName($compN)->starttime;
+
 
 ?>

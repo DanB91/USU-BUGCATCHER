@@ -1,7 +1,7 @@
 //BUG 2: LINE 12 takes the absolute value, making it not work on negative shifts.
 
 public class Encoder_Bug4 {	
-	public static String encrypt(String toEncrypt, int shift){
+	public static String encrypt(String toEncrypt, double shift){
 		char[] letterArray = toEncrypt.toCharArray();
 		char[] encryptedLetterArray = new char[letterArray.length];
 		
@@ -13,10 +13,10 @@ public class Encoder_Bug4 {
 		return new String(encryptedLetterArray);
 	}
 	
-	public static char encryptChar(char letter, int shift){
+	public static char encryptChar(char letter, double shift){
 		if (Character.isLowerCase(letter))
 		{
-			int shiftedLetter = (letter - 'a') + shift;
+			double shiftedLetter = (letter - 'a') + shift;
 			if (shiftedLetter < 0) 
 				shiftedLetter += 26;
 			else 
@@ -26,7 +26,7 @@ public class Encoder_Bug4 {
 		}
 		else 
 		{
-			int shiftedLetter = (letter - 'A') + shift;
+			double shiftedLetter = (letter - 'A') + shift;
 			if (shiftedLetter < 0)
 				shiftedLetter += 26;
 			else
@@ -39,7 +39,7 @@ public class Encoder_Bug4 {
     public static void main(String[] args){
         String toEncrypt = args[0];
         try{
-            int shift = Integer.parseInt(args[1]);
+            double shift = Integer.parseInt(args[1]);
             String encrypted = encrypt(toEncrypt, shift);
             System.out.println(encrypted);
         }catch(Exception e){

@@ -130,6 +130,24 @@ abstract class Model {
         $this->values[$field] = $value;
     }
     
+    public function findInDB($tablename, array $data){
+	$sql= "SELECT * FROM " . $tablename . " WHERE " ;
+	
+	$and=false;
+	foreach($data as $fieldName => $value){
+	    if($and==false)
+		$and=true;
+	    else
+		$sql.=" AND ";
+	    
+	    $sql.=$fieldName . "=" . $value ;
+	}
+	
+	if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Select Failed: ' . $this->connection->error);
+	
+        return $result;
+    }
 
     
     
@@ -206,7 +224,16 @@ abstract class Model {
             throw new BugCatcherException('Update query failed: ' . $this->connection->error);
     }
     
-    
+    public function removeFromDB()
+    {
+        $sql = 'DELETE FROM ' . $this->tableName . ' WHERE ' . $this->getPrimaryKeyName()
+                . ' = ' . $this->getPrimaryKeyValue();
+        
+        if(!$this->connection->query($sql))
+            throw new BugCatcherException('Delet query failed: ' . $this->connection->error);
+    }
+
+
     /**
      *
      * @param Model $model
@@ -214,11 +241,9 @@ abstract class Model {
      */
     protected function createRelationToModel(Model $model, $tableName)
     {
+	$this->connection = connectToDB();
 	$this->values[$model->primaryKeyName . "s"][]=$model->getPrimaryKeyValue();
-	var_dump($this->values[$model->primaryKeyName . "s"]);
 	$model->values[$this->primaryKeyName . "s"][]=$this->getPrimaryKeyValue();
-	echo"comp";
-	var_dump($model->values[$this->primaryKeyName . "s"]);
 	
         $sql = 'INSERT INTO ' . $tableName . '(' .  $this->primaryKeyName . ', ' . $model->getPrimaryKeyName() . 
                 ') VALUES (' . $this->getPrimaryKeyValue() . ', ' . $model->getPrimaryKeyValue() . ')';
@@ -265,7 +290,7 @@ abstract class Model {
         $this->getFieldTypes();
         
         //if the unique value is is a string, enclose it in quotes
-        $searchValue = ($this->types[$this->uniqueFieldName] === 's') ? "'" . $this->uniqueFieldValue . "'" : 
+        $searchValue = ($this->types[$this->uniqueFieldName] === 's' && $this->uniqueFieldValue[0]!="'") ? "'" . $this->uniqueFieldValue . "'" : 
             $this->uniqueFieldValue;
         
         if(!$result = $this->connection->query('SELECT * FROM ' . $this->tableName . ' WHERE ' . $this->uniqueFieldName
@@ -386,7 +411,9 @@ abstract class Model {
            }
            
            
-           if (strpos($row['Type'], 'text') !== FALSE || strpos($row['Type'], 'char') !== FALSE)
+           if (strpos($row['Type'], 'text') !== FALSE || strpos($row['Type'], 'char') !== FALSE ||
+                   strpos($row['Type'], 'date') !== FALSE || strpos($row['Type'], 'timestamp') !== FALSE ||
+                   strpos($row['Type'], 'enum') !== FALSE)
            {
                
                $fieldType = 's';
@@ -398,10 +425,7 @@ abstract class Model {
            {
                $fieldType = 'i';
            }
-           elseif (strpos($row['Type'], 'date') !== FALSE || strpos($row['Type'], 'timestamp') !== FALSE)
-           {
-               $fieldType = 's';
-           }
+           
            //the database contains a type we do not support
            else
            {

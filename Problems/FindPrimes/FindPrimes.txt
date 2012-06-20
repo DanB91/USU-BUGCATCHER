@@ -2,17 +2,17 @@
 
 public class FindPrimes{
 	
-   public static String listPrimes(int max){
+   public static String listPrimes(double max){
       String primes = "";
       boolean isFirst = true;
 				
-      if (max &lt= 3)
+      if (max <= 3)
          return primes;
 		
-      for (int i = 2; i &lt max; i++){
+      for (int i = 2; i < max; i++){
          boolean isPrime = true;
 			
-      for (int j = 2; j &lt i/2; j++){
+      for (int j = 2; j < i/2; j++){
          if ((i % j) == 0){
             isPrime = false;
             break;
@@ -29,11 +29,9 @@ public class FindPrimes{
    }
 	
    public static void main(String[] args){
-      try{
-          int maximum = Integer.parseInt(args[0]);
+     
+          double maximum = Integer.parseInt(args[0]);
           System.out.println(listPrimes(maximum));
-	  }catch(Exception e){
-		  System.out.println("Error: Bad Input");
-	  }
+	  
    }
 }

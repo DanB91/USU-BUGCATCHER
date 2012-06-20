@@ -1,3 +1,6 @@
 SalePrice returns the new price of an item give the original price and percent discount.
-LINE 15: Does not allow a discount of 0.
-LINE 18: Switches discount and price.
+1)LINE 15: Does not allow a discount of 0.
+2)LINE 18: Switches discount and price.
+3)Does not have "try...catch" to catch input errors
+4)Does not check if input is within the range of 0 and 100
+5)Does not check if input is under 2000000000.
