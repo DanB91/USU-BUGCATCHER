@@ -59,6 +59,7 @@ function insertHTML(tabValue)
       break;
 		case 1:
 			filePath = "selectComp.html";
+                        CS_loadAdminComps();
 			break;
     case 2:
       filePath = "TeamManagement.html";
