@@ -39,7 +39,7 @@ public class Encoder_Bug1 {
     public static void main(String[] args){
         String toEncrypt = args[0];
         try{
-            int shift = Integer.parseInt(args[1]);
+            double shift = Integer.parseInt(args[1]);
             String encrypted = encrypt(toEncrypt, shift);
             System.out.println(encrypted);
         }catch(Exception e){

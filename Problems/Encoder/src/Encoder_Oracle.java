@@ -37,8 +37,9 @@ public class Encoder_Oracle {
 	}
 	
     public static void main(String[] args){
+        try{
         String toEncrypt = args[0];
-       try{
+       
             double shift = Double.parseDouble(args[1]);
             if (Math.floor(shift)==shift) {
             String encrypted = encrypt(toEncrypt, shift);

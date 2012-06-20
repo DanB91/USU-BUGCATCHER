@@ -1,4 +1,5 @@
 LongestBlock returns the length of the longest string of the same char.
-LINE 14: Starts at first letter, counting it twice.
-INE 10: Setting curMax to 0 before the for loop makes it not work for strings of length 1.
-LINE 14: Stops counting at length -1.
+1)LINE 14: Starts at first letter, counting it twice.
+2)LINE 10: Setting curMax to 0 before the for loop makes it not work for strings of length 1.
+3)LINE 14: Stops counting at length -1.
+4)Does not include "try...catch" to catch input errors

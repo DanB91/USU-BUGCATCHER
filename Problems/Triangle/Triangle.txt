@@ -1,14 +1,14 @@
 
 
 public class Triangle{
-   private static int firstAngle = 0;
-   private static int secondAngle = 0;
-   private static int thirdAngle = 0;
+   private static double firstAngle = 0;
+   private static double secondAngle = 0;
+   private static double thirdAngle = 0;
    static int RIGHTANGLE = 93;
    static int SUMTRIANGLEANGLE = 180;
     
     /*Determine which angle is the biggest one*/
-   public static int biggest(int angle1, int angle2, int angle3){
+   public static double biggest(double angle1, double angle2, double angle3){
       if((angle2 <= angle3)&&(angle1 >= angle3))
          return angle3;
       else if ((angle1 <= angle2)&&(angle3 <= angle2))
@@ -22,8 +22,8 @@ public class Triangle{
       if(firstAngle < 0 || secondAngle < 0 || thirdAngle < 0){
          return "Invalid Input Value(s)";        
       } 
-      int bigAngle = biggest(firstAngle, secondAngle,thirdAngle);
-      int sum = firstAngle + secondAngle + thirdAngle;
+      double bigAngle = biggest(firstAngle, secondAngle,thirdAngle);
+      double sum = firstAngle + secondAngle + thirdAngle;
       if (sum > SUMTRIANGLEANGLE)
          return "Not a Triangle";
       else if (bigAngle >= RIGHTANGLE)
@@ -35,24 +35,22 @@ public class Triangle{
    }
     
    /*constructor*/
-   public Triangle(int angle1, int angle2, int angle3){
+   public Triangle (double angle1, double angle2, double angle3){
       firstAngle = angle1;
       secondAngle = angle2;
       thirdAngle = angle3;
     }
 	
    public static void main(String[] args) {        
-       try{ 
-        int arg1 = Integer.parseInt(args[0]);
-        int arg2 = Integer.parseInt(args[1]);
-        int arg3 = Integer.parseInt(args[2]);
+    
+      double arg1 = Double.parseDouble(args[0]);
+      double arg2 = Double.parseDouble(args[1]);
+      double arg3 = Double.parseDouble(args[2]);
+
         
-        
-        Triangle tr = new Triangle(arg1, arg2, arg3);
-        System.out.println(tr.findTriangleType());
-       } catch(Exception e){
-       	System.out.println("Error: Bad Input");
-       }
+      Triangle tr = new Triangle(arg1, arg2, arg3);
+      System.out.println(tr.findTriangleType());
+    
     }
 
 }

@@ -1,8 +1,7 @@
 
 public class PowersOfTwo {
     public static void main(String[] args) {
-    	try{
-        
+    	        
         int N = Integer.parseInt(args[0]);
 
         int i = 0;                
@@ -13,8 +12,6 @@ public class PowersOfTwo {
             powerOfTwo = 2 * N;                
             i = i + 1;
         }
-    	}catch(Exception e){
-          System.out.println("Error: Bad Input");
-    	}
+    	
     }
 }
