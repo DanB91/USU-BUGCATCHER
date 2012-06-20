@@ -7,3 +7,7 @@
 4. The Nth number is the number input by the user.
 <br/>
 5. This program does not accept integers greater than 30.  If the entered integer is greater, the program will output: "Error: Input too large."
+<br/>
+6. If the input is not a positive integer it will output, "Error:  Input must be a positive integer."
+<br/>
+7. Other invalid inputs will output, "Error: Bad Input".

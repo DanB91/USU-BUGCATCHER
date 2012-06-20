@@ -45,7 +45,7 @@ public class OddsEvens_Bug2 {
                                 System.out.println("Error: Second input must be an integer.");
                             }
                         }else{
-                            System.out.println("Error: Second input must be a positive integer less or equal to 2000000000. ");
+                            System.out.println("Error: Second input must be an integer less or equal to 2000000000. ");
                         }
 	}catch(Exception e){
     	System.out.println("Error: Bad Input");

@@ -1,8 +1,6 @@
 <?php
 
-require_once "../Models/Team.php";
-require_once "../Models/User.php";
-require_once "../Models/TeamInvite.php";
+require_once "../header.php";
 
 session_start();
 $user = $_SESSION['userObject'];
@@ -30,6 +28,7 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
             $invitee2 = new User($invite1, "username");
             $user->sendTeamInviteToUser($team, $invitee2);           
         }
+        
         echo 1;
     } catch (ModelAlreadyExistsException $e) {
         echo "Team name already exists. Please choose a new team name.";
