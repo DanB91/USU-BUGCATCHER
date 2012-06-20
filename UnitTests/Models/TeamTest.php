@@ -92,6 +92,14 @@ class TeamTest extends PHPUnit_Framework_TestCase {
         $arr = $this->object->getUsers();
         $this->assertEquals($arr[0]->userid, 21);
     }
+    
+    public function testGetLeader()
+    {
+        
+        $this->assertEquals($this->object->getTeamLeader()->userid, 21);
+    }
+    
+    
 
 }
 

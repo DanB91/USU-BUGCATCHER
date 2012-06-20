@@ -87,6 +87,11 @@ class Team extends Model {
         
         return $retArray;
     }
+    
+    public function getTeamLeader()
+    {
+        return new User($this->teamleaderid);
+    }
 }
 
 
