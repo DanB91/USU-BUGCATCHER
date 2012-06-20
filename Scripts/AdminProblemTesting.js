@@ -17,11 +17,14 @@ function getCustomProblems()
     {
 			customProblems = eval(xmlpopCustomProbs.responseText);
 			var index = customProblems.indexOf(".");
-			customProblems.splice(index, 1);
+                        if (index != -1)
+                            customProblems.splice(index, 1);
 			index = customProblems.indexOf("..");
-			customProblems.splice(index, 1);
+			if (index != -1)
+                            customProblems.splice(index, 1);
 			index = customProblems.indexOf("index.html");
-			customProblems.splice(index, 1);
+			if (index != -1)
+                            customProblems.splice(index, 1);
 			refreshCustomProbList();
     }
   }
