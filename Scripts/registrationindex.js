@@ -128,7 +128,7 @@ function getRegistrationUserType()
     document.RegistrationForm.Registrationstate.disabled = true;
     registration_tempSchoolName_str = document.RegistrationForm.Registrationschoolname.value;
     registration_tempState_index = Registrationstate.selectedIndex;
-    document.RegistrationForm.Registrationschoolname.val('N/A');
+    document.RegistrationForm.Registrationschoolname.value='N/A';
     Registrationstate.selectedIndex = 0;
     document.RegistrationForm.Registrationschoolname.style.backgroundColor = '';
     document.RegistrationForm.Registrationstate.style.backgroundColor = '';
@@ -226,5 +226,5 @@ function ValidateRegistrationForms()
   registration_old_state_str = registration_new_state_str;
   registration_old_user_str = registration_new_user_str;
   registration_old_pass_str = registration_new_pass_str;
-  registration_prev_state_selected = $("#Registrationstate").selectedIndex;
+  registration_prev_state_selected = Document.getElementById("Registrationstate").selectedIndex;
 }

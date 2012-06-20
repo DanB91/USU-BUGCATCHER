@@ -1,7 +1,7 @@
 <?php
 
 require_once "header.php";
-
+session_start();
 $inviteID = $_POST['inviteID'];
 $invite = new Invite($inviteID);
 $team = new Team($invite->teamid);
