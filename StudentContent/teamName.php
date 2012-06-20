@@ -1,9 +1,10 @@
 <?php
-require_once dirname(__FILE__) . "/../header.php";
-if(isset($_COOKIE["userObject"]) && $_COOKIE["userObject"] != NULL && isset($_COOKIE["teamObject"]) && $_COOKIE["teamObject"] != NULL)
-{
-	$teamName = $_SESSION['teamObject']->teamname;
-        echo $teamName;
-}
-else echo 'Student not logged in or on a team.';
+require_once "../header.php";
+session_start();
+$team=$_SESSION['teamObject'];
+if($team->teamname!="")
+    echo $team->teamname;
+
+else
+    echo 'Student not on team';
 ?>
