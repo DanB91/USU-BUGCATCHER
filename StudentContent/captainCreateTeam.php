@@ -30,8 +30,7 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
     } catch (ModelAlreadyExistsException $e) {
         echo "Team name already exists. Please choose a new team name.";
     }
-    
-    
-    
+        
 }
+else echo "You must be logged in to create a new team";
 ?>

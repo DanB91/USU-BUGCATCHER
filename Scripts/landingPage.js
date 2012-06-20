@@ -41,7 +41,7 @@ function loadTeamInvites()
 {
     $.post('loadTeamInvites.php', "", 
         function(html){
-            $("#TeamInvitations").html(html);
+            $("#InviteSelectBox").html(html);
         });
 }
 
@@ -186,7 +186,8 @@ function StartToMember(teamID)
             if (html.trim() == '1')
             {
                 $("#LandingView-Start").hide();
-                $("#LandingView-Member").show();  
+                $("#LandingView-Member").show();
+                loadComps();
             }
             else
                 alert(html);
@@ -214,16 +215,21 @@ function StartToCaptain()
     var inviteOne = $("#LandingInvite1").val();
     var inviteTwo = $("#LandingInvite2").val();
             
-    $.post('StudentContent/captainCreateTeam.php', "newTeam=true&teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
-        function(html){
+    $.ajax({
+        type: "POST",
+        url:'StudentContent/captainCreateTeam.php', 
+        data:"newTeam=true&teamName="+teamName+"&inviteOne="+inviteOne+"&inviteTwo="+inviteTwo, 
+        success: function(html){
             if (html.trim() == '1')
             {
                 $("#LandingView-Start").hide();
-                $("#LandingView-Captain").show();  
+                $("#LandingView-Captain").show(); 
+                loadComps();
             }
             else
                 alert(html);
-        });
+        }
+    });
         
 }
 
