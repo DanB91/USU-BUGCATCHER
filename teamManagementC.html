@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload='loadComps();refreshMember2();'>
+<body onload='loadComps();refreshMember(true);'>
 
 <div id="headerSplash"></div>
 <div id="content" style="margin: 0 auto; width: 1000px;">
@@ -29,10 +29,10 @@
           <p>Username to Invite 2</p>
             <input type="text" id="LandingInvite4" class="Itext" />-->
           <!--<a class="button" onClick="sendMoreInvites();"><p>Send Invites</p></a>-->
-          <a class="button" onClick="refreshMember2();"><p>Refresh</p></a>
+          <a class="button" onClick="refreshMember(true);"><p>Refresh</p></a>
         </fieldset>
         </form>
-        <a class="button" onClick="CaptainLeaveTeam();loadTeamInvites();"><p>Leave Team</p></a>
+        <a class="button" onClick="CaptainLeaveTeam();"><p>Leave Team</p></a>
     </div><!--end LVC-Left-->
     
     <div id="LVC-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
