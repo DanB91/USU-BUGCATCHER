@@ -56,7 +56,7 @@ public class Triangle_Oracle {
         System.out.println(tr.findTriangleType());
       
         }else{
-        	System.out.println("Error: All three inputs must be less than or equal to 2147483647.");
+        	System.out.println("Error: All three inputs must be less than or equal to 2000000000.");
         }
         }else{
         	System.out.println("Error:  All three inputs must be integers.");

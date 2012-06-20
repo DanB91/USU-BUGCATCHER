@@ -1,3 +1,9 @@
 1. FindPrimes takes an integer, and returns all the prime numbers less than or equal to that integer. 
 <br/>
 2. It should return them separated by commas. The input 3, for example, should return "2, 3"
+<br/>
+3. If input is not an integer, it will output, "Error: Input must be an integer."
+<br/>
+4. If input is greater than 2000000000, it will output, "Error: Input must be less than or equal to 2000000000."
+<br/>
+5. Other invalid inputs will output, "Error: Bad Input".
