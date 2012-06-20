@@ -13,7 +13,7 @@ if ($user != NULL && $team != NULL) {
         $members = $team->getUsers();
         foreach ($members as $member) {
             if ($member->userid != $user->userid)
-                $memberInfo .= $member->username . ",";
+                $memberInfo .= "<p>".$member->username . "</p>";
         }
     } else {
         $leader = $team->getTeamLeader();

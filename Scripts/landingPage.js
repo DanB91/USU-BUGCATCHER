@@ -175,13 +175,14 @@ function refreshMember2()
     
     $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
         function(html){
-            var members = html.split(",");
-            var counter = 1;
-            for(m in members)
-                {
-                    $("#TM"+counter).html(members[m]);
-                    counter++;
-                }
+            $("#TMS").html(html);
+//            var members = html.split(",");
+//            var counter = 1;
+//            for(m in members)
+//                {
+//                    $("#TM"+counter).html(members[m]);
+//                    counter++;
+//                }
         });
 }
 
