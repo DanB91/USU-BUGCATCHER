@@ -1,6 +1,14 @@
 	<?php
-		//The purpose of this code is to show the admin the progrss of all teams and their place in the competition.
-		//This can be viewd on the admin side under progress
+            require_once '../header.php';
+
+            $compN = $_COOKIE['compN'];
+            
+            $lb = new Leaderboard(new Competition($compN, "compname"));
+            $stats = $lb->getStats();
+            
+            
+            //The purpose of this code is to show the admin the progrss of all teams and their place in the competition.
+            //This can be viewd on the admin side under progress
 	?>
 	
 	<?php if(isset($_COOKIE['adminCompID']) && $_COOKIE['adminCompID'] != ''):/*If a comp has been created*/?>
