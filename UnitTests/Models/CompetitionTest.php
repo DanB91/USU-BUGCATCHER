@@ -42,7 +42,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase {
     
     public function testGetJoinableCompetition()
     {
-        $arr = Competition::getJoinableCompetions();
+        $arr = Competition::getJoinableCompetitions();
         
         $this->assertSame($arr[0]->compid, '20');
     }

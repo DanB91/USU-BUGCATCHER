@@ -28,6 +28,26 @@ class Problem extends Model {
     {
 	$this->removeRelationFromModel($comp, 'COMPETITION_PROBLEM_LINK');
     }
+    
+    public static function getAllProblems()
+    {
+        $retProbs = array();
+        
+        $connection = connectToDB();
+        
+        $sql = 'SELECT problemid FROM PROBLEMS';
+        if(!$result = $connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $connection->error);
+        
+          
+        
+        while(($row = $result->fetch_assoc()))
+        {          
+            $retProbs[] = new Problem($row['problemid']);
+        }
+        
+        return $retProbs;   
+    }
 }
 
 ?>

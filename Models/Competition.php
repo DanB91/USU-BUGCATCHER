@@ -43,8 +43,7 @@ class Competition extends Model{
           
         
         while(($row = $result->fetch_assoc()))
-        {
-            echo $row['compid'];
+        {          
             $retComps[] = new Competition($row['compid']);
         }
         
