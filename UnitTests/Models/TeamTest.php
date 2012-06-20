@@ -66,6 +66,7 @@ class TeamTest extends PHPUnit_Framework_TestCase {
 	//$this->assertSame($competition->teamids, array());
 	//$this->assertSame($this->object->compids, array());
     }
+
     
     public function testFoundBugInCompetition(){
 	$bug=new Bug(1);

@@ -23,9 +23,9 @@
   <div id="LandingView-Start" class="LV-Sections">
     <div id="LVS-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
       <p id="smallerHeader" style="color:#000;">Team Invites</p>
-      <div id="TeamInvitations"><select id ="InviteSelectBox" size=5><option selected>View Team Invites Here</option></select></div>
+      <div id="TeamInvitations"><select name ="InviteSelectBox" id="InviteSelectBox" size=5><option selected>View Team Invites Here</option></select></div>
       <!--        <input type="submit" value="Refresh" >-->
-      <a class="button"><p>Refresh</p></a> <!-- onClick="joinTeam()"-->
+      <a class="button" onClick="loadTeamInvites();"><p>Refresh</p></a>
       <a class="button" onClick="StartToMember(InviteSelectBox.options[InviteSelectBox.selectedIndex].value);"><p>Join Team</p></a>
     </div><!--end LVS-Left-->
         
@@ -35,9 +35,9 @@
         <div class="formHeader"><h3 class="formHeadText">Create a Team</h3></div>
         <fieldset>
           <p>Team Name</p>
-            <input type="text" id="LandingTeamName" />
+            <input type="text" id="LandingTeamName" class="Itext"/>
           <p>Username to Invite 1</p>
-            <input type="text" id="LandingInvite1" />
+            <input type="text" id="LandingInvite1" class="Itext" />
           <p>Username to Invite 2</p>
             <input type="text" id="LandingInvite2" class="Itext" />
           <a class="button" onClick="StartToCaptain();"><p>Create Team</p></a>

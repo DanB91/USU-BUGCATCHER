@@ -17,7 +17,12 @@ class Competition extends Model{
     
     
     public function getProblems(){
-	return $this->problemids;
+	$arr=array();
+	
+	foreach($this->problemids as $id)
+	    $arr[]=new Problem($id);
+	
+	return $arr;
     }
     
     public function getTeams()
@@ -28,6 +33,27 @@ class Competition extends Model{
             $retArray[] = new Team ($id);
             
         return $retArray;
+    }
+    
+    public static function getJoinableCompetitions()
+    {
+        $retComps = array();
+        
+        $connection = connectToDB();
+        
+        $sql = 'SELECT compid FROM COMPETITIONS WHERE hidden = 0';
+        if(!$result = $connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $connection->error);
+        
+          
+        
+        while(($row = $result->fetch_assoc()))
+        {
+            echo $row['compid'];
+            $retComps[] = new Competition($row['compid']);
+        }
+        
+        return $retComps;   
     }
     
     

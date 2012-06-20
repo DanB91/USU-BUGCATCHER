@@ -1,6 +1,7 @@
 <?php
 
 require_once dirname(__FILE__) . '/../../Models/Admin.php';
+require_once dirname(__FILE__) . '/../../Models/Problem.php';
 
 /**
  * Test class for Admin.
@@ -31,7 +32,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     
     public function testRegisterAdmin()
     {
-        Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
+        //Admin::registerAdmin(array('username' => 'admin', 'password' => 'password', 'nickname' => 'adz'));
     }
     
     public function testFields()
@@ -46,7 +47,7 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     
     public function testAddCompetition()
     {
-        //$this->object->createCompetition(array('compName' => 'ffdsoas'));
+        $this->object->createCompetition(array('compname' => 'jgifd'), array(new Problem(2), new Problem(5)));
     }
     
     public function testGetCompitions()
@@ -58,6 +59,8 @@ class AdminTest extends PHPUnit_Framework_TestCase {
     {
         var_dump($this->object->getCompetitionByCompName("123")->starttime);
     }
+    
+   
 
 }
 
