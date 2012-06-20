@@ -1,16 +1,18 @@
 <?php
 
 require_once "header.php";
+
+
 session_start();
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
 
 if ($team != NULL) {
     if ($user != NULL) {
-        $compArray = Competition::getJoinableCompetitions();
+	$compArray = Competition::getJoinableCompetitions();
 
         $content = "<select size='15' onclick='showCompInfo(this.value)' style='width:150px;'>";
-        //$competitions = array();
+        $competitions = array();
         foreach ($compArray as $value) {
             $content .= "<option value='".$value->compid."' ondblclick='joinComp(this.value);'>";
             $content .= $value->compname."</option>";

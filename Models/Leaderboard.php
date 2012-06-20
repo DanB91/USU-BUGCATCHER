@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Database/Connection.php';
+require_once dirname(__FILE__) . '/../Database/Connection.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
