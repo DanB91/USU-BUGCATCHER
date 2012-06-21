@@ -42,7 +42,10 @@ function setTesting()
 {
   insertHTML(6);
 }
-
+function viewCurrentComp()
+{
+  insertHTML(7);
+}
 //This gets the HTML code that needs to inserted via element.innerHTML
 function insertHTML(tabValue)
 {
@@ -69,11 +72,14 @@ function insertHTML(tabValue)
     case 4:
       filePath = "Hints.html";
       break;
-		case 5:
-			filePath = "ProblemUpload.html";
-			break;
-		case 6:
+    case 5:
+            filePath = "ProblemUpload.html";
+            break;
+    case 6:
       filePath = "CustomProblemTesting.html";
+      break;
+    case 7:
+      filePath = "currentCompInformation.html";
       break;
     default:
   }
@@ -99,22 +105,28 @@ $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:f
           break;
         case 3:
           progUpdate = setInterval(showTableProg, 1000);
-					clearInterval(t3);
+            clearInterval(t3);
           break;
-				case 4:
+        case 4:
           loadProblemNames();
           clearInterval(progUpdate);
 					clearInterval(t3);
           break;
-				case 5:
-					clearInterval(progUpdate);
+        case 5:
+                clearInterval(progUpdate);
+                clearInterval(t3);
+                break;
+        case 6:
+                clearInterval(progUpdate);
+                getCustomProblems();
+                t3 = setInterval(receive,1000);
+                break;
+        case 7:
+            CS_loadSelectedAdminCompsA();
+            CS_loadSelectedAdminCompsB();
+            clearInterval(progUpdate);
 					clearInterval(t3);
-					break;
-				case 6:
-					clearInterval(progUpdate);
-					getCustomProblems();
-					t3 = setInterval(receive,1000);
-					break;
+          break;
         default:
           return;
       }
