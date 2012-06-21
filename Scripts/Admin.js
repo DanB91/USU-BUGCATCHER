@@ -220,7 +220,7 @@ function popProbSelectBox()//Find Code ---------- CS1003
     
     $.ajax({type: "GET", url: "AdminCompContent/loadProblems.php", success:function(result){
 
-            
+
             availableProbs = eval(result);
             var index = availableProbs.indexOf(".");
             availableProbs.splice(index, 1);
@@ -384,7 +384,30 @@ function moveProbDown(problem)//Find Code ---------- CS1010
    addedProbs[index + 1] = problem;
    refreshProbList();
 }
+// This is Javascript, not PHP!
 
+function js_array_to_php_array(a)
+{
+    var a_php = "";
+    var total = 0;
+    for (var key in a)
+    {
+        ++ total;
+        a_php = a_php + "s:" +
+                String(key).length + ":\"" + String(key) + "\";s:" +
+                String(a[key]).length + ":\"" + String(a[key]) + "\";";
+    }
+    a_php = "a:" + total + ":{" + a_php + "}";
+    return a_php;
+}
+
+function setCookie(c_name,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=c_name + "=" + c_value;
+}
 function createCompetition()//Find Code ---------- CS1011
 {
 
@@ -457,8 +480,9 @@ function createCompetition()//Find Code ---------- CS1011
   
   
   
-  
-  $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
+
+ 
+  $.ajax({type: "GET",  url:"setupImpl.php", data: {php_array : addedProbs,content:contents}, success:function(result){
         
         //alert(result);
         compSetTimeM = TimeVal;
