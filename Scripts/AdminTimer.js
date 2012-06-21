@@ -89,7 +89,7 @@ function countdown()
     minutes = 0;
     seconds = 0;
     document.getElementById('header-timer').innerHTML="STOP!";
-    stopCompetition();
+    
   }
   else
   {

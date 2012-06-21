@@ -109,32 +109,6 @@ function startCompetition() //Find Code ---------- CS1001
 
 }
 
-function stopCompetition()
-{
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlstopCompetition=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlstopCompetition=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlstopCompetition.onreadystatechange=function()
-  {
-    if (xmlstopCompetition.readyState == 4 && xmlstopCompetition.status == 200)
-    {
-        //Need to write a new countdown function
-        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />';
-        //alert(xmlstartCompetitionhttp.responseText);
-        
-    }
-  }
-  //Don't start competition until the countdown timer reaches zero.
-
-  xmlstopCompetition.open("GET","AdminCompContent/StopCompetition.php",true)
-  xmlstopCompetition.send();
-}
 
 function refreshProbList()
 {
@@ -483,10 +457,10 @@ function createCompetition()//Find Code ---------- CS1011
   
   
   
-   
+  
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
-        
+        //alert(result);
         compSetTimeM = TimeVal;
         
         compSetTime = TimeVal;
