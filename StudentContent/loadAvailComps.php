@@ -10,7 +10,7 @@ $isCaptain = trim($_POST['isCaptn']);
 
 if ($team != NULL) {
     if ($user != NULL) {
-        if ($isCaptain == false){
+        if ($isCaptain == "true"){
             $compArray = Competition::getJoinableCompetitions();
         }
         else{
