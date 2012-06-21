@@ -1,7 +1,8 @@
 <?php
 
 require_once '../header.php';
-include 'timeStampManip.php';
+
+include '../timer.php';
 session_start();
 
 $admin = $_SESSION['adminObject'];

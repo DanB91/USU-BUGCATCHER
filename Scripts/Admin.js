@@ -542,16 +542,33 @@ function createCompetition()//Find Code ---------- CS1011
     setupXML.open("GET","setupImpl.php?"+contents+"&"+IETimeStamp,true);
     setupXML.send();
   }
-  else
-  {
-    setupXML.open("GET","setupImpl.php?"+contents+"&"+IETimeStamp,true);
-    setupXML.send();
-  }*/
-    PAUSE = false;   
-    pauseTimer();
-    document.getElementById('header-timer').innerHTML=TimeVal +":00";
-  setupXML.open("GET","setupImpl.php?"+contents,true);
-  setupXML.send();
+
+  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
+  
+  
+  
+  
+  $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
+        
+        //alert(result);
+        compSetTimeM = TimeVal;
+        
+        compSetTime = TimeVal;
+        if (CountdownVal)
+        	compSetTimeS = 10;
+        else 
+        	compSetTimeS = 0;
+        Time.value = '';
+        //setCompCookies();
+        createTimer();
+        stopTimer();
+        $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
+
+        
+    }});
+
+
+    $("#header-timer").html(TimeVal +":00");
 
 }
 

@@ -7,6 +7,8 @@
 //For example if a team finds a bug at 60 mins, then 60 mins will be added to time of bugs found. 
 //The team with the most time and or most bugs will be declared the winning team.
 //See Student.js for more details
+require_once "../header.php";
+session_start();
 
 $comp = $_SESSION['competitionObject'];
 $compID = $comp->compid;

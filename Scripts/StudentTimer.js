@@ -4,7 +4,6 @@ var seconds = 0;
 var studentTimer;
 var STOPPED = true;
 var PAUSED = false;
-var timer_compID;
 var timeCount = 0;
 var currentTime = 3;
 var previousTime = 0;
@@ -19,7 +18,7 @@ function createStudentTimer()
 //Get the current competition time from the server and displays it
 function getTime()
 {
-	$.ajax({type: "GET", url:"StudentContent/updateStudentTimer.php", data: "compID="+timer_compID, success:function(time){
+	$.ajax({type: "GET", url:"StudentContent/updateStudentTimer.php", success:function(time){
 	    currentTime = time;
 	    if(currentTime-lastTimeChecked >= 30)
 	    {

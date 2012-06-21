@@ -2,11 +2,21 @@
 /* CSS Document */
 
 * {	margin: 0; padding: 0;}
+
+/*####################################################*/
+/*         Global Styles for HTML Document            */
+/*####################################################*/
+
+/*                       Body
+/*____________________________________________________*/
 body {
 	background-image: url('../Images/bg.gif');
 	background-repeat:repeat;
 }
+/*____________________________________________________*/
 
+/*                       Links
+/*____________________________________________________*/
 a{
 	border:none;
 	text-decoration:none;
@@ -16,14 +26,27 @@ a img {
 	border: none;
 	text-decoration:none;
 }
+/*____________________________________________________*/
 
+/*                   Horizontal Rule
+/*____________________________________________________*/
 hr {
 	height: 9px;
 	background-color: #779853;
 	border: none;
 	margin: 15px 0;
 }
+/*____________________________________________________*/
 
+/*                        Lists
+/*____________________________________________________*/
+li {
+	list-style: none;	
+}
+/*____________________________________________________*/
+
+/*                      Font/Text
+/*____________________________________________________*/
 /* Display Text: */
 @font-face {
 	font-family: Dekar; src: url('dekar-webfont.ttf');
@@ -31,7 +54,7 @@ hr {
 }
 
 p {
-	text-align:left;
+	text-align: left;
 }
 
 h1 {
@@ -40,37 +63,6 @@ h1 {
 	color: #fdd794;
 	font-size: 80px;
 	padding: 90px 0 0 350px;
-}
-
-#smHeader {
-	font-family: Dekar, "Lucida Console", Monaco, monospace;
-	font-weight: lighter;
-	color: #fdd794;
-	overflow:visible;
-	font-size: 30px;
-	float: right;
-	width: 200px;
-	text-align: center;
-	margin: 10px 90px 0 0;
-}
-
-#adminHeader {
-	font-family: Dekar, "Lucida Console", Monaco, monospace;
-	font-weight: lighter;
-	color: #fdd794;
-	font-size: 30px;
-	float: left;
-	width: 160px;
-	text-align: center;
-	margin: 0 0 0 90px;
-}
-
-#smallerHeader {
-	font-family: Dekar, "Lucida Console", Monaco, monospace;
-	font-weight: lighter;
-	color: #fdd794;
-	font-size: 20px;
-	overflow:visible;
 }
 
 h2 {
@@ -96,1068 +88,10 @@ h4 {
 	font-size: 18px;
 	padding: 10px 0;
 }
+/*____________________________________________________*/
 
-/* --------------- NAVIGATION --------------- */
-#navigation {
-	width: 1000px;
-	height: 48px;
-	margin: 0 auto;
-	background: url('../Images/menu.png') no-repeat;
-}
-
-li {
-	list-style: none;	
-}
-
-#ReqLabel {
-	height: 44px;
-	width: 250px;
-	float: left;
-	padding: 4px 0 0 0;
-}
-
-#ProblemsLabel {
-	width: 500px;
-	height: 44px;
-	float: left;
-	padding: 4px 0 0 0;
-	color: #394e5f;
-}
-
-#BugTestLabel{
-	height: 44px;
-	width: 250px;
-	float: left;
-	padding: 4px 0 0 0;
-}
-
-#header-logout-help{
-	float: right;
-	width: 91px;
-	height: 79px;
-}
-
-#header-left {
-	color: #fff;	
-	font-family: Dekar;
-	font-weight: lighter;
-	padding: 10px 20px 0 20px;
-	float: left;
-}
-
-#timer {
-	height: 51px;
-}
-
-#header-winningteams {
-	float: left;
-	height: 78px;
-	color: #aad67b;
-}
-
-#header-right {
-	float: right;
-	width: 180px;
-	height: 73px;
-	padding: 0 0 0 50px;	
-}
-
-#header{
-	clear: both;	
-}
-/* --- end Navigation --- */
-
-
-/* --------------- LAYOUT --------------- */
-#content{
-	width: 1000px;
-	margin: 0 auto;
-	background-color: #aad67b;
-}
-
-#content-container {
-	width: 1000px;
-	margin: 0 auto;
-	background-color: #aad67b;
-}
-
-#IndexLeft {
-	float: left;
-	width: 622px;
-	background-color: #aad67b;
-}
-
-#IndexMiddle {
-	float:left;
-	width: 369px;
-	border-left: 9px solid #779853;
-	background-color: #cdefa9;
-}
-
-/* Larger header for front pages */
-#headerSplash {
-	background: url('../Images/header.jpg') no-repeat;
-	width: 1000px;
-	height: 243px;
-	margin: 0 auto;
-}
-
-#header {
-	background: url('../Images/header.png') no-repeat;
-	width: 1000px;
-	height: 79px;
-	margin: 0 auto;
-        overflow: hidden;
-}
-
-/* -------------------- Landing Page Layout --------------------*/
-.LV-Sections ,.LV-Sections div {
-	margin: 0px;
-	padding: 0px;
-}
-
-.LV-Left {
-	background-color: #aad67b;
-	float: left;
-	height: 640px;
-	text-align: center;
-}
-
-.LV-Right {
-	background-color: #cdefa9;
-	border-left: 9px solid #779853;
-	float: left;
-	height: 640px;
-	text-align: center;
-}
-/*--------------------------------------------------------------*/
-#LandingView-Start {
-	background-color: #cdefa9;
-	border-bottom: 2px solid #000;
-	height: 640px;
-	margin: 0px;
-	padding: 0px;
-	width: 1000px;
-}
-
-#LVS-Left {
-	background-color: #aad67b;
-	float: left;
-	height: 640px;
-	text-align: center;
-	width: 300px;
-}
-
-#LVS-Right {
-	background-color: #cdefa9;
-	border-left: 9px solid #779853;
-	float: left;
-	height: 640px;
-	width: 691px;
-}
-
-#LVS-CreateTeam {
-	width: 300px;
-}
-/*--------------------------------------------------------------*/
-#LandingView-Member {
-	background-color: #cdefa9;
-	border-bottom: 2px solid #000;
-	height: 640px;
-	margin: 0px;
-	padding: 0px;
-	width: 1000px;
-}
-
-#LVM-Left {
-	background-color: #aad67b;
-	float: left;
-	height: 640px;
-	text-align: center;
-	width: 661px;
-}
-
-#TeamMember1 {
-	margin-left: 35px;
-	margin-right: 20px;
-	float: left;
-}
-
-#TeamMember2 {
-	margin-left: 20px;
-	margin-right: 35px;
-	float: left;
-}
-
-#LVM-Right {
-	background-color: #cdefa9;
-	border-left: 9px solid #779853;
-	float: left;
-	height: 640px;
-	width: 330px;
-}
-/*--------------------------------------------------------------*/
-#LandingView-Captain {
-	background-color: #cdefa9;
-	height: 640px;
-	margin: 0px;
-	padding: 0px;
-	width: 1000px;
-}
-
-#LVC-Left {
-	background-color: #aad67b;
-	float: left;
-	height: 640px;
-	text-align: center;
-	width: 300px;
-}
-
-#LVC-Right {
-	background-color: #cdefa9;
-	border-left: 9px solid #779853;
-	float: left;
-	height: 640px;
-	width: 691px;
-}
-
-#LVC-LeftBottom {
-	float: left;
-	text-align: center;
-	width: 300px;
-}
-/*--------------------------------------------------------------*/
-#LandingLeft {
-	background-color: #aad67b;
-	float: left;
-	height: 640px;
-	text-align: center;
-	width: 300px;
-}
-
-#LandingLeft p{
-	text-align: center;
-}
-
-#LandingLeft-Top {
-	float: left;
-	text-align: center;
-	width: 300px;
-}
-
-#LandingLeft-Bottom {
-	float: left;
-	text-align: center;
-	width: 300px;
-}
-
-#LandingLeft-Bottom p{
-	text-align: left;
-}
-
-#LandingRight {
-	background-color: #cdefa9;
-	border-left: 9px solid #779853;
-	float: left;
-	height: 640px;
-	width: 691px;
-}
-
-#LandingRight p{
-	text-align: center;
-}
-
-#Landing-CompList {
-	float: left;
-	text-align: center;
-	width: 340px;
-}
-
-#Landing-CompInfo {
-	float: left;
-	text-align: center;
-	width: 340px;
-}
-
-/* -------------------- Student Layout --------------------*/
-.studentBody {
-	background: url('../Images/studentBody.png') repeat-y;
-}
-
-#StudentLeft{
-	float: left;
-	width: 241px;
-	padding: 10px 0 0 9px;
-}
-
-#RequirementsList{
-	border:1px solid #afcb91;
-	background-color:#fff;
-    color: #000;
-	padding: 7px;
-    height: 380px;
-    overflow-y: scroll;
-    word-wrap: break-word;
-	margin: 0 0 0 -8px;
-	width: 222px;
-}
-
-#StudentMiddle {
-	float:left;
-	width: 500px;
-	padding: 10px 0 0 0;
-	background-color: #d3fba7;
-}
-
-#StudentMiddleTop{
-    float: left;
-	width: 200px;
-    height: 35px;
-    margin-bottom: -10px;
-	margin-top: -7px;
-    text-align: center;
-}
-
-#StudentMiddleBottom{
-    float: left;
-    width: 496px;
-}
-
-#ProblemCode{
-    border:1px solid #afcb91;
-	background-color:#fff;
-    color: #000;
-    float: left;
-    height: 344px;
-    margin-left: 15px;
-    margin-top: -30px;
-    overflow-y: scroll;
-    padding: 7px;
-    width: 465px;
-	word-wrap: break-word;
-}
-
-#ProblemCode pre{
-    margin: 0px;
-    padding: 0px;
-}
-
-#CoverageToggle{
-
-    float: right;
-    margin: 0px 30px 0 0;
-    padding: 0px;
-    padding-left: 3px;
-}
-
-#ProblemName{
-	float: right;
-	font-size: 20px;
-	height: 35px;
-	margin: 0px;
-	overflow: hidden;
-	padding: 0px;
-	text-align: center;
-	width: 220px;
-}
-
-#ProblemsListLink{
-    color: #2f393f;
-	float: left;
-	margin: 0px;
-	margin-right: 3px;
-	padding: 0px;
-	text-decoration: none;
-}
-
-/* ---- Pop-Up Area For the List of Problems ---- */
-#PopUpButton{
-    clear: both;
-	float: left;
-}
-
-#popParent {
-	position: relative;	
-	float: left;
-	width: 274px;
-}
-
-#PopUpArea{
-	background: url('../Images/changeProblems.png') no-repeat;
-	color: #000;
-	float: left;
-	height: 514px;
-	width: 274px;
-	overflow: hidden;
-	position: absolute;
-/*	left: 20%;*/
-	padding: 80px 10px 10px 10px;
-/*	top: 10%;*/
-	text-align: left;
-}
-			
-.PUA-hidden{
-	height: 0px;
-	width: 0px;
-	z-index: -5;
-}
-			
-.PUA-showing-1col{
-	width: 125px;
-	z-index: 30;
-}
-	
-.PUA-showing-2col{
-	width: 265px;
-	z-index: 30;
-}
-	
-.PUA-showing-3col{
-	width: 405px;
-	z-index: 30;
-}
-
-#PopUpArea ul{
-/*	background: #587736;*/
-	float: left;
-	height: 200;
-	margin-left: 9px;
-	margin-top: 10px;
-	padding: 3px;
-	width: 120px;
-}
-
-#PopUpArea ul li{
-    list-style-type: none;
-}
-
-#PopUpArea a{
-	color: #000;
-}
-
-#Background_Tinted{
-	clear: right;
-	background: #587736;
-	border-radius: 10px;
-	float: right;
-	height: 230px;
-	opacity: .9;
-	overflow: hidden;
-	position: relative;
-	left: 0px;
-	top: -238px;
-}
-			
-.BT-hidden{
-	height: 0px;
-	width: 0px;
-	z-index: -5;
-}
-			
-			
-.BT-showing-1col{
-	width: 125px;
-	z-index: 20;
-}
-	
-.BT-showing-2col{
-	width: 265px;
-	z-index: 20;
-}
-	
-.BT-showing-3col{
-	width: 405px;
-	z-index: 20;
-}
-
-#StudentRight {
-	float: right;
-	width: 241px;
-	padding: 10px 0 0 9px;
-}
-
-#ResultsList{
-    border:1px solid #afcb91;
-	background-color:#fff;
-    color: #000;
-	padding: 7px;
-    height: 190px;
-    overflow-y: scroll;
-    word-wrap: break-word;
-}
-
-#ChatBox{
-    height: 25px;
-/*    text-align: center;*/
-    width: 246px;
-}
-
-#ChatInput{
-/*    margin-left: -1;
-    margin-top: 1;*/
-/*    width: 220px;*/
-}
-
-
-/*used on registration form*/
-#OneCol{
-	width: 800px;
-	margin: 0 auto;
-	padding: 20px 0 0 0;
-}
-
-#WelcomeText {
-	padding: 65px 0 0 75px;
-	width: 430px;
-}
-
-#footer {
-	background: url('../Images/footer.png') no-repeat;
-	width:1000px;
-	height:72px;
-	clear: both;
-}
-
-
-#arrow {
-	float:left;	
-	margin: 60px 0 0 -9px;
-}
-/* --- end Layout --- */
-
-
-
-/* ------------- ADMIN LAYOUT STYLES ------------ */
-#header-controls{
-	float: left;
-	width: 100px;
-	height: 79px;
-	margin: 0;
-	padding: 0;
-	cursor: pointer;
-}
-
-#header-remainingTime {
-	float: left;
-	width: 200px;
-}
-
-/*################################################################################*/
-/*################################################################################*/
-
-#admenu {
-	width: 1000px;
-	height: 48px;
-	margin: 0 auto;
-	background: url('../Images/admenu.png') repeat-x;
-	overflow-y: visible;
-	text-align:center;
-}
-
-#admenu h4 {
-	margin: 0;
-	padding: 0;
-}
-
-#admenu li{
-	float: left;
-	margin: 0px;
-	text-align:center;
-}
-
-.navTabs-subMenu-visible{
-	float: left;
-	height: 48px;
-	overflow-y: visible;
-	text-align:center;
-}
-
-.navTabs-subMenu-hidden{
-	float: left;
-	height: 48px;
-	overflow-y: hidden;
-	text-align:center;
-}
-
-#navTabs{
-	height: 48px;
-	width: 883px;
-	margin: 0 -100px 0 70px;
-}
-
-.navTabs-label{
-}
-
-.navTabs-link{
-	height: 48px;
-	overflow-y: hidden;
-}
-
-#navTabs a{
-	display: inline;
-	float: left;
-	text-decoration: none;
-	color: #fff;
-}
-
-#navTabs a:hover{
-	/*background: url(../Images/admenuHover.png);
-	color: #2f393f;
-	color: #000;*/
-}
-
-#navTabs h4{
-	display: inline;
-	float: left;
-	padding: 14px 18px 14px 18px;
-	text-decoration: none;
-	color: #fff;
-}
-
-#navTabs li ul{
-	position: relative;
-		left: 0px;
-		top: -96px;
-	z-index: -30;
-}
-
-#navTabs li:hover ul{
-	position: relative;
-		left: 0px;
-		top: 0px;
-	z-index: 100;
-}
-
-#navTabs li:hover ul.navTabs-SubNormal{
-	position: relative;
-		left: 0px;
-		top: -96px;
-	z-index: -30;
-}
-
-#navTabs li:hover ul.navTabs-SubHover{
-	position: relative;
-		left: 0px;
-		top: 0px;
-	z-index: 100;
-}
-
-#navTabs li ul li{
-	background: url(../Images/admenu.png) repeat-x;
-	clear: left;
-	width: 100%;
-}
-
-#navTabs li:hover a{
-	width: 100%;
-}
-
-#navTabs li:hover h4{
-	color: #fdd794;
-}
-
-a.navTabs-link:hover{
-	background: url(../Images/admenuSubHover3.png);
-}
-
-#navTabs li:hover h4.navTabs-label{
-	background: url(../Images/admenuHover.png);
-	color: #fff;
-}
-
-#navTabs li:hover li h4{
-	background: url(../Images/admenu.png);
-	color: #fff;
-	width: 100%;
-}
-
-#navTabs li li h4:hover{
-	background: url(../Images/admenuSubHover3.png);
-	color: #fdd794;
-	/*color: #2f393f;*/
-	width: 100%;
-}
-
-#navTabs li li h4{
-	padding-left: 0px;
-	padding-right: 0px;
-}
-
-/*################################################################################*/
-/*################################################################################*/
-
-#header-remainingTime {
-	color: #fff;
-	font-family: Dekar;
-	font-weight: lighter;
-	font-size: 24px;
-	padding: 10px 0 0 20px;
-}
-
-option.difficulty0{
-	background-color:#d3fba7;
-}
-option.difficulty1{
-	background-color:#f4f673;
-}
-option.difficulty2{
-	background-color:#ffd35c;
-}
-option.difficulty3{
-	background-color:#ff9453;
-}
-option.difficulty4{
-	background-color:#e7542c;
-}
-
-/*--COMP LAYOUT--*/
-.threeColBody {
-	background: url('../Images/studentBody.png') repeat-y;	
-}
-
-.leftColBody {
-	background: url('../Images/leftColBody.png') repeat-y;	
-}
-
-.CompBody h2 {
-	font-size: 24px;
-	padding: 10px 20px;
-	
-}
-
-#CompLeft{
-	/*background: #AAD67B;
-/*	border-right: 9px solid #779853;*/
-	clear: left;
-	color: #000;
-	display: inline;
-	float: left;
-	font-weight: bold;
-	margin: 0px 30px 0 0;
-	padding: 0px;
-	text-align: center;
-	width: 248px;
-}
-
-#CompRight {
-	float: right;
-	width: 230px;
-	display: inline;
-        /*height: 300;*/
-/*	border-left: 9px solid #779853;*/
-}
-
-#CompMiddle h4 {
-	color: #32434f;
-	text-align: left;
-}
-
-#CsetupForm{
-	margin: 0px;
-	margin-top: 20px;
-	padding: 0px;
-	padding-right: 20px;
-	text-align: center;
-	width: 248px;
-}
-
-.Cradio-container{
-	border:1px solid #afcb91;
-	color: #000;
-	margin: 0px;
-	margin-left: 48px;
-	margin-top: 3px;
-	text-align: left;
-	width: 150px;
-}
-
-.Cradio-left{
-	margin-right: 0px;
-}
-			
-.Cradio-right{
-	margin-left: 10px;
-	margin-right: 0px;
-}
-
-.Ctext input[type=text], .Ctext input[type=file], .Ctext input[type=password], .Ctext textarea{
-	border:1px solid #afcb91;
-	background-color:#fff;
-	margin: 5px;
-	margin-bottom: 15px;
-	margin-top: 3px;
-	padding:7px;
-	width: 150px;
-}
-
-#CTextArea {
-	border:1px solid #afcb91;
-	background-color:#fff;
-	margin: 5px;
-	margin-bottom: 15px;
-	margin-top: 3px;
-	padding:7px;
-	width: 440px;
-}
-
-#CBugArea{
-	border:1px solid #afcb91;
-	background-color:#fff;
-	margin: 5px;
-	margin-bottom: 15px;
-	margin-top: 3px;
-	padding:7px;
-	width: 440px;
-}
-
-.Cselect{
-	border:1px solid #afcb91;
-	background-color:#fff;
-	margin-bottom: 15px;
-	margin-top: 3px;
-	padding: 7px;
-	width: 200px;
-}
-
-#CompNameID {
-	border:1px solid #afcb91;
-	background-color:#fff;
-	margin: 5px;
-	margin-bottom: 15px;
-	margin-top: 3px;
-	padding:7px;
-	width: 150px;
-}
-
-#CompTime {
-	border:1px solid #afcb91;
-	background-color:#fff;
-	margin: 5px;
-	margin-bottom: 15px;
-	margin-top: 3px;
-	padding:7px;
-	width: 150px;
-}
-
-.Cbutton{
-	margin: 0px;
-	width: 130px;
-}
-
-#CSetupError{
-	height: 140px;
-	padding-bottom: 6px;
-	margin-top: -20px;
-	overflow: hidden;
-}
-
-.Cerror-bad{	
-	background: #E38686;
-	color: #000;
-	font-weight: normal;
-}
-
-.Cerror-good{	
-	background: #d3fba7;
-	color: #3c454b;
-	font-weight: normal;
-}
-
-.Cerror-normal{
-	background-color: #AAD67B;
-	color: #3c454b;
-	font-weight: normal;
-}
-
-/* --- end Setup Layout --- */
-
-
-/* --- Manage Layout --- */
-#ManageMain {
-	width: 238px;
-	float: left;
-	clear: left;
-	padding:10px;
-}
-
-#ManageMain hr {
-	margin:10px 0 20px -10px; 	
-}
-
-#ManageMain h2 {
-	padding-bottom: 10px;	
-}
-
-#ManageRight {
-	width: 720px;
-	float: left;
-	clear: right;
-	padding: 10px;
-}
-
-#MTeamTable{
-    padding: 0px 10px;
-}
-
-#MStudent1, #MStudent2, #MStudent3 {
-	width: 230px;
-	float: left;
-}
-
-/* --- end Manage Layout ---*/
-
-
-/* --- Progress Layout --- */
-#ProgressMain h2 {
-	padding: 20px;	
-}
-
-table.PTable{
-    background: #2f393f;
-    border: 1px solid #272e31;
-    width: 935px;
-	margin: 20px 0 0 0;
-}
-
-#PHeadTable{
-    text-align: center;
-}
-
-tr.PHeadRow{
-    color: #fff;
-}
-
-tr.PRow{
-    background: #d3fba7;
-}
-
-td.PTeamName{
-    /*No Style Needed At The Moment*/
-}
-
-td.PTeamMember{
-    width: 183px;
-}
-
-td.PStats{
-    text-align: center;
-    width: 138px;
-}
-/* --- end Progress Layout --- */
-
-
-
-/* --- Hints Layout --- */
-#CustomHeader{
-	border-right: 9px solid #779853;
-	background-color: #d3fba7;
-    clear: left;
-    display: inline;
-    float: left;
-    font-weight: bold;
-    margin: 0px;
-    padding: 0px;	
-	width: 440px;
-}
-
-#CustomHeader h2{
-	padding: 0 0 0 20px;	
-}
-
-#PreDefHeader{
-    display: inline;
-    float: right;
-    margin: 0px;
-    padding: 0px;
-    width: 540px;
-}
-	  
-#HintsLeft{
-	border-right: 9px solid #779853;
-    display: inline;
-    float: left;
-    margin: 0px;
-	padding: 0;
-    width: 440px;
-	height: 400px;
-	background-color: #d3fba7;
-}
-
-#HintsLeft hr{
-    border-left: none;
-    border-right: none;
-    height: 9px solid #779853;
-    margin: 0;
-    padding: 0;
-}
-
-#HintsLeft p{
-    margin: 0px;
-    padding: 20px 0 10px 20px;
-}
-
-#CustomHint{
-	border:1px solid #afcb91;
-    background: #fff;
-    height: 150px;
-	padding: 7px;
-    margin-top: 0px;
-    width: 400px;
-}
-	  
-#HintsRight{
-      display: inline;
-      float: right;
-      margin: 0px;
-      padding: 0px;
-      padding-bottom: 20px;
-      width: 540px;}
-
-#HintsPreDefTop{
-      display: inline;
-      float: right;
-      margin: 0px;
-      padding: 0px;
-      width: 540px;}
-
-#HintsPreDefRight{
-    display: inline;
-	text-align: left;
-    float: right;
-    margin: 0px;
-    padding: 0px;
-    width: 264px;}
-
-
-#HintsPreDefLeft{
-    display: inline;
-	text-align: left;
-    float: right;
-    margin: 0px;
-    padding: 0px;
-    width: 264px;}
-
-#HintsPreDefBottom{
-    display: inline;
-    float: right;
-    margin: 0px;
-    padding: 0px;
-    width: 540px;
-}
-
-	  
-.Hselect{
-	background: #fff;
-	border:1px solid #afcb91;
-    margin: 0px;
-    padding: 7px;
-    width: 180px;
-}
-	  
-/* --- end Hints Layout --- */
-
-
-/* --------------- FORMS --------------- */
+/*                        Forms
+/*____________________________________________________*/
 #formcontainer{
 /*	margin: 0 0 50px 0;*/
 }
@@ -1235,37 +169,10 @@ td.PStats{
 	background: url('../Images/formFooter.png') repeat-x;
 	height: 9px;
 }
+/*____________________________________________________*/
 
-/* Comp Forms */
-#CompForm input[type=text], #CompForm input[type=file], #CompForm input[type=password], #CompForm textarea{		
-	border:1px solid #afcb91;
-	background-color:#fff;
-	padding:7px;
-	width: 200px;
-}
-
-#CompForm p{
-	text-align:left;
-	padding: 30px 0 5px 23px;
-	text-decoration: none;
-}
-
-/* Manage Forms */
-#MForm1 input[type=text], #MForm2 input[type=text], #MForm3 input[type=text], #MTeamName{
-	border:1px solid #afcb91;
-	background-color:#fff;
-	padding:7px;
-	width: 180px;
-}
-
-#MTeamName {
-	margin: 0 0 0 -15px;	
-}
-
-/* --- end Forms --- */
-
-
-/* ----- Buttons ----- */
+/*                       Buttons
+/*____________________________________________________*/
 #LoginButton {
 	background: url('../Images/login.png') no-repeat;
 	width: 224px;
@@ -1431,6 +338,16 @@ td.PStats{
 	margin: 20px 10px;
 }
 
+#CP_Upload {
+	background: url('../Images/uploadProblemBtn.png') no-repeat;
+	width: 224px;
+	height: 70px;
+	font-size: 1px;
+	color: #f3e483;
+	border: none;
+	cursor: pointer;
+	margin: 20px 10px;
+}
 /* ----- Dynamic Buttons ----- */
 .buttonText {
 	color: #2f393f;	
@@ -1467,23 +384,1191 @@ a.button p {
 a.button:hover p{
 	text-decoration:none;
 }
+/*____________________________________________________*/
+
+/*                    Named Divisions
+/*____________________________________________________*/
+#smHeader {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #fdd794;
+	overflow: visible;
+	font-size: 30px;
+	float: right;
+	width: 200px;
+	text-align: center;
+	margin: 10px 90px 0 0;
+}
+
+#smallerHeader {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #fdd794;
+	font-size: 20px;
+	overflow:visible;
+}
+
+#footer {
+	background: url('../Images/footer.png') no-repeat;
+	width:1000px;
+	height:72px;
+	clear: both;
+}
+
+#arrow {
+	float:left;	
+	margin: 60px 0 0 -9px;
+}
+
+#adminHeader {
+	font-family: Dekar, "Lucida Console", Monaco, monospace;
+	font-weight: lighter;
+	color: #fdd794;
+	font-size: 30px;
+	float: left;
+	width: 160px;
+	text-align: center;
+	margin: 0 0 0 90px;
+}
 
 .nooverflow{
       clear: left;
       line-height: 0;
 }
-/* --- end Buttons --- */
-/* --- Up Comp Selection --- */
-.CSselect{
+
+/* --------------- NAVIGATION --------------- */
+#navigation {
+	width: 1000px;
+	height: 48px;
+	margin: 0 auto;
+	background: url('../Images/menu.png') no-repeat;
+}
+
+/*####################################################*/
+/*    Styles for index.html and registration.html     */
+/*####################################################*/
+#IndexLeft {
+	float: left;
+	width: 622px;
+	background-color: #aad67b;
+}
+
+#IndexMiddle {
+	float: left;
+	width: 369px;
+	border-left: 9px solid #779853;
+	background-color: #cdefa9;
+}
+
+/*used on registration form*/
+#OneCol{
+	width: 800px;
+	margin: 0 auto;
+	padding: 20px 0 0 0;
+}
+
+#WelcomeText {
+	padding: 65px 0 0 75px;
+	width: 430px;
+}
+
+/*####################################################*/
+/*              Styles for Student.html               */
+/*####################################################*/
+
+/*                       Header
+/*____________________________________________________*/
+#header-logout-help{
+	float: right;
+	width: 91px;
+	height: 79px;
+}
+
+#header-left {
+	color: #fff;	
+	font-family: Dekar;
+	font-weight: lighter;
+	padding: 10px 20px 0 20px;
+	float: left;
+}
+
+#timer {
+	height: 51px;
+}
+
+#header-winningteams {
+	float: left;
+	height: 78px;
+	color: #aad67b;
+}
+
+#header-right {
+	float: right;
+	width: 180px;
+	height: 73px;
+	padding: 0 0 0 50px;	
+}
+
+#header{
+	clear: both;	
+}
+
+/*                       Label Bar
+/*____________________________________________________*/
+#ReqLabel {
+	height: 44px;
+	width: 250px;
+	float: left;
+	padding: 4px 0 0 0;
+}
+
+#ProblemsLabel {
+	width: 500px;
+	height: 44px;
+	float: left;
+	padding: 4px 0 0 0;
+	color: #394e5f;
+}
+
+#BugTestLabel{
+	height: 44px;
+	width: 250px;
+	float: left;
+	padding: 4px 0 0 0;
+}
+
+/*                       Content Layout
+/*____________________________________________________*/
+.studentBody {
+	background: url('../Images/studentBody.png') repeat-y;
+}
+
+#content{
+	width: 1000px;
+	margin: 0 auto;
+	background-color: #aad67b;
+}
+
+#content-container {
+	width: 1000px;
+	margin: 0 auto;
+	background-color: #aad67b;
+}
+
+/* Larger header for front pages */
+#headerSplash {
+	background: url('../Images/header.jpg') no-repeat;
+	width: 1000px;
+	height: 243px;
+	margin: 0 auto;
+}
+
+#header {
+	background: url('../Images/header.png') no-repeat;
+	width: 1000px;
+	height: 79px;
+	margin: 0 auto;
+}
+
+/*         Student Left
+/*________________________________*/
+#StudentLeft{
+	float: left;
+	width: 241px;
+	padding: 10px 0 0 9px;
+}
+
+#RequirementsList{
+	border:1px solid #afcb91;
+	background-color:#fff;
+    color: #000;
+	padding: 7px;
+    height: 380px;
+    overflow-y: scroll;
+    word-wrap: break-word;
+	margin: 0 0 0 -8px;
+	width: 222px;
+}
+
+/*         Student Middle
+/*________________________________*/
+#StudentMiddle {
+	float:left;
+	width: 500px;
+	padding: 10px 0 0 0;
+	background-color: #d3fba7;
+}
+
+#StudentMiddleTop{
+    float: left;
+	width: 200px;
+    height: 35px;
+    margin-bottom: -10px;
+	margin-top: -7px;
+    text-align: center;
+}
+
+#StudentMiddleBottom{
+    float: left;
+    width: 496px;
+}
+
+#ProblemCode{
+    border:1px solid #afcb91;
+	background-color:#fff;
+    color: #000;
+    float: left;
+    height: 344px;
+    margin-left: 15px;
+    margin-top: -30px;
+    overflow-y: scroll;
+    padding: 7px;
+    width: 465px;
+	word-wrap: break-word;
+}
+
+#ProblemCode pre{
+    margin: 0px;
+    padding: 0px;
+}
+
+#CoverageToggle{
+
+    float: right;
+    margin: 0px 30px 0 0;
+    padding: 0px;
+    padding-left: 3px;
+}
+
+#ProblemName{
+	float: right;
+	font-size: 20px;
+	height: 35px;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0px;
+	text-align: center;
+	width: 220px;
+}
+
+#ProblemsListLink{
+    color: #2f393f;
+	float: left;
+	margin: 0px;
+	margin-right: 3px;
+	padding: 0px;
+	text-decoration: none;
+}
+
+/* Pop-Up Area For the List of Problems
+/*________________________________*/
+#PopUpButton{
+    clear: both;
+	float: left;
+}
+
+#popParent {
+	position: relative;	
+	float: left;
+	width: 274px;
+}
+
+#PopUpArea{
+	background: url('../Images/changeProblems.png') no-repeat;
+	color: #000;
+	float: left;
+	height: 514px;
+	width: 274px;
+	overflow: hidden;
+	position: absolute;
+/*	left: 20%;*/
+	padding: 80px 10px 10px 10px;
+/*	top: 10%;*/
+	text-align: left;
+}
+			
+.PUA-hidden{
+	height: 0px;
+	width: 0px;
+	z-index: -5;
+}
+			
+.PUA-showing-1col{
+	width: 125px;
+	z-index: 30;
+}
+	
+.PUA-showing-2col{
+	width: 265px;
+	z-index: 30;
+}
+	
+.PUA-showing-3col{
+	width: 405px;
+	z-index: 30;
+}
+
+#PopUpArea ul{
+/*	background: #587736;*/
+	float: left;
+	height: 200;
+	margin-left: 9px;
+	margin-top: 10px;
+	padding: 3px;
+	width: 120px;
+}
+
+#PopUpArea ul li{
+    list-style-type: none;
+}
+
+#PopUpArea a{
+	color: #000;
+}
+
+#Background_Tinted{
+	clear: right;
+	background: #587736;
+	border-radius: 10px;
+	float: right;
+	height: 230px;
+	opacity: .9;
+	overflow: hidden;
+	position: relative;
+	left: 0px;
+	top: -238px;
+}
+			
+.BT-hidden{
+	height: 0px;
+	width: 0px;
+	z-index: -5;
+}
+			
+			
+.BT-showing-1col{
+	width: 125px;
+	z-index: 20;
+}
+	
+.BT-showing-2col{
+	width: 265px;
+	z-index: 20;
+}
+	
+.BT-showing-3col{
+	width: 405px;
+	z-index: 20;
+}
+
+/*           Student Right
+/*________________________________*/
+#StudentRight {
+	float: right;
+	width: 241px;
+	padding: 10px 0 0 9px;
+}
+
+#ResultsList{
+    border:1px solid #afcb91;
+	background-color:#fff;
+    color: #000;
+	padding: 7px;
+    height: 190px;
+    overflow-y: scroll;
+    word-wrap: break-word;
+}
+
+#ChatBox{
+    height: 25px;
+/*    text-align: center;*/
+    width: 246px;
+}
+
+#ChatInput{
+/*    margin-left: -1;
+    margin-top: 1;*/
+/*    width: 220px;*/
+}
+
+/*####################################################*/
+/*           Styles for StudentLanding.html           */
+/*####################################################*/
+
+/*                  General Styles
+/*____________________________________________________*/
+.LV-Sections ,.LV-Sections div {
+	margin: 0px;
+	padding: 0px;
+}
+
+.LV-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+}
+
+.LV-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	text-align: center;
+}
+#LandingLeft {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 300px;
+}
+
+#LandingLeft p{
+	text-align: center;
+}
+
+#LandingLeft-Top {
+	float: left;
+	text-align: center;
+	width: 300px;
+}
+
+#LandingLeft-Bottom {
+	float: left;
+	text-align: center;
+	width: 300px;
+}
+
+#LandingLeft-Bottom p{
+	text-align: left;
+}
+
+#LandingRight {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 691px;
+}
+
+#LandingRight p{
+	text-align: center;
+}
+
+#Landing-CompList {
+	float: left;
+	text-align: center;
+	width: 340px;
+}
+
+#Landing-CompInfo {
+	float: left;
+	text-align: center;
+	width: 340px;
+}
+
+/*            Styles for Starting Section
+/*____________________________________________________*/
+#LandingView-Start {
+	background-color: #cdefa9;
+	border-bottom: 2px solid #000;
+	height: 640px;
+	margin: 0px;
+	padding: 0px;
+	width: 1000px;
+}
+
+#LVS-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 300px;
+}
+
+#LVS-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 691px;
+}
+
+#LVS-CreateTeam {
+	width: 300px;
+}
+
+/*             Styles for Member Section
+/*____________________________________________________*/
+#LandingView-Member {
+	background-color: #cdefa9;
+	border-bottom: 2px solid #000;
+	height: 640px;
+	margin: 0px;
+	padding: 0px;
+	width: 1000px;
+}
+
+#LVM-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 661px;
+}
+
+#TeamMember1 {
+	margin-left: 35px;
+	margin-right: 20px;
+	float: left;
+}
+
+#TeamMember2 {
+	margin-left: 20px;
+	margin-right: 35px;
+	float: left;
+}
+
+#LVM-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 330px;
+}
+
+/*              Styles for Member Section
+/*____________________________________________________*/
+#LandingView-Captain {
+	background-color: #cdefa9;
+	height: 640px;
+	margin: 0px;
+	padding: 0px;
+	width: 1000px;
+}
+
+#LVC-Left {
+	background-color: #aad67b;
+	float: left;
+	height: 640px;
+	text-align: center;
+	width: 300px;
+}
+
+#LVC-Right {
+	background-color: #cdefa9;
+	border-left: 9px solid #779853;
+	float: left;
+	height: 640px;
+	width: 691px;
+}
+
+#LVC-LeftBottom {
+	float: left;
+	text-align: center;
+	width: 300px;
+}
+/*####################################################*/
+/*               Styles for Admin.html                */
+/*####################################################*/
+
+/*                      Header
+/*____________________________________________________*/
+#header-controls{
+	float: left;
+	width: 100px;
+	height: 79px;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+#header-remainingTime {
+	float: left;
+	width: 200px;
+}
+
+#header-remainingTime {
+	color: #fff;
+	font-family: Dekar;
+	font-weight: lighter;
+	font-size: 24px;
+	padding: 10px 0 0 20px;
+}
+
+/*                     Admin Menu
+/*____________________________________________________*/
+#admenu {
+	width: 1000px;
+	height: 48px;
+	margin: 0 auto;
+	background: url('../Images/admenu.png') repeat-x;
+	overflow-y: visible;
+	text-align:center;
+}
+
+#admenu h4 {
+	margin: 0;
+	padding: 0;
+}
+
+#admenu li{
+	float: left;
+	margin: 0px;
+	text-align:center;
+}
+
+.navTabs-subMenu-visible{
+	float: left;
+	height: 48px;
+	overflow-y: visible;
+	text-align:center;
+}
+
+.navTabs-subMenu-hidden{
+	float: left;
+	height: 48px;
+	overflow-y: hidden;
+	text-align:center;
+}
+
+#navTabs{
+	height: 48px;
+	width: 883px;
+	margin: 0 -100px 0 70px;"
+}
+
+.navTabs-label{
+}
+
+.navTabs-link{
+	height: 48px;
+	overflow-y: hidden;
+}
+
+#navTabs a{
+	display: inline;
+	float: left;
+	text-decoration: none;
+	color: #fff;
+}
+
+#navTabs a:hover{
+	/*background: url(../Images/admenuHover.png);
+	color: #2f393f;
+	color: #000;*/
+}
+
+#navTabs h4{
+	display: inline;
+	float: left;
+	padding: 14px 18px 14px 18px;
+	text-decoration: none;
+	color: #fff;
+}
+
+#navTabs li ul{
+	position: relative;
+		left: 0px;
+		top: -96px;
+	z-index: -30;
+}
+
+#navTabs li:hover ul{
+	position: relative;
+		left: 0px;
+		top: 0px;
+	z-index: 100;
+}
+
+#navTabs li:hover ul.navTabs-SubNormal{
+	position: relative;
+		left: 0px;
+		top: -96px;
+	z-index: -30;
+}
+
+#navTabs li:hover ul.navTabs-SubHover{
+	position: relative;
+		left: 0px;
+		top: 0px;
+	z-index: 100;
+}
+
+#navTabs li ul li{
+	background: url(../Images/admenu.png) repeat-x;
+	clear: left;
+	width: 100%;
+}
+
+#navTabs li:hover a{
+	width: 100%;
+}
+
+#navTabs li:hover h4{
+	color: #fdd794;
+}
+
+a.navTabs-link:hover{
+	background: url(../Images/admenuSubHover3.png);
+}
+
+#navTabs li:hover h4.navTabs-label{
+	background: url(../Images/admenuHover.png);
+	color: #fff;
+}
+
+#navTabs li:hover li h4{
+	background: url(../Images/admenu.png);
+	color: #fff;
+	width: 100%;
+}
+
+#navTabs li li h4:hover{
+	background: url(../Images/admenuSubHover3.png);
+	color: #fdd794;
+	/*color: #2f393f;*/
+	width: 100%;
+}
+
+#navTabs li li h4{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+/*                  Competition Setup
+/*____________________________________________________*/
+
+/*    General Styles
+/*_______________________*/
+.threeColBody {
+	background: url('../Images/studentBody.png') repeat-y;	
+}
+
+.leftColBody {
+	background: url('../Images/leftColBody.png') repeat-y;	
+}
+
+.CompBody h2 {
+	font-size: 24px;
+	padding: 10px 20px;
+}
+
+#CompForm input[type=text], #CompForm input[type=file], #CompForm input[type=password], #CompForm textarea{		
+	border:1px solid #afcb91;
+	background-color:#fff;
+	padding:7px;
+	width: 200px;
+}
+
+#CompForm p{
+	text-align:left;
+	padding: 30px 0 5px 23px;
+	text-decoration: none;
+}
+
+/*      Comp Left
+/*_______________________*/
+#CompLeft{
+	/*background: #AAD67B;
+/*	border-right: 9px solid #779853;*/
+	clear: left;
+	color: #000;
+	display: inline;
+	float: left;
+	font-weight: bold;
+	margin: 0px 30px 0 0;
+	padding: 0px;
+	text-align: center;
+	width: 248px;
+}
+
+#CsetupForm{
+	margin: 0px;
+	margin-top: 20px;
+	padding: 0px;
+	padding-right: 20px;
+	text-align: center;
+	width: 248px;
+}
+
+.Cradio-container{
+	border:1px solid #afcb91;
+	color: #000;
+	margin: 0px;
+	margin-left: 48px;
+	margin-top: 3px;
+	text-align: left;
+	width: 150px;
+}
+
+.Cradio-left{
+	margin-right: 0px;
+}
+			
+.Cradio-right{
+	margin-left: 10px;
+	margin-right: 0px;
+}
+
+.Ctext input[type=text], .Ctext input[type=file], .Ctext input[type=password], .Ctext textarea{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 150px;
+}
+
+#CompNameID {
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 150px;
+}
+
+#CompTime {
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 150px;
+}
+
+.Cbutton{
+	margin: 0px;
+	width: 130px;
+}
+
+#CSetupError{
+	height: 140px;
+	padding-bottom: 6px;
+	margin-top: -20px;
+	overflow: hidden;
+}
+
+.Cerror-bad{	
+	background: #E38686;
+	color: #000;
+	font-weight: normal;
+}
+
+.Cerror-good{	
+	background: #d3fba7;
+	color: #3c454b;
+	font-weight: normal;
+}
+
+.Cerror-normal{
+	background-color: #AAD67B;
+	color: #3c454b;
+	font-weight: normal;
+}
+
+/*      Comp Right
+/*_______________________*/
+#CompRight {
+	float: right;
+	width: 230px;
+	display: inline;
+}
+
+.Cselect{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding: 7px;
+	width: 200px;
+}
+
+/*      Comp Middle
+/*_______________________*/
+#CompMiddle h4 {
+	color: #32434f;
+	text-align: left;
+}
+
+#CTextArea {
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 440px;
+}
+
+#CBugArea{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	margin: 5px;
+	margin-bottom: 15px;
+	margin-top: 3px;
+	padding:7px;
+	width: 440px;
+}
+
+/*Also used in Problem Testing
+/*_______________________*/
+option.difficulty0{
+	background-color:#d3fba7;
+}
+option.difficulty1{
+	background-color:#f4f673;
+}
+option.difficulty2{
+	background-color:#ffd35c;
+}
+option.difficulty3{
+	background-color:#ff9453;
+}
+option.difficulty4{
+	background-color:#e7542c;
+}
+
+/*                Competition Selection
+/*____________________________________________________*/
+
+/*                   Team Management
+/*____________________________________________________*/
+
+/*    General Styles
+/*_______________________*/
+#MForm1 input[type=text], #MForm2 input[type=text], #MForm3 input[type=text], #MTeamName{
+	border:1px solid #afcb91;
+	background-color:#fff;
+	padding:7px;
+	width: 180px;
+}
+
+#MTeamName {
+	margin: 0 0 0 -15px;	
+}
+
+/*    Manage Main
+/*___________________*/
+#ManageMain {
+	width: 238px;
+	float: left;
+	clear: left;
+	padding:10px;
+}
+
+#ManageMain hr {
+	margin:10px 0 20px -10px; 	
+}
+
+#ManageMain h2 {
+	padding-bottom: 10px;	
+}
+
+/*    Manage Right
+/*___________________*/
+#ManageRight {
+	width: 720px;
+	float: left;
+	clear: right;
+	padding: 10px;
+}
+
+#MTeamTable{
+    padding: 0px 10px;
+}
+
+#MStudent1, #MStudent2, #MStudent3 {
+	width: 230px;
+	float: left;
+}
+
+/*                  Progress & Statistics
+/*____________________________________________________*/
+
+/*    General Styles
+/*_______________________*/
+#ProgressMain h2 {
+	padding: 20px;	
+}
+
+table.PTable{
+    background: #2f393f;
+    border: 1px solid #272e31;
+    width: 935px;
+	margin: 20px 0 0 0;
+}
+
+#PHeadTable{
+    text-align: center;
+}
+
+tr.PHeadRow{
+    color: #fff;
+}
+
+tr.PRow{
+    background: #d3fba7;
+}
+
+td.PTeamName{
+    /*No Style Needed At The Moment*/
+}
+
+td.PTeamMember{
+    width: 183px;
+}
+
+td.PStats{
+    text-align: center;
+    width: 138px;
+}
+
+/*                       Hints
+/*____________________________________________________*/
+
+/*    General Styles
+/*_______________________*/
+
+/*Custom Hints Header
+/*___________________*/
+#CustomHeader{
+	border-right: 9px solid #779853;
+	background-color: #d3fba7;
+    clear: left;
+    display: inline;
+    float: left;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;	
+	width: 440px;
+}
+
+#CustomHeader h2{
+	padding: 0 0 0 20px;	
+}
+
+/*Pre-Defined Hints Header
+/*_______________________*/
+#PreDefHeader{
+    display: inline;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 540px;
+}
+
+/*    Hints Left
+/*___________________*/
+#HintsLeft{
+	border-right: 9px solid #779853;
+    display: inline;
+    float: left;
+    margin: 0px;
+	padding: 0;
+    width: 440px;
+	height: 400px;
+	background-color: #d3fba7;
+}
+
+#HintsLeft hr{
+    border-left: none;
+    border-right: none;
+    height: 9px solid #779853;
+    margin: 0;
+    padding: 0;
+}
+
+#HintsLeft p{
+    margin: 0px;
+    padding: 20px 0 10px 20px;
+}
+
+#CustomHint{
+	border:1px solid #afcb91;
+    background: #fff;
+    height: 150px;
+	padding: 7px;
+    margin-top: 0px;
+    width: 400px;
+}
+
+/*    Hints Right
+/*___________________*/
+#HintsRight{
+      display: inline;
+      float: right;
+      margin: 0px;
+      padding: 0px;
+      padding-bottom: 20px;
+      width: 540px;}
+
+#HintsPreDefTop{
+      display: inline;
+      float: right;
+      margin: 0px;
+      padding: 0px;
+      width: 540px;}
+
+#HintsPreDefRight{
+    display: inline;
+	text-align: left;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 264px;}
+
+#HintsPreDefRight p{
+    margin: 0;
+    padding-bottom: 0px;
+    padding-top: 20px;}
+
+#HintsPreDefLeft{
+    display: inline;
+	text-align: left;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 264px;}
+
+#HintsPreDefLeft p{
+    margin: 0;
+    padding-bottom: 0px;
+    padding-top: 20px;
+}
+
+#HintsPreDefBottom{
+    display: inline;
+    float: right;
+    margin: 0px;
+    padding: 0px;
+    width: 540px;
+}
+
+#HintsPreDefBottom p{
+    margin: 0;
+    padding-bottom: 0px;
+	padding-top: 20px;
+}
+	  
+.Hselect{
 	background: #fff;
 	border:1px solid #afcb91;
     margin: 0px;
     padding: 7px;
-    width:80%;
-    height:50%;
-    padding-right: 100px;
+    width: 180px;
 }
 
+/*                    Problem Upload
+/*____________________________________________________*/
+
+/*    General Styles
+/*_______________________*/
 #file {
 	border: 2px solid #779853;
 	background-color:#fffded;
@@ -1491,13 +1576,10 @@ a.button:hover p{
 	width: 220px; 
 }
 
-#CP_Upload {
-	background: url('../Images/uploadProblemBtn.png') no-repeat;
-	width: 224px;
-	height: 70px;
-	font-size: 1px;
-	color: #f3e483;
-	border: none;
-	cursor: pointer;
-	margin: 20px 10px;
-}
+/*   Problem Testing (Uses Styles From Student.html)
+/*____________________________________________________*/
+
+
+/*____________________________________________________*/
+
+
