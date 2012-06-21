@@ -544,24 +544,10 @@ function setEditable(studPos)//Find Code ---------- TM1001
 //which can found under select a team in Team Management.
 function loadTeamNameList()//Find Code ---------- TM1002
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlloadTeamNameListhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlloadTeamNameListhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlloadTeamNameListhttp.onreadystatechange=function()
-  {
-    if (xmlloadTeamNameListhttp.readyState==4 && xmlloadTeamNameListhttp.status==200)
-    {
+    $.ajax({url: "ManageContent/loadTeamNames.php", success:function(result){
 
-        document.getElementById("MTeamList").innerHTML=xmlloadTeamNameListhttp.responseText;
-    }
-  }
-  xmlloadTeamNameListhttp.open("GET","ManageContent/loadTeamNames.php",true);
-  xmlloadTeamNameListhttp.send();
+            $("#MTeamList").html(result);
+    }});  
 }
 
 //This function is referenced in AdminContentUpdate.js
@@ -614,24 +600,12 @@ function removeTeam()//Find Code ---------- TM1005
 		document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
 		return;
 	}
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		removeTeamXML=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		removeTeamXML=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	removeTeamXML.onreadystatechange=function()
-	{
-		if (removeTeamXML.readyState==4 && removeTeamXML.status==200)
-		{
-			loadTeamNameList();
-		}
-		
-	}
-		removeTeamhttp.open("GET","ManageContent/removeTeam.php?"+"&team=" + teamN,true);
-		removeTeamhttp.send();
+	
+        $.ajax({url: "ManageContent/removeTeam.php", data: "team=" + teamN, success:function(){
+                loadTeamNameList();
+        }});
+			
+	
 }
 
 //This function is called when there is no student in a position on a team
@@ -680,16 +654,17 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
   
   if (teamN=="")//If no team is currently selected
   {
-    document.getElementById("MTeamTitle").innerHTML="<p>Please select a team name.</p>";
+    $("#MTeamTitle").html("<p>Please select a team name.</p>");
     return;
   }
   else
   {
-    document.getElementById("MTeamTitle").innerHTML="Team "+teamN;//Places the team name below the Team Information heading in Team Management
+    $("#MTeamTitle").html("Team "+teamN);//Places the team name below the Team Information heading in Team Management
   }
 	
   var studPos;
   var studentPosNum = 1;
+  
   
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -725,7 +700,6 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
 					else
 					{
 						//alert(studentPosNum + " " + loadStudentsXML.responseText);
-					
 						
 						loadStudName(loadStudentsXML.responseText, studPos);
 						getUserName(loadStudentsXML.responseText, studentPosNum);
@@ -868,8 +842,9 @@ function getUserName(student, studentPosNum)//Find Code ---------- TM1011
 
       }
     }
-	
-	getUserNameXML[studentPosNum].open("GET","ManageContent/getStudentUserName.php?currStudent="+student,true);
+    
+    
+    getUserNameXML[studentPosNum].open("GET","ManageContent/getStudentUserName.php?currStudent="+student,true);
     getUserNameXML[studentPosNum].send();
 }
 

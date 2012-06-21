@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload='refreshMember(false)'>
+<body onload='refreshMember(false); loadComps(false); hideButton();'>
 
 <div id="headerSplash"></div>
 <div id="content" style="margin: 0 auto; width: 1000px;">
@@ -26,12 +26,21 @@
       <form id="TeamMember1" class="form">
       <div class="formHeader"><h3 class="formHeadText" id ="TeamName2">Team Name</h3></div>
       <fieldset>
-          <p>Teammates</p>
-          <div id="TMS"></div>
+          <div id="TeamMateDiv"><h2>Teammates</h2>
+                <div id="TMS"></div>
+          </div>
                 <a class="button" onClick="refreshMember(false);"><p>Refresh</p></a>
+                <a class="button" onClick="MemberLeaveTeam()"><p>Leave Team</p></a>
+
 
       </fieldset>
       </form>
+      <div id="Team-CompList">
+        <p id="smallerHeader" style="color:#000;">Available Competitions</p>
+        <div id="LandingCompSelect">Loading...</div>
+        <!--        <input type="submit" value="Refresh" >-->
+        <a class="button" onClick="loadComps(false)"><p>Refresh</p></a>
+      </div>
       
       <!--<form id="TeamMember2" class="form">
       <div class="formHeader"><h3 class="formHeadText">Teammate #2</h3></div>
@@ -44,18 +53,22 @@
         <p id="TMandC6"></p>
       </fieldset>
       </form>-->
-      <a class="button" onClick="MemberLeaveTeam()"><p>Leave Team</p></a>
         
     </div><!--end LVM-Left-->
     
-    <div id="LVM-Right" class="LV-Right"> <!--style="float: left; widht:600px; margin: 30px 0 0 50px;">-->
+    <div id="LVM-Right" class="LV-Right"> <!--style="float: left; width:600px; margin: 30px 0 0 50px;">-->
       
+        <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
       <div id="Landing-CompInfo">
         <p id="smallerHeader" style="color:#000;">Competition Information</p>
-        <div><textarea rows="10" cols="30" id="LVM-CompInfo"></textarea></div>
+        <div><textarea rows="10" cols="30" id="displayInfo"></textarea></div>
+        <p> Password: <input name="CompPassword" id="CompPassword" class="Ctext" /></p>
+
         <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
-        <a class="button" onClick="refreshCompInfo()"><p>Refresh</p></a>
+             <a class="button" onClick="joinComp()"><p>Join Competition</p></a>
       </div>
+       
+
     </div><!--end LVM-Right-->
   </div><!--end LandingView-Member-->
 
