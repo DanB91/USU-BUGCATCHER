@@ -6,11 +6,17 @@ require_once "../header.php";
 session_start();
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
+$isCaptain = trim($_POST['isCaptn']);
 
 if ($team != NULL) {
     if ($user != NULL) {
-	$compArray = Competition::getJoinableCompetitions();
-
+        if ($isCaptain == false){
+            $compArray = Competition::getJoinableCompetitions();
+        }
+        else{
+            $compArray = $team->getCompetitions();
+        }
+        
         $content = "<select size='15' onclick='showCompInfo(this.value)' style='width:150px;'>";
         $competitions = array();
         foreach ($compArray as $value) {

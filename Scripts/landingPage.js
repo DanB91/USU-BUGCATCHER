@@ -1,11 +1,15 @@
 var compSelected;
 
+function hideButton()
+{
+    $("#joinbutton").hide();
+}
 
 //Pre-Conditions:
 //Post-Conditions:
-function loadComps()
+function loadComps(isCaptn)
 {
-    $.post('StudentContent/loadAvailComps.php', "", 
+    $.post('StudentContent/loadAvailComps.php', "isCaptn="+isCaptn, 
         function(html){
             $("#LandingCompSelect").html(html);
             compSelected = "";
@@ -81,6 +85,8 @@ function mSetCookie(c_name,value,exdays)
     document.cookie=c_name + "=" + c_value;
 }
 
+
+
 //Pre-Conditions:
 //Post-Conditions:
 function getCompInfo()
@@ -135,7 +141,6 @@ function getCompInfo()
               coverage="Yes";
             }
             displayOutput += "\nCode Coverage Allowed: " + coverage;
-            document.getElementById('displayInfo').value = displayOutput;
             break;
           case 4:
             var password = getCompInfoXML.responseText;
@@ -149,6 +154,7 @@ function getCompInfo()
                 $("#CompPassword").val("");
                 $("#CompPassword").attr("disabled", false);    
             }
+            $('#displayInfo').val(displayOutput);
             break;
           default:
             break;
