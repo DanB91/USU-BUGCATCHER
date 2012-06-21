@@ -91,4 +91,18 @@ function getRemainingTime($obj)
         echo "stop";
 }
 
+
+function hasFinished($obj)
+{
+    $timeStampSecs = strtotime($obj->starttime);
+    $durationSecs = ($obj->duration) * 60;
+    $currTimeSecs = strtotime(date("Y-m-d H:i:s"));
+    
+    if($timeStampSecs + $durationSecs > $currTimeSecs)
+        return true;
+    else
+        return false;
+}
+
+
 ?>
