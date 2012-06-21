@@ -27,8 +27,8 @@
                                 <td Class="Pstats"><?php  
                             //Display the time of last bug found
                             $currentTime = $stats[$counter - 1]['lastTimeBugFound'];
-                            $currentTime = substr($currentTime, -8);
-                            
+                            //$currentTime = substr($currentTime, -8);
+                            $currentTime = date("g:i:s a", strtotime($currentTime));
                             echo $currentTime;
 
                                                                          ?></td>
