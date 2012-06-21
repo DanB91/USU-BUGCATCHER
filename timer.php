@@ -25,6 +25,8 @@ function diffTime($time1, $time2)
     
 }
 
+//Precondition: Must provide a valid competition object
+//Postcondition: Returns the remaining time in i:s format
 function getRemainingTime($obj)
 {
     $duration = $obj->duration;
@@ -91,7 +93,8 @@ function getRemainingTime($obj)
         echo "stop";
 }
 
-
+//Precondition: Must provide a valid competition object
+//Postcondition: Returns true if the competition has concluded false otherwise
 function hasFinished($obj)
 {
     $timeStampSecs = strtotime($obj->starttime);
@@ -99,9 +102,9 @@ function hasFinished($obj)
     $currTimeSecs = strtotime(date("Y-m-d H:i:s"));
     
     if($timeStampSecs + $durationSecs > $currTimeSecs)
-        return true;
-    else
         return false;
+    else
+        return true;
 }
 
 
