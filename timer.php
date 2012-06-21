@@ -1,6 +1,6 @@
 <?php
-//Precondition: Takes two time stamps for the format H:i:s 
-//Postcondition: Calculates the difference between the two time stamps and returns
+//Precondition: Takes two time stamps 
+//Postcondition: Pulls out the H:i:s and calculates the difference between the two time stamps and returns
 //in the format of i:s where i can be > 60 if hours > 0
 function diffTime($time1, $time2)
 {
@@ -9,12 +9,12 @@ function diffTime($time1, $time2)
     $elapsedMins = '';
     $elapsedSecs = '';
     
-    $time1 = explode(":", $time1);
+    //Incase the time is given in something other than H:i:s
+    $time1 = substr($time1, -8);
+    $time2 = substr($time2, -8);
     
-    $time2 = explode(":", $time2);
-    
-    $time1Secs = $time1[0] * 3600 + $time1[1] * 60 + $time1[2];
-    $time2Secs = $time2[0] * 3600 + $time2[1] * 60 + $time2[2];
+    $time1Secs = strtotime($time1);
+    $time2Secs = strtotime($time2); 
     
     $elapsedSecs2 = $time1Secs - $time2Secs;
     
@@ -25,6 +25,8 @@ function diffTime($time1, $time2)
     
 }
 
+//Precondition: Must provide a valid competition object
+//Postcondition: Returns the remaining time in i:s format
 function getRemainingTime($obj)
 {
     $duration = $obj->duration;
@@ -35,7 +37,7 @@ function getRemainingTime($obj)
     $currentTime = date("H:i:s");
     $currentTime = substr($currentTime, -8);
     
-    if($obj->hasfinish == 0)
+    if(!hasFinished($obj))
     {
         if($obj->starttime !== '0000-00-00 00:00:00')
         {
@@ -91,7 +93,8 @@ function getRemainingTime($obj)
         echo "stop";
 }
 
-
+//Precondition: Must provide a valid competition object
+//Postcondition: Returns true if the competition has concluded false otherwise
 function hasFinished($obj)
 {
     $timeStampSecs = strtotime($obj->starttime);
@@ -99,9 +102,9 @@ function hasFinished($obj)
     $currTimeSecs = strtotime(date("Y-m-d H:i:s"));
     
     if($timeStampSecs + $durationSecs > $currTimeSecs)
-        return true;
-    else
         return false;
+    else
+        return true;
 }
 
 
