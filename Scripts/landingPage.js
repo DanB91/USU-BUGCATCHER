@@ -93,7 +93,10 @@ function getCompInfo()
 {
   var loopCount = 1;
   var displayOutput = "";
-         
+  
+  if (!compSelected)
+      return;
+  
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     getCompInfoXML=new XMLHttpRequest();
