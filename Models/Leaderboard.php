@@ -17,7 +17,7 @@ class Leaderboard {
     private $teamsStats;
     
     
-    public function __construct(Competiton $competition) {
+    public function __construct(Competition $competition) {
         $this->competition = $competition;
         
         $this->load();
@@ -43,7 +43,7 @@ class Leaderboard {
         $teamStats = array();
         
         $connection = connectToDB();
-        $sql = 'select TEAMS.teamname, count(TEAM_FOUND_BUG.bugid) as bugsfound, max(TEAM_FOUND_BUG.timestamp) as latest'.
+        $sql = 'select TEAMS.teamname, count(TEAM_FOUND_BUG.bugid) as bugsfound, max(TEAM_FOUND_BUG.timesolved) as latest'.
                 ' from TEAM_FOUND_BUG inner join TEAMS on TEAM_FOUND_BUG.teamid = TEAMS.teamid where compid = '. 
                 $this->competition->getPrimaryKeyValue() .' group by TEAM_FOUND_BUG.teamid order by bugsfound desc, latest asc';
         
