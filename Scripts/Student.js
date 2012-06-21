@@ -446,6 +446,7 @@ function hasCompStarted()//Find Code ---------- C1001
                 $("#testforBug").attr("disable", true);
                 $("#testInput").attr("disable", true);
                 $("#testOutput").attr("disable", true);
+		$("#ProblemCode").html ("The competition has not yet started.");
             }
         });
 }
