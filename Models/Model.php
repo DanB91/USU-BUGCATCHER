@@ -148,6 +148,15 @@ abstract class Model {
 	
         return $result;
     }
+    
+    public function update()
+    {
+        $this->connection = connectToDB();
+        $this->values = array();
+        $this->types = array();
+        $this->load();
+        
+    }
 
     
     

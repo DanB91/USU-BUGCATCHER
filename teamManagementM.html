@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload=''>
+<body onload='refreshMember(false)'>
 
 <div id="headerSplash"></div>
 <div id="content" style="margin: 0 auto; width: 1000px;">
@@ -24,18 +24,16 @@
     <div id="LVM-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
         
       <form id="TeamMember1" class="form">
-      <div class="formHeader"><h3 class="formHeadText">Teammate #1 (captain)</h3></div>
+      <div class="formHeader"><h3 class="formHeadText" id ="TeamName2">Team Name</h3></div>
       <fieldset>
-        <p>Username</p>
-        <p id="TMandC1"></p>
-        <p>First Name</p>
-        <p id="TMandC2"></p>
-        <p>Last Name</p>
-        <p id="TMandC3"></p>
+          <p>Teammates</p>
+          <div id="TMS"></div>
+                <a class="button" onClick="refreshMember(false);"><p>Refresh</p></a>
+
       </fieldset>
       </form>
       
-      <form id="TeamMember2" class="form">
+      <!--<form id="TeamMember2" class="form">
       <div class="formHeader"><h3 class="formHeadText">Teammate #2</h3></div>
       <fieldset>
         <p>Username</p>
@@ -45,9 +43,8 @@
         <p>Last Name</p>
         <p id="TMandC6"></p>
       </fieldset>
-      </form>
-      <a class="button" onClick="refreshMember1();"><p>Refresh</p></a>
-      <a class="button" onClick="MemberLeaveTeam(); loadTeamInvites();"><p>Leave Team</p></a>
+      </form>-->
+      <a class="button" onClick="MemberLeaveTeam()"><p>Leave Team</p></a>
         
     </div><!--end LVM-Left-->
     

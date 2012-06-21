@@ -26,7 +26,7 @@ if (isset($_SESSION['userObject']) && ($user != NULL)) {
             $user->sendTeamInviteToUser($team, $invitee1);
         }
         if ($invite2 != ''){
-            $invitee2 = new User($invite1, "username");
+            $invitee2 = new User($invite2, "username");
             $user->sendTeamInviteToUser($team, $invitee2);           
         }
         

@@ -3,19 +3,17 @@
 //If code coverage is not allowed, then the radio buttons are disabled
 //0 indicates that the students are not allowed to use code coverage
 //1 indicates that code coverage is allowed
+require_once "../header.php";
+session_start();
+$comp = $_SESSION['compObject'];
 
-$compID = $_COOKIE['compID'];
-$codeCovState = 2;
-
-if(isset($_COOKIE['compID']) && $_COOKIE['compID'] != '')//If the competition has been created
+if($comp->compid)//If the competition has been created
 {
-	$comp = new Competition($compID);//open the file as an array
-
-	if($comp->codeCov)
+	if($comp->codeCoverage)
 		echo "SET";
 	else
 		echo "NOTSET";
-	}
+}
 else 
 	echo "You must be part of a competition to use code coverage";
 

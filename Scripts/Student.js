@@ -93,13 +93,13 @@ function instantMessaging(message)//Find Code ---------- G1003
 //Postcondition: Recieves the team content file and displays the contents
 function recieve()//Find Code ---------- G1004
 {
-        $.post('StudentContent/recieve.php', "string="+message, 
+        $.ajax({type: "GET", url:"StudentContent/recieve.php", success:
         function(html){
             		var arr = JSON.parse(html);
-			$("#ResultsList").html(format(arr));
+			$("#ResultsList").html(arr[0]);//format(arr));
 			if(doScrollDown)
 				scrollResultsDown();
-        });
+        }});
 }
 
 
@@ -302,12 +302,13 @@ function showProblemsList()
 function getReqAndProb(index, cov)//Find Code ---------- PR1001
 {
 
-	//alert(probNames[index]);
-	getProb(probNames[index], cov, index);
-	getReq(probNames[index], index);
-	currProblem = probNames[index];
-	coverage = 0;//cov;
-	currIndex = index;
+	if(index){
+	    getProb(probNames[index], cov, index);
+	    getReq(probNames[index], index);
+	    currProblem = probNames[index];
+	    coverage = 0;//cov;
+	    currIndex = index;
+	}
 }
 
 //This function is called in the function getReqAndProb look up 
@@ -466,14 +467,12 @@ function checkCompFinished()//Find Code ---------- C1003
         function(html){	
             if(html.trim() == 0)
             {
-                //alert("The admin has disabled code coverage");
                 $("#testforBug").attr("disable", false);
                 $("#testInput").attr("disable", false);
                 $("#testOutput").attr("disable", false);
             }
             else
             {
-                //alert(checkCompFinishedXml.responseText);
                 $("#testforBug").attr("disable", true);
                 $("#testInput").attr("disable", true);
                 $("#testOutput").attr("disable", true);
@@ -504,7 +503,7 @@ function initialize()//Find Code ---------- I1000
 {
 	loadStudentProblems();
 	setCodeCoverageState();
-	prettyPrint();
+	//prettyPrint();
 	t6 = setInterval(getBugs, 1000);
 	createStudentTimer();
 	t5 = setInterval(getWinningTeams, 6000);

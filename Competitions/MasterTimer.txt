@@ -1,0 +1,1 @@
+0Error: [2] session_start() [<a href=\'function.session-start\'>function.session-start</a>]: Cannot send session cache limiter - headers already sent (output started at /Users/admin/NetBeansProjects/USU-BUGCATCHER/AdminCompContent/getMasterTime.php:20NaN
