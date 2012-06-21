@@ -122,6 +122,7 @@ function getCompInfo()
             break;
           case 3:
             var coverage = getCompInfoXML.responseText;
+            loopCount++
             if (coverage == 0)
             {
               coverage="No";
@@ -132,6 +133,14 @@ function getCompInfo()
             }
             displayOutput += "\nCode Coverage Allowed: " + coverage;
             document.getElementById('displayInfo').value = displayOutput;
+            break;
+          case 4:
+            var password = getCompInfoXML.responseText;
+            if (password == 0)
+            {
+                $("#CompPassword").val("N/A");
+                $("#CompPassword").attr(disabled, true);
+            }
             break;
           default:
             break;

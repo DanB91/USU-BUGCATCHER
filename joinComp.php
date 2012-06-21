@@ -12,8 +12,8 @@ try{
     $team->addTeamToCompetition($comp);
     echo 1;
 }
-catch(ModelAlreadyExistsException $e){
-    echo $e;
+catch(BugCatcherException $e){
+    echo 1;
 }
 
 ?>
