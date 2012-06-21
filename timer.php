@@ -101,7 +101,8 @@ function hasFinished($obj)
     $durationSecs = ($obj->duration) * 60;
     $currTimeSecs = strtotime(date("Y-m-d H:i:s"));
     
-    if($timeStampSecs + $durationSecs > $currTimeSecs)
+	
+    if(($timeStampSecs + $durationSecs > $currTimeSecs) || $obj->starttime=="0000-00-00 00:00:00")
         return false;
     else
         return true;
