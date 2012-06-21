@@ -16,7 +16,8 @@ function loadComps()
 //Post-Conditions:
 function joinComp()
 {
-    $.ajax({ type:"GET", url:'joinComp.php', data:"compS="+compSelected, 
+    var password = $("#CompPassword").val();
+    $.ajax({ type:"POST", url:'joinComp.php', data:"compS="+compSelected+"&pword="+password, 
         success: function(html){
 
             var t = html.trim();
@@ -96,7 +97,7 @@ function getCompInfo()
     getCompInfoXML=new ActiveXObject("Microsoft.XMLHTTP");
   }
   
-  getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+3,true)
+  getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+0,true)
   getCompInfoXML.send();
   
   getCompInfoXML.onreadystatechange=function()
@@ -110,7 +111,7 @@ function getCompInfo()
             displayOutput += "Competition ID: " + compSelected;
             displayOutput += "\n\nCompetition Length: " + mins + " mins\n";
             loopCount++;
-            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+0,true)
+            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+1,true)
             getCompInfoXML.send();
             break;
           case 2:
@@ -123,6 +124,8 @@ function getCompInfo()
           case 3:
             var coverage = getCompInfoXML.responseText;
             loopCount++
+            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+3,true)
+            getCompInfoXML.send();
             if (coverage == 0)
             {
               coverage="No";
@@ -139,7 +142,12 @@ function getCompInfo()
             if (password == 0)
             {
                 $("#CompPassword").val("N/A");
-                $("#CompPassword").attr(disabled, true);
+                $("#CompPassword").attr("disabled", true);
+            }
+            else
+            {
+                $("#CompPassword").val("");
+                $("#CompPassword").attr("disabled", false);    
             }
             break;
           default:
@@ -157,8 +165,8 @@ function showCompInfo(str,page)
   getCompInfo();
 }
 
-//refreshMember1 and 2 display the information about other team members on refresh.
-//refreshMember1 displays them for a regular user
+//refreshMember displays the information about other team members on refresh.
+//it takes a boolean to determine if the team member is the captain, so that information can be displayed as well.
 function refreshMember(isCapt)
 {
             $.post('StudentContent/teamName.php', "", 
@@ -172,7 +180,6 @@ function refreshMember(isCapt)
         });
 }
 
-//refreshMember2 displays them for the team captain.
 //function refreshMember2()
 //{
 //        $.post('StudentContent/teamName.php', "", 

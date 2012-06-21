@@ -1,20 +1,21 @@
 <?php
-$fileLineNumber = $_GET['fileLine'];
+require_once "../header.php";
+$compInfoNumber = $_GET['fileLine'];
 $compID = $_GET['compID'];
 $comp = new Competition($compID);
 
-switch ($fileLineNumber)
+switch ($compInfoNumber)
 {
-    case 1: 
+    case 0: 
         echo $comp->duration;
         break;
-    case 2:
+    case 1:
         echo $comp->getNumProblems();
         break;
-    case 3:
+    case 2:
         echo $comp->codecoverage;
         break;
-    case 4:
+    case 3:
         if ($comp->password == NULL)
             echo 0;
         else
