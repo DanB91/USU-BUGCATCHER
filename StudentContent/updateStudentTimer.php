@@ -1,16 +1,14 @@
- <?php
+<?php
+require_once "../timer.php";
+require_once "../header.php";
+ 
+session_start();
+$comp = $_SESSION['compObject'];
 
-
-
-//Gets the competition ID from the user's cookies
-$comp = $_COOKIE['compID'];
-
-//Opens the file containing the master time of the competition and sends that time to the students
-if(file_exists("../Competitions/${comp}/".$comp."MasterTimer.txt"))
-{
-    $masterTimer = file("../Competitions/${comp}/".$comp."MasterTimer.txt");
-    echo $masterTimer[0];
+if($comp!=NULL){
+    echo getRemainingTime($comp);
 }
 else
-    echo "Timer failed to load 000";
+    echo "You must be in a competition";
+
 ?>

@@ -25,6 +25,14 @@ class Competition extends Model{
 	return $arr;
     }
     
+    public function getNumProblems(){
+	return count($this->problemids);
+    }
+    
+    public function getNumTeams(){
+	return count($this->teamids);
+    }
+    
     public function getTeams()
     {
         $retArray = array();

@@ -1,5 +1,6 @@
 <?php
 require 'Models/Competition.php';
+include 'timer.php';
 $compID = $_GET['compID'];
 $CompOject = new Competition($compID);
 echo "<table border='5'>";
@@ -25,8 +26,8 @@ else{echo "No </td></tr>";}
 
 
 echo "<tr><td>Joinable</td><td>";
-if($CompOject->joinable){echo "Yes</td></tr>";}
-else{echo "No </td></tr>";}
+if($CompOject->notjoinable){echo "No</td></tr>";}
+else{echo "Yes </td></tr>";}
 
 echo "<tr><td>Coundown on</td><td>";
 if($CompOject->countdown){echo "Yes</td></tr>";}
@@ -40,7 +41,7 @@ else{echo "No </td></tr>";}
 
 
 echo "<tr><td>Finish</td><td>";
-if($CompOject->hasfinish){echo "Yes</td></tr>";}
+if(hasFinished($CompOject)){echo "Yes</td></tr>";}
 else{echo "No </td></tr>";}
 
 

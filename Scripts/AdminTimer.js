@@ -36,20 +36,22 @@ function startTimerOnRefresh()
 {
     
     $.ajax({url: "AdminCompContent/getPauseState.php", success:function(result){
-
-        if(result != "paused")
-        {
-            adminTimer = setInterval(function() {countdown();},1000);
-            document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
-            STOPPED = false;
-            PAUSED = false;
-        }
-        else
-        {
-            PAUSED = true;
-            document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
-        }
-    } }); 
+            $.ajax({url: "AdminCompContent/getStartedState.php", success:function(result2){
+                    
+                if(result != "paused" && result2 == "started")
+                {
+                    adminTimer = setInterval(function() {countdown();},1000);
+                    document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
+                    STOPPED = false;
+                    PAUSED = false;
+                }
+                else
+                {
+                    PAUSED = true;
+                    document.getElementById('header-controls').innerHTML = '<img title="Start Competition" src="Images/start.png" height="79" width="107" onclick=startCompetition(); />';
+                }
+            }});
+        }}); 
         
      
 }
@@ -89,7 +91,7 @@ function countdown()
     minutes = 0;
     seconds = 0;
     document.getElementById('header-timer').innerHTML="STOP!";
-    stopCompetition();
+    
   }
   else
   {

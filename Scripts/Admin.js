@@ -109,32 +109,6 @@ function startCompetition() //Find Code ---------- CS1001
 
 }
 
-function stopCompetition()
-{
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlstopCompetition=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlstopCompetition=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlstopCompetition.onreadystatechange=function()
-  {
-    if (xmlstopCompetition.readyState == 4 && xmlstopCompetition.status == 200)
-    {
-        //Need to write a new countdown function
-        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />';
-        //alert(xmlstartCompetitionhttp.responseText);
-        
-    }
-  }
-  //Don't start competition until the countdown timer reaches zero.
-
-  xmlstopCompetition.open("GET","AdminCompContent/StopCompetition.php",true)
-  xmlstopCompetition.send();
-}
 
 function refreshProbList()
 {
@@ -246,7 +220,7 @@ function popProbSelectBox()//Find Code ---------- CS1003
     
     $.ajax({type: "GET", url: "AdminCompContent/loadProblems.php", success:function(result){
 
-            
+
             availableProbs = eval(result);
             var index = availableProbs.indexOf(".");
             availableProbs.splice(index, 1);
@@ -410,7 +384,30 @@ function moveProbDown(problem)//Find Code ---------- CS1010
    addedProbs[index + 1] = problem;
    refreshProbList();
 }
+// This is Javascript, not PHP!
 
+function js_array_to_php_array(a)
+{
+    var a_php = "";
+    var total = 0;
+    for (var key in a)
+    {
+        ++ total;
+        a_php = a_php + "s:" +
+                String(key).length + ":\"" + String(key) + "\";s:" +
+                String(a[key]).length + ":\"" + String(a[key]) + "\";";
+    }
+    a_php = "a:" + total + ":{" + a_php + "}";
+    return a_php;
+}
+
+function setCookie(c_name,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=c_name + "=" + c_value;
+}
 function createCompetition()//Find Code ---------- CS1011
 {
 
@@ -483,28 +480,37 @@ function createCompetition()//Find Code ---------- CS1011
   
   
   
-   
+
+ 
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
-        
-        compSetTimeM = TimeVal;
-        
-        compSetTime = TimeVal;
-        if (CountdownVal)
-        	compSetTimeS = 10;
-        else 
-        	compSetTimeS = 0;
-        Time.value = '';
-        //setCompCookies();
-        createTimer();
-        stopTimer();
-        $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
+        //alert(result);
+        if(result == "")
+        {
+            compSetTimeM = TimeVal;
+
+            compSetTime = TimeVal;
+            if (CountdownVal)
+                    compSetTimeS = 10;
+            else 
+                    compSetTimeS = 0;
+            Time.value = '';
+            //setCompCookies();
+            createTimer();
+            stopTimer();
+            $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
+            $("#header-timer").html(TimeVal +":00");
+        }
+        else
+        {
+             $("#CSetupError").html("Competition name already exists.");
+        }
 
         
     }});
 
 
-    $("#header-timer").html(TimeVal +":00");
+    
 
 }
 
@@ -1248,7 +1254,7 @@ function getMasterTime()//Find Code ---------- USC1002
                     seconds = time.substring(time.length-2,time.length);
                     minutes = time.substring(0,time.length-2);
                     document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
-                     startTimerOnRefresh(); 
+                    startTimerOnRefresh(); 
             }
             else
             {

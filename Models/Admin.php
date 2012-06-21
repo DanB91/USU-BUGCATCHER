@@ -25,7 +25,7 @@ class Admin extends Model{
      * @param array $problems problems to add to Competition, must be problem objects!
      * @return Competition the competition object
      */
-    public function createCompetition(array $data, array $problems)
+    public function createCompetition(array $data, array $problems = NULL)
     {
         foreach($data as $fieldName => &$value)
         {
@@ -49,9 +49,10 @@ class Admin extends Model{
         
         $newComp = new Competition($data['compname'], 'compname');
         
-        foreach($problems as $problem)
-        {
-            $problem->addProblemToCompetition($newComp);
+        if ($problems) {
+            foreach ($problems as $problem) {
+                $problem->addProblemToCompetition($newComp);
+            }
         }
         
         return $newComp;
