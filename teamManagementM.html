@@ -25,7 +25,11 @@
         
       <form id="TeamMember1" class="form">
       <div class="formHeader"><h3 class="formHeadText" id ="TeamName2">Team Name</h3></div>
-      <fieldset id="TMS">
+      <fieldset>
+          <p>Teammates</p>
+          <div id="TMS"></div>
+                <a class="button" onClick="refreshMember(false);"><p>Refresh</p></a>
+
       </fieldset>
       </form>
       
@@ -40,7 +44,6 @@
         <p id="TMandC6"></p>
       </fieldset>
       </form>-->
-      <a class="button" onClick="refreshMember(false);"><p>Refresh</p></a>
       <a class="button" onClick="MemberLeaveTeam()"><p>Leave Team</p></a>
         
     </div><!--end LVM-Left-->
