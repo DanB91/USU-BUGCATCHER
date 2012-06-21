@@ -1,9 +1,14 @@
- <?php
- /*require_once "../header.php";
+<?php
+require_once "../timer.php";
+require_once "../header.php";
  
 session_start();
-$comp = $_SESSION['compObject'];*/
+$comp = $_SESSION['compObject'];
 
-//do stuff with aaron's code
-echo 3000;
+if($comp!=NULL){
+    echo getRemainingTime($comp);
+}
+else
+    echo "You must be in a competition";
+
 ?>

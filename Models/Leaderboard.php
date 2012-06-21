@@ -52,7 +52,7 @@ class Leaderboard {
         if(!$result = $connection->query($sql))
                throw new BugCatcherException('Query Failed: ' . $connection->error);
         
-        
+        $count=1;
         while(($row = $result->fetch_assoc()))
         {
             $teamStats['teamName'] = $row['teamname'];
@@ -60,6 +60,9 @@ class Leaderboard {
             $teamStats['lastTimeBugFound'] = $row['latest'];
             
             $this->teamsStats[] = $teamStats;
+	    echo "loading row ".$count;
+	    var_dump($row);
+	    $count++;
            
         }
         
