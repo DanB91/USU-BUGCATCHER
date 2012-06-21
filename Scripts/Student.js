@@ -446,6 +446,7 @@ function hasCompStarted()//Find Code ---------- C1001
                 $("#testforBug").attr("disable", true);
                 $("#testInput").attr("disable", true);
                 $("#testOutput").attr("disable", true);
+		$("#ProblemCode").html ("The competition has not yet started.");
             }
         });
 }
@@ -464,7 +465,7 @@ function playCountAni()
 function checkCompFinished()//Find Code ---------- C1003
 {
     $.post('StudentContent/hasCompFinished.php', "", 
-        function(html){	
+        function(html){
             if(html.trim() == 0)
             {
                 $("#testforBug").attr("disable", false);

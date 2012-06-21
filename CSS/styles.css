@@ -1370,6 +1370,11 @@ option.difficulty4{
 	padding-bottom: 10px;	
 }
 
+#TeamMateDiv {
+        padding-top:10px;
+        padding-left:20px;
+}
+
 /*    Manage Right
 /*___________________*/
 #ManageRight {

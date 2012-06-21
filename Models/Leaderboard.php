@@ -55,7 +55,7 @@ class Leaderboard {
         
         while(($row = $result->fetch_assoc()))
         {
-            $teamStats['teamName'] = $row['TEAMS.teamname'];
+            $teamStats['teamName'] = $row['teamname'];
             $teamStats['bugsFound'] = $row['bugsfound'];
             $teamStats['lastTimeBugFound'] = $row['latest'];
             
