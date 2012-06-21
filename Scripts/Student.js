@@ -1,13 +1,11 @@
 /* 
    Table of Contents
    1.	Global Variables ---------- GV1000
-   1.1 hasFinished			  ---------- GV1001
    1.2 currProblem		      ---------- GV1002
    1.3 coverage			  ---------- GV1003
    1.4 prevFound			  ---------- GV1004
    1.5 t1					  ---------- GV1005
    1.7 t3					  ---------- GV1007
-   1.8 t4				      ---------- GV1008
    1.9 pingCount		      ---------- GV1009
    2.  General 		---------- G1000 
    2.1 getWinningTeams		  ---------- G1001
@@ -35,7 +33,6 @@
 //                                         Global Variables GV1000                                   //
 //###################################################################################################//
 
-var hasFinished = 0;  //Find Code ---------- GV1001
 
 //Problems and requirements
 var currProblem = ''; //Find Code ---------- GV1002
@@ -47,7 +44,6 @@ var prevFound = 0;	  //Find Code ---------- GV1004
 //Competition
 var t1;		 		  //Find Code ---------- GV1005
 var t3;				  //Find Code ---------- GV1007
-var t4;			      //Find Code ---------- GV1008
 
 var PopUpShowingClass = "";
 
@@ -318,15 +314,7 @@ function getReq(str, index)//Find Code ---------- PR1002
 {
     $.post('StudentContent/showCodeReq.php', "problem="+str + "&index=" + index, 
         function(html){
-            if(hasFinished == 0)
-            {
-                $("#RequirementsList").html(html);
-            }
-            else
-            {
-                $("#RequirementsList").html("This competition has concluded");
-            }
-
+             $("#RequirementsList").html(html);
         });
 }
 
@@ -338,17 +326,9 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
     
     $.post('StudentContent/showCode.php', "problem="+currProblem+"&coverage="+coverage + "&index=" + currIndex, 
         function(html){
-        
-            if(hasFinished == 0)
-            {
-                $("#ProblemCode").html("<pre class='prettyprint lang-java linenums'>"+html+"</pre>");
-                prettyPrint();
-                getToolTip(currProblem);
-            }
-            else
-            {
-                $("#ProblemCode").html("This competition has concluded");
-            }
+	    $("#ProblemCode").html("<pre class='prettyprint lang-java linenums'>"+html+"</pre>");
+	    prettyPrint();
+	    getToolTip(currProblem);
         });
 	
 }
@@ -435,17 +415,17 @@ function hasCompStarted()//Find Code ---------- C1001
                 }
                 else
                 {
-                    $("#testforBug").attr("disable", false);
-                    $("#testInput").attr("disable", false);
-                    $("#testOutput").attr("disable", false);
+                    $("#testforBug").attr("disabled", false);
+                    $("#testInput").attr("disabled", false);
+                    $("#testOutput").attr("disabled", false);
                     $("#ProblemCode").html ("The competition has started please select a problem.");
                 }
             }
             else
             {
-                $("#testforBug").attr("disable", true);
-                $("#testInput").attr("disable", true);
-                $("#testOutput").attr("disable", true);
+                $("#testforBug").attr("disabled", true);
+                $("#testInput").attr("disabled", true);
+                $("#testOutput").attr("disabled", true);
 		$("#ProblemCode").html ("The competition has not yet started.");
             }
         });
@@ -462,28 +442,17 @@ function playCountAni()
         });
 }
 
-function checkCompFinished()//Find Code ---------- C1003
+function compHasFinished()//Find Code ---------- C1003
 {
-    $.post('StudentContent/hasCompFinished.php', "", 
-        function(html){
-            if(html.trim() == 0)
-            {
-                $("#testforBug").attr("disable", false);
-                $("#testInput").attr("disable", false);
-                $("#testOutput").attr("disable", false);
-            }
-            else
-            {
-                $("#testforBug").attr("disable", true);
-                $("#testInput").attr("disable", true);
-                $("#testOutput").attr("disable", true);
-                clearInterval(t1);
-                clearInterval(t3);
-                $("#ResultsList").html("This competition has concluded");
-                hasFinished = 1;
-                getReqAndProb(currProblem, coverage);
-            }
-        });
+    $("#testforBug").attr("disabled", true);
+    $("#testInput").attr("disabled", true);
+    $("#testOutput").attr("disabled", true);
+    clearInterval(t1);
+    clearInterval(t3);
+    $("#ResultsList").html("This competition has concluded");
+    $("#RequirementsList").html("This competition has concluded");
+    $("#ProblemCode").html("This competition has concluded");
+    $("#timer").html("STOP!");
 }
 
 function changeOnLogID()
@@ -510,7 +479,6 @@ function initialize()//Find Code ---------- I1000
 	t5 = setInterval(getWinningTeams, 6000);
 	t3 = setInterval(recieve,1000);
 	t1 = setInterval(hasCompStarted, 2000);
-	checkCompFinished();
 	getAniState();
 	setInterval(getCurrentTeam, 15000);
         getCurrentTeam();

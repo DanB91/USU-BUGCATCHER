@@ -92,6 +92,17 @@ class Team extends Model {
     {
         return new User($this->teamleaderid);
     }
+    
+    public function getCompetitions()
+    {
+        $retArray = array();
+	
+        $data['teamid']=$this->getPrimaryKeyValue();
+        $result=$this->findInDB("TEAM_COMPETITION_LINK", $data);
+	while(($row = $result->fetch_assoc()))
+	    $retArray[] = new Competition ($row['compid']);
+	return $retArray;
+    }
 }
 
 
