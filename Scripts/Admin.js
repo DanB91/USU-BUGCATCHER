@@ -1,3 +1,4 @@
+
 /*
 Table of Contents
 	1.Global Variables    ---------- GV1000
@@ -126,7 +127,7 @@ function stopCompetition()
         //Need to write a new countdown function
         document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="50" width="50" onclick=pauseTimer(); />';
         //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();
+        
     }
   }
   //Don't start competition until the countdown timer reaches zero.
@@ -135,43 +136,40 @@ function stopCompetition()
   xmlstopCompetition.send();
 }
 
-function refreshProbList(){
-      var content = '<select name="ProblemsList" id="ProblemsListGet" class="Cselect" size="8" onchange="showProbPreview(this)">';
-      var difficulty;
-      var pSBD = new Array(); //problems sorted by difficulty
-             alert(availableProbs.length);
-      for(var i = 0; i < availableProbs.length; i++){
-      		   	if (window.XMLHttpRequest)
-  				{xmlGetDifficulty=new XMLHttpRequest();}
-  				else{xmlGetDifficulty=new ActiveXObject("Microsoft.XMLHTTP");}
- 			 	xmlGetDifficulty.onreadystatechange=function(){
-    				if (xmlGetDifficulty.readyState == 4 && xmlGetDifficulty.status == 200){
-    					difficulty = parseInt(xmlGetDifficulty.responseText);
-    					if(pSBD[difficulty] == undefined){pSBD[difficulty] = new Array();}
-    					pSBD[difficulty].push(availableProbs[i]);
-    					
-    					
-						//content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"'>" + availableProbs[i] + "</option>"; 
-    				}
-    				
-  				}
-  			xmlGetDifficulty.open("GET","AdminCompContent/getDifficulty.php?problem="+availableProbs[i],false);
-  			xmlGetDifficulty.send();
-  			
-
-  			
-      }
-      var diffStr = '';
-      for(var difficulty = 0; difficulty < pSBD.length; difficulty++)
-      {
-	if(pSBD[difficulty] == undefined)
-		continue;
+function refreshProbList()
+{
+    
+    var content = '<select name="ProblemsList" id="ProblemsListGet" class="Cselect" size="8" onchange="showProbPreview(this)">';
+    var difficulty;
+    var pSBD = new Array(); //problems sorted by difficulty
+    for(var i = 0; i < availableProbs.length; i++)
+    {
+        $.ajax({
+            url:"AdminCompContent/getDifficulty.php", 
+            data: {problem: availableProbs[i]},
+            async: false, 
+            success:function(result){    
+                
+                difficulty = parseInt(result);
+                if(pSBD[difficulty] == undefined)
+                {
+                    pSBD[difficulty] = new Array();
+                }
+                pSBD[difficulty].push(availableProbs[i]);
+            }
+        });			
+    }
+    var diffStr = '';
+    for(var difficulty = 0; difficulty < pSBD.length; difficulty++)
+    {
+        if(pSBD[difficulty] == undefined)
+            continue;
       
       	for(var prob = 0; prob < pSBD[difficulty].length; prob++)
       	{
       		switch(difficulty)
       		{
-      			case 0: 
+      			case 0:
       				diffStr = ' - Very Easy';
       				break;
       			case 1:
@@ -198,51 +196,45 @@ function refreshProbList(){
      
      content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
       
-     for(i = 0; i < addedProbs.length; i++)
-     {
-             	if (window.XMLHttpRequest)
-  				{// code for IE7+, Firefox, Chrome, Opera, Safari
-   					xmlGetDifficultyTwo=new XMLHttpRequest();
-  				}
-  				else
-  				{// code for IE6, IE5
-    				xmlGetDifficultyTwo=new ActiveXObject("Microsoft.XMLHTTP");
-  				}
-  
- 			 	xmlGetDifficultyTwo.onreadystatechange=function()
-  				{
-    				if (xmlGetDifficultyTwo.readyState == 4 && xmlGetDifficultyTwo.status == 200)
-    				{
-    					difficulty = parseInt(xmlGetDifficultyTwo.responseText); 
-  			    		var diffStr = '';
-    					switch (difficulty)
-    					{
-      						case 0: 
-      							diffStr = ' - Very Easy';
-      							break;
-      						case 1:
-								diffStr = ' - Easy';
-								break;
-      						case 2:
-      							diffStr = ' - Medium';
-								break;
-      						case 3:
-								diffStr = ' - Hard';
-      							break;
-      						case 4:
-      							diffStr = ' - Very Hard';
-      							break;    					
-    					}
-            			content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
-    				}
-  				}
-  			xmlGetDifficultyTwo.open("GET","AdminCompContent/getDifficulty.php?problem="+addedProbs[i],false);
-  			xmlGetDifficultyTwo.send();   
+    for(i = 0; i < addedProbs.length; i++)
+    {
+        $.ajax({
+            url:"AdminCompContent/getDifficulty.php", 
+            async: false, 
+            data: {problem: addedProbs[i]},
+            success:function(result){     
+              
+                difficulty = parseInt(result); 
+                  
+                var diffStr = '';
+                switch (difficulty)
+                {
+                    case 0:
+                        diffStr = ' - Very Easy';
+                        break;
+                    case 1:
+                        diffStr = ' - Easy';
+                        break;
+                    case 2:
+                        diffStr = ' - Medium';
+                        break;
+                    case 3:
+                        diffStr = ' - Hard';
+                        break;
+                    case 4:
+                        diffStr = ' - Very Hard';
+                        break;    					
+                }
+                content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
 
-      }
-      content += '</select>';
+            }
+        });
+
+
+    }
+    content += '</select>';
     
-     document.getElementById('SelectedProblems').innerHTML = content;
+    $('#SelectedProblems').html(content);
 }
 
 
@@ -251,38 +243,25 @@ function refreshProbList(){
 //Postcondition: Sets up files and does initial loading of problems available
 function popProbSelectBox()//Find Code ---------- CS1003
 {
-  
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlpopulateProbSelectBox=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlpopulateProbSelectBox=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlpopulateProbSelectBox.onreadystatechange=function()
-  {
-    if (xmlpopulateProbSelectBox.readyState == 4 && xmlpopulateProbSelectBox.status == 200)
-    {
-      availableProbs = eval(xmlpopulateProbSelectBox.responseText);
-      /*
-      var index = availableProbs.indexOf(".");
-          availableProbs.splice(index, 1);
-          index = availableProbs.indexOf("..");
-          availableProbs.splice(index, 1);
-          index = availableProbs.indexOf("index.html");
-          availableProbs.splice(index, 1);
-          */
-       document.getElementById('rBut').disabled = true;
-       document.getElementById('CMoveUp').disabled = true;
-       document.getElementById('CMoveDown').disabled = true;
-       refreshProbList();   
-    }
-  }
-  xmlpopulateProbSelectBox.open("GET","AdminCompContent/loadProblems.php",true);
-  xmlpopulateProbSelectBox.send();
-  
+    
+    $.ajax({type: "GET", url: "AdminCompContent/loadProblems.php", success:function(result){
+
+
+            availableProbs = eval(result);
+            var index = availableProbs.indexOf(".");
+            availableProbs.splice(index, 1);
+            index = availableProbs.indexOf("..");
+            availableProbs.splice(index, 1);
+            index = availableProbs.indexOf("index.html");
+            availableProbs.splice(index, 1);
+
+        document.getElementById('rBut').disabled = true;
+        document.getElementById('CMoveUp').disabled = true;
+        document.getElementById('CMoveDown').disabled = true;
+        refreshProbList();   
+
+    }});
+
 }
 
 //This function is referenced in page.html
@@ -295,6 +274,7 @@ function addProb(problem)//Find Code ---------- CS1004
       //document.getElementById('CSetupError').innerHTML = "You cannot have more than 5 problems in a competition.";
       //return;
   //}
+  //alert("Called");
   
   if(problem == '')
   {
@@ -430,62 +410,53 @@ function moveProbDown(problem)//Find Code ---------- CS1010
    addedProbs[index + 1] = problem;
    refreshProbList();
 }
+// This is Javascript, not PHP!
 
+function js_array_to_php_array(a)
+{
+    var a_php = "";
+    var total = 0;
+    for (var key in a)
+    {
+        ++ total;
+        a_php = a_php + "s:" +
+                String(key).length + ":\"" + String(key) + "\";s:" +
+                String(a[key]).length + ":\"" + String(a[key]) + "\";";
+    }
+    a_php = "a:" + total + ":{" + a_php + "}";
+    return a_php;
+}
+
+function setCookie(c_name,value,exdays)
+{
+var exdate=new Date();
+exdate.setDate(exdate.getDate() + exdays);
+var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+document.cookie=c_name + "=" + c_value;
+}
 function createCompetition()//Find Code ---------- CS1011
 {
 
   //STOPPED = true;
   
-  var setupXML;
+
   var CodeCov = document.forms.CompForm.AllowCoverage;
   var inclCD = document.forms.CompForm.IncludeCountdown;
+  var hidden = document.forms.CompForm.HideComp;
   var Time = document.getElementById("CompTime");
+  var compName = $("#CompName").val();
+  var compDesc = $("#CompDesc").val();
+  var passwd = $("#PassWord").val();
   var CountdownVal;
+  var CodeCovVal;
+  var HideCompVal;
   
-//  if(inclCD[0].checked == true)
-//      CountdownVal = 1;
-//  else
-//      CountdownVal = 0; 
       
-  if (window.XMLHttpRequest)
-  {
-    setupXML = new XMLHttpRequest();
-  }
+  if(hidden[0].checked == true)
+      HideCompVal = 1;
   else
-  {
-    setupXML = new ActiveXObject("Microsoft.XMLHTTP");
-  }
- 
-  
-  setupXML.onreadystatechange=function()
-  {
-    if (setupXML.readyState == 4 && setupXML.status == 200)
-    {
-      //if (setupXML.responseText.length == 8)
-      //{
-
-        compSetID = setupXML.responseText;
-                       
-        
-        //compSetHints = Hints.options[Hints.selectedIndex].text;
-        //Hints.value = 1;
-		compSetTimeM = Time.value;
-                compSetTime = Time.value;
-        if (CountdownVal)
-        	compSetTimeS = 10;
-        else 
-        	compSetTimeS = 0;
-        Time.value = '';
-        //setCompCookies();
-        createTimer();
-        document.getElementById('adminCompID').innerHTML = "<p>" + "Competition ID: " +setupXML.responseText + "</p>";
-      //}
-
-    }
-    
-  }
-  
-   
+      HideCompVal = 0;
+      
   if(CodeCov[0].checked == true)
       CodeCovVal = 1;
   else
@@ -499,7 +470,7 @@ function createCompetition()//Find Code ---------- CS1011
   var TimeVal = Time.value;
   var length = addedProbs.length;
   
-  
+
   if(length <= 0)
   {
     document.getElementById('CSetupError').innerHTML = "You must select at least one problem before you can setup a competition.";
@@ -511,7 +482,7 @@ function createCompetition()//Find Code ---------- CS1011
     document.getElementById('CSetupError').innerHTML = "You must enter a valid number for time(mins) before you can setup a competition.";
     return;    
   }
-  
+ 
   if(TimeVal <= 0)
   {
      document.getElementById('CSetupError').innerHTML = "You must enter a valid number for time(mins) before you can setup a competition.";
@@ -521,34 +492,23 @@ function createCompetition()//Find Code ---------- CS1011
   if(TimeVal > 1000)
   {
     document.getElementById('CSetupError').innerHTML = "The competition time must be less than 1000 minutes.";
+
     return;
   }
   
-  
-  
-  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "&newTeamIDm='" + document.getElementById("CompNameID").value + "'&inclCD=" + CountdownVal;
-  
-//  for(var i = 0; i < length; i++)
-//  {
-//      temp = addedProbs[i];
-//      contents += "&Prob" + (i + 1) + "=" + temp;
-//  }
- 
- 
-  /*var IETimeStamp = new Date().getTime();
-  
-  if (navigator.appName == "Microsoft Internet Explorer")
+  if(compName == "")
   {
-    setupXML.open("GET","setupImpl.php?"+contents+"&"+IETimeStamp,true);
-    setupXML.send();
+      $("#CSetupError").html("Competition must be given a name");
+      return;    
   }
 
   var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
   
   
-  
-  $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
+
+ 
+  $.ajax({type: "GET",  url:"setupImpl.php", data: {php_array : addedProbs,content:contents}, success:function(result){
         
         //alert(result);
         compSetTimeM = TimeVal;
@@ -626,7 +586,7 @@ function loadTeamNameList()//Find Code ---------- TM1002
 //Precondition: None
 //Postcondition: Sets up the Team Management page
 function loadManage()//Find Code ---------- TM1003
-{  
+{
   document.getElementById("remove1").disabled=true;
   document.getElementById("remove2").disabled=true;
   document.getElementById("remove3").disabled=true;
@@ -1297,34 +1257,34 @@ function AdminLoadCheck()//Find Code ---------- USC1001
 //Since the master timer is synced with the administrators timer
 function getMasterTime()//Find Code ---------- USC1002
 {
+    
+    $.ajax({url: "AdminCompContent/getMasterTime.php", success:function(result){
 
-	if (window.XMLHttpRequest)
-	{// code for IE7+, Firefox, Chrome, Opera, Safari
-		getTimerXML=new XMLHttpRequest();
-	}
-	else
-	{// code for IE6, IE5
-		getTimerXML=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	
-	getTimerXML.onreadystatechange=function()
-	{
-		if (getTimerXML.readyState==4 && getTimerXML.status==200)
-		{
-			var time = getTimerXML.responseText;
-			  if (time.length > 3)
-			  {
-				  seconds = time.substring(time.length-2,time.length);
-				  minutes = time.substring(0,time.length-2);
-				  document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
-			  }
-			  else
-			  {
-				  //A competition has not been created.
-			  }
-		}
-	}
-	
-	getTimerXML.open("GET","AdminCompContent/getMasterTime.php?compID="+compSetID,true);
-	getTimerXML.send();
+        var time;
+        time = $.trim(result);
+        //alert(result);
+       
+        if(!isNaN(time))
+        {
+            if (time.length > 3)
+            {
+
+                    seconds = time.substring(time.length-2,time.length);
+                    minutes = time.substring(0,time.length-2);
+                    document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
+                     startTimerOnRefresh(); 
+            }
+            else
+            {
+                    //A competition has not been created.
+            }
+        }
+        else if(time == "paused")
+            {document.getElementById("header-timer").innerHTML="paused!";  startTimerOnRefresh();}
+        else
+            document.getElementById("header-timer").innerHTML="STOP!";
+
+    }});
+           
 }
+

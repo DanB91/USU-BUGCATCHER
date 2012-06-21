@@ -22,7 +22,8 @@ $admin = $_SESSION['adminObject'];
 
 
 
-
+     $myArray = $_REQUEST['php_array'];
+    print_r ($myArray);
 
 
   $compData = array(
