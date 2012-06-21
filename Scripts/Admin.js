@@ -485,24 +485,32 @@ function createCompetition()//Find Code ---------- CS1011
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
         //alert(result);
-        compSetTimeM = TimeVal;
-        
-        compSetTime = TimeVal;
-        if (CountdownVal)
-        	compSetTimeS = 10;
-        else 
-        	compSetTimeS = 0;
-        Time.value = '';
-        //setCompCookies();
-        createTimer();
-        stopTimer();
-        $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
+        if(result == "")
+        {
+            compSetTimeM = TimeVal;
+
+            compSetTime = TimeVal;
+            if (CountdownVal)
+                    compSetTimeS = 10;
+            else 
+                    compSetTimeS = 0;
+            Time.value = '';
+            //setCompCookies();
+            createTimer();
+            stopTimer();
+            $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
+            $("#header-timer").html(TimeVal +":00");
+        }
+        else
+        {
+             $("#CSetupError").html("Competition name already exists.");
+        }
 
         
     }});
 
 
-    $("#header-timer").html(TimeVal +":00");
+    
 
 }
 
@@ -1246,7 +1254,7 @@ function getMasterTime()//Find Code ---------- USC1002
                     seconds = time.substring(time.length-2,time.length);
                     minutes = time.substring(0,time.length-2);
                     document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
-                     startTimerOnRefresh(); 
+                    startTimerOnRefresh(); 
             }
             else
             {

@@ -1,5 +1,6 @@
 <?php
 require 'Models/Competition.php';
+include 'timer.php';
 $compID = $_GET['compID'];
 $CompOject = new Competition($compID);
 echo "<table border='5'>";
@@ -40,7 +41,7 @@ else{echo "No </td></tr>";}
 
 
 echo "<tr><td>Finish</td><td>";
-if($CompOject->hasfinish){echo "Yes</td></tr>";}
+if(hasFinished($CompOject)){echo "Yes</td></tr>";}
 else{echo "No </td></tr>";}
 
 

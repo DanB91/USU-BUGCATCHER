@@ -32,6 +32,7 @@ class Leaderboard {
      */
     public function getStats()
     {
+        $this->teamsStats = array();
         $this->load();
         return $this->teamsStats;
     }
