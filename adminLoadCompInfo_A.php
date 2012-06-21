@@ -12,7 +12,7 @@ if(isset($_SESSION['competitionObject'])){
     echo "<tr><td>Description</td><td>$CompOject->description </td></tr>";
 
 
-    echo "<tr><td>Compeition Password</td><td>";
+    echo "<tr><td>Competition Password</td><td>";
     if($CompOject->password){echo "Yes</td></tr>";}
     else{echo "No </td></tr>";}
 
@@ -32,7 +32,7 @@ if(isset($_SESSION['competitionObject'])){
     if($CompOject->notjoinable){echo "No</td></tr>";}
     else{echo "Yes </td></tr>";}
 
-    echo "<tr><td>Coundown on</td><td>";
+    echo "<tr><td>Countdown on</td><td>";
     if($CompOject->countdown){echo "Yes</td></tr>";}
     else{echo "No </td></tr>";}
 
