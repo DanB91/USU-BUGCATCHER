@@ -1,7 +1,7 @@
 <?php
 
 set_error_handler('error_handler');
-
+require_once 'Models/Problem.php';
 require_once "Models/Admin.php";
 
 session_start();
@@ -14,7 +14,7 @@ $compN = $_GET["compN"];
 $passwd = $_GET["passwd"];
 $desc = $_GET["desc"];
 $hidden = $_GET["hidden"];
-$joinable = $_GET["joinable"];
+//$joinable = $_GET["joinable"];
 $compTime = $_GET["CompTime"];
 $codeCov = $_GET["codeCov"];
 $inclCD = $_GET["inclCD"];
@@ -22,7 +22,12 @@ $admin = $_SESSION['adminObject'];
 
 
 
-
+    
+$pieces = explode(",", $_GET['problems'][0]);
+foreach($pieces as $value){
+         $problem = new Problem($value,"problemname");
+         array_push($problemArr,$problem);
+}
 
 
   $compData = array(
@@ -36,24 +41,7 @@ $admin = $_SESSION['adminObject'];
                    );
 
 
-//try {
     setcookie("compN", $compN, time() + 60 * 60 * 24 * 30);//  $_SESSION['compN'] = $compN;
-    
-//    foreach($pArr as $p)
-//    {
-//        try
-//        {
-//            
-//         array_push($problemArr, new Problem($p, "problemname"));
-//        }
-//        catch(BugCatcherException $e) { echo $e; } 
-//    }
-//    var_dump($problemArr);
     $admin->createCompetition($compData, $problemArr);
-//}
-//catch(Exception $e){ echo $e; }
 
-
-//echo "Comp Name: " . $compN . "\n" . "passwd: " . $passwd . "\n" . "desc: " . $desc . "\n" . "hidden: " . $hidden . "\n" . "compT: " . $compTime;
- 
 ?>
