@@ -1,6 +1,55 @@
 var compSelected;
 
+function CS_loadSelectedAdminCompsA()
+{
 
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    CSloadSelectedCompshttp_A=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    CSloadSelectedCompshttp_A=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  
+  CSloadSelectedCompshttp_A.onreadystatechange=function()
+  {
+    if (CSloadSelectedCompshttp_A.readyState == 4 && CSloadSelectedCompshttp_A.status == 200)
+    {
+        
+        document.getElementById('displayloadAdminCompInfo_A').innerHTML = CSloadSelectedCompshttp_A.responseText;
+        compSelected = "";
+    }
+  }
+  
+  CSloadSelectedCompshttp_A.open("GET","adminLoadCompInfo_A.php",true)
+  CSloadSelectedCompshttp_A.send();
+}
+function CS_loadSelectedAdminCompsB()
+{
+
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+    CSloadSelectedCompshttp_B=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+    CSloadSelectedCompshttp_B=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  
+  CSloadSelectedCompshttp_B.onreadystatechange=function()
+  {
+    if (CSloadSelectedCompshttp_B.readyState == 4 && CSloadSelectedCompshttp_B.status == 200)
+    {
+        
+        document.getElementById('displayloadAdminCompInfo_B').innerHTML = CSloadSelectedCompshttp_B.responseText;
+        compSelected = "";
+    }
+  }
+  
+  CSloadSelectedCompshttp_B.open("GET","adminLoadCompInfo_B.php",true)
+  CSloadSelectedCompshttp_B.send();
+}
 //Pre-Conditions:
 //Post-Conditions:
 function CS_loadAdminComps()
@@ -42,6 +91,8 @@ function CS_joinComp(){
             if (CSSelectloadCompshttp.readyState == 4 && CSSelectloadCompshttp.status == 200){
                 document.getElementById('CScontrol').innerHTML = CSSelectloadCompshttp.responseText;
                 compSelected = "";
+                window.location = "";
+                
             }
         }
         CSSelectloadCompshttp.open("GET","adminLoadAvailCompSelect.php?compID="+compSelected,true);

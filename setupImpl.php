@@ -41,7 +41,11 @@ foreach($pieces as $value){
                    );
 
 
-    setcookie("compN", $compN, time() + 60 * 60 * 24 * 30);//  $_SESSION['compN'] = $compN;
-    $admin->createCompetition($compData, $problemArr);
-
+  
+    try
+    {
+         setcookie("compN", $compN, time() + 60 * 60 * 24 * 30);
+         $admin->createCompetition($compData, $problemArr);
+    }
+    catch(Exception $e) { setcookie("compN", $compN, time() + 0); echo $e; }
 ?>

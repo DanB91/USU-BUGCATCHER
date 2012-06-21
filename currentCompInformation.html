@@ -5,9 +5,10 @@
 <link rel="stylesheet" href="CSS/styles.css" type="text/css" />
 <script language="javascript" src="Scripts/Admin.js"></script>
 <script language="javascript" src="Scripts/AdminContentUpdate.js"></script>
-<script language="javascript" src="Scripts/jquery.js"></script>
 <script language="javascript" src="Scripts/AdminTimer.js"></script>
 <script language="javascript" src="Scripts/CountdownTimer.js"></script>
+<script language="javascript" src="Scripts/jquery.js"></script>
+<script language="javascript" src="Scripts/adminLandingPage.js"></script>
 
 <script language="javascript">
 var compSetLanguage = '';
@@ -20,8 +21,8 @@ var compSetID = '';
 
 </head>
 
-<body onload=AdminLoadCheck();>
-
+<body >
+<!-- CS_loadAdminComps();-->
 <div id="container" class="gradient">
 	<div id="header">
     	<div id="header-remainingTime">
@@ -46,22 +47,29 @@ var compSetID = '';
 	</div><!--end navigation-->
     
 	<div id="Content">
+            
 <!--Do Not Delete The Comment Below This-->
 <!--CONVERSION_STARTS_HERE-->
-    <div id="ProgressMain" align=center>
-      <h2>Progress & Statistics</h2>
-      <div name="PHeader" id="PHeader">
-       <table class="PTable" rules="all" id="PHeadTable">
-        <tr class="PHeadRow">
-          <td class="PTeamName">Team Name</td>
-          <td Class="Pstats">Bugs found</td>
-          <td Class="PStats">Time of last bug found</td>
-          <td Class="PStats">Place</td>
-        </tr>
-      </table>
-      <div id="PTeamTables"></div>
-      </div>
+		<div id="CustomHeader" align=center>
+      <h2>Competition  Information</h2>
+     
     </div>
+
+    <div id="PreDefHeader" align=center style="background: #D3FBA7; padding-left: 11px;">
+      <h2>Students In Competition</h2>
+      
+    </div>
+
+		<div id="HintsLeft" align=center>
+                    <br>
+                        
+                    <div id="displayloadAdminCompInfo_A">None Selected</div> 
+		</div>
+		<div id="HintsRight" align=center style="background: #D3FBA7; height: 380px; padding-left: 11px;">
+                    <br>
+                    <div id="displayloadAdminCompInfo_B">None Selected</div> 
+
+		</div>
 <!--CONVERSION_ENDS_HERE-->
 <!--Do Not Delete The Comment Above This-->
 	</div><!--end content-->
@@ -73,6 +81,10 @@ var compSetID = '';
 	<div class="nooverflow"></div>
 </div><!--end container-->
 
+
 </body>
 
 </html>
+
+
+<?php echo "pie";?>

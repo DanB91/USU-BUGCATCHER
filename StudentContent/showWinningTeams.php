@@ -22,7 +22,7 @@ if($comp!=null&&$user!=NULL&&$team!=null)//if the competition has been created a
 	$leader=new Leaderboard($comp);
 	$topArr=$leader->getStats();
 	$numTeams=$comp->getNumTeams();
-	
+	var_dump($topArr);
 	$resultString .= "1st: " . $topArr[0]['teamName'];
 	$resultString .= formatBugsFoundString($topArr[0]['bugsFound']);
 	if($numTeams>1){

@@ -85,9 +85,9 @@ function getRemainingTime($obj)
             else
                 echo "paused";
 
-    }
+        }
         else
-            echo "0000";
+             echo $obj->duration . '00';
     }
     else
         echo "stop";
@@ -97,12 +97,13 @@ function getRemainingTime($obj)
 //Postcondition: Returns true if the competition has concluded false otherwise
 function hasFinished($obj)
 {
+   
     $timeStampSecs = strtotime($obj->starttime);
+    
     $durationSecs = ($obj->duration) * 60;
     $currTimeSecs = strtotime(date("Y-m-d H:i:s"));
     
-	
-    if(($timeStampSecs + $durationSecs > $currTimeSecs) || $obj->starttime=="0000-00-00 00:00:00")
+    if($obj->starttime == '0000-00-00 00:00:00'|| $timeStampSecs + $durationSecs > $currTimeSecs)
         return false;
     else
         return true;

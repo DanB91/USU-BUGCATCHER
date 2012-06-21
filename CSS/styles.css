@@ -1398,6 +1398,10 @@ option.difficulty4{
 
 /*    General Styles
 /*_______________________*/
+#ProgressMain {
+	padding-bottom: 30px;	
+}
+
 #ProgressMain h2 {
 	padding: 20px;	
 }
@@ -1406,11 +1410,12 @@ table.PTable{
     background: #2f393f;
     border: 1px solid #272e31;
     width: 935px;
-	margin: 20px 0 0 0;
+	margin: 0px;
 }
 
 #PHeadTable{
     text-align: center;
+    margin: 20px 0 0 0;
 }
 
 tr.PHeadRow{
