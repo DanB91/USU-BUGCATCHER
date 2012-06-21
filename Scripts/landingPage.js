@@ -17,7 +17,7 @@ function loadComps()
 function joinComp()
 {
     var password = $("#CompPassword").val();
-    $.ajax({ type:"POST", url:'joinComp.php', data:"compS="+compSelected+"&pword="+password, 
+    $.ajax({type:"POST", url:'joinComp.php', data:"compS="+compSelected+"&pword="+password, 
         success: function(html){
 
             var t = html.trim();
@@ -275,11 +275,15 @@ function StartToCaptain()
 //
 function CaptainLeaveTeam()
 {
-        
-            $.post('StudentContent/leaveTeam.php',"captain=true", 
-        function(){
-        });
-        window.location = "StudentLanding.html";
+    $.ajax({
+        type: "POST",
+        url:'StudentContent/leaveTeam.php', 
+        data: "captain=true",
+        async: false,
+        success: function(){
+        }
+    });  
+    window.location = "StudentLanding.html";
 }
 
 function sendInvites()
