@@ -4,5 +4,7 @@
     $CompOject = new Competition($compID);
     session_start();
     $_SESSION['competitionObject'] = $CompOject;
-    echo "You now control this competition";
+     setcookie("compN", $CompOject->compname, time() + 60 * 60 * 24 * 30);
+    echo "You now control $CompOject->compname";
+    
 ?>
