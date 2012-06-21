@@ -37,7 +37,7 @@ function getRemainingTime($obj)
     $currentTime = date("H:i:s");
     $currentTime = substr($currentTime, -8);
     
-    if($obj->hasfinish == 0)
+    if(!hasFinished($obj))
     {
         if($obj->starttime !== '0000-00-00 00:00:00')
         {
