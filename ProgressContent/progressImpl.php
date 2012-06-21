@@ -35,5 +35,5 @@
                             
                         <td Class="Pstats"><?php /*Display the place of the team in the competition*/echo $counter; $counter++;?></td>
                     </tr>
-		<?php  endwhile;?>
+		<?php  endwhile;?></table>
 	
