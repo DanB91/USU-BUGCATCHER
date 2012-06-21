@@ -464,7 +464,7 @@ function playCountAni()
 function checkCompFinished()//Find Code ---------- C1003
 {
     $.post('StudentContent/hasCompFinished.php', "", 
-        function(html){	
+        function(html){
             if(html.trim() == 0)
             {
                 $("#testforBug").attr("disable", false);
