@@ -24,7 +24,7 @@ if ($team != NULL) {
             echo $content;
             return;
         }
-        $content = "<select onclick='showCompInfo(this.value)' style='width:200px;'>";
+        $content = "<select onChange='showCompInfo(this.value)' style='width:200px;'>";
         $competitions = array();
         foreach ($compArray as $value) {
             $content .= "<option value='".$value->compid."' ondblclick='joinComp(this.value);'>";

@@ -654,16 +654,17 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
   
   if (teamN=="")//If no team is currently selected
   {
-    document.getElementById("MTeamTitle").innerHTML="<p>Please select a team name.</p>";
+    $("#MTeamTitle").html("<p>Please select a team name.</p>");
     return;
   }
   else
   {
-    document.getElementById("MTeamTitle").innerHTML="Team "+teamN;//Places the team name below the Team Information heading in Team Management
+    $("#MTeamTitle").html("Team "+teamN);//Places the team name below the Team Information heading in Team Management
   }
 	
   var studPos;
   var studentPosNum = 1;
+  
   
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -699,7 +700,6 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
 					else
 					{
 						//alert(studentPosNum + " " + loadStudentsXML.responseText);
-					
 						
 						loadStudName(loadStudentsXML.responseText, studPos);
 						getUserName(loadStudentsXML.responseText, studentPosNum);
