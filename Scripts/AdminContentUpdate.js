@@ -59,7 +59,6 @@ function insertHTML(tabValue)
       break;
 		case 1:
 			filePath = "selectComp.html";
-                        CS_loadAdminComps();
 			break;
     case 2:
       filePath = "TeamManagement.html";
@@ -84,31 +83,26 @@ $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:f
       switch(tabValue)
       {
         case 0:
-          //setNavClass("navComp");
           popProbSelectBox();
           clearInterval(progUpdate);
 					clearInterval(t3);
           addedProbs = [];
           break;
         case 1:
-          //setNavClass("navManage");
-          loadManage();
+                        CS_loadAdminComps();
           clearInterval(progUpdate);
 					clearInterval(t3);
           break;
         case 2:
-          progUpdate = setInterval(showTableProg, 1000);
-          //setNavClass("navProgress"); 
+          loadManage();
+          clearInterval(progUpdate);
           break;
         case 3:
-          loadProblemNames();
-          //setNavClass("navHints");
-          clearInterval(progUpdate);
+          progUpdate = setInterval(showTableProg, 1000);
 					clearInterval(t3);
           break;
 				case 4:
-          getCustomProblems();
-          //setNavClass("navHints");
+          loadProblemNames();
           clearInterval(progUpdate);
 					clearInterval(t3);
           break;
