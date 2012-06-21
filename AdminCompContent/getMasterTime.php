@@ -10,7 +10,7 @@ $compN = $_COOKIE['compN'];
 
 
 echo getRemainingTime($admin->getCompetitionByCompName($compN));
-
+//echo hasFinished($admin->getCompetitionByCompName($compN));
 ?>
 
 

@@ -4,14 +4,14 @@
 require_once "../header.php";
 session_start();
 
-$comp = $_SESSION['competitionObject'];
+$comp = $_SESSION['compObject'];
 
-if($comp->compid)//If the competition has been created 
+if($comp!=NULL)//If the competition has been created 
 {
-	if(!$comp->isPaused())
+	if($comp->hasStarted())
 		echo 1;//The competition has started
 	else
-		echo 0;//The competition has not started or is paused
+		echo 0;//The competition has not started
 }
 else
 	echo "You must be in a competition";

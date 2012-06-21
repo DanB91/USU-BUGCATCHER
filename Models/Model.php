@@ -102,6 +102,7 @@ abstract class Model {
         return $this->values[$field];
     }
     
+    
     /**
      *Sets the given field
      * @param string $field name of field
@@ -129,6 +130,7 @@ abstract class Model {
         
         $this->values[$field] = $value;
     }
+    
     
     public function findInDB($tablename, array $data){
 	$sql= "SELECT * FROM " . $tablename . " WHERE " ;
@@ -179,6 +181,7 @@ abstract class Model {
      */
     public function commitToDB()
     {
+        $this->connection = connectToDB();
         $sql = 'UPDATE ' . $this->tableName . ' SET ';
         $value; //used to hold a value of a field
         
@@ -235,6 +238,7 @@ abstract class Model {
     
     public function removeFromDB()
     {
+        $this->connection = connectToDB();
         $sql = 'DELETE FROM ' . $this->tableName . ' WHERE ' . $this->getPrimaryKeyName()
                 . ' = ' . $this->getPrimaryKeyValue();
         

@@ -16,13 +16,14 @@ function loadComps()
 //Post-Conditions:
 function joinComp()
 {
-    $.ajax({ type:"GET", url:'joinComp.php', data:"compS="+compSelected, 
+    var password = $("#CompPassword").val();
+    $.ajax({type:"POST", url:'joinComp.php', data:"compS="+compSelected+"&pword="+password, 
         success: function(html){
 
             var t = html.trim();
             if(t != '1')
             {
-		alert("something bad happened when adding your team to the competition, too bad for you sucka");
+		alert(html);
                /* var studTName = prompt("This competition has started please enter your team name.");
                 while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
                 {
@@ -96,7 +97,7 @@ function getCompInfo()
     getCompInfoXML=new ActiveXObject("Microsoft.XMLHTTP");
   }
   
-  getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+3,true)
+  getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+0,true)
   getCompInfoXML.send();
   
   getCompInfoXML.onreadystatechange=function()
@@ -110,7 +111,7 @@ function getCompInfo()
             displayOutput += "Competition ID: " + compSelected;
             displayOutput += "\n\nCompetition Length: " + mins + " mins\n";
             loopCount++;
-            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+0,true)
+            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+1,true)
             getCompInfoXML.send();
             break;
           case 2:
@@ -122,6 +123,9 @@ function getCompInfo()
             break;
           case 3:
             var coverage = getCompInfoXML.responseText;
+            loopCount++
+            getCompInfoXML.open("GET","StudentContent/studentCompInfo.php?compID="+compSelected+"&fileLine="+3,true)
+            getCompInfoXML.send();
             if (coverage == 0)
             {
               coverage="No";
@@ -132,6 +136,19 @@ function getCompInfo()
             }
             displayOutput += "\nCode Coverage Allowed: " + coverage;
             document.getElementById('displayInfo').value = displayOutput;
+            break;
+          case 4:
+            var password = getCompInfoXML.responseText;
+            if (password == 0)
+            {
+                $("#CompPassword").val("N/A");
+                $("#CompPassword").attr("disabled", true);
+            }
+            else
+            {
+                $("#CompPassword").val("");
+                $("#CompPassword").attr("disabled", false);    
+            }
             break;
           default:
             break;
@@ -148,8 +165,8 @@ function showCompInfo(str,page)
   getCompInfo();
 }
 
-//refreshMember1 and 2 display the information about other team members on refresh.
-//refreshMember1 displays them for a regular user
+//refreshMember displays the information about other team members on refresh.
+//it takes a boolean to determine if the team member is the captain, so that information can be displayed as well.
 function refreshMember(isCapt)
 {
             $.post('StudentContent/teamName.php', "", 
@@ -163,7 +180,6 @@ function refreshMember(isCapt)
         });
 }
 
-//refreshMember2 displays them for the team captain.
 //function refreshMember2()
 //{
 //        $.post('StudentContent/teamName.php', "", 
@@ -259,11 +275,15 @@ function StartToCaptain()
 //
 function CaptainLeaveTeam()
 {
-        
-            $.post('StudentContent/leaveTeam.php',"captain=true", 
-        function(){
-        });
-        window.location = "StudentLanding.html";
+    $.ajax({
+        type: "POST",
+        url:'StudentContent/leaveTeam.php', 
+        data: "captain=true",
+        async: false,
+        success: function(){
+        }
+    });  
+    window.location = "StudentLanding.html";
 }
 
 function sendInvites()

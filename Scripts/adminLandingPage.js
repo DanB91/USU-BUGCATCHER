@@ -91,6 +91,8 @@ function CS_joinComp(){
             if (CSSelectloadCompshttp.readyState == 4 && CSSelectloadCompshttp.status == 200){
                 document.getElementById('CScontrol').innerHTML = CSSelectloadCompshttp.responseText;
                 compSelected = "";
+                window.location = "";
+                
             }
         }
         CSSelectloadCompshttp.open("GET","adminLoadAvailCompSelect.php?compID="+compSelected,true);
