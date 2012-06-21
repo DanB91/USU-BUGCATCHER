@@ -150,40 +150,32 @@ function showCompInfo(str,page)
 
 //refreshMember1 and 2 display the information about other team members on refresh.
 //refreshMember1 displays them for a regular user
-function refreshMember1()
+function refreshMember(isCapt)
 {
-    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=false", 
+            $.post('StudentContent/teamName.php', "", 
         function(html){
-            var members = html.split(",");
-            var counter = 1;
-            for (m in members)
-                {
-                    $("#TMandC"+counter).html(m);
-                    counter++;
-                }
-
+            $("#TeamName2").html(html);
+        });
+        
+    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain="+isCapt, 
+        function(html){
+            $("#TMS").html(html);
         });
 }
 
 //refreshMember2 displays them for the team captain.
-function refreshMember2()
-{
-        $.post('StudentContent/teamName.php', "", 
-        function(html){
-            $("#TeamName2").html(html);
-        });
-    
-    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
-        function(html){
-            var members = html.split(",");
-            var counter = 1;
-            for(m in members)
-                {
-                    $("#TM"+counter).html(m);
-                    counter++;
-                }
-        });
-}
+//function refreshMember2()
+//{
+//        $.post('StudentContent/teamName.php', "", 
+//        function(html){
+//            $("#TeamName2").html(html);
+//        });
+//    
+//    $.post('StudentContent/getTeamMemberInfo.php', "isCaptain=true", 
+//        function(html){
+//            $("#TMS").html(html);
+//        });
+//}
 
 //############################################################################//
 //############################################################################//

@@ -4,6 +4,7 @@ require_once dirname(__FILE__) . "/../header.php";
 session_start();
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
+$team->update();
 $isCaptain = $_POST['isCaptain'];
 
 if ($user != NULL && $team != NULL) {
@@ -11,23 +12,22 @@ if ($user != NULL && $team != NULL) {
     if ($isCaptain) {
         $members = $team->getUsers();
         foreach ($members as $member) {
-            $memberInfo .= $member->username . ",";
+            if ($member->userid != $user->userid)
+                $memberInfo .= "<p>".$member->username . "</p>";
         }
     } else {
         $leader = $team->getTeamLeader();
         $leaderID = $leader->userid;
         $userID = $user->userid;
-        $memberInfo .= $captain->username . ",";
-        $memberInfo .= $captain->firstname . ",";
-        $memberInfo .= $captain->lastname . ",";
+        $memberInfo .= "<p>Team Leader: ";
+        $memberInfo .= $captain->username . "</p>";
+
 
         $members = $team->getUsers();
         foreach ($members as $member) {
             //if the member is not the current user or the captain, return their information
             if (($member->userid != $leaderID) && $member->userid != $userID) {
-                $memberInfo .= $member->username . ",";
-                $memberInfo .= $member->firstname . ",";
-                $memberInfo .= $member->lastname . ",";
+                $memberInfo .= "<p>".$member->username . "</p>";
             }
         }
     }
