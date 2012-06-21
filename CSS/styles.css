@@ -1398,6 +1398,10 @@ option.difficulty4{
 
 /*    General Styles
 /*_______________________*/
+#ProgressMain {
+	padding-bottom: 30px;	
+}
+
 #ProgressMain h2 {
 	padding: 20px;	
 }
