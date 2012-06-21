@@ -97,7 +97,7 @@ class Team extends Model {
     {
         $retArray = array();
         
-        $connection = connectToDB();
+        $this->connection = connectToDB();
 	
         $data['teamid']=$this->getPrimaryKeyValue();
         $result=$this->findInDB("TEAM_COMPETITION_LINK", $data);

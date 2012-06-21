@@ -77,7 +77,7 @@ class Competition extends Model{
     }
     
     public function isPaused(){
-	if($this->pauseState=="0000-00-00 00:00:00")
+	if($this->pausestate=="0000-00-00 00:00:00")
 	    return false;
 	return true;
     }
