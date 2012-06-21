@@ -1246,7 +1246,7 @@ function getMasterTime()//Find Code ---------- USC1002
                     seconds = time.substring(time.length-2,time.length);
                     minutes = time.substring(0,time.length-2);
                     document.getElementById("header-timer").innerHTML=minutes+":"+seconds;
-                     startTimerOnRefresh(); 
+                    startTimerOnRefresh(); 
             }
             else
             {
