@@ -95,9 +95,8 @@ function recieve()//Find Code ---------- G1004
 {
         $.ajax({type: "GET", url:"StudentContent/recieve.php", success:
         function(html){
-	    alert(html);
             		var arr = JSON.parse(html);
-			$("#ResultsList").html(format(arr));
+			$("#ResultsList").html(arr[0]);//format(arr));
 			if(doScrollDown)
 				scrollResultsDown();
         }});
