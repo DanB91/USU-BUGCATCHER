@@ -299,11 +299,11 @@ function getReqAndProb(index, cov)//Find Code ---------- PR1001
 {
 
 	if(index){
-	    getProb(probNames[index], cov, index);
-	    getReq(probNames[index], index);
 	    currProblem = probNames[index];
 	    coverage = 0;//cov;
 	    currIndex = index;
+	    getProb(probNames[index], cov, index);
+	    getReq(probNames[index], index);
 	}
 }
 
@@ -323,7 +323,6 @@ function getReq(str, index)//Find Code ---------- PR1002
 //Postcondition: Displays the problem that the student selected
 function getProb(str, cov, index)//Find Code ---------- PR1003
 {
-    
     $.post('StudentContent/showCode.php', "problem="+currProblem+"&coverage="+coverage + "&index=" + currIndex, 
         function(html){
 	    $("#ProblemCode").html("<pre class='prettyprint lang-java linenums'>"+html+"</pre>");
@@ -334,7 +333,7 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
 }
 
 function getToolTip(str)
-{
+{   echo("problem is "+str);
     $.post('StudentContent/getToolTip.php', "problem="+str, 
         function(html){	
             $("#BugTesterDiv").attr("title",html);
