@@ -23,7 +23,7 @@ function joinComp()
             var t = html.trim();
             if(t != '1')
             {
-		alert("something bad happened when adding your team to the competition, too bad for you sucka");
+		alert(html);
                /* var studTName = prompt("This competition has started please enter your team name.");
                 while(studTName.search('"') >= 0 || studTName.search("'") >= 0)
                 {
