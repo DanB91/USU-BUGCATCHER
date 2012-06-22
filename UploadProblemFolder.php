@@ -1,10 +1,16 @@
 <?php
-require_once 'header.php';
+require_once 'Models/Problem.php';
+require_once 'Models/Admin.php';
+
+set_exception_handler('exceptionHandler');
+set_error_handler('errorHandler');
+
+
 //Variablse needed for Problem Upload
 $fileName = "";
 session_start();
 $AdminUsername = $_SESSION['adminObject']->username;
-$error = '';
+
 
 //Checks to see if the file is over 100Kb
 if ($_FILES["file"]["size"] > 102400)
@@ -25,11 +31,14 @@ if ($_FILES["file"]["type"] == "application/octet-stream" || $_FILES["file"]["ty
 	else
 	{
 		$fileName = $_FILES["file"]["tmp_name"];
+                $tmpArray = explode('.', $_FILES['file']['name']);
+                $problemName = $tmpArray[0]; //get problem name
 		$zip = new ZipArchive;
 		$zip->open($fileName);
 		if ($zip->open($fileName) === TRUE) {
 				$zip->extractTo("Uploads/".$AdminUsername."/Problems/");
-				$zip->close();
+				$zip->close("Uploads/".$AdminUsername."/Problems/");
+                                storeInDB("Uploads/".$AdminUsername."/Problems/" . $problemName . '/', $problemName, $AdminUsername);
 				alert('Upload Complete');
                                 
 		} else {
@@ -43,46 +52,103 @@ else
     die();
 }
 
-/*****************************************************/
-/*                 Dump To Error Log                 */
-/*****************************************************/
 
-function DumpToErrorLog($FileName_Original,$FileName,$FirstName,$LastName,$Username,$Password,$SchoolName,$State)
+
+/**
+ * Stores the given problem in the database
+ * @param string $path is the path contains the problem folder
+ * @param string $problemName the problem name
+ */
+function storeInDB($problemPath, $problemName, $adminName)
 {
-	$length = strlen($FileName) - 3;
-	$extension = substr($FileName,$length,3);
-	$errorFileName = substr($FileName,0,8);
-	$errorIndex = 0;
-	if (file_exists("ErrorLogs/" . $errorFileName . ".txt"))//".txt"
-	{
-		do
-		{
-			$errorIndex++;
-		}while(file_exists("ErrorLogs/" . $errorFileName."(".$errorIndex.").txt"));
-		$errorFileName .= "(".$errorIndex.")";
-	}
-	$errorFileName .= ".txt";
-	
-	$errorFile = fopen("ErrorLogs/".$errorFileName,"w+");
-	
-	fwrite($errorFile,"An error occurred during ".strtoupper($extension)." file registration. Below is the information that was being handled at the time of the error.\r\n\r\n");
-	
-	fwrite($errorFile,"Original File Name: ".$FileName_Original."\r\n");
-	fwrite($errorFile,"New File Name: ".$FileName."\r\n");
-	fwrite($errorFile,"First Name: ".$FirstName."\r\n");
-	fwrite($errorFile,"Last Name: ".$LastName."\r\n");
-	fwrite($errorFile,"Username: ".$Username."\r\n");
-	fwrite($errorFile,"Password: ".$Password."\r\n");
-	fwrite($errorFile,"School Name: ".$SchoolName."\r\n");
-	fwrite($errorFile,"State: ".$State."\r\n");
-	
-	fclose($errorFile);
+
+   
+    $difficulty = getProblemDifficulty($problemPath . 'difficulty.txt');
+    
+    $problemData = array('problemname' => $adminName.$problemName, 'requirements' => file_get_contents($problemPath . $problemName. 'Req.txt'),
+        'oraclepath' => $problemPath . $problemName . 'Oracle.jar', 'allbugspath' => $problemPath . $problemName . '.jar',
+        'srcpath' => $problemPath . 'src/', 'problemdifficulty' => $difficulty);
+    
+    $bugsData = getBugsData($problemPath);
+    
+    Problem::addProblemToDB($problemData, $bugsData);
+    
+    
 }
 
+function getBugsData($problemPath)
+{
+    $filesInDir = scandir($problemPath);
+    $bugsData = array(); //return value
+    $bugFilesInDir = array();
+    
+    foreach ($filesInDir as $key => $value) {
+        //if the file is a runnable bug file add it in
+        if (preg_match('/.*bug[\d]*\.jar/i', $value)) {
+            $bugFilesInDir[] = $value;
+        }
+    }
+    
+    if(!count($bugFilesInDir))
+        trigger_error('Problem does not contain any bugs!');
+    
+    foreach($bugFilesInDir as $value)
+        $bugsData[] = array('abpath' => $problemPath.$value);
+    
+    return $bugsData;
+    
+    
+    
+    
+    
+}
 
+function getProblemDifficulty($pathToDifficultyFile)
+{
+    $fileContents = file($pathToDifficultyFile);
+    $difficulty = '';
+    
+    switch($fileContents[0])
+    {
+        default:
+        case '0':
+            $difficulty = 'VE';
+            break;
+        case '1':
+            $difficulty = 'E';
+            break;
+        case '2':
+            $difficulty = 'M';
+            break;
+        case '3':
+            $difficulty = 'H';
+            break;
+        case '4':
+            $difficulty = 'VH';
+            break;
+        
+    }
+    
+    return $difficulty;
+}
 
 function alert($msg)
 {
    echo '<script language="javascript">alert("'.$msg.'"); top.document.getElementById("uploadWrapper").innerHTML = \'<input type="file" name="file" id="file" />\';</script>';
 }
+
+function exceptionHandler($exception) {
+    alert("Uncaught exception: " . $exception->getMessage(). "\n");
+    die();
+}
+
+
+
+function errorHandler($errNo, $errStr)
+{
+  alert("Error: " . "[$errNo] ". $errStr, "\n");
+  die();
+}
+
+
 ?>

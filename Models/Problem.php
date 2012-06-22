@@ -1,5 +1,6 @@
 <?php
 require_once 'Model.php';
+require_once 'Bug.php';
 //require_once 'Competition.php';
 /*
  * To change this template, choose Tools | Templates
@@ -29,6 +30,8 @@ class Problem extends Model {
 	$this->removeRelationFromModel($comp, 'COMPETITION_PROBLEM_LINK');
     }
     
+    
+    
     public static function getAllProblems()
     {
         $retProbs = array();
@@ -49,16 +52,41 @@ class Problem extends Model {
         return $retProbs;   
     }
     
-    public static function addProblemToDB(array $data)
+    
+    /**
+     *Adds problem to the database with bug information
+     * @param array $problemData array of db data
+     * @param array $bugsData array bugs which each conatains an array of db data (so this is a double array)\
+     * important to note that $bugsData does not contain 'problemid' as we do not have it yet.  It is added automatically 
+     */
+    public static function addProblemToDB(array $problemData, array $bugsData)
     {
         
-        foreach($data as &$value)
+        foreach($problemData as &$value)
         {
             $value = "'" . $value . "'";
         }
         
-        Model::addRow('PROBLEMS', $data);
+        
+        Model::addRow('PROBLEMS', $problemData);
+        
+        $problem = new Problem($problemData['problemname'], 'problemname');
+        
+        //needed for adding bugs
+        $problemID = $problem->problemid;
+        
+        
+        
+        foreach ($bugsData as &$bugData)
+        {
+            $bugData['problemid'] = $problemID;
+            Bug::addBugToDB($bugData);
+        }
+        
+        
     }
+    
+   
 }
 
 ?>
