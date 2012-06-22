@@ -49,11 +49,11 @@ var compSetID = '';
 <!--Do Not Delete The Comment Below This-->
 <!--CONVERSION_STARTS_HERE-->
     <div id="ManageMain" align=center style="background: #D3FBA7; border: none; height: 380px; margin: 0px; margin-right: 0px; padding-right: 0px; width: 230px;">
-       <h2>Create Team</h2>
+       <!--<h2>Create Team</h2>
       <form onSubmit="event.preventDefault(); addTeam(); return false;" method="get">
         <p>Team Name:</p><input type="text" name="MTeamName" id="MTeamName" /><br /><br />
         <input type="submit" value="Create Team" name="submit" />
-      </form>
+      </form>-->
       <hr />
       <h2>Edit Team</h2>
       <p>Select A Team:</p>
@@ -66,13 +66,9 @@ var compSetID = '';
         <div id="MTeamTable">
           <div name="MStudent1" id="MStudent1" class="MStudentInfo" style="background: #fffded; margin: 0px;">
             <h3>Student 1</h3>
-            <form id="MForm1" onSubmit="event.preventDefault(); addRemoveStudent('Username_S1', 'Stud1'); return false;" method="get">
+            <form id="MForm1" onSubmit="event.preventDefault(); return false;" method="get">
               <label>Name:</label><br />
-              <div id="Member1">
-                <select name="Stud1" id="Stud1" class="MStudentSelect" onChange="currentSelection(this.value)">
-                <option>------Select a Name------</option>
-                </select>
-              </div>
+              <input type="text" name="Name_S1" id="Name_S1" value="BugMaster1337" class="Mtext" readonly /><br />
               <label>Username:</label><br />
               <input type="text" name="Username_S1" id="Username_S1" value="BugMaster1337" class="Mtext" readonly /><br />
               <label>School:</label><br />
@@ -86,13 +82,9 @@ var compSetID = '';
           </div>
           <div name="MStudent2" id="MStudent2" class="MStudentInfo" style="background: #fffded; margin: 0px 5px;">
             <h3>Student 2</h3>
-            <form id="MForm2" onSubmit="event.preventDefault(); addRemoveStudent('Username_S2', 'Stud2'); return false;" method="get">
+            <form id="MForm2" onSubmit="event.preventDefault();  return false;" method="get">
               <label>Name:</label><br />
-              <div id="Member2">
-                <select name="Stud2" id="Stud2" class="MStudentSelect" onChange="currentSelection(this)">
-                <option>------Select a Name------</option>
-                </select>
-              </div>
+              <input type="text" name="Name_S2" id="Name_S2" value="BugMaster1337" class="Mtext" readonly /><br />
               <label>Username:</label><br />
               <input type="text" name="Username_S2" id="Username_S2" value="Insecticider" class="Mtext" readonly /><br />
               <label>School:</label><br />
@@ -106,13 +98,9 @@ var compSetID = '';
           </div>
           <div name="MStudent3" id="MStudent3" class="MStudentInfo" style="background: #fffded; margin: 0px;">
             <h3>Student 3</h3>
-            <form id="MForm3" onSubmit="event.preventDefault(); addRemoveStudent('Username_S3', 'Stud3'); return false;" method="get">
+            <form id="MForm3" onSubmit="event.preventDefault();  return false;" method="get">
               <label>Name:</label><br />
-              <div id="Member3">
-                <select name="Stud3" id="Stud3" class="MStudentSelect" onChange="currentSelection(this)">
-                <option>------Select a Name------</option>
-                </select>
-              </div>
+              <input type="text" name="Name_S3" id="Name_S3" value="BugMaster1337" class="Mtext" readonly /><br />
               <label>Username:</label><br />
                 <input type="text" name="Username_S3" id="Username_S3" value="DenverCoder9" class="Mtext" readonly /><br />
               <label>School:</label><br />

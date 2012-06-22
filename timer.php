@@ -39,12 +39,11 @@ function getRemainingTime($obj)
     
     if(!hasFinished($obj))
     {
-        if($obj->starttime !== '0000-00-00 00:00:00')
-        {
-
-            if($obj->pausestate == '0000-00-00 00:00:00')
+            if($obj->starttime !== '0000-00-00 00:00:00')
             {
-
+                if($obj->pausestate == '0000-00-00 00:00:00')
+                {
+                 
                     $diff = diffTime($currentTime, $startTime);
                     //echo $diff;
                     $diffArr = explode(":", $diff);
@@ -77,17 +76,16 @@ function getRemainingTime($obj)
                         if($minsLeft < 10)
                             $minsLeft = '0' . $minsLeft;
                     }
-
+                    
                     $timeLeft = $minsLeft . $secsLeft;
+                    
                     return $timeLeft;
-
+                }
+                else
+                    echo "paused";
             }
             else
-                echo "paused";
-
-        }
-        else
-             echo $obj->duration . '00';
+                echo $obj->duration . '00';   
     }
     else
         echo "stop";

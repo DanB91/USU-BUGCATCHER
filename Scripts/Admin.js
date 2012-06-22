@@ -5,7 +5,6 @@ Table of Contents
 		1.1 teamN			  	---------- GV1001
 		1.2 MAX_STUDENT_ON_TEAM ---------- GV1002
 		1.3 currentStudent      ---------- GV1003
-		1.4 hintsEnabled        ---------- GV1004
 		1.5 currProblemSelected ---------- GV1005
 		1.6 lastHintSelected    ---------- GV1006
 	2.Competition Setup   ---------- CS1000
@@ -63,7 +62,7 @@ var MAX_STUDENT_ON_TEAM = 3; //Find Code ---------- GV1002
 var currentStudent = '';	 //Find Code ---------- GV1003
 
 //Hints Global Variables
-var hintsEnabled;			 //Find Code ---------- GV1004
+
 var currProblemSelected = '';//Find Code ---------- GV1005
 var lastHintSelected = '';	 //Find Code ---------- GV1006
 
@@ -83,32 +82,13 @@ var compSetTime;
 //Postcondition: Starts the competition
 function startCompetition() //Find Code ---------- CS1001
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlstartCompetitionhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlstartCompetitionhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlstartCompetitionhttp.onreadystatechange=function()
-  {
-    if (xmlstartCompetitionhttp.readyState == 4 && xmlstartCompetitionhttp.status == 200)
-    {
-        //Need to write a new countdown function
-        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
-        //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();
-    }
-  }
-  //Don't start competition until the countdown timer reaches zero.
-  while (
-  xmlstartCompetitionhttp.open("GET","AdminCompContent/StartCompetition.php",true));
-  xmlstartCompetitionhttp.send();
-
+    $.ajax({url: "AdminCompContent/StartCompetition.php", success:function(){
+            //Need to write a new countdown function
+            document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
+            //alert(xmlstartCompetitionhttp.responseText);
+            startTimer();  
+    }});    
 }
-
 
 function refreshProbList()
 {
@@ -415,7 +395,6 @@ function createCompetition()//Find Code ---------- CS1011
   
 
   var CodeCov = document.forms.CompForm.AllowCoverage;
-  var inclCD = document.forms.CompForm.IncludeCountdown;
   var hidden = document.forms.CompForm.HideComp;
   var Time = document.getElementById("CompTime");
   var compName = $("#CompName").val();
@@ -436,10 +415,6 @@ function createCompetition()//Find Code ---------- CS1011
   else
       CodeCovVal = 0;
 
-  if(inclCD[0].checked == true)
-      CountdownVal = 1;
-  else
-      CountdownVal = 0;
   
   var TimeVal = Time.value;
   var length = addedProbs.length;
@@ -476,12 +451,9 @@ function createCompetition()//Find Code ---------- CS1011
       return;    
   }
 
-  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
-  
-  
+  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
 
- 
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
         //alert(result);
@@ -489,8 +461,9 @@ function createCompetition()//Find Code ---------- CS1011
         {
             compSetTimeM = TimeVal;
 
+            
             compSetTime = TimeVal;
-            if (CountdownVal)
+            if (CountdownVal == 1)
                     compSetTimeS = 10;
             else 
                     compSetTimeS = 0;
@@ -520,32 +493,14 @@ function createCompetition()//Find Code ---------- CS1011
 //                                          Team Management TM1000                                   //
 //###################################################################################################//
 
-//This function is called when a student is removed from a team
-//Precondition: studPos, Stud1, Stud2, ..., is a valid student position
-//Postcondition: Username, school, and state are set to N/A,
-//the student name is set to it's default, and the add button is enabled.
-function setEditable(studPos)//Find Code ---------- TM1001
-{
-
-	var studentPosNum = studPos.charAt(studPos.length - 1);
-    
-	document.getElementById("Stud"+studentPosNum).value = "------Select a Name------";
-	document.getElementById("Stud"+studentPosNum).disabled = false;
-	document.getElementById("remove"+studentPosNum).disabled = true;
-	document.getElementById("add"+studentPosNum).disabled = false;
-	document.getElementById("Username_S"+studentPosNum).value = "N/A";
-	document.getElementById("School_S"+studentPosNum).value = "N/A";
-	document.getElementById("State_S"+studentPosNum).value = "N/A";
-	
-}
-
 //Precondition: Compeition must exist
 //Postcondition: Produces a list of team names based on the current competition
 //which can found under select a team in Team Management.
 function loadTeamNameList()//Find Code ---------- TM1002
 {
+   
     $.ajax({url: "ManageContent/loadTeamNames.php", success:function(result){
-
+            
             $("#MTeamList").html(result);
     }});  
 }
@@ -558,36 +513,12 @@ function loadManage()//Find Code ---------- TM1003
   document.getElementById("remove1").disabled=true;
   document.getElementById("remove2").disabled=true;
   document.getElementById("remove3").disabled=true;
+  document.getElementById("add1").disabled=true;
+  document.getElementById("add2").disabled=true;
+  document.getElementById("add3").disabled=true;
   loadTeamNameList();
 }
 
-//This function is referenced in Content_Manage.js
-//Precondition: Compeition must exist and team name must be unique
-//Postcondition: Creates a team based on the name entered
-function addTeam()//Find Code ---------- TM1004
-{
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    addTeamXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    addTeamXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  addTeamXML.onreadystatechange=function()
-  {
-    if (addTeamXML.readyState == 4 && addTeamXML.status == 200)
-    {
-      document.getElementById("MTeamList").innerHTML=addTeamXML.responseText;
-      document.getElementById("MTeamName").value='';
-    }
-  }
-  
-  var MTeamName = "MTeamName=" + document.getElementById("MTeamName").value;
-  addTeamXML.open("GET","ManageContent/createTeam.php?"+MTeamName,true);
-  addTeamXML.send();
-}
 
 //This function is currently not being used
 //Precondition: Team exists
@@ -595,53 +526,17 @@ function addTeam()//Find Code ---------- TM1004
 //is removed from the current compeition.
 function removeTeam()//Find Code ---------- TM1005
 {	
-	if (teamN=="")
-	{
-		document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
-		return;
-	}
-	
-        $.ajax({url: "ManageContent/removeTeam.php", data: "team=" + teamN, success:function(){
-                loadTeamNameList();
-        }});
-			
-	
-}
-
-//This function is called when there is no student in a position on a team
-//Precondition: Student posisition number must be valid 1,2,3,...
-//Postcondition: Loads all the students that are in the database and are currently not on a team.
-function showStudents(studentPosNum)//Find Code ---------- TM1006
-{
-
-  var showStudentsXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    showStudentsXML[studentPosNum]=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    showStudentsXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  showStudentsXML[studentPosNum].onreadystatechange=function()
-  {
-    if (showStudentsXML[studentPosNum].readyState==4 && showStudentsXML[studentPosNum].status==200)
+    if (teamN=="")
     {
-      document.getElementById("Member"+studentPosNum).innerHTML=showStudentsXML[studentPosNum].responseText;
-      document.getElementById("Stud"+studentPosNum).disabled = false;
-      document.getElementById("remove"+studentPosNum).disabled = true;
-      document.getElementById("add"+studentPosNum).disabled = false;
-	  document.getElementById("Username_S"+studentPosNum).value = "N/A";
-	  document.getElementById("School_S"+studentPosNum).value = "N/A";
-	  document.getElementById("State_S"+studentPosNum).value = "N/A";
+            document.getElementById("MTeamTitle").inner.HTML="<p>Please select a team name.</p>";
+            return;
     }
-  }
-  var getVars = "q="+teamN+"&selectName=Stud"+studentPosNum;
-  showStudentsXML[studentPosNum].open("GET","ManageContent/loadStudentNames.php?"+getVars,true);
-  showStudentsXML[studentPosNum].send();
 
+    $.ajax({url: "ManageContent/removeTeam.php", data: "team=" + teamN, success:function(){
+            loadTeamNameList();
+    }});
 }
+
 
 //This function is called when a team name is clicked.
 //This function is referenced in loadTeamNames.php and createTeam.php
@@ -650,354 +545,39 @@ function showStudents(studentPosNum)//Find Code ---------- TM1006
 function loadStudentInfo(element)//Find Code ---------- TM1007
 {
 
-  teamN = element.value;
-  
-  if (teamN=="")//If no team is currently selected
-  {
-    $("#MTeamTitle").html("<p>Please select a team name.</p>");
-    return;
-  }
-  else
-  {
-    $("#MTeamTitle").html("Team "+teamN);//Places the team name below the Team Information heading in Team Management
-  }
-	
-  var studPos;
-  var studentPosNum = 1;
-  
-  
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	loadStudentsXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-	loadStudentsXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-	  loadStudentsXML.onreadystatechange=function()
-	  {
-		if (loadStudentsXML.readyState==4 && loadStudentsXML.status==200)
-		{
-		    if(studentPosNum <= MAX_STUDENT_ON_TEAM)
-			{
-			  
-					if(loadStudentsXML.responseText == '')
-					{
-						switch(studentPosNum)
-						{
-							case 1:
-								showStudents(studentPosNum);
-							break;
-							case 2:
-								showStudents(studentPosNum);
-							break;
-							case 3:
-								showStudents(studentPosNum);
-							break;
-						}
+        teamN = element.value;
 
-					}
-					else
-					{
-						//alert(studentPosNum + " " + loadStudentsXML.responseText);
-						
-						loadStudName(loadStudentsXML.responseText, studPos);
-						getUserName(loadStudentsXML.responseText, studentPosNum);
-						getSchool(loadStudentsXML.responseText, studentPosNum);
-						getState(loadStudentsXML.responseText, studentPosNum);
-						document.getElementById("remove"+studentPosNum).disabled = false;
-						document.getElementById("add"+studentPosNum).disabled = true;
-					}
-					
-				studentPosNum++;
-				studPos = "Stud" + studentPosNum;
-				var getVars = "q="+teamN+"&studName="+studPos;
-				loadStudentsXML.open("GET","ManageContent/getFullStudentName.php?"+getVars,true);
-				loadStudentsXML.send();
-			}
-			
-			
-		}
-	  }
-	  
-	  studPos = "Stud" + studentPosNum;
-	  var getVars = "q="+teamN+"&studName="+studPos;
-	  loadStudentsXML.open("GET","ManageContent/getFullStudentName.php?"+getVars,true);
-	  loadStudentsXML.send();
+        if (teamN=="")//If no team is currently selected
+        {
+            document.getElementById("MTeamTitle").innerHTML="<p>Please select a team name.</p>";
+            return;
+        }
+        else
+        {
+            document.getElementById("MTeamTitle").innerHTML="Team "+teamN;//Places the team name below the Team Information heading in Team Management
+        }
+
+        var getVars = "q="+teamN;
+        
+        $.ajax({url: "ManageContent/getStudentInfo.php", data: getVars, success:function(result){
+
+                if(result.length != 0)
+                {
+                        var t = JSON.parse(result);
+                        var temp = t.length / 4;
+                        var i;
+                        for(i = 0; i < temp; i++)
+                        {                              
+                              document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
+                              document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
+                              document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
+                              document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
+                        }
+                        
+                }
+        } });
+ 
 }
-
-//This function is called when a team is selected
-//and has students on the team.
-//Precondition: Student position, Stud1, Stud2, ..., must be valid and a team must be selected
-//Postcondition: Student name is placed in an option which is then disabled
-//for viewing purposes.
-function loadStudName(studentName, studPos)//Find Code ---------- TM1008
-{
-
-	switch(studPos)
-	{
-		case 'Stud1':
-			member = 'Member1';
-			break;
-		case 'Stud2':
-			member = 'Member2';
-			break;
-		case 'Stud3':
-			member = 'Member3';
-			break;
-		default:
-			alert("Error from loadStudName in admin.js");
-			
-	}
-
-  if (teamN=="")
-  {
-	//document.getElementById("txtHint").innerHTML="";
-	return;
-  } 
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	loadStudNameXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-	loadStudNameXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  loadStudNameXML.onreadystatechange=function()
-  {
-	if (loadStudNameXML.readyState==4 && loadStudNameXML.status==200)
-	{
-			document.getElementById(member).innerHTML=loadStudNameXML.responseText;
-			document.getElementById(studPos).disabled = true;
-	}
-  }
-  var getVars = "q="+studentName+"&studName="+studPos;
-  loadStudNameXML.open("GET","ManageContent/studentNameLoad.php?"+getVars,true);
-  loadStudNameXML.send();
-
-}
-
-//This function is called when a student is either added or removed from a team.
-//Precondition: Student position must be provided such as Stud1, Stud2, etc
-//Postcondition: Refreshes the other students provided that there are no students in the team slots
-function refreshTeamInfo(element)//Find Code ---------- TM1009
-{
-  if (teamN=="")
-  {
-    document.getElementById("MTeamTitle").innerHTML="<p>Please select a team name.</p>";
-    return;
-  }
-  else
-  {
-    document.getElementById("MTeamTitle").innerHTML="Team "+teamN;
-  } 
-      
-	if(document.getElementById("Stud1").disabled == false)
-	{
-	  showStudents(1);
-	}
-	if (document.getElementById("Stud2").disabled == false)
-	{
-	  showStudents(2);
-	}
-	if (document.getElementById("Stud3").disabled == false)
-	{
-	  showStudents(3);
-	}
-}
-//This function is referenced in loadStudentNames.php and studentNameLoad.php
-//Precondition: The student's name must be passed as well as the currentStudPosition such as stud1, stud2, etc.
-//Postcondition: Calls the appropriate functions to display the student's username, school, and state.
-function currentSelection(element, currentStudPos)//Find Code ---------- TM1010
-{
-  currentStudent = element.value;
-  studentPos = currentStudPos.charAt(currentStudPos.length - 1);
-
-  getUserName(currentStudent, studentPos);
-  getSchool(currentStudent, studentPos);
-  getState(currentStudent, studentPos);
-}
-
-//This function is called when a team has a student in a given position.
-//Precondition: Student name in the form lastName, firstName must be provided as well as the students position number such as 1, 2, 3...
-//Postcondition: Places the student's username in the correct field on the Team Management page
-function getUserName(student, studentPosNum)//Find Code ---------- TM1011
-{
-	var userN;
-	var getUserNameXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-	
-	if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      getUserNameXML[studentPosNum]=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      getUserNameXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    getUserNameXML[studentPosNum].onreadystatechange=function()
-    {
-      if (getUserNameXML[studentPosNum].readyState==4 && getUserNameXML[studentPosNum].status==200)
-      {
-			document.getElementById("Username_S"+studentPosNum).value=getUserNameXML[studentPosNum].responseText;
-
-      }
-    }
-    
-    
-    getUserNameXML[studentPosNum].open("GET","ManageContent/getStudentUserName.php?currStudent="+student,true);
-    getUserNameXML[studentPosNum].send();
-}
-
-//This function is called when a team has a student in a given position.
-//Precondition: Student name in the form lastName, firstName must be provided as well as the students position number such as 1, 2, 3...
-//Postcondition: Places the student's school in the correct field on the Team Management page
-function getSchool(student, studentPosNum)//Find Code ---------- TM1012
-{
-
-	var getSchoolXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-	
-	if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      getSchoolXML[studentPosNum]=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      getSchoolXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    getSchoolXML[studentPosNum].onreadystatechange=function()
-    {
-      if (getSchoolXML[studentPosNum].readyState==4 && getSchoolXML[studentPosNum].status==200)
-      {
-			document.getElementById("School_S"+studentPosNum).value=getSchoolXML[studentPosNum].responseText;
-      }
-    }
-    getSchoolXML[studentPosNum].open("GET","ManageContent/getStudentSchool.php?currStudent="+student,true);
-    getSchoolXML[studentPosNum].send();
-}
-
-//This function is called when a team has a student in a given position.
-//Precondition: Student name in the form lastName, firstName must be provided as well as the students position number such as 1, 2, 3...
-//Postcondition: Places the student's state in the correct field on the Team Management page
-function getState(student, studentPosNum)//Find Code ---------- TM1013
-{
-
-	var getStateXML = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-
-	if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-      getStateXML[studentPosNum]=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-      getStateXML[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    getStateXML[studentPosNum].onreadystatechange=function()
-    {
-      if (getStateXML[studentPosNum].readyState==4 && getStateXML[studentPosNum].status==200)
-      {		
-			document.getElementById("State_S"+studentPosNum).value=getStateXML[studentPosNum].responseText;
-      }
-    }
-    getStateXML[studentPosNum].open("GET","ManageContent/getStudentState.php?currStudent="+student,true);
-    getStateXML[studentPosNum].send();
-}
-
-//This function is referenced in Content_Manage.js
-//Precondition: Valid username and student position must be provided.
-//Postcondition: Student is either added or removed from a team.
-function addRemoveStudent(userN, studPos)//Find Code ---------- TM1014
-{
-
-  var selectElement = document.getElementById(studPos);
-  var selectUser = document.getElementById(userN).value;
-  var selectStud = studPos;
-  var removeSelected;
-  var addSelected;
-  var studentPosNum;
-  var xmladdRemoveStudenthttp = new Array();//Since this function is called multiple times in a row we must create a different XMLHttpRequest we call the function so we don't overwrite the previous calls.
-  
-  if(selectStud == "Stud1")
-  {
-		removeSelected = "remove1";
-		addSelected = "add1";
-		studentPosNum = 1;
-  }
-  else if(selectStud == "Stud2")
-  {
-		removeSelected = "remove2";
-		addSelected = "add2";
-		studentPosNum = 2;
-  }
-  else
-  {
-		removeSelected = "remove3";
-		addSelected = "add3";
-		studentPosNum = 3;
-  }
-
-  if(document.getElementById(removeSelected).disabled)
-  {
-	  if(currentStudent == "------Select a Name------" || currentStudent == '')
-	  {
-		alert("That is not a valid selection");
-	  }
-	  else
-	  {
-		if (window.XMLHttpRequest)
-		{// code for IE7+, Firefox, Chrome, Opera, Safari
-		  xmladdRemoveStudenthttp[studentPosNum]=new XMLHttpRequest();
-		}
-		else
-		{// code for IE6, IE5
-		  xmladdRemoveStudenthttp[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmladdRemoveStudenthttp[studentPosNum].onreadystatechange=function()
-		{
-		  if (xmladdRemoveStudenthttp[studentPosNum].readyState==4 && xmladdRemoveStudenthttp[studentPosNum].status==200)
-		  {
-		    //refreshTeamInfo(selectElement);
-		    document.getElementById(selectStud).disabled=true;
-			document.getElementById(addSelected).disabled=true;
-			document.getElementById(removeSelected).disabled=false;
-			refreshTeamInfo(selectElement);
-		
-		  }
-		}
-		
-		xmladdRemoveStudenthttp[studentPosNum].open("GET","ManageContent/placeStudentOnTeam.php?userN="+selectUser + "&team=" + teamN + "&studNum="+selectStud,true);
-		xmladdRemoveStudenthttp[studentPosNum].send();
-		currentStudent='------Select a Name------';
-		
-	  }
-  }
-  else 
-  {
-		if (window.XMLHttpRequest)
-		{// code for IE7+, Firefox, Chrome, Opera, Safari
-		  xmladdRemoveStudenthttp[studentPosNum]=new XMLHttpRequest();
-		}
-		else
-		{// code for IE6, IE5
-		  xmladdRemoveStudenthttp[studentPosNum]=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		xmladdRemoveStudenthttp[studentPosNum].onreadystatechange=function()
-		{
-		  if (xmladdRemoveStudenthttp[studentPosNum].readyState==4 && xmladdRemoveStudenthttp[studentPosNum].status==200)
-		  {
-		    //alert(xmladdRemoveStudenthttp[studentPosNum].responseText);
-			
-			setEditable(selectStud);
-			refreshTeamInfo(selectElement);
-		  }
-		}
-		xmladdRemoveStudenthttp[studentPosNum].open("GET","ManageContent/removeStudentFromTeam.php?userN="+selectUser + "&team=" + teamN + "&studNum="+selectStud,true);
-		xmladdRemoveStudenthttp[studentPosNum].send();
-		currentStudent='------Select a Name------';
-	
-  }
-	
-}
-
 
 //###################################################################################################//
 //                                        Progress/Statistics PS1000                                 //
@@ -1008,196 +588,65 @@ function addRemoveStudent(userN, studPos)//Find Code ---------- TM1014
 //Postcondition: Load's the Progress and Statistics table
 function showTableProg()//Find Code ---------- PS1001
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function()
-  {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      document.getElementById("PTeamTables").innerHTML=xmlhttp.responseText;
-    }
-  }
-  xmlhttp.open("GET","ProgressContent/progressImpl.php",true);
-  xmlhttp.send();
+    $.ajax({url: "ProgressContent/progressImpl.php", success:function(result){
+
+            $("#PTeamTables").html(result);
+    }});
 }
 
 //###################################################################################################//
 //                                               Hints H1000                                         //
 //###################################################################################################//
 
-//This function is called when a competition is created
-//Precondition: Competition file must exist
-//Postcondition: Sets hintsEnabled to the correct value
-function setHintState()//Find Code ---------- H1001
-{
-	//alert("recieving now");
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    setHintStateXml=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    setHintStateXml=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  setHintStateXml.onreadystatechange=function()
-  {
-    if (setHintStateXml.readyState==4 && setHintStateXml.status==200)
-    {
-       if(setHintStateXml.responseText != "SET")
-	   {
-			hintsEnabled = false;
-			// alert("Hints: " + setHintStateXml.responseText);
-			// document.getElementById("SendPreDef").disabled = true;
-			// document.getElementById("SendCustom").disabled = true;
-			// document.getElementById("CustomHint").disabled = true;
-			// document.getElementById("HHintNum").disabled = true;
-			// document.getElementById("hintCountClear").disabled = true;
-	   }
-	   else
-		hintsEnabled = true;
-    }
-  }
-  setHintStateXml.open("GET","HintsContent/hintsState.php",true);
-  setHintStateXml.send();
-}
+
 
 //This function is referenced in Content_Hints.js
 //Precondition: Hints string must be passed and competition must be valid
 //Postcondition: Sends the custom hint to the compeition content file located in competitions folder
 function sendHintsCust(str)//Find Code ---------- H1002
 {
+    $.ajax({type: "GET", async: true, url: "HintsContent/sendCustom.php", data: "customHint=" + str, success:function(){
 
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            document.getElementById("CustomHint").value='';
-        }
-    }
-
-    xmlhttp.open("GET","HintsContent/sendCustom.php?customHint="+str,true);
-    xmlhttp.send();
-	
+            document.getElementById("CustomHint").value='';   
+    }});	
 }
 
 function showPre(str)//Find Code ---------- H1003
 {
 	
-  currProblemSelected = str;
+    currProblemSelected = str;
 	
+    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str, success:function(result){
 
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    showPreXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    showPreXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  showPreXML.onreadystatechange=function()
-  {
-    if (showPreXML.readyState==4 && showPreXML.status==200)
-    {
-      document.getElementById("HintNum").innerHTML=showPreXML.responseText;
-    }
-  }
-
-  showPreXML.open("GET","HintsContent/showPreDefHints.php?hintPreDef="+str,true);
-  showPreXML.send();
-  
+            $("#HintNum").html(result);  
+    }});  
 }
 
 function showPreHintText(str)//Find Code ---------- H1004
-{
+{      
+    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHintText.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + str, success:function(result){
 
-	  lastHintSelected = str;
-	  if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-		showPreTextXML=new XMLHttpRequest();
-	  }
-	  else
-	  {// code for IE6, IE5
-		showPreTextXML=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	  showPreTextXML.onreadystatechange=function()
-	  {
-		if (showPreTextXML.readyState==4 && showPreTextXML.status==200)
-		{
-				document.getElementById("HintText").innerHTML=showPreTextXML.responseText;
-                                //alert(showPreTextXML.responseText);
-		   
-		}
-	  }
-
-	  showPreTextXML.open("GET","HintsContent/showPreDefHintText.php?problemSelected="+currProblemSelected + "&hintSelected=" + str,true);
-	  showPreTextXML.send();
-
+    $("#HintText").html(result);  
+    }}); 
 }
 
 
 function sendHintPreDef()//Find Code ---------- H1005
-{
+{    
+    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected, success:function(result){
 
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlsendHintPreDefhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlsendHintPreDefhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
+        $("#HintText").html(result);  
 
-    xmlsendHintPreDefhttp.onreadystatechange=function()
-    {
-        if (xmlsendHintPreDefhttp.readyState==4 && xmlsendHintPreDefhttp.status==200)
-        {
-            document.getElementById("HintText").innerHTML=xmlsendHintPreDefhttp.responseText;
-            //document.getElementById("HintText").innerHTML=xmlsendHintPreDefhttp.responseText;
-
-        }
-    }
-
-    xmlsendHintPreDefhttp.open("GET","HintsContent/sendPre.php?problemSelected="+currProblemSelected + "&hintSlected=" + lastHintSelected,true);
-    xmlsendHintPreDefhttp.send();
-	 
-
+    }});
 }
 
 function loadProblemNames()//Find Code ---------- H1006
-{
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadProblemNamesXML=new XMLHttpRequest();
-	  }
-	  else
-	  {// code for IE6, IE5
-		loadProblemNamesXML=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	  loadProblemNamesXML.onreadystatechange=function()
-	  {
-		if (loadProblemNamesXML.readyState==4 && loadProblemNamesXML.status==200)
-		{
-		  document.getElementById("probNamesHints").innerHTML=loadProblemNamesXML.responseText;
-		}
-	  }
+{              
+    $.ajax({type: "GET", url: "HintsContent/getProbNames.php", success:function(result){
 
-	  loadProblemNamesXML.open("GET","HintsContent/getProbNames.php",true);
-	  loadProblemNamesXML.send();
+            $("#probNamesHints").html(result);  
+
+    }});               
 }
 
 //###################################################################################################//
