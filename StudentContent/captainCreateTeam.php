@@ -13,7 +13,7 @@ $isNewTeam = $_POST['newTeam'];
 if (isset($_SESSION['userObject']) && ($user != NULL)) {
     try {
       //check if a new team has been created
-      if($isNewTeam){
+      if($isNewTeam=="true"){
         $registerData = array("teamname" => $teamName, "teamleaderid" => $user->userid);
         $team = Team::createTeam($registerData);
 	$user->addUserToTeam($team);

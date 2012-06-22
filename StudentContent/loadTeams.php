@@ -8,7 +8,7 @@ if ($user != NULL) {
     $html = '';
     foreach ($teams as $team) {
         if ($team->getTeamLeader() == $user->userid)
-            $html .= "<option value='".$team->teamid."' ondblclick='RejoinTeam(this.value);' style='font-weight:bold;'>";
+            $html .= "<option value='".$team->teamid."' ondblclick='RejoinTeam(this.value);' class='boldedOpt'>";
         else
             $html .= "<option value='".$team->teamid."' ondblclick='RejoinTeam(this.value);'>";
         $html .= $team->teamname;
