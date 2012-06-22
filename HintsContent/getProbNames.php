@@ -1,22 +1,35 @@
 <?php
 
+require_once '../header.php';
+session_start();
+
+if(isset($_SESSION['adminObject']))
+{
+    if(isset($_COOKIE['compN']) && $_COOKIE['compN'] != '')
+    {
+        $admin = $_SESSION['adminObject'];
+        $compN = $_COOKIE['compN'];
+
+        $problems = $admin->getCompetitionByCompName($compN)->getProblems();
 
 
-
-  if(file_exists ("../Competitions/${adminCompID}/${adminCompID}.txt")){
-    $file = file("../Competitions/${adminCompID}/${adminCompID}.txt");
-    $problemNums = $file[0];
-    $content = '<select name="HProbNum" id="HProbNum" size=5 class="Hselect" onchange=showPre(this.value);>';
-    $studProbs = explode(',', $file[4]);
-    
-	for($i = 0; $i < $problemNums; $i++)
-	{
-		$content .= "<option> ${studProbs[$i]} </option>";
-	}
-	
-	$content .= '</select>';
-	echo $content;
-   }
+            $content = '<select name="HProbNum" id="HProbNum" size=5 class="Hselect" onchange=showPre(this.value);>';
 
 
+                for($i = 0; $i < count($problems); $i++)
+                {
+                    $probID = $problems[$i]->problemid;
+                    $prob = $problems[$i]->problemname;
+                    $content .= "<option id='${probID}'> ${prob} </option>";
+                }
+
+                $content .= '</select>';
+                echo $content;
+    }
+    else
+        echo "Please select a competition";
+           
+}
+else
+    header( 'Location: index.html');
 ?>
