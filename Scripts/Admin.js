@@ -92,7 +92,6 @@ function startCompetition() //Find Code ---------- CS1001
 
 function refreshProbList()
 {
-    
     var content = '<select name="ProblemsList" id="ProblemsListGet" class="Cselect" size="8" onchange="showProbPreview(this)">';
     var difficulty;
     var pSBD = new Array(); //problems sorted by difficulty
@@ -137,14 +136,13 @@ function refreshProbList()
       				break;
       			case 4:
       				diffStr = ' - Very Hard';
-      				break;
-     				
+      				break;	
       		}
       		content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + pSBD[difficulty][prob] + "'>" + pSBD[difficulty][prob] + diffStr +"</option>"; 
       	}
       }
       
-      content += '</select>';
+     content += '</select>';
     
      document.getElementById('ProblemsList').innerHTML = content;
      
@@ -180,11 +178,8 @@ function refreshProbList()
                         break;    					
                 }
                 content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
-
             }
         });
-
-
     }
     content += '</select>';
     
@@ -197,7 +192,6 @@ function refreshProbList()
 //Postcondition: Sets up files and does initial loading of problems available
 function popProbSelectBox()//Find Code ---------- CS1003
 {
-    
     $.ajax({type: "GET", url: "AdminCompContent/loadProblems.php", success:function(result){
             
             availableProbs = JSON.parse(result);
@@ -214,7 +208,6 @@ function popProbSelectBox()//Find Code ---------- CS1003
         refreshProbList();   
 
     }});
-
 }
 
 //This function is referenced in page.html
@@ -222,41 +215,30 @@ function popProbSelectBox()//Find Code ---------- CS1003
 //Postcondition: Adds the problem to the added box(selected problems) and removes it from the available box(available problems)
 function addProb(problem)//Find Code ---------- CS1004
 {
-  //if(addedProbs.length == 5)
-  //{
-      //document.getElementById('CSetupError').innerHTML = "You cannot have more than 5 problems in a competition.";
-      //return;
-  //}
-  //alert("Called");
-  
-  if(problem == '')
-  {
-      return;
-  }
-  
-  /*if (contains(addedProbs, problem))
-  {
-  	return;
-  }*/
-  
-  var index = availableProbs.indexOf(problem);
-  availableProbs.splice(index, 1);
-  addedProbs.push(problem);
-  refreshProbList();
-  
-  if(addedProbs.length > 0)
-       document.getElementById('rBut').disabled = false;
-  
-  if(addedProbs.length > 1)
-  {
-      document.getElementById('CMoveUp').disabled = false;
-      document.getElementById('CMoveDown').disabled = false;
-  }
-  
-  if(availableProbs.length == 0)
-       document.getElementById('aBut').disabled = true;
+    if(problem == '')
+    {
+        return;
+    }
 
-	refreshProbList()
+
+    var index = availableProbs.indexOf(problem);
+    availableProbs.splice(index, 1);
+    addedProbs.push(problem);
+    refreshProbList();
+
+    if(addedProbs.length > 0)
+        document.getElementById('rBut').disabled = false;
+
+    if(addedProbs.length > 1)
+    {
+        document.getElementById('CMoveUp').disabled = false;
+        document.getElementById('CMoveDown').disabled = false;
+    }
+
+    if(availableProbs.length == 0)
+        document.getElementById('aBut').disabled = true;
+
+            refreshProbList()
 }
 
 //This function is referenced in page.html
@@ -297,7 +279,6 @@ function showProbPreview(prob)//Find Code ---------- CS1008
     $.ajax({url: "AdminCompContent/showPreview.php", async: true, data: "problem=" + problem, success:function(result){
 
             $("#CTextArea").val(result);
-
     }});
 	
   showBugList(problem);
@@ -311,8 +292,7 @@ function showBugList(prob)
     $.ajax({url: "AdminCompContent/showBugList.php", async: true, data: "problem=" + prob, success:function(result){
 
             $("#CBugArea").val(result);	
-    }});
-		  
+    }});		  
 }
 
 function moveProbUp(problem)//Find Code ---------- CS1009
@@ -353,16 +333,13 @@ function js_array_to_php_array(a)
 
 function setCookie(c_name,value,exdays)
 {
-var exdate=new Date();
-exdate.setDate(exdate.getDate() + exdays);
-var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-document.cookie=c_name + "=" + c_value;
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+    document.cookie=c_name + "=" + c_value;
 }
 function createCompetition()//Find Code ---------- CS1011
 {
-
-  //STOPPED = true;
-  
 
   var CodeCov = document.forms.CompForm.AllowCoverage;
   var hidden = document.forms.CompForm.HideComp;
@@ -373,8 +350,7 @@ function createCompetition()//Find Code ---------- CS1011
   var CountdownVal;
   var CodeCovVal;
   var HideCompVal;
-  
-      
+    
   if(hidden[0].checked == true)
       HideCompVal = 1;
   else
@@ -385,7 +361,6 @@ function createCompetition()//Find Code ---------- CS1011
   else
       CodeCovVal = 0;
 
-  
   var TimeVal = Time.value;
   var length = addedProbs.length;
  
@@ -423,7 +398,6 @@ function createCompetition()//Find Code ---------- CS1011
 
   var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
-
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
         //alert(result);
@@ -451,13 +425,7 @@ function createCompetition()//Find Code ---------- CS1011
 
         
     }});
-
-
-    
-
 }
-
-
 
 //###################################################################################################//
 //                                          Team Management TM1000                                   //
@@ -531,23 +499,20 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
         var getVars = "q="+teamN;
         
         $.ajax({url: "ManageContent/getStudentInfo.php", data: getVars, success:function(result){
-
-                if(result.length != 0)
-                {
-                        var t = JSON.parse(result);
-                        var temp = t.length / 4;
-                        var i;
-                        for(i = 0; i < temp; i++)
-                        {                              
-                                document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
-                                document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
-                                document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
-                                document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
-                        }
-
-                }
-        } });
- 
+                    if(result.length != 0)
+                    {
+                            var t = JSON.parse(result);
+                            var temp = t.length / 4;
+                            var i;
+                            for(i = 0; i < temp; i++)
+                            {                              
+                                    document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
+                                    document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
+                                    document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
+                                    document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
+                            }
+                    }
+                }});
 }
 
 //###################################################################################################//
@@ -632,7 +597,6 @@ function AdminLoadCheck()//Find Code ---------- USC1001
 //Since the master timer is synced with the administrators timer
 function getMasterTime()//Find Code ---------- USC1002
 {
-    
     $.ajax({url: "AdminCompContent/getMasterTime.php", success:function(result){
 
         var time;
@@ -659,7 +623,6 @@ function getMasterTime()//Find Code ---------- USC1002
         else
             document.getElementById("header-timer").innerHTML="STOP!";
 
-    }});
-           
+    }});       
 }
 
