@@ -1,5 +1,17 @@
 var compSelected;
 
+//checks that a users cookies are set before allowing them to view the page
+function checkUser()
+{
+    $.post('StudentContent/checkUser.php', "", 
+        function(html){
+            //if the user is not logged in, redirect them to login page
+            if (html.trim() == 0){
+                alert(html);
+}
+        });
+}
+
 function hideButton()
 {
     $("#joinbutton").hide();
