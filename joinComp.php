@@ -12,7 +12,7 @@ $correctPassword = $comp->password;
 
 
 try{
-    if ($correctPassword == NULL)
+    if (($correctPassword == NULL)||($correctPassword = crypt("",SALT)))
     {
         $team->addTeamToCompetition($comp);
         echo 1;
@@ -22,7 +22,7 @@ try{
         $team->addTeamToCompetition($comp);
         echo 1;
     }
-    else echo $passwordEntered .",". $correctPassword;
+    else echo 0;
 }
 catch(BugCatcherException $e){
     echo 1;

@@ -11,13 +11,15 @@ if ($user != NULL && $team != NULL) {
     $memberInfo = '';
     if ($isCaptain) {
         $members = $team->getUsers();
+        if (count($members) == 0)
+            echo "<p>None logged in</p>";
         foreach ($members as $member) {
             if ($member->userid != $user->userid)
                 $memberInfo .= "<p>".$member->username . "</p>";
         }
     } else {
-        $leader = $team->getTeamLeader();
-        $leaderID = $leader->userid;
+        $leaderID = $team->getTeamLeader();
+        $leader = new User($leaderID);
         $userID = $user->userid;
         $memberInfo .= "<p>Team Leader: ";
         $memberInfo .= $captain->username . "</p>";
@@ -31,6 +33,7 @@ if ($user != NULL && $team != NULL) {
             }
         }
     }
+    
     echo $memberInfo;
 }
 else
