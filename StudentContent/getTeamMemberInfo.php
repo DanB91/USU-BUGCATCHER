@@ -9,7 +9,7 @@ $isCaptain = $_POST['isCaptain'];
 
 if ($user != NULL && $team != NULL) {
     $memberInfo = '';
-    if ($isCaptain) {
+    if ($isCaptain == "true") {
         $members = $team->getUsers();
         if (count($members) == 0)
             echo "<p>None logged in</p>";
