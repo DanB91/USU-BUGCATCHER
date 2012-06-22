@@ -3,6 +3,7 @@
 require_once 'Model.php';
 require_once 'Team.php';
 require_once 'TeamInvite.php';
+require_once 'Chat.php';
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -17,7 +18,6 @@ require_once 'TeamInvite.php';
  * @author danielbokser
  */
 class User extends Model{
-  
     
     /**
      *Constructs a user using a given unique value 
@@ -124,10 +124,24 @@ class User extends Model{
 	return $teamArr;
     }
     
+    public function sendChat($compID, $chatText){
+	$data['chattext'] = $chatText;
+	$data['chattype'] = "Chat";
+	$data['userid'] = $this->getPrimaryKeyValue();
+	$data['compid'] = $compID;
+        Model::addRow('CHATS', $data);
+    }
     
-    
-    
-    
+    public function submitTestCase($compID, $testText, $problemID, $teamID){
+	$data['chattext'] = $testText;
+	$data['chattype'] = "Test";
+	$data['teamid'] = $teamID;
+	$data['userid'] = $this->getPrimaryKeyValue();
+	$data['problemid'] = $problemID;
+	$data['compid'] = $compID;
+        Model::addRow('CHATS', $data);
+    }
+     
 }
 
 ?>
