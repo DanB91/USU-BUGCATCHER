@@ -371,7 +371,7 @@ a.button {
 	text-decoration: none;
 	color: #2f393f;
 	font-family: Dekar, "Lucida Console", Monaco, monospace;
-	font-size:40px;
+	font-size:20px;
 	font-weight:normal;
 }
 a.button p {
@@ -379,6 +379,7 @@ a.button p {
 	background: transparent url(../Images/buttonL.png) no-repeat; 
 	display: block;
 	line-height: 65px;
+        
 	padding: 0px 20px 5px 40px;
 } 
 a.button:hover p{
