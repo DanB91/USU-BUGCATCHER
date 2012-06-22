@@ -441,8 +441,8 @@ function createCompetition()//Find Code ---------- CS1011
             //setCompCookies();
             createTimer();
             stopTimer();
-            $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
             $("#header-timer").html(TimeVal +":00");
+            $("#CSetupError").html("Competition successfully created.");
         }
         else
         {
@@ -539,12 +539,12 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
                         var i;
                         for(i = 0; i < temp; i++)
                         {                              
-                              document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
-                              document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
-                              document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
-                              document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
+                                document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
+                                document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
+                                document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
+                                document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
                         }
-                        
+
                 }
         } });
  
@@ -625,7 +625,6 @@ function loadProblemNames()//Find Code ---------- H1006
 //Checks all student users' current active status
 function AdminLoadCheck()//Find Code ---------- USC1001
 {
-	//getActiveCompetition();
         getMasterTime();
 }
 
