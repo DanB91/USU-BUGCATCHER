@@ -38,7 +38,7 @@ if(!file_exists($tempFix.$prob->oraclepath)){trigger_error("Can't find Oracle, c
 
 $foundBug = false;
 $alreadyFoundBug = false;
-$bugid ="";
+$bugObjectFound ="";
 
 
 
@@ -46,34 +46,46 @@ $oOutput = trim(shell_exec("java -jar $tempFix"."$prob->oraclepath $testInput"))
 
 
 foreach($prob->getBugs() as $value){
+    if($oOutput != $testOutput){
+        break;
+    }
     $bOutput = trim(shell_exec("java -jar $tempFix". "$value->abpath $testInput"));
-    
+        
      if ($bOutput != $oOutput) {
-         echo "$value->bugid,$comp->compid,$team->teamid";
+         
          if ($team->hasFoundBugInCompetition($value, $comp)) {
              $alreadyFoundBug = true;
              continue;
          }
          else{
              $foundBug = true;
-             $bugid = $value->bugid;
+             $bugObjectFound = $value;
              break;
          }
          
      }
+
     
 }
 if($foundBug &&  $alreadyFoundBug){
-    echo "Found Newer Bug";
+    echo "$bugObjectFound->bugid,$comp->compname\n";
+    $team->foundBugInCompetition($bugObjectFound,$comp);
+    echo "Found Bug\n";
+    echo "Correct Output:$bOutput\n";
+    echo "Program Output:$oOutput";
 }
 elseif($foundBug &&  !$alreadyFoundBug){
-    echo "Found Bug";
+    echo "$bugObjectFound->bugid,$comp->compname\n";
+    $team->foundBugInCompetition($bugObjectFound,$comp);
+    echo "Found Bug\n";
+    echo "Correct Output:$bOutput\n";
+    echo "Program Output:$oOutput";
 }
 elseif(!$foundBug &&  $alreadyFoundBug){
-    echo "Found alreay exist";
+    echo "Bug already exist";
 }
 else{
-     echo "This is impossible";   
+     echo "Bad input/output";   
 }
 
 
