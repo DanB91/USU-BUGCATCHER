@@ -65,7 +65,7 @@ var currentStudent = '';	 //Find Code ---------- GV1003
 
 var currProblemSelected = '';//Find Code ---------- GV1005
 var lastHintSelected = '';	 //Find Code ---------- GV1006
-
+var currProbID = '';
 var availableProbs;
 var addedProbs = [];
 
@@ -612,17 +612,18 @@ function sendHintsCust(str)//Find Code ---------- H1002
 
 function showPre(str)//Find Code ---------- H1003
 {
+    currProbID = str.id;
+    currProblemSelected = str.value;
 	
-    currProblemSelected = str;
-	
-    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str, success:function(result){
+    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str.value, success:function(result){
 
             $("#HintNum").html(result);  
     }});  
 }
 
 function showPreHintText(str)//Find Code ---------- H1004
-{      
+{   
+    lastHintSelected = str;
     $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHintText.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + str, success:function(result){
 
     $("#HintText").html(result);  
@@ -632,7 +633,7 @@ function showPreHintText(str)//Find Code ---------- H1004
 
 function sendHintPreDef()//Find Code ---------- H1005
 {    
-    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected, success:function(result){
+    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected + "&probID=" + currProbID, success:function(result){
 
         $("#HintText").html(result);  
 
