@@ -11,7 +11,7 @@
 
 </head>
 
-<body onload='checkUser();loadTeamInvites();'>
+<body onload='checkUser();loadTeamInvites();loadTeams();'>
    
     <a href="Student.html"></a>
 	<div id="header-logout-help" style="float: right; margin: 0 120 0 0;text-align: center;width: 75;">
@@ -26,14 +26,22 @@
     <!--#####################################################################-->
     <!--#####################################################################-->
     	
-  <div id="LandingView-Start" class="LV-Sections">
-    <div id="LVS-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
-      <p id="smallerHeader" style="color:#000;">Team Invites</p>
-      <div id="TeamInvitations"><select name ="InviteSelectBox" id="InviteSelectBox" size=5><option selected disabled>View Team Invites Here</option></select></div>
-      <!--        <input type="submit" value="Refresh" >-->
-      <a class="button" onClick="loadTeamInvites();"><p>Refresh</p></a>
-      <a class="button" onClick="StartToMember(InviteSelectBox.options[InviteSelectBox.selectedIndex].value);"><p>Join Team</p></a>
-    </div><!--end LVS-Left-->
+    <div id="LandingView-Start" class="LV-Sections">
+        <div id="LVS-Left" class="LV-Left">  <!--style="float: left; width: 250px; margin: 30px 0 0 20px;">-->
+
+            <div id="UsersTeams" style="margin:10px;">
+                <p id="smallerHeader" style="color:#000;">Your Teams</p>
+                <select name ="TeamSelectBox" id="TeamSelectBox" size=5 style="width:250px;"><option selected disabled>View Teams Here</option></select>
+                <a class="button" onClick="RejoinTeam(TeamSelectBox.options[TeamSelectBox.selectedIndex].value);"><p>Join Team</p></a>
+            </div>
+            <div id="TeamInvites" style="margin:20px;">
+                <p id="smallerHeader" style="color:#000;">Team Invites</p>
+                <select name ="InviteSelectBox" id="InviteSelectBox" size=5 style="width:250px;"><option selected disabled>View Team Invites Here</option></select>
+                <a class="button" onClick="StartToMember(InviteSelectBox.options[InviteSelectBox.selectedIndex].value);"><p>Accept Invite</p></a>
+            </div>
+        <a class="button" onClick="loadTeamInvites();loadTeams();"><p>Refresh</p></a>
+            
+        </div><!--end LVS-Left-->
         
     <div id="LVS-Right" class="LV-Right"> <!--style="float: left; width:600px; margin: 30px 0 0 50px;">-->
     

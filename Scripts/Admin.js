@@ -5,7 +5,6 @@ Table of Contents
 		1.1 teamN			  	---------- GV1001
 		1.2 MAX_STUDENT_ON_TEAM ---------- GV1002
 		1.3 currentStudent      ---------- GV1003
-		1.4 hintsEnabled        ---------- GV1004
 		1.5 currProblemSelected ---------- GV1005
 		1.6 lastHintSelected    ---------- GV1006
 	2.Competition Setup   ---------- CS1000
@@ -63,7 +62,7 @@ var MAX_STUDENT_ON_TEAM = 3; //Find Code ---------- GV1002
 var currentStudent = '';	 //Find Code ---------- GV1003
 
 //Hints Global Variables
-var hintsEnabled;			 //Find Code ---------- GV1004
+
 var currProblemSelected = '';//Find Code ---------- GV1005
 var lastHintSelected = '';	 //Find Code ---------- GV1006
 
@@ -83,32 +82,13 @@ var compSetTime;
 //Postcondition: Starts the competition
 function startCompetition() //Find Code ---------- CS1001
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlstartCompetitionhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlstartCompetitionhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlstartCompetitionhttp.onreadystatechange=function()
-  {
-    if (xmlstartCompetitionhttp.readyState == 4 && xmlstartCompetitionhttp.status == 200)
-    {
-        //Need to write a new countdown function
-        document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
-        //alert(xmlstartCompetitionhttp.responseText);
-        startTimer();
-    }
-  }
-  //Don't start competition until the countdown timer reaches zero.
-  while (
-  xmlstartCompetitionhttp.open("GET","AdminCompContent/StartCompetition.php",true));
-  xmlstartCompetitionhttp.send();
-
+    $.ajax({url: "AdminCompContent/StartCompetition.php", success:function(){
+            //Need to write a new countdown function
+            document.getElementById('header-controls').innerHTML = '<img title="Pause Competition" src="Images/pause.gif" height="79" width="107" onclick=pauseTimer(); />';
+            //alert(xmlstartCompetitionhttp.responseText);
+            startTimer();  
+    }});    
 }
-
 
 function refreshProbList()
 {
@@ -415,7 +395,6 @@ function createCompetition()//Find Code ---------- CS1011
   
 
   var CodeCov = document.forms.CompForm.AllowCoverage;
-  var inclCD = document.forms.CompForm.IncludeCountdown;
   var hidden = document.forms.CompForm.HideComp;
   var Time = document.getElementById("CompTime");
   var compName = $("#CompName").val();
@@ -436,10 +415,6 @@ function createCompetition()//Find Code ---------- CS1011
   else
       CodeCovVal = 0;
 
-  if(inclCD[0].checked == true)
-      CountdownVal = 1;
-  else
-      CountdownVal = 0;
   
   var TimeVal = Time.value;
   var length = addedProbs.length;
@@ -476,12 +451,9 @@ function createCompetition()//Find Code ---------- CS1011
       return;    
   }
 
-  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
-  
-  
+  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
 
- 
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
         //alert(result);
@@ -489,8 +461,9 @@ function createCompetition()//Find Code ---------- CS1011
         {
             compSetTimeM = TimeVal;
 
+            
             compSetTime = TimeVal;
-            if (CountdownVal)
+            if (CountdownVal == 1)
                     compSetTimeS = 10;
             else 
                     compSetTimeS = 0;
@@ -525,8 +498,9 @@ function createCompetition()//Find Code ---------- CS1011
 //which can found under select a team in Team Management.
 function loadTeamNameList()//Find Code ---------- TM1002
 {
+   
     $.ajax({url: "ManageContent/loadTeamNames.php", success:function(result){
-
+            
             $("#MTeamList").html(result);
     }});  
 }
@@ -560,6 +534,7 @@ function removeTeam()//Find Code ---------- TM1005
 
     $.ajax({url: "ManageContent/removeTeam.php", data: "team=" + teamN, success:function(){
             loadTeamNameList();
+            teamN = '';
     }});
 }
 
@@ -587,18 +562,22 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
         
         $.ajax({url: "ManageContent/getStudentInfo.php", data: getVars, success:function(result){
 
-                var t = JSON.parse(result);
-                
-                for(var i = 0; i < t.length; i++)
+                if(result.length != 0)
                 {
-                    document.getElementById('Name_S' + (i + 1)).value=t[i][0];
-                    document.getElementById('Username_S' + (i + 1)).value=t[i][1];
-                    document.getElementById('School_S' + (i + 1)).value=t[i][2];
-                    document.getElementById('State_S1' + (i + 1)).value=t[i][3];
+                        var t = JSON.parse(result);
+                        var temp = t.length / 4;
+                        var i;
+                        for(i = 0; i < temp; i++)
+                        {                              
+                              document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
+                              document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
+                              document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
+                              document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
+                        }
+                        
                 }
         } });
-                    
-      
+ 
 }
 
 //###################################################################################################//
@@ -610,196 +589,65 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
 //Postcondition: Load's the Progress and Statistics table
 function showTableProg()//Find Code ---------- PS1001
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function()
-  {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      document.getElementById("PTeamTables").innerHTML=xmlhttp.responseText;
-    }
-  }
-  xmlhttp.open("GET","ProgressContent/progressImpl.php",true);
-  xmlhttp.send();
+    $.ajax({url: "ProgressContent/progressImpl.php", success:function(result){
+
+            $("#PTeamTables").html(result);
+    }});
 }
 
 //###################################################################################################//
 //                                               Hints H1000                                         //
 //###################################################################################################//
 
-//This function is called when a competition is created
-//Precondition: Competition file must exist
-//Postcondition: Sets hintsEnabled to the correct value
-function setHintState()//Find Code ---------- H1001
-{
-	//alert("recieving now");
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    setHintStateXml=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    setHintStateXml=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  setHintStateXml.onreadystatechange=function()
-  {
-    if (setHintStateXml.readyState==4 && setHintStateXml.status==200)
-    {
-       if(setHintStateXml.responseText != "SET")
-	   {
-			hintsEnabled = false;
-			// alert("Hints: " + setHintStateXml.responseText);
-			// document.getElementById("SendPreDef").disabled = true;
-			// document.getElementById("SendCustom").disabled = true;
-			// document.getElementById("CustomHint").disabled = true;
-			// document.getElementById("HHintNum").disabled = true;
-			// document.getElementById("hintCountClear").disabled = true;
-	   }
-	   else
-		hintsEnabled = true;
-    }
-  }
-  setHintStateXml.open("GET","HintsContent/hintsState.php",true);
-  setHintStateXml.send();
-}
+
 
 //This function is referenced in Content_Hints.js
 //Precondition: Hints string must be passed and competition must be valid
 //Postcondition: Sends the custom hint to the compeition content file located in competitions folder
 function sendHintsCust(str)//Find Code ---------- H1002
 {
+    $.ajax({type: "GET", async: true, url: "HintsContent/sendCustom.php", data: "customHint=" + str, success:function(){
 
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function()
-    {
-        if (xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-            document.getElementById("CustomHint").value='';
-        }
-    }
-
-    xmlhttp.open("GET","HintsContent/sendCustom.php?customHint="+str,true);
-    xmlhttp.send();
-	
+            document.getElementById("CustomHint").value='';   
+    }});	
 }
 
 function showPre(str)//Find Code ---------- H1003
 {
 	
-  currProblemSelected = str;
+    currProblemSelected = str;
 	
+    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str, success:function(result){
 
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    showPreXML=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    showPreXML=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  showPreXML.onreadystatechange=function()
-  {
-    if (showPreXML.readyState==4 && showPreXML.status==200)
-    {
-      document.getElementById("HintNum").innerHTML=showPreXML.responseText;
-    }
-  }
-
-  showPreXML.open("GET","HintsContent/showPreDefHints.php?hintPreDef="+str,true);
-  showPreXML.send();
-  
+            $("#HintNum").html(result);  
+    }});  
 }
 
 function showPreHintText(str)//Find Code ---------- H1004
-{
+{      
+    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHintText.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + str, success:function(result){
 
-	  lastHintSelected = str;
-	  if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-		showPreTextXML=new XMLHttpRequest();
-	  }
-	  else
-	  {// code for IE6, IE5
-		showPreTextXML=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	  showPreTextXML.onreadystatechange=function()
-	  {
-		if (showPreTextXML.readyState==4 && showPreTextXML.status==200)
-		{
-				document.getElementById("HintText").innerHTML=showPreTextXML.responseText;
-                                //alert(showPreTextXML.responseText);
-		   
-		}
-	  }
-
-	  showPreTextXML.open("GET","HintsContent/showPreDefHintText.php?problemSelected="+currProblemSelected + "&hintSelected=" + str,true);
-	  showPreTextXML.send();
-
+    $("#HintText").html(result);  
+    }}); 
 }
 
 
 function sendHintPreDef()//Find Code ---------- H1005
-{
+{    
+    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected, success:function(result){
 
-    if (window.XMLHttpRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xmlsendHintPreDefhttp=new XMLHttpRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xmlsendHintPreDefhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
+        $("#HintText").html(result);  
 
-    xmlsendHintPreDefhttp.onreadystatechange=function()
-    {
-        if (xmlsendHintPreDefhttp.readyState==4 && xmlsendHintPreDefhttp.status==200)
-        {
-            document.getElementById("HintText").innerHTML=xmlsendHintPreDefhttp.responseText;
-            //document.getElementById("HintText").innerHTML=xmlsendHintPreDefhttp.responseText;
-
-        }
-    }
-
-    xmlsendHintPreDefhttp.open("GET","HintsContent/sendPre.php?problemSelected="+currProblemSelected + "&hintSlected=" + lastHintSelected,true);
-    xmlsendHintPreDefhttp.send();
-	 
-
+    }});
 }
 
 function loadProblemNames()//Find Code ---------- H1006
-{
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-		loadProblemNamesXML=new XMLHttpRequest();
-	  }
-	  else
-	  {// code for IE6, IE5
-		loadProblemNamesXML=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	  loadProblemNamesXML.onreadystatechange=function()
-	  {
-		if (loadProblemNamesXML.readyState==4 && loadProblemNamesXML.status==200)
-		{
-		  document.getElementById("probNamesHints").innerHTML=loadProblemNamesXML.responseText;
-		}
-	  }
+{              
+    $.ajax({type: "GET", url: "HintsContent/getProbNames.php", success:function(result){
 
-	  loadProblemNamesXML.open("GET","HintsContent/getProbNames.php",true);
-	  loadProblemNamesXML.send();
+            $("#probNamesHints").html(result);  
+
+    }});               
 }
 
 //###################################################################################################//

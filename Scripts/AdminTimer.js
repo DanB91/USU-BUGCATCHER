@@ -13,20 +13,28 @@ function startTimer()
     if (STOPPED || (!STOPPED && PAUSED))
     {   
        
-        $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){} });
+        $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){
+               
+            if(PAUSED)
+            {
+                $.ajax({url: "AdminCompContent/unPause.php", success:function(){
+                        
+                    getMasterTime();
+                    STOPPED = false;
+                    PAUSED = false;
+                     
+                } });
+               
+            }
+            else
+            {
+                adminTimer = setInterval(function() {countdown();},1000);
+                STOPPED = false;
+            }
+                
+        } });
         
-        if(PAUSED)
-        {
-            $.ajax({url: "AdminCompContent/unPause.php", success:function(){ } });
-            getMasterTime();
-            STOPPED = false;
-            PAUSED = false;
-        }
-        else
-        {
-             adminTimer = setInterval(function() {countdown();},1000);
-             STOPPED = false;
-        }
+       
         
        
     } 
@@ -129,9 +137,12 @@ function createTimer()
     STOPPED = true;
     PAUSED = false;
 
-    if (seconds > 0)
-            COUNTINGDOWN = true;
-   
+    if (seconds > 0){
+
+        COUNTINGDOWN = true;
+    }
+ 
+
 }
 
 //Inserts leading zeroes on the minutes and seconds for the timer

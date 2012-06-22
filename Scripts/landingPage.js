@@ -54,8 +54,14 @@ function joinComp()
         }});
 }
 
-//Pre-Conditions:
-//Post-Conditions:
+function loadTeams()
+{
+    $.post('StudentContent/loadTeams.php', "", 
+        function(html){
+            $("#TeamSelectBox").html(html);
+        });
+}
+
 function loadTeamInvites()
 {
     $.post('StudentContent/loadTeamInvites.php', "", 
@@ -248,8 +254,7 @@ function StartToMember(inviteID)
             if (html.trim() == '1')
             {
                 window.location = "teamManagementM.html";
-                loadComps();
-                refreshMember2();
+
             }
             else
                 alert(html);
@@ -257,11 +262,23 @@ function StartToMember(inviteID)
         
 }
 
-//
-function MemberLeaveTeam()
+function RejoinTeam(teamID)
+{
+        $.post('StudentContent/rejoinTeam.php', "teamID="+teamID, 
+        function(html){
+            if (html.trim() == '1')
+            {
+                window.location = "teamManagementM.html";
+            }
+            else
+                alert(html);
+        });
+}
+
+function LeaveTeam()
 {
 
-    $.post('StudentContent/leaveTeam.php',"captain=false", 
+    $.post('StudentContent/leaveTeam.php',"", 
         function(){
         });
     window.location = "StudentLanding.html";
@@ -294,18 +311,18 @@ function StartToCaptain()
 }
 
 //
-function CaptainLeaveTeam()
-{
-    $.ajax({
-        type: "POST",
-        url:'StudentContent/leaveTeam.php', 
-        data: "captain=true",
-        async: false,
-        success: function(){
-        }
-    });  
-    window.location = "StudentLanding.html";
-}
+//function CaptainLeaveTeam()
+//{
+//    $.ajax({
+//        type: "POST",
+//        url:'StudentContent/leaveTeam.php', 
+//        data: "captain=false",
+//        async: false,
+//        success: function(){
+//        }
+//    });  
+//    window.location = "StudentLanding.html";
+//}
 
 function sendInvites()
 {

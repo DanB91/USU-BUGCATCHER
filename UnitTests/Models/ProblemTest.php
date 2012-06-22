@@ -19,7 +19,7 @@ class ProblemTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-	$this->object = new Problem(2);
+	$this->object = new Problem(27);
     }
 
 //    public function testFields(){
@@ -65,6 +65,13 @@ class ProblemTest extends PHPUnit_Framework_TestCase {
     {
         var_dump(Problem::getAllProblems());
     }
+    
+    public function testGetBugs()
+    {
+        $bugs = $this->object->getBugs();
+        $this->assertEquals($bugs[0]->bugid, 169);
+    }
+    
     
     
 

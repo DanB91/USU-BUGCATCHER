@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 require_once 'Model.php';
-require_once 'Competition.php'; ;
+require_once 'Competition.php';
 /**
  * Class the represents admin
  *
@@ -124,6 +124,15 @@ class Admin extends Model{
         
         
         
+    }
+    
+    public function sendHint($compID, $hintText, $problemID){
+	$data['chattext'] = $hintText;
+	$data['chattype'] = "Hint";
+	$data['userid'] = $this->getPrimaryKeyValue();
+	$data['problemid'] = $problemID;
+	$data['compid'] = $compID;
+        Model::addRow('CHATS', $data);
     }
 }
 
