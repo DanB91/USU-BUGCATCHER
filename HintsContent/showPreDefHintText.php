@@ -16,22 +16,20 @@ for($line=0;$line<count($fileCust);$line++){
 
 	for($i = 0; $i < $count - 1; $i++)//Print array
 	{
-		if($hintsSoFar == $hintSelected - 1)//When we get to the correct hint print
-		{
-			echo $messageArr[$i];//Print the hint
-			$foundHint = true;
-			$hintsSoFar++;//Used to eliminate the event that a hint may be printed twice
-			break;
-		}
-		
-		$hintsSoFar++;
+            if($hintsSoFar == $hintSelected - 1)//When we get to the correct hint print
+            {
+                echo $messageArr[$i];//Print the hint
+                $foundHint = true;
+                $hintsSoFar++;//Used to eliminate the event that a hint may be printed twice
+                break;
+            }
+
+            $hintsSoFar++;
 	}
 	if($foundHint)
 	{
-   // echo "dasdsd";
-		break;
-    } 
-
+            break;
+        } 
 }
 
 
