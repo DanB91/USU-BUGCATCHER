@@ -66,6 +66,18 @@ class Team extends Model {
 	    return false;
     }
     
+    public function getBugCount(Competition $comp){
+	$this->connection = connectToDB();
+	$data=array();
+	$data['teamid']=$this->getPrimaryKeyValue();
+	$data['compid']=$comp->getPrimaryKeyValue();
+	$result=$this->findInDB("TEAM_FOUND_BUG", $data);
+	$count=0;
+	while(($row = $result->fetch_assoc()))
+	    $count++;
+	return $count;
+    }
+    
     public function getNumberOfStudentsOnTeam(){
 	$data['teamid']=$this->getPrimaryKeyValue();
 	$result=$this->findInDB("STUDENT_TEAM_LINK", $data);

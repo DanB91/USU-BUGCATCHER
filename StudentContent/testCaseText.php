@@ -1,25 +1,27 @@
 <?php
 
 include 'simple_html_dom.php';
+require_once "../header.php";
+session_start();
 
 set_error_handler('error');
+
 
 $testInput = mysql_real_escape_string(trim($_POST["testInput"])); //sanitizes input
 $testOutput = mysql_real_escape_string(trim($_POST["testOutput"])); //sanitizes output
 $isCoverage = $_POST["codeCov"]; //boolean for coverage
 $problemName = $_POST["problem"];
-$comp = $_SESSION['competitionObject'];
+$comp = $_SESSION['compObject'];
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
 $prob = new Problem($problemName);
-$teamID = $team->teamid;
 
 define(ROOT_DIRECTORY, 'Competitions/'.$comp->compid); //the root directory of the website
 chdir(ROOT_DIRECTORY);
 
-if (!isset($_COOKIE['competitionObject']) || $_COOKIE['competitionObject'] == NULL || $_COOKIE['userObject'] == NULL || !isset($_COOKIE['userObject'])) {
+if ($comp==null) {
     trigger_error('You must be part of the competion to submit bugs');
-} elseif (!isset($_SESSION['teamID']) || $teamID == '') {
+} elseif ($team==null) {
     trigger_error("You must be on a team to submit a bug");
 }
 //input and output cant be just white space or empty
@@ -29,7 +31,7 @@ elseif (count(preg_split('/[\n\r\t\s]/', $testInput, NULL, PREG_SPLIT_NO_EMPTY))
     trigger_error('Please select a problem');
 }
 
-$contentFileName = "$teamID/Content.txt"; //name of the content file
+$contentFileName = $team->teamid."/Content.txt"; //name of the content file
 ///////////////////////////////////
 //now to run the oracle
 $oraclePath = $prob->oraclepath;
@@ -62,20 +64,20 @@ foreach ($bugs as $index => $bug) {
         $team->foundBugInCompetition($bug, $comp);
 
         //alert the user they found a bug
-        writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual Output: '$buggyOutput'<br>Bug found!", $contentFileName);
+        writeToContentFile("[Test, ".$user->username.", $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual Output: '$buggyOutput'<br>Bug found!", $contentFileName);
         $foundBug = '1';
         break;
     }
 }
 
-if (($lineNums = getExecutedLines($prob, $testInput, $teamID))) {
-    file_put_contents("$compID$teamID${problemName}Coverage.txt", implode("\n", $lineNums));
+if (($lineNums = getExecutedLines($prob, $testInput, $team->teamid))) {
+    file_put_contents($comp->compid.$team->teamid."${problemName}Coverage.txt", implode("\n", $lineNums));
 }
 
 if ($alreadyFoundBug && !$foundBug) {
-    writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual Output: '$output'<br>Bug already found!", $contentFileName);
+    writeToContentFile("[Test, ".$user->username.", $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual Output: '$output'<br>Bug already found!", $contentFileName);
 } else if (!$foundBug) {
-    writeToContentFile("[Test, $userName, $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual output: '$oracle'<br>Bug not found!", $contentFileName);
+    writeToContentFile("[Test, ".$user->username.", $problemName]<br>Input: '$testInput'<br>Expected output: '$testOutput'<br>Actual output: '$oracle'<br>Bug not found!", $contentFileName);
 }
 
 echo $foundBug;
@@ -86,9 +88,6 @@ echo $foundBug;
 //returns an array of the line numbers of the executed lines of a program
 function getExecutedLines(Problem $prob, $testInput, $teamID)
 {
-
-
-
 	$lineNums = FALSE;
 	$command = "java -cp ../Problems/emma.jar emmarun -sp ../Problems/$problemName/src -r html -Dreport.html.out.file=$teamID$problemName/index.html -jar ../../Problems/$problemName/$problemName.jar $testInput";
 
@@ -113,10 +112,6 @@ function getExecutedLines(Problem $prob, $testInput, $teamID)
 	}
 
 		return $lineNums;
-
-
-
-
 }
 
 
