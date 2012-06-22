@@ -6,8 +6,6 @@ require_once "Models/Admin.php";
 
 session_start();
 
-$nProbs = $_GET["numProbs"];
-$pArr = $_GET["problems"];
 $problemArr = array();
 
 $compN = $_GET["compN"];
@@ -17,12 +15,8 @@ $hidden = $_GET["hidden"];
 //$joinable = $_GET["joinable"];
 $compTime = $_GET["CompTime"];
 $codeCov = $_GET["codeCov"];
-$inclCD = $_GET["inclCD"];
 $admin = $_SESSION['adminObject'];
 
-
-
-    
 $pieces = explode(",", $_GET['problems'][0]);
 foreach($pieces as $value){
          $problem = new Problem($value,"problemname");
@@ -36,8 +30,7 @@ foreach($pieces as $value){
                     "description" => $desc,
                     "hidden" => $hidden,
                     "duration" => $compTime,
-                    "codecoverage" => 0,
-                    "countdown" => $inclCD
+                    "codecoverage" => $codeCov
                    );
 
 
