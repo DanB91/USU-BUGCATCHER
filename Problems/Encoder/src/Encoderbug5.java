@@ -1,6 +1,6 @@
+//Error: does not check to see if input is letters; no try, catch
 
-
-public class Encoder_Oracle {
+public class Encoderbug5 {
 	public static String encrypt(String toEncrypt, double shift){
 		char[] letterArray = toEncrypt.toCharArray();
 		char[] encryptedLetterArray = new char[letterArray.length];
@@ -37,16 +37,14 @@ public class Encoder_Oracle {
 	}
 	
     public static void main(String[] args){
-    	try{
-    	String toEncrypt = args[0];
-       
-            double shift = Double.parseDouble(args[1]);
+        String toEncrypt = args[0];
+        
+        
+            double shift = Integer.parseInt(args[1]);
             
             String encrypted = encrypt(toEncrypt, shift);
             System.out.println(encrypted);
+            
         
-        }catch(Exception e){
-            System.out.println("Error: Bad Input");
-        }
     }
 }

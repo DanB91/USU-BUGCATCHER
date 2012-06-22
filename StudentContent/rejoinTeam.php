@@ -6,7 +6,10 @@ $team = new Team($teamID);
 
 if (isset($_SESSION['userObject']) && ($_SESSION['userObject'] != NULL)) {
         $_SESSION['teamObject'] = $team;
-        echo "1";
+        if ($team->getTeamLeader() == $_SESSION['userObject']->userid)
+            echo "2";
+        else
+            echo "1";
 }
 else echo "You must be logged in to join a team";
 ?>

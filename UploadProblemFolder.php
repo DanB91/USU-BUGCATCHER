@@ -65,15 +65,51 @@ function storeInDB($problemPath, $problemName, $adminName)
    
     $difficulty = getProblemDifficulty($problemPath . 'difficulty.txt');
     
-    $problemData = array('problemname' => $adminName.$problemName, 'requirements' => file_get_contents($problemPath . $problemName. 'Req.txt'),
+    
+    $problemData = array('problemname' => $adminName.$problemName, 'requirements' => $problemPath . $problemName. 'Req.txt',
         'oraclepath' => $problemPath . $problemName . 'Oracle.jar', 'allbugspath' => $problemPath . $problemName . '.jar',
         'srcpath' => $problemPath . 'src/', 'problemdifficulty' => $difficulty);
     
+    
+    
+    verifyPaths($problemData);
+    
+    $problemData['requirements'] = file_get_contents($problemData['requirements']); //put the requirements in the database
+    
     $bugsData = getBugsData($problemPath);
     
-    Problem::addProblemToDB($problemData, $bugsData);
+    try
+    {
+        Problem::addProblemToDB($problemData, $bugsData);
+    }
+    catch(ModelAlreadyExistsException $e)
+    {
+        trigger_error('You already uploaded this problem!');
+    }
+   
     
     
+}
+
+/**
+ *Verifies if all files and paths exist.  If not, it triggers an error
+ * @param type $problemData 
+ */
+function verifyPaths($problemData)
+{
+    $missingFile = FALSE;
+    
+    if(!file_exists($problemData['requirements']))
+        $missingFile = $problemData['requirements'];
+    elseif(!file_exists($problemData['oraclepath']))
+        $missingFile = $problemData['oraclepath'];
+    elseif(!file_exists($problemData['allbugspath']))
+        $missingFile = $problemData['allbugspath'];
+    elseif(!file_exists($problemData['srcpath']))
+        $missingFile = $problemData['srcpath'];
+    
+    if($missingFile)
+        trigger_error ($missingFile . ' does not exist!  Please include it and re-upload');
 }
 
 function getBugsData($problemPath)
@@ -106,6 +142,10 @@ function getBugsData($problemPath)
 function getProblemDifficulty($pathToDifficultyFile)
 {
     $fileContents = file($pathToDifficultyFile);
+    
+    if(!$fileContents)
+        trigger_error ('difficulty.txt not found!  Please include it and re-upload');
+    
     $difficulty = '';
     
     switch($fileContents[0])
@@ -138,7 +178,8 @@ function alert($msg)
 }
 
 function exceptionHandler($exception) {
-    alert("Uncaught exception: " . $exception->getMessage(). "\n");
+    
+    alert($exception->getMessage());
     die();
 }
 
