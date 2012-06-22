@@ -17,6 +17,17 @@ class Bug extends Model {
     public function __construct($uniqueValue) {
         parent::__construct('BUGS', $uniqueValue);
     }
+    
+    public static function addBugToDB(array $data)
+    {
+        foreach($data as $fieldName => &$value)
+        {
+            if($fieldName === 'abpath' || $fieldName === 'abpath')
+                $value = "'" . $value . "'";
+        }
+        
+        Model::addRow('BUGS', $data);
+    }
 }
 
 ?>
