@@ -16,7 +16,7 @@ switch ($compInfoNumber)
         echo $comp->codecoverage;
         break;
     case 3:
-        if ($comp->password == NULL)
+        if (($comp->password == NULL)||($comp->password == crypt("",SALT)))
             echo 0;
         else
             echo 1;
