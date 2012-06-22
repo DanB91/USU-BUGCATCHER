@@ -17,7 +17,7 @@ class Leaderboard {
     private $teamsStats;
     
     
-    public function __construct(Competiton $competition) {
+    public function __construct(Competition $competition) {
         $this->competition = $competition;
         
         $this->load();
@@ -46,7 +46,7 @@ class Leaderboard {
         
         $connection = connectToDB();
         
-        $sql = 'select TEAMS.teamname, count(TEAM_FOUND_BUG.bugid) as bugsfound, max(TEAM_FOUND_BUG.timestamp) as latest'.
+        $sql = 'select TEAMS.teamname, count(TEAM_FOUND_BUG.bugid) as bugsfound, max(TEAM_FOUND_BUG.timesolved) as latest'.
                 ' from TEAM_FOUND_BUG inner join TEAMS on TEAM_FOUND_BUG.teamid = TEAMS.teamid where compid = '. 
                 $this->competition->getPrimaryKeyValue() .' group by TEAM_FOUND_BUG.teamid order by bugsfound desc, latest asc';
         
@@ -65,7 +65,7 @@ class Leaderboard {
         }
         
         //take care of the case where the team hasn't found a bug yet
-        $sql = 'select teamname from TEAMS inner join TEAM_COMPETITION_LINK on TEAMS.teamid = TEAM_COMPETITION_LINK where '.
+        $sql = 'select teamname from TEAMS inner join TEAM_COMPETITION_LINK on TEAMS.teamid = TEAM_COMPETITION_LINK.teamid where '.
             'compid = ' . $this->competition->getPrimaryKeyValue();
         
         if(!$result = $connection->query($sql))
@@ -76,7 +76,7 @@ class Leaderboard {
         {
             if(!in_array($row['teamname'], $teamsThatHaveFoundBugs))
             {
-                $this->teamsStats[] =  $this->getStatsArray($row['teamName'], 0, '0000-00-00 00:00:00');
+                $this->teamsStats[] =  $this->getStatsArray($row['teamname'], 0, '0000-00-00 00:00:00');
             }
            
         }

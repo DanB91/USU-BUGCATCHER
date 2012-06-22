@@ -22,17 +22,21 @@ if($comp!=null&&$user!=NULL&&$team!=null)//if the competition has been created a
 	$leader=new Leaderboard($comp);
 	$topArr=$leader->getStats();
 	$numTeams=$comp->getNumTeams();
-	var_dump($topArr);
-	$resultString .= "1st: " . $topArr[0]['teamName'];
-	$resultString .= formatBugsFoundString($topArr[0]['bugsFound']);
-	if($numTeams>1){
-	    $resultString .= "2nd: " . $topArr[1]['teamName'];
-	    $resultString .= formatBugsFoundString($topArr[1]['bugsFound']);
+	
+	if($numTeams>0){
+	    $resultString .= "1st: " . $topArr[0]['teamName'];
+	    $resultString .= formatBugsFoundString($topArr[0]['bugsFound']);
+	    if($numTeams>1){
+		$resultString .= "2nd: " . $topArr[1]['teamName'];
+		$resultString .= formatBugsFoundString($topArr[1]['bugsFound']);
+		if($numTeams>2){
+		    $resultString .= "3rd: " . $topArr[2]['teamName'];
+		    $resultString .= formatBugsFoundString($topArr[2]['bugsFound']);
+		}
+	    }
 	}
-	if($numTeams>2){
-	    $resultString .= "3rd: " . $topArr[2]['teamName'];
-	    $resultString .= formatBugsFoundString($topArr[2]['bugsFound']);
-	}
+	else
+	    $resultString= "Top Teams will be here";
 
 	
 	echo $resultString;

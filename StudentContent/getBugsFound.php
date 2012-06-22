@@ -3,35 +3,18 @@
 //The number of bugs found is returned and updated on the student side.
 //See student.js for more details
 
-if(isset($_COOKIE["userID"]) && $_COOKIE["userID"] != '')//If the user is correctly logged in
-{
-	
-	$comp = $_COOKIE['compID'];
-	$useID = $_COOKIE['userID'];
-	$comp = strtolower($comp);
+require_once "../header.php";
+ 
+session_start();
+$comp = $_SESSION['compObject'];
+$team = $_SESSION['teamObject'];
 
-	$con = mysql_connect('localhost', 'guest', '');
-	mysql_select_db("competition", $con);
-	$sql="SELECT * FROM ${comp}students WHERE userID ='${useID}'";
-	$result = mysql_query($sql);
-	$row = mysql_fetch_array($result);
-	$teamName = $row['teamName'];
-	
-	if($teamName != "")//If on a team
+if($comp!=null)//If the user is correctly logged in
+{
+	if($team != null)//If on a team
 	{
 
-		$sql="SELECT * FROM ${comp}Teams WHERE teamName ='${teamName}'";
-		$result =  mysql_query($sql);
-
-		$res = mysql_fetch_array($result);
-		$bF = $res['bugsFound'];
-		if ($bF < 1)
-		{
-			echo 0;
-		}
-		else echo $bF;
-
-		mysql_close($con);
+		echo $team->getBugCount($comp);
 	}
 	else echo 0;
 

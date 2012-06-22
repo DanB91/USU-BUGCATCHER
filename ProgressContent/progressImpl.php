@@ -29,7 +29,10 @@
                             $currentTime = $stats[$counter - 1]['lastTimeBugFound'];
                             //$currentTime = substr($currentTime, -8);
                             $currentTime = date("g:i:s a", strtotime($currentTime));
-                            echo $currentTime;
+                            if($bugsF == 0)
+                                echo "N/A";
+                            else
+                                echo $currentTime;
 
                                                                          ?></td>
                             

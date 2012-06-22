@@ -140,20 +140,10 @@ var compSetID = '';
             <div id="ResultsList" align=left>
             </div>
             <div id="ChatBox">
-                <form id="ChatForm" class="fields" onSubmit="event.preventDefault(); instantMessaging(ChatInput.value);scrollResultsDown();">
-
-                    <input type="text" id="ChatInput" />
                     <div id="Filters" align=left>
-                        <label>Show:</label><br />
-                        <input type="checkbox" name="hintFilterBox" id="hintFilterBox" checked  />
-                        <label for="hintFilterBox">Hints</label>
-                        <input type="checkbox" name="chatFilterBox" id="chatFilterBox" checked  />
-                        <label for="chatFilterBox">Chats</label>
-                        <input type="checkbox" name="testFilterBox" id="testFilterBox" checked />
-                        <label for="testFilterBox">All Tests</label>
                         <br /><a onClick="clearSavedResults();"><u style="color: blue; cursor: pointer;">Clear Saved Results</u></a>
                   </div><!--Filters-->
-            </form>
+
       </div><!--end ChatBox--><br /> <br /><br /><br />
     </div><!--end StudentRight-->
 <!--CONVERSION_ENDS_HERE-->

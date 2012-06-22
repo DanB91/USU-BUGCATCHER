@@ -12,7 +12,7 @@ var lastTimeChecked = 0;
 //Sets the interval for getting the competition time from the server.
 function createStudentTimer()
 {
-	studentTimer = setInterval(function() {getTime();},100);
+	studentTimer = setInterval(function() {getTime();},1000);
 }
 
 //Get the current competition time from the server and displays it
@@ -20,11 +20,17 @@ function getTime()
 {
 	$.ajax({type: "GET", url:"StudentContent/updateStudentTimer.php", success:function(time){
 	    currentTime = time;
-
-	    if(time=="stop")//Check if comp has finished
-	    {
-		    checkCompFinished();
-		    $("#timer").html("STOP!");
+	    if(time=="stop"){//Check if comp has finished
+		    compHasFinished();
+		    clearInterval(studentTimer);
+		    studentTimer = setInterval(function() {getTime();},10000);
+	    }
+	    else if(time=="paused"){
+		PAUSED = true;
+		document.getElementById("testforBug").disabled = true;
+		document.getElementById("testInput").disabled = true;
+		document.getElementById("testOutput").disabled = true;
+		$("#timer").html("PAUSED!");
 	    }
 	    else{
 		if(currentTime-lastTimeChecked >= 30)

@@ -21,6 +21,7 @@ var registration_old_first_str = "";
 var registration_old_last_str = "";
 var registration_old_school_str = "";
 var registration_old_state_str = "";
+var registration_old_nick_str = "";
 var registration_old_user_str = "";
 var registration_old_pass_str = "";
 var registration_new_first_str = "";
@@ -29,6 +30,7 @@ var registration_new_school_str = "";
 var registration_new_state_str = "";
 var registration_new_user_str = "";
 var registration_new_pass_str = "";
+var registration_new_nick_str = "";
 var REGISTRATION_FIRSTNAME_VALID = false;
 var REGISTRATION_LASTNAME_VALID = false;
 var REGISTRATION_SCHOOLNAME_VALID = false;
@@ -39,6 +41,7 @@ var REGISTRATION_STUDENT = true;
 var registration_tempSchoolName_str = '';
 var registration_tempState_index = 0;
 var registration_prev_state_selected = 1;
+var registration_tempNickname_str = '';
 
 //This function handles the event of the user attempting to register.
 //If any of the fields have an incorrect value length or no value at all the AJAX login
@@ -97,6 +100,7 @@ function OnRegister()
                     $("#Registrationstate").selectedIndex = 0;
                     $("#Registrationusername").val('');
                     $("#Registrationpassword").val('');
+                    $("#RegistrationNickname").val('');
                 }
                 else
                 {
@@ -132,12 +136,19 @@ function getRegistrationUserType()
     Registrationstate.selectedIndex = 0;
     document.RegistrationForm.Registrationschoolname.style.backgroundColor = '';
     document.RegistrationForm.Registrationstate.style.backgroundColor = '';
+    if (document.RegistrationForm.RegistrationNickname.value.localeCompare('N/A') == 0)
+    {
+      document.RegistrationForm.RegistrationNickname.value = registration_tempNickname_str;
+    }
     return false;
   }
   else if(document.RegistrationForm.Registrationusertype[1].checked == true)
   {
+    document.RegistrationForm.RegistrationNickname.disabled = true;
     document.RegistrationForm.Registrationschoolname.disabled = false;
     document.RegistrationForm.Registrationstate.disabled = false;
+    registration_tempNickname_str = document.RegistrationForm.RegistrationNickname.value;
+    document.RegistrationForm.RegistrationNickname.value = 'N/A';
     if (document.RegistrationForm.Registrationschoolname.value.localeCompare('N/A') == 0)
     {
       document.RegistrationForm.Registrationschoolname.value = registration_tempSchoolName_str;
@@ -145,6 +156,7 @@ function getRegistrationUserType()
     }
     return true;
   }
+  
 }
   
 function isValid_RegistrationField(fieldName, oldString, newString, minLength, maxLength)
@@ -209,6 +221,7 @@ function ValidateRegistrationForms()
   registration_new_state_str = $("#Registrationstate").val();
   registration_new_user_str = $("#Registrationusername").val();
   registration_new_pass_str = $("#Registrationpassword").val();
+  registration_new_nick_str = $("#RegistrationNickname").val();
   
   REGISTRATION_INPUT_VALID = isValid_RegistrationField('Registrationfirstname', registration_old_first_str, registration_new_first_str, 1, 20);
   REGISTRATION_INPUT_VALID *= isValid_RegistrationField('Registrationlastname', registration_old_last_str, registration_new_last_str, 1, 20);
@@ -226,5 +239,6 @@ function ValidateRegistrationForms()
   registration_old_state_str = registration_new_state_str;
   registration_old_user_str = registration_new_user_str;
   registration_old_pass_str = registration_new_pass_str;
+  registration_old_nick_str = registration_new_nick_str;
   registration_prev_state_selected = Document.getElementById("Registrationstate").selectedIndex;
 }
