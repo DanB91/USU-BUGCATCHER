@@ -133,6 +133,7 @@ abstract class Model {
     
     
     public function findInDB($tablename, array $data){
+        $this->connection = connectToDB();
 	$sql= "SELECT * FROM " . $tablename . " WHERE " ;
 	
 	$and=false;

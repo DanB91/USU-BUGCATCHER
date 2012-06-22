@@ -15,7 +15,10 @@ require_once 'User.php';
  * @author danielbokser
  */
 class Team extends Model {
+    public $chats;
+    
     public function __construct($uniqueValue, $uniqueFieldName = FALSE) {
+	$this->chats=array();
         parent::__construct('TEAMS', $uniqueValue, $uniqueFieldName, array('STUDENT_TEAM_LINK', 'TEAM_COMPETITION_LINK'));
     }
     
@@ -102,7 +105,25 @@ class Team extends Model {
     
     public function getTeamLeader()
     {
-        return new User($this->teamleaderid);
+        return $this->teamleaderid;
+    }
+    
+    public function refreshChats($comp){
+	$lastRecieve=$chats[count($chats)-1]['timesent'];
+	
+	$sql= "SELECT * FROM CHATS WHERE (teamid=".$this->getPrimaryKeyValue();
+	$sql= "OR teamid=NULL) AND timesent >".$lastRecieve." AND compid=".$comp->compid;
+	
+	
+	if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Select Failed: ' . $this->connection->error);
+	
+	while(($row = $result->fetch_assoc()))
+	    $this->chats[]=new Chat($row['chatid']);
+    }
+    
+    public function getChats(){
+	return $this->chats;
     }
     
     public function getCompetitions()

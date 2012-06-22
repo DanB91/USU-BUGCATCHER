@@ -272,7 +272,7 @@ var HIDDEN=true;
 //
 function showProblemsList()
 {
-	if (HIDDEN)
+	if (HIDDEN && ! document.getElementById("testforBug").disabled)
 	{
 		$("#PopUpArea").attr("class","PUA-"+PopUpShowingClass);
 		$("#PopUpArea").attr("className","PUA-"+PopUpShowingClass);
@@ -333,7 +333,8 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
 }
 
 function getToolTip(str)
-{   echo("problem is "+str);
+
+{
     $.post('StudentContent/getToolTip.php', "problem="+str, 
         function(html){	
             $("#BugTesterDiv").attr("title",html);

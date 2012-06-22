@@ -23,9 +23,9 @@ if ($accountType_str == 'admin')
 
         );
        ADMIN::registerAdmin($ADMIN);
-       mkdir("Uploads/${username_str}",777); //Not sure if this line is redundant or not.
-	mkdir("Uploads/${username_str}/Problems",777);
-	mkdir("Uploads/${username_str}/TempCompetition",777);
+       
+	mkdir("Uploads/${username_str}/Problems",0775, TRUE);
+	mkdir("Uploads/${username_str}/TempCompetition",0775, TRUE);
 	fclose(fopen("Uploads/${username_str}/TempCompetition/Content.txt","w+"));
 	copy("Problems/emma.jar","Uploads/${username_str}/Problems/emma.jar");
        //print_r($ADMIN);
