@@ -15,25 +15,29 @@ if ($user != NULL && $team != NULL) {
             echo "<p>None logged in</p>";
         foreach ($members as $member) {
             if ($member->userid != $user->userid)
-                $memberInfo .= "<p>".$member->username . "</p>";
+                $memberInfo .= "<p>" . $member->username . "</p>";
         }
     } else {
-        $leaderID = $team->getTeamLeader();
-        $leader = new User($leaderID);
-        $userID = $user->userid;
-        $memberInfo .= "<p>Team Leader: ";
-        $memberInfo .= $captain->username . "</p>";
-
-
         $members = $team->getUsers();
-        foreach ($members as $member) {
-            //if the member is not the current user or the captain, return their information
-            if (($member->userid != $leaderID) && $member->userid != $userID) {
-                $memberInfo .= "<p>".$member->username . "</p>";
+        if (count($members) == 0)
+            echo "<p>None logged in</p>";
+        else {
+            $leaderID = $team->getTeamLeader();
+            $leader = new User($leaderID);
+            $userID = $user->userid;
+            $memberInfo .= "<p>Team Leader: ";
+            $memberInfo .= $captain->username . "</p>";
+
+
+            foreach ($members as $member) {
+                //if the member is not the current user or the captain, return their information
+                if (($member->userid != $leaderID) && $member->userid != $userID) {
+                    $memberInfo .= "<p>" . $member->username . "</p>";
+                }
             }
         }
     }
-    
+
     echo $memberInfo;
 }
 else
