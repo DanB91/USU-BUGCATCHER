@@ -415,7 +415,6 @@ function createCompetition()//Find Code ---------- CS1011
   
 
   var CodeCov = document.forms.CompForm.AllowCoverage;
-  var inclCD = document.forms.CompForm.IncludeCountdown;
   var hidden = document.forms.CompForm.HideComp;
   var Time = document.getElementById("CompTime");
   var compName = $("#CompName").val();
@@ -436,10 +435,6 @@ function createCompetition()//Find Code ---------- CS1011
   else
       CodeCovVal = 0;
 
-  if(inclCD[0].checked == true)
-      CountdownVal = 1;
-  else
-      CountdownVal = 0;
   
   var TimeVal = Time.value;
   var length = addedProbs.length;
@@ -476,7 +471,7 @@ function createCompetition()//Find Code ---------- CS1011
       return;    
   }
 
-  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
+  var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
 
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
