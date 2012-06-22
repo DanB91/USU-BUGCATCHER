@@ -534,6 +534,7 @@ function removeTeam()//Find Code ---------- TM1005
 
     $.ajax({url: "ManageContent/removeTeam.php", data: "team=" + teamN, success:function(){
             loadTeamNameList();
+            teamN = '';
     }});
 }
 
