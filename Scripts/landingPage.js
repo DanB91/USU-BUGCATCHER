@@ -7,8 +7,8 @@ function checkUser()
         function(html){
             //if the user is not logged in, redirect them to login page
             if (html.trim() == 0){
-                window.location = "index.html";
-            }
+                alert(html);
+}
         });
 }
 

@@ -1,5 +1,8 @@
 <?php
-if (isset($_SESSION['userObject']) && $_SESSION['userObject'] != NULL)
+require_once "../header.php";
+session_start();
+if ($_SESSION['userObject']!=null)
     echo 1;
-else echo 0;
+else 
+    echo 0;
 ?>
