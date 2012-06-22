@@ -388,7 +388,7 @@ function createCompetition()//Find Code ---------- CS1011
   
   var TimeVal = Time.value;
   var length = addedProbs.length;
-  
+ 
 
   if(length <= 0)
   {
