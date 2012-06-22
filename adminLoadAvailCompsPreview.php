@@ -39,8 +39,5 @@ else{echo "No </td></tr>";}
 
 
 echo "</table>";
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 ?>
