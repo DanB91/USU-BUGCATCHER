@@ -334,7 +334,7 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
 
 function getToolTip(str)
 
-{echo("problem is "+str);
+{
     $.post('StudentContent/getToolTip.php', "problem="+str, 
         function(html){	
             $("#BugTesterDiv").attr("title",html);
