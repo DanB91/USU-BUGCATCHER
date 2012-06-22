@@ -478,10 +478,7 @@ function createCompetition()//Find Code ---------- CS1011
 
   var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "'&inclCD=" + CountdownVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
-  
-  
 
- 
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
         //alert(result);
@@ -489,8 +486,9 @@ function createCompetition()//Find Code ---------- CS1011
         {
             compSetTimeM = TimeVal;
 
+            
             compSetTime = TimeVal;
-            if (CountdownVal)
+            if (CountdownVal == 1)
                     compSetTimeS = 10;
             else 
                     compSetTimeS = 0;
@@ -525,8 +523,9 @@ function createCompetition()//Find Code ---------- CS1011
 //which can found under select a team in Team Management.
 function loadTeamNameList()//Find Code ---------- TM1002
 {
+   
     $.ajax({url: "ManageContent/loadTeamNames.php", success:function(result){
-
+            
             $("#MTeamList").html(result);
     }});  
 }
@@ -587,18 +586,22 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
         
         $.ajax({url: "ManageContent/getStudentInfo.php", data: getVars, success:function(result){
 
-                var t = JSON.parse(result);
-                
-                for(var i = 0; i < t.length; i++)
+                if(result.length != 0)
                 {
-                    document.getElementById('Name_S' + (i + 1)).value=t[i][0];
-                    document.getElementById('Username_S' + (i + 1)).value=t[i][1];
-                    document.getElementById('School_S' + (i + 1)).value=t[i][2];
-                    document.getElementById('State_S1' + (i + 1)).value=t[i][3];
+                        var t = JSON.parse(result);
+                        var temp = t.length / 4;
+                        var i;
+                        for(i = 0; i < temp; i++)
+                        {                              
+                              document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
+                              document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
+                              document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
+                              document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
+                        }
+                        
                 }
         } });
-                    
-      
+ 
 }
 
 //###################################################################################################//
@@ -610,23 +613,10 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
 //Postcondition: Load's the Progress and Statistics table
 function showTableProg()//Find Code ---------- PS1001
 {
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function()
-  {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      document.getElementById("PTeamTables").innerHTML=xmlhttp.responseText;
-    }
-  }
-  xmlhttp.open("GET","ProgressContent/progressImpl.php",true);
-  xmlhttp.send();
+    $.ajax({url: "ProgressContent/progressImpl.php", success:function(result){
+
+            $("#PTeamTables").html(result);
+    }});
 }
 
 //###################################################################################################//
