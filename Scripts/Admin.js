@@ -65,7 +65,7 @@ var currentStudent = '';	 //Find Code ---------- GV1003
 
 var currProblemSelected = '';//Find Code ---------- GV1005
 var lastHintSelected = '';	 //Find Code ---------- GV1006
-
+var currProbID = '';
 var availableProbs;
 var addedProbs = [];
 
@@ -199,9 +199,8 @@ function popProbSelectBox()//Find Code ---------- CS1003
 {
     
     $.ajax({type: "GET", url: "AdminCompContent/loadProblems.php", success:function(result){
-
-
-            availableProbs = eval(result);
+            
+            availableProbs = JSON.parse(result);
             var index = availableProbs.indexOf(".");
             availableProbs.splice(index, 1);
             index = availableProbs.indexOf("..");
@@ -291,58 +290,29 @@ function removeProb(problem)//Find Code ---------- CS1005
 //Postcondition:Shows a preview of the problem currently selected
 function showProbPreview(prob)//Find Code ---------- CS1008
 {
-  var problem = prob.options[prob.selectedIndex].value;
-  if(problem == '')
+    var problem = prob.options[prob.selectedIndex].value;
+    if(problem == '')
 	return;
 	
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlshowPreview=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlshowPreview=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlshowPreview.onreadystatechange=function()
-  {
-    if (xmlshowPreview.readyState == 4 && xmlshowPreview.status == 200)
-    {
-		document.getElementById('CTextArea').value=xmlshowPreview.responseText;
-		
-    }
-  }
-  xmlshowPreview.open("GET","AdminCompContent/showPreview.php?problem=" + problem,true);
-  xmlshowPreview.send();	
-  
+    $.ajax({url: "AdminCompContent/showPreview.php", async: true, data: "problem=" + problem, success:function(result){
+
+            $("#CTextArea").val(result);
+
+    }});
+	
   showBugList(problem);
 }
 
 function showBugList(prob)
 {
-  if (prob == '')
+    if (prob == '')
 	  return;
 	  
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlshowBugList=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlshowBugList=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlshowBugList.onreadystatechange=function()
-  {
-    if (xmlshowBugList.readyState == 4 && xmlshowBugList.status == 200)
-    {
-		document.getElementById('CBugArea').value=xmlshowBugList.responseText;
-		
-    }
-  }
-  xmlshowBugList.open("GET","AdminCompContent/showBugList.php?problem=" + prob,true);
-  xmlshowBugList.send();		  
+    $.ajax({url: "AdminCompContent/showBugList.php", async: true, data: "problem=" + prob, success:function(result){
 
+            $("#CBugArea").val(result);	
+    }});
+		  
 }
 
 function moveProbUp(problem)//Find Code ---------- CS1009
@@ -612,17 +582,18 @@ function sendHintsCust(str)//Find Code ---------- H1002
 
 function showPre(str)//Find Code ---------- H1003
 {
+    currProbID = str.id;
+    currProblemSelected = str.value;
 	
-    currProblemSelected = str;
-	
-    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str, success:function(result){
+    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str.value, success:function(result){
 
             $("#HintNum").html(result);  
     }});  
 }
 
 function showPreHintText(str)//Find Code ---------- H1004
-{      
+{   
+    lastHintSelected = str;
     $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHintText.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + str, success:function(result){
 
     $("#HintText").html(result);  
@@ -632,7 +603,7 @@ function showPreHintText(str)//Find Code ---------- H1004
 
 function sendHintPreDef()//Find Code ---------- H1005
 {    
-    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected, success:function(result){
+    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected + "&probID=" + currProbID, success:function(result){
 
         $("#HintText").html(result);  
 

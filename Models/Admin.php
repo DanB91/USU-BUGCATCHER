@@ -127,10 +127,18 @@ class Admin extends Model{
     }
     
     public function sendHint($compID, $hintText, $problemID){
-	$data['chattext'] = $hintText;
-	$data['chattype'] = "Hint";
+	$data['chattext'] = "'${hintText}'";
+	$data['chattype'] = "'Hint'";
 	$data['userid'] = $this->getPrimaryKeyValue();
 	$data['problemid'] = $problemID;
+	$data['compid'] = $compID;
+        Model::addRow('CHATS', $data);
+    }
+    
+    public function sendCustHint($compID, $hintText){
+	$data['chattext'] = "'${hintText}'";
+	$data['chattype'] = "'Hint'";
+	$data['userid'] = $this->getPrimaryKeyValue();
 	$data['compid'] = $compID;
         Model::addRow('CHATS', $data);
     }

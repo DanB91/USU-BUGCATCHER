@@ -10,7 +10,6 @@ if(isset($_SESSION['adminObject']))
         $admin = $_SESSION['adminObject'];
         $compN = $_COOKIE['compN'];
 
-        //Store the start time of the competition in the db
         if($admin->getCompetitionByCompName($compN)->pausestate === '0000-00-00 00:00:00')
         {
             echo "not paused";
@@ -19,8 +18,7 @@ if(isset($_SESSION['adminObject']))
             echo "paused";
     }   
     else
-        echo "Please select a competition";
-           
+        echo "Please select a competition";       
 }
 else
     header( 'Location: index.html');
