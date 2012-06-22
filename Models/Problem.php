@@ -31,6 +31,22 @@ class Problem extends Model {
     }
     
     
+    public function getBugs()
+    {
+        $retBugs = array();
+        $this->connection = connectToDB();
+        
+        $sql = 'SELECT bugid FROM BUGS WHERE problemid = ' . $this->getPrimaryKeyValue();
+        if(!$result = $this->connection->query($sql))
+               throw new BugCatcherException('Query Failed: ' . $connection->error);
+        
+        while(($row = $result->fetch_assoc()))
+        {          
+            $retBugs[] = new Bug($row['bugid']);
+        }
+        
+        return $retBugs;
+    }
     
     public static function getAllProblems()
     {
