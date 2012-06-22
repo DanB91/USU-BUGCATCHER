@@ -4,38 +4,48 @@ include 'simple_html_dom.php';
 require_once "../header.php";
 session_start();
 
-set_error_handler('error');
+
+//set_error_handler('error');
 
 
 $testInput = mysql_real_escape_string(trim($_POST["testInput"])); //sanitizes input
 $testOutput = mysql_real_escape_string(trim($_POST["testOutput"])); //sanitizes output
 $isCoverage = $_POST["codeCov"]; //boolean for coverage
-$problemName = $_POST["problem"];
+$problemName = $_POST["problemNum"];
 $comp = $_SESSION['compObject'];
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
-$prob = new Problem($problemName);
+//Wrote by Tara Noble
+//Edited by Quentin Mayo
 
-define(ROOT_DIRECTORY, 'Competitions/'.$comp->compid); //the root directory of the website
-chdir(ROOT_DIRECTORY);
 
-if ($comp==null) {
-    trigger_error('You must be part of the competion to submit bugs');
-} elseif ($team==null) {
-    trigger_error("You must be on a team to submit a bug");
+//input checking
+if ($comp==null) {trigger_error('You must be part of the competion to submit bugs');}
+elseif ($team==null) {trigger_error("You must be on a team to submit a bug");}
+elseif ($user==null) { trigger_error("You must be logged to submit a bug");}
+elseif ($problemName==null) { trigger_error("Unkown problem");}
+//* Uncomment Line
+//elseif (count(preg_split('/[\n\r\t\s]/', $testInput, NULL, PREG_SPLIT_NO_EMPTY)) == 0 || count(preg_split('/[\n\r\t\s]/', $testOutput, NULL, PREG_SPLIT_NO_EMPTY)) == 0) {trigger_error('Please enter an expected input and output');} 
+elseif ($problemName == '') {trigger_error('Please select a problem');}
+
+
+//chdir('../..');
+$prob = new Problem($problemName,"problemname");
+
+//* Remove '../Problems/'
+if(!file_exists('../Problems/'.$prob->oraclepath)){trigger_error("Can't find Oracle, contact administrative");}
+
+$foundBug= 0;
+foreach($prob->getAllBugs() as $value){
+    $value->abpath;
+    
 }
-//input and output cant be just white space or empty
-elseif (count(preg_split('/[\n\r\t\s]/', $testInput, NULL, PREG_SPLIT_NO_EMPTY)) == 0 || count(preg_split('/[\n\r\t\s]/', $testOutput, NULL, PREG_SPLIT_NO_EMPTY)) == 0) {
-    trigger_error('Please enter an expected input and output');
-} elseif ($problemName == '') {
-    trigger_error('Please select a problem');
-}
 
-$contentFileName = $team->teamid."/Content.txt"; //name of the content file
+
+
 ///////////////////////////////////
 //now to run the oracle
-$oraclePath = $prob->oraclepath;
-$oracle = trim(shell_exec("java -jar ${oraclePath} ${testInput}"));
+
 
 //get bugs from the file
 $bugs = $prob->bugs;
@@ -138,6 +148,6 @@ function error($errNo, $errStr)
 }
 
 ////////////////////////////
-
+*/
 
 ?>

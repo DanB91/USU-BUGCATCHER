@@ -297,7 +297,6 @@ function showProblemsList()
 //Postcondition: The appropriate functions are called to set up the problems that will be seen by the students.
 function getReqAndProb(index, cov)//Find Code ---------- PR1001
 {
-
 	if(index){
 	    currProblem = probNames[index];
 	    coverage = 0;//cov;
@@ -323,9 +322,11 @@ function getReq(str, index)//Find Code ---------- PR1002
 //Postcondition: Displays the problem that the student selected
 function getProb(str, cov, index)//Find Code ---------- PR1003
 {
+    
     $.post('StudentContent/showCode.php', "problem="+currProblem+"&coverage="+coverage + "&index=" + currIndex, 
         function(html){
 	    $("#ProblemCode").html("<pre class='prettyprint lang-java linenums'>"+html+"</pre>");
+	    $("#ProblemName").html(probNames[index]);
 	    prettyPrint();
 	    getToolTip(currProblem);
         });
@@ -364,9 +365,11 @@ function getBugs()//Find Code ---------- BF1001
 //---------------------------------------------------------------------------------------
 function getBugTestInfo(str, str2)
 {
+    
     $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
         function(html){
-            getBugs();     		
+            getBugs();     
+            alert(html);
             if (html.trim() == '1' && !recentlyLogged)
             {
                 bugFoundAnimation();
