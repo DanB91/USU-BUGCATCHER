@@ -4,11 +4,14 @@ require_once 'header.php';
 $fileName = "";
 session_start();
 $AdminUsername = $_SESSION['adminObject']->username;
+$error = '';
 
 //Checks to see if the file is over 100Kb
 if ($_FILES["file"]["size"] > 102400)
 {
-	die("File is too large.");
+        
+	alert("File is too large.");
+        die();
 }
 
 if ($_FILES["file"]["type"] == "application/octet-stream" || $_FILES["file"]["type"] == "application/x-zip-compressed"||
@@ -16,8 +19,8 @@ if ($_FILES["file"]["type"] == "application/octet-stream" || $_FILES["file"]["ty
 {
 	if ($_FILES["file"]["error"] > 0)
 	{
-    echo "Return Code: " . $_FILES["file"]["error"] . "<br />";
-		die();
+           alert("Return Code: " . $_FILES["file"]["error"] . "<br />");
+	   die();
 	}
 	else
 	{
@@ -27,16 +30,17 @@ if ($_FILES["file"]["type"] == "application/octet-stream" || $_FILES["file"]["ty
 		if ($zip->open($fileName) === TRUE) {
 				$zip->extractTo("Uploads/".$AdminUsername."/Problems/");
 				$zip->close();
-				echo '<script language="javascript">alert("Upload Complete"); top.document.getElementById("uploadWrapper").innerHTML = \'<input type="file" name="file" id="file" />\';</script>';
+				alert('Upload Complete');
+                                
 		} else {
-				echo '<script language="javascript">alert("Upload Failed"); top.document.getElementById("uploadWrapper").innerHTML = \'<input type="file" name="file" id="file" />\';</script>';
+				alert("Upload Failed"); 
 		}
 	}
 }
 else
 {
-    echo '<script language="javascript">alert("'.$_FILES["file"]["type"].'"); top.document.getElementById("uploadWrapper").innerHTML = \'<input type="file" name="file" id="file" />\';</script>';
-    die("Incorrect File Format.");
+    alert("Incorrect File Format.");
+    die();
 }
 
 /*****************************************************/
@@ -73,5 +77,12 @@ function DumpToErrorLog($FileName_Original,$FileName,$FirstName,$LastName,$Usern
 	fwrite($errorFile,"State: ".$State."\r\n");
 	
 	fclose($errorFile);
+}
+
+
+
+function alert($msg)
+{
+   echo '<script language="javascript">alert("'.$msg.'"); top.document.getElementById("uploadWrapper").innerHTML = \'<input type="file" name="file" id="file" />\';</script>';
 }
 ?>

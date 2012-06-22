@@ -48,6 +48,17 @@ class Problem extends Model {
         
         return $retProbs;   
     }
+    
+    public static function addProblemToDB(array $data)
+    {
+        
+        foreach($data as &$value)
+        {
+            $value = "'" . $value . "'";
+        }
+        
+        Model::addRow('PROBLEMS', $data);
+    }
 }
 
 ?>
