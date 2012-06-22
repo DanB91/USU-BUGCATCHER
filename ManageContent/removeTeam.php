@@ -1,11 +1,5 @@
 <?php
 
-//The purpose of this code is to completely delete a team from a competition.
-//If there are students on the team that is to be removed, then the students 
-//are first removed and their onteam column in the database is set to null.
-//When a team is removed the team is completely removed from the database and the team name can be used again.
-//NOTE: There is currently no button on the team management tab to remove a team.
-
 $team=$_GET["team"];
 $nullValue = NULL;
 

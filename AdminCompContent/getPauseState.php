@@ -3,20 +3,27 @@
 require_once '../header.php';
 session_start();
 
-$admin = $_SESSION['adminObject'];
-$compN = $_COOKIE['compN'];
-
-//Store the start time of the competition in the db
-if($admin->getCompetitionByCompName($compN)->pausestate === '0000-00-00 00:00:00')
+if(isset($_SESSION['adminObject']))
 {
-    echo "not paused";
+    if(isset($_COOKIE['compN']) && $_COOKIE['compN'] != '')
+    {
+        $admin = $_SESSION['adminObject'];
+        $compN = $_COOKIE['compN'];
+
+        //Store the start time of the competition in the db
+        if($admin->getCompetitionByCompName($compN)->pausestate === '0000-00-00 00:00:00')
+        {
+            echo "not paused";
+        }
+        else
+            echo "paused";
+    }   
+    else
+        echo "Please select a competition";
+           
 }
 else
-    echo "paused";
-
-
-
-
+    header( 'Location: index.html');
   
 
 ?>
