@@ -599,8 +599,6 @@ function showTableProg()//Find Code ---------- PS1001
 //                                               Hints H1000                                         //
 //###################################################################################################//
 
-
-
 //This function is referenced in Content_Hints.js
 //Precondition: Hints string must be passed and competition must be valid
 //Postcondition: Sends the custom hint to the compeition content file located in competitions folder

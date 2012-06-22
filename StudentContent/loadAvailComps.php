@@ -18,13 +18,14 @@ if ($team != NULL) {
         }
         //if no competitions are available, disable drop down
         if (count($compArray)==0){
-            $content = "<select disabled onclick='showCompInfo(this.value)' style='width:200px;'>";
+            $content = "<select disabled style='width:200px;'>";
             $content .= "<option>No competitions available.</option>";
             $content .= "</select>";
             echo $content;
             return;
         }
         $content = "<select onChange='showCompInfo(this.value)' style='width:200px;'>";
+        $content .= "<option value='-1'>Select a competition</option>";
         $competitions = array();
         foreach ($compArray as $value) {
             $content .= "<option value='".$value->compid."' ondblclick='joinComp(this.value);'>";
