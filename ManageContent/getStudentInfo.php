@@ -18,18 +18,14 @@ if(isset($_COOKIE['compN']) && $_COOKIE['compN'] != '')//If compeition has been 
     //var_dump($users);
    for($i = 0; $i < count($users); $i++)
    {
-       $tArr = array(
-                      $i=>array($users[$i]->lname . "," . $users[$i]->fname,
-                                $users[$i]->username,
-                                $users[$i]->stateabbr,
-                                $users[$i]->schoolabbr
-                               )
-                    );
-       
+        array_push($tArr, $users[$i]->lname . "," . $users[$i]->fname);
+        array_push($tArr, $users[$i]->username);
+        array_push($tArr, $users[$i]->stateabbr);
+        array_push($tArr, $users[$i]->schoolabbr);
    }
    
-   //var_dump($tArr);
-   $r =  json_encode($tArr);
+    //var_dump($tArr);
+    $r =  json_encode($tArr);
     echo $r;
 }
 else
