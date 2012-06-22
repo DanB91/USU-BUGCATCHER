@@ -25,6 +25,13 @@ function getTime()
 		    clearInterval(studentTimer);
 		    studentTimer = setInterval(function() {getTime();},10000);
 	    }
+	    else if(time=="paused"){
+		PAUSED = true;
+		document.getElementById("testforBug").disabled = true;
+		document.getElementById("testInput").disabled = true;
+		document.getElementById("testOutput").disabled = true;
+		$("#timer").html("PAUSED!");
+	    }
 	    else{
 		if(currentTime-lastTimeChecked >= 30)
 		{
