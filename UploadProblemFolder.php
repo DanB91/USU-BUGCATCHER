@@ -1,5 +1,5 @@
 <?php
-require '../../Models/Admin.php';
+require_once 'header.php';
 //Variablse needed for Problem Upload
 $fileName = "";
 session_start();
@@ -11,7 +11,8 @@ if ($_FILES["file"]["size"] > 102400)
 	die("File is too large.");
 }
 
-if ($_FILES["file"]["type"] == "application/octet-stream" || $_FILES["file"]["type"] == "application/x-zip-compressed")
+if ($_FILES["file"]["type"] == "application/octet-stream" || $_FILES["file"]["type"] == "application/x-zip-compressed"||
+         $_FILES["file"]["type"] == "application/zip")
 {
 	if ($_FILES["file"]["error"] > 0)
 	{
@@ -34,7 +35,8 @@ if ($_FILES["file"]["type"] == "application/octet-stream" || $_FILES["file"]["ty
 }
 else
 {
-	die("Incorrect File Format.");
+    echo '<script language="javascript">alert("'.$_FILES["file"]["type"].'"); top.document.getElementById("uploadWrapper").innerHTML = \'<input type="file" name="file" id="file" />\';</script>';
+    die("Incorrect File Format.");
 }
 
 /*****************************************************/
