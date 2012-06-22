@@ -1,11 +1,27 @@
 var compSelected;
 
+//checks that a users cookies are set before allowing them to view the page
+function checkUser()
+{
+    $.post('StudentContent/checkUser.php', "", 
+        function(html){
+            //if the user is not logged in, redirect them to login page
+            if (html.trim() == 0){
+                alert(html);
+}
+        });
+}
+
+function hideButton()
+{
+    $("#joinbutton").hide();
+}
 
 //Pre-Conditions:
 //Post-Conditions:
-function loadComps()
+function loadComps(isCaptn)
 {
-    $.post('StudentContent/loadAvailComps.php', "", 
+    $.post('StudentContent/loadAvailComps.php', "isCaptn="+isCaptn, 
         function(html){
             $("#LandingCompSelect").html(html);
             compSelected = "";
@@ -81,13 +97,18 @@ function mSetCookie(c_name,value,exdays)
     document.cookie=c_name + "=" + c_value;
 }
 
+
+
 //Pre-Conditions:
 //Post-Conditions:
 function getCompInfo()
 {
   var loopCount = 1;
   var displayOutput = "";
-         
+  
+  if (!compSelected)
+      return;
+  
   if (window.XMLHttpRequest)
   {// code for IE7+, Firefox, Chrome, Opera, Safari
     getCompInfoXML=new XMLHttpRequest();
@@ -135,7 +156,6 @@ function getCompInfo()
               coverage="Yes";
             }
             displayOutput += "\nCode Coverage Allowed: " + coverage;
-            document.getElementById('displayInfo').value = displayOutput;
             break;
           case 4:
             var password = getCompInfoXML.responseText;
@@ -149,6 +169,7 @@ function getCompInfo()
                 $("#CompPassword").val("");
                 $("#CompPassword").attr("disabled", false);    
             }
+            $('#displayInfo').val(displayOutput);
             break;
           default:
             break;

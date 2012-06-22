@@ -11,9 +11,11 @@
 
 </head>
 
-<body onload='loadComps();refreshMember(true);'>
+<body onload='checkUser();loadComps(true);refreshMember(true);'>
 
-<div id="headerSplash"></div>
+    <a href="Student.html">
+        <div id="headerSplash"></div>
+    </a>
 <div id="content" style="margin: 0 auto; width: 1000px;">
     
 
@@ -42,7 +44,7 @@
         <p id="smallerHeader" style="color:#000;">Available Competitions</p>
         <div id="LandingCompSelect">Loading...</div>
         <!--        <input type="submit" value="Refresh" >-->
-        <a class="button" onClick="loadComps()"><p>Refresh</p></a>
+        <a class="button" onClick="loadComps(true)"><p>Refresh</p></a>
       </div>
       
       <div id="Landing-CompInfo">

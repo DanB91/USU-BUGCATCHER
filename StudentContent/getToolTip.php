@@ -4,11 +4,15 @@
 //for the code that they are debugging such as how to enter test cases 
 //and a description of how the program functions.
 
+require_once "../timer.php";
+require_once "../header.php";
+ 
+session_start();
+$comp = $_SESSION['compObject'];
 
 $problem = $_GET["problem"];
-$compID = $_COOKIE['compID'];
 
-if(isset($_COOKIE["compID"]) && $_COOKIE["compID"] != '')//If the competition has been created
+if($comp!=null)//If the competition has been created
 {
         if(!file_exists("../Problems/${problem}/${problem}Ex.txt"))
         {
