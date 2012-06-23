@@ -12,7 +12,6 @@ function startTimer()
 {
     if (STOPPED || (!STOPPED && PAUSED))
     {   
-       
         $.ajax({url: "AdminCompContent/setMasterTimer.php", success:function(){  
              
             if(PAUSED)
@@ -23,15 +22,13 @@ function startTimer()
                         PAUSED = false;  
                         getMasterTime();                       
                 }});
-                        
-                    
+                            
             }
             else
             {
                 adminTimer = setInterval(function() {countdown();},1000);
                 STOPPED = false;
-            }
-                
+            }  
        }});
     } 
 }
