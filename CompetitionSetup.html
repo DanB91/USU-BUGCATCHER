@@ -53,13 +53,13 @@ var compSetID = '';
       <h2>Competition Settings</h2>
       <div id="CsetupForm">
         <form name="CompForm" id="CompForm" onSubmit="event.preventDefault(); createCompetition(); return false;" method="GET">
-          <u>Allow Code Coverage</u><br />
+          <u><span title= "Allow users to see which lines of the code are executed">Allow Code Coverage</span></u><br />
           <div class="Cradio-container">
             <input type="radio" class="Cradio-left" name="AllowCoverage" id="AllowCoverage" value="1" /> Yes
             <input type="radio" class="Cradio-right" name="AllowCoverage" id="AllowCoverage" value="0" checked /> No
           </div><br />
             
-        <u>Hide Competition</u><br />
+        <u><span title="Hide the competition from uninvited users">Hide Competition</span></u><br />
         <div class="Cradio-container">
             <input type="radio" class="Cradio-left" name="HideComp" id="HideComp" value="1" /> Yes
             <input type="radio" class="Cradio-left" name="HideComp" id="HideComp" value="0" checked /> No
@@ -68,7 +68,7 @@ var compSetID = '';
           <span class="reqField">&#10029;</span><u>Competition Time (mins)</u><br />
           <input name="CompTime" id="CompTime" class="Ctext" /><br />
 
-          <u>Competition Name</u><br />
+          <span class="reqField">&#10029;</span><u>Competition Name</u><br />
           <input name="CompName" id="CompName" class="Ctext" /><br />
           
           <u>Competition Description</u><br />
