@@ -33,6 +33,10 @@ function loadComps(isCaptn)
 function joinComp()
 {
     var password = $("#CompPassword").val();
+    
+    if(compSelected == '')
+        return;
+    
     $.ajax({type:"POST", url:'joinComp.php', data:"compS="+compSelected+"&pword="+password, 
         success: function(html){
 
@@ -74,6 +78,10 @@ function loadTeamInvites()
 //Post-Conditions:
 function createSTeam(tName)
 {
+
+    if(tName == '')
+        return;
+
     $.post('createSTeam.php', "compS="+compSelected+"&tName="+tName, 
         function(html){
 
@@ -302,6 +310,10 @@ function StartToCaptain()
     var teamName = $("#LandingTeamName").val();
     var inviteOne = $("#LandingInvite1").val();
     var inviteTwo = $("#LandingInvite2").val();
+            
+   if(teamName == '')
+       return;
+            
             
     $.ajax({
         type: "POST",
