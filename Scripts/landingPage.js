@@ -340,6 +340,7 @@ function sendInvites()
         function(){
             $("#LandingInvite3").val('');
             $("#LandingInvite4").val('');
+            alert("Invites sent!");
         });
 }
 

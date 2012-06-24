@@ -13,8 +13,9 @@ if ($user != NULL && $team != NULL) {
     if ($isCaptain == "true") {
         $members = $team->getUsers();
         if (count($members) <= 1)
-            echo "<p>None Accepted</p>";
+            echo "";
         else {
+            $memberInfo .= "<h2>Teammates</h2>";
             foreach ($members as $member) {
                 if ($member->userid != $user->userid) {
                     $memberInfo .= "<p>" . $member->username;

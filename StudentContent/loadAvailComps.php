@@ -39,8 +39,8 @@ if ($team != NULL) {
         //$_SESSION['compList'] = $competitions;
     }
     else
-        echo "<option>You must be logged in to view.</option>";
+        echo "<select disabled style='width:200px;'><option>You must be logged in to view.</option></select>";
 }
 else
-    echo "<option>You must be on a team to view competitions.</option>";
+    echo "<select disabled style='width:200px;'><option>You must be on a team to view competitions.</option></select>";
 ?>
