@@ -88,12 +88,15 @@ var compSetID = '';
       <form>
           <u>Available Problems</u><br />
           <div id="ProblemsList">
+              
           <select name="ProblemsList" class="Cselect" size="8">
+              <option disabled="disabled">Loading...</option>
           </select></div>
 
           <u>Selected Problems</u><br />
           <div id="SelectedProblems">
           <select name="SelectedProblems" class="Cselect"  size="5">
+              <option disabled="disabled">Loading...</option>
           </select></div>
 
           <input type="submit" value="Move Up" name="CMoveUp" id="CMoveUp" class="Cbutton-small" onClick="event.preventDefault(); moveProbUp(SelectedProblemsGet.value)" />

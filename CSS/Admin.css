@@ -865,16 +865,16 @@ div.nooverflow{
       height: -5px;
       line-height: 0;}
       
-option.difficulty0{
+option.difficultyVE{
 		background-color:#F2F5A9;}
-option.difficulty1{
+option.difficultyE{
 		background-color:#F5DA81;}
-option.difficulty2{
+option.difficultyM{
 		background-color:#FAAC58;}
-option.difficulty3{
+option.difficultyH{
 		background-color:#FE642E;
 		color:white;}
-option.difficulty4{
+option.difficultyVH{
 		background-color:#FF0000;
 		color:white;}
 span.reqField{
