@@ -6,14 +6,14 @@
 <META HTTP-EQUIV="Expires" CONTENT="-1">
 <title>Registration</title>
 
+<script language="javascript" src="Scripts/registrationIndex.js"></script>
 <script language="javascript" src="Scripts/States.js"></script>
-<script language="javascript" src="Scripts/registrationindex.js"></script>
 <script language="javascript" src="Scripts/jquery.js"></script>
 <link rel="stylesheet" href="CSS/styles.css" type="text/css" />
 
 </head>
 
-<body onload="loadIndex();">
+<body onload=loadIndex()>
 
 <div id="container">
     <a href="index.html">
@@ -26,7 +26,7 @@
 		<div id="OneCol">
         	<div name="RegistrationError" id="RegistrationError"></div>
         	<div id="Registration">
-                <form class="form" style="width: 610px;" name="RegistrationForm" method="get" onSubmit=" event.preventDefault(); OnRegister(); return false;">
+                <form class="form" style="width: 610px;" name="RegistrationForm" method="get" onSubmit="event.preventDefault(); OnRegister(); return false;">
 					<div class="formHeader"><h3 class="formHeadText">register</h3></div>
                     <fieldset>
                     <div id="formColLeft">

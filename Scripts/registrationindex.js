@@ -1,18 +1,13 @@
 //Loads all the state names and values for the registration form state selection box
 //Sets the intervals for JavaScript validation of the Login and Registration fields
-
-
-
 function loadIndex()
 {
-    
   $("#StateSelection").html(string_states);
-  setInterval(function() {ValidateRegistrationForms();}, 1000);
+  setInterval(function() {ValidateRegistrationForms();}, 100);
 
-    $.ajax({type: "post", async: true, url: 'onLogCookies.php', 
-        success:function(){
-            //alert("called");
-        }});
+    $.post('onLogCookies.php', "", 
+        function(){
+        });
  
 }
 
@@ -53,7 +48,6 @@ var registration_tempNickname_str = '';
 //code will not even be called. A "Login Error" will also keep them on the homepage.
 function OnRegister()
 {
-    
   if (REGISTRATION_INPUT_VALID)
   {
     var registrationXML;
