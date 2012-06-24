@@ -223,9 +223,7 @@ abstract class Model {
             }
             
             $sql .= $fieldName . '=' . $value . ",";
-            
-            
-            
+     
         }
         
         //chop off the last comma
@@ -235,6 +233,7 @@ abstract class Model {
          
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Update query failed: ' . $this->connection->error);
+            
     }
     
     public function removeFromDB()

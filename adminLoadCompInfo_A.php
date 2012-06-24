@@ -32,11 +32,7 @@ if(isset($_SESSION['competitionObject'])){
     if($CompOject->notjoinable){echo "No</td></tr>";}
     else{echo "Yes </td></tr>";}
 
-    echo "<tr><td>Countdown on</td><td>";
-    if($CompOject->countdown){echo "Yes</td></tr>";}
-    else{echo "No </td></tr>";}
-
-
+    
     echo "<tr><td>Code Coverage on</td><td>";
     if($CompOject->codecoverage){echo "Yes</td></tr>";}
     else{echo "No </td></tr>";}
