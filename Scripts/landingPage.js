@@ -33,6 +33,10 @@ function loadComps(isCaptn)
 function joinComp()
 {
     var password = $("#CompPassword").val();
+    
+    if(compSelected == '')
+        return;
+    
     $.ajax({type:"POST", url:'joinComp.php', data:"compS="+compSelected+"&pword="+password, 
         success: function(html){
 
@@ -74,6 +78,10 @@ function loadTeamInvites()
 //Post-Conditions:
 function createSTeam(tName)
 {
+
+    if(tName == '')
+        return;
+
     $.post('createSTeam.php', "compS="+compSelected+"&tName="+tName, 
         function(html){
 
@@ -168,11 +176,13 @@ function getCompInfo()
             if (password == 0)
             {
                 $("#CompPassword").val("N/A");
+                document.getElementById("CompPassword").type="text";
                 $("#CompPassword").attr("disabled", true);
             }
             else
             {
                 $("#CompPassword").val("");
+                document.getElementById("CompPassword").type="password";
                 $("#CompPassword").attr("disabled", false);    
             }
             $('#displayInfo').val(displayOutput);
@@ -301,6 +311,10 @@ function StartToCaptain()
     var inviteOne = $("#LandingInvite1").val();
     var inviteTwo = $("#LandingInvite2").val();
             
+   if(teamName == '')
+       return;
+            
+            
     $.ajax({
         type: "POST",
         url:'StudentContent/captainCreateTeam.php', 
@@ -340,6 +354,7 @@ function sendInvites()
         function(){
             $("#LandingInvite3").val('');
             $("#LandingInvite4").val('');
+            alert("Invites sent!");
         });
 }
 
