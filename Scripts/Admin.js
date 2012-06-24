@@ -224,7 +224,7 @@ function addProb(problem)//Find Code ---------- CS1004
     var index = availableProbs.indexOf(problem);
     availableProbs.splice(index, 1);
     addedProbs.push(problem);
-    refreshProbList();
+    
 
     if(addedProbs.length > 0)
         document.getElementById('rBut').disabled = false;
@@ -237,8 +237,10 @@ function addProb(problem)//Find Code ---------- CS1004
 
     if(availableProbs.length == 0)
         document.getElementById('aBut').disabled = true;
+    
+    refreshProbList();
 
-            refreshProbList()
+            
 }
 
 //This function is referenced in page.html
@@ -249,7 +251,7 @@ function removeProb(problem)//Find Code ---------- CS1005
   var index = addedProbs.indexOf(problem);
   addedProbs.splice(index, 1);
   availableProbs.push(problem);
-  refreshProbList();
+  
   
   if(addedProbs.length == 0)
        document.getElementById('rBut').disabled = true;
@@ -263,7 +265,7 @@ function removeProb(problem)//Find Code ---------- CS1005
   if(availableProbs.length > 0)
        document.getElementById('aBut').disabled = false;
        
-   refreshProbList()
+   refreshProbList();
 }
 
 
