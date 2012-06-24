@@ -342,3 +342,11 @@ function sendInvites()
             $("#LandingInvite4").val('');
         });
 }
+
+function removeFromTeam(memberID)
+{
+    $.post('StudentContent/removeFromTeam.php', "memberID="+memberID,
+    function(){
+       refreshMember(true); 
+    });
+}

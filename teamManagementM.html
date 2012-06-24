@@ -41,7 +41,8 @@
       </fieldset>
       </form>
       <div id="Team-CompList">
-        <p id="smallerHeader" style="color:#000;">Available Competitions</p>
+        <span id="smallerHeader" style="color:#000;">Available Competitions</span>
+        <p> Note that only those competitions which your team leader has joined will be available to you.</p>
         <div id="LandingCompSelect">Loading...</div>
         <!--        <input type="submit" value="Refresh" >-->
         <a class="button" onClick="loadComps(false)"><p>Refresh</p></a>
@@ -66,8 +67,8 @@
         <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
       <div id="Landing-CompInfo">
         <p id="smallerHeader" style="color:#000;">Competition Information</p>
-        <div><textarea rows="10" cols="30" id="displayInfo"></textarea></div>
-        <p> Password: <input name="CompPassword" id="CompPassword" class="Ctext" /></p>
+        <div><textarea rows="10" cols="30" id="displayInfo" disabled></textarea></div>
+        <p> Password: <input type="password" name="CompPassword" id="CompPassword" class="Ctext" /></p>
 
         <!--        <div><input type="submit" value="Join Competition" onClick="joinComp()"></div>-->
              <a class="button" onClick="joinComp()"><p>Join Competition</p></a>
