@@ -33,6 +33,10 @@ function loadComps(isCaptn)
 function joinComp()
 {
     var password = $("#CompPassword").val();
+    
+    if(compSelected == '')
+        return;
+    
     $.ajax({type:"POST", url:'joinComp.php', data:"compS="+compSelected+"&pword="+password, 
         success: function(html){
 
