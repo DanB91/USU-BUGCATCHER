@@ -25,7 +25,7 @@ elseif ($team==null) {trigger_error("You must be on a team to submit a bug");}
 elseif ($user==null) { trigger_error("You must be logged to submit a bug");}
 elseif ($problemName==null) { trigger_error("Unkown problem");}
 //* Uncomment Line
-//elseif (count(preg_split('/[\n\r\t\s]/', $testInput, NULL, PREG_SPLIT_NO_EMPTY)) == 0 || count(preg_split('/[\n\r\t\s]/', $testOutput, NULL, PREG_SPLIT_NO_EMPTY)) == 0) {trigger_error('Please enter an expected input and output');} 
+elseif (count(preg_split('/[\n\r\t\s]/', $testInput, NULL, PREG_SPLIT_NO_EMPTY)) == 0 || count(preg_split('/[\n\r\t\s]/', $testOutput, NULL, PREG_SPLIT_NO_EMPTY)) == 0) {trigger_error('Please enter an expected input and output');} 
 elseif ($problemName == '') {trigger_error('Please select a problem');}
 
 
