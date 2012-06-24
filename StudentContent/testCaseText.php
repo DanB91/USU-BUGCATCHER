@@ -70,14 +70,13 @@ if($foundBug &&  $alreadyFoundBug){
     //echo "$bugObjectFound->bugid,$comp->compname\n";
     $team->foundBugInCompetition($bugObjectFound,$comp);
     echo "Found Bug\n";
-   
     echo "Correct Output:$oOutput\n";
     echo "Program Output:$bOutput";
 }
 elseif($foundBug &&  !$alreadyFoundBug){
     //echo "$bugObjectFound->bugid,$comp->compname\n";
     $team->foundBugInCompetition($bugObjectFound,$comp);
-    echo "Found Bug\n";
+    echo "Found (new) Bug\n";
     echo "Correct Output:$oOutput\n";
     echo "Program Output:$bOutput";
 }
