@@ -33,7 +33,7 @@ elseif ($problemName == '') {trigger_error('Please select a problem');}
 $prob = new Problem($problemName,"problemname");
 
 //* Remove 
-$tempFix = '../Problems/';
+$tempFix = '../';
 if(!file_exists($tempFix.$prob->oraclepath)){trigger_error("Can't find Oracle, contact administrative");}
 
 $foundBug = false;
@@ -43,12 +43,11 @@ $bugObjectFound ="";
 
 
 $oOutput = trim(shell_exec("java -jar $tempFix"."$prob->oraclepath $testInput"));
-
-
+$bOutput ="";
 foreach($prob->getBugs() as $value){
-    if($oOutput != $testOutput){
-        break;
-    }
+    //if($oOutput != $testOutput){
+    //    break;
+    //}
     $bOutput = trim(shell_exec("java -jar $tempFix". "$value->abpath $testInput"));
         
      if ($bOutput != $oOutput) {
@@ -86,6 +85,7 @@ elseif(!$foundBug &&  $alreadyFoundBug){
 }
 else{
      echo "Bad input/output";   
+
 }
 
 
