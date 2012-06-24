@@ -13,7 +13,7 @@ if ($user != NULL && $team != NULL) {
     if ($isCaptain == "true") {
         $members = $team->getUsers();
         if (count($members) <= 1)
-            echo "<p>None logged in</p>";
+            echo "<p>None Accepted</p>";
         else {
             foreach ($members as $member) {
                 if ($member->userid != $user->userid) {
