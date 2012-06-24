@@ -328,14 +328,16 @@ function getProb(str, cov, index)//Find Code ---------- PR1003
 	    $("#ProblemCode").html("<pre class='prettyprint lang-java linenums'>"+html+"</pre>");
 	    $("#ProblemName").html(probNames[index]);
 	    prettyPrint();
-	    getToolTip(currProblem);
+         
+	   
         });
-	
+	 getToolTip(currProblem);
 }
 
 function getToolTip(str)
 
 {
+
     $.post('StudentContent/getToolTip.php', "problem="+str, 
         function(html){	
             $("#BugTesterDiv").attr("title",html);
