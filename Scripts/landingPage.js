@@ -168,11 +168,13 @@ function getCompInfo()
             if (password == 0)
             {
                 $("#CompPassword").val("N/A");
+                document.getElementById("CompPassword").type="text";
                 $("#CompPassword").attr("disabled", true);
             }
             else
             {
                 $("#CompPassword").val("");
+                document.getElementById("CompPassword").type="password";
                 $("#CompPassword").attr("disabled", false);    
             }
             $('#displayInfo').val(displayOutput);
