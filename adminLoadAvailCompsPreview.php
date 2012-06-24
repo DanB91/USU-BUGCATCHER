@@ -33,21 +33,11 @@ echo "<tr><td>Coundown on</td><td>";
 if($CompOject->countdown){echo "Yes</td></tr>";}
 else{echo "No </td></tr>";}
 
-
-echo "<tr><td>Code Coverage on</td><td>";
-if($CompOject->codecoverage){echo "Yes</td></tr>";}
-else{echo "No </td></tr>";}
-
-
-
 echo "<tr><td>Finish</td><td>";
 if(hasFinished($CompOject)){echo "Yes</td></tr>";}
 else{echo "No </td></tr>";}
 
 
 echo "</table>";
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 ?>

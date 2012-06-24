@@ -56,7 +56,7 @@ function getRemainingTime($obj)
                     if($elapsedSecs == 0)
                     {
                         $minsLeft = $duration - $elapsedMins;
-                        $secsLeft = '00';
+                        $secsLeft = '0';
 
                         if($secsLeft < 10)
                             $secsLeft = '0' . $secsLeft;

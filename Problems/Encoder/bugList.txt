@@ -3,5 +3,4 @@ Encoder takes a string and an int, and shifts all the characters in the string b
 2)LINE 20: Mods by 25 instead of 26.
 3)LINE 35: Subtracts rather than taking the mod, meaning it will not work on large inputs.
 4)LINE 12: Takes the absolute value, making it not work on negative shifts.
-5)Does not check if input is an integer
-6)Does not include "try...catch" for invalid inputs
+5)Does not include "try...catch" for invalid inputs

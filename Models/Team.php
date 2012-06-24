@@ -39,6 +39,21 @@ class Team extends Model {
         return new Team($registerData['teamname'], 'teamname');
     }
     
+    
+    
+    public function removeUserByID($userid)
+    {
+        $this->connection = connectToDB();
+        $sql = 'DELETE FROM STUDENT_TEAM_LINK WHERE userid = ' . $userid . ' AND teamid = ' . $this->getPrimaryKeyValue();
+
+        if (!$this->connection->query($sql))
+            throw new BugCatcherException('Delete Failed: ' . $this->connection->error);
+        
+        if(($key = array_search($userid, $this->userids)))
+            unset ($this->userids, $key);
+    }
+
+
     public function addTeamToCompetition(Competition $comp)
     {
 	$this->createRelationToModel($comp, 'TEAM_COMPETITION_LINK');
@@ -50,7 +65,7 @@ class Team extends Model {
     }
     
     public function foundBugInCompetition(Bug $bug, Competition $comp){
-	$data=array('teamid', 'bugid', 'compid');
+	$data=array();
 	$data['teamid']=$this->getPrimaryKeyValue();
 	$data['bugid']=$bug->getPrimaryKeyValue();
 	$data['compid']=$comp->getPrimaryKeyValue();
