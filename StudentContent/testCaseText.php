@@ -33,7 +33,7 @@ elseif ($problemName == '') {trigger_error('Please select a problem');}
 $prob = new Problem($problemName,"problemname");
 
 //* Remove 
-$tempFix = '../Problems/';
+$tempFix = '../';
 if(!file_exists($tempFix.$prob->oraclepath)){trigger_error("Can't find Oracle, contact administrative");}
 
 $foundBug = false;
