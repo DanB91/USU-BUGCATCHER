@@ -124,17 +124,42 @@ class Team extends Model {
     }
     
     public function refreshChats($comp){
-	$lastRecieve=$chats[count($chats)-1]['timesent'];
+	$this->connection = connectToDB();
+	$lastRecieve=0;
+	$lastIndex=count($this->chats)-1;
+	if($lastIndex>=0)
+	    $lastRecieve=$this->chats[$lastIndex]['timesent'];
 	
 	$sql= "SELECT * FROM CHATS WHERE (teamid=".$this->getPrimaryKeyValue();
-	$sql= "OR teamid=NULL) AND timesent >".$lastRecieve." AND compid=".$comp->compid;
+	$sql .= " OR teamid=NULL) AND timesent >'".$lastRecieve."' AND compid=".$comp->compid;
 	
 	
 	if(!$result = $this->connection->query($sql))
                throw new BugCatcherException('Select Failed: ' . $this->connection->error);
 	
-	while(($row = $result->fetch_assoc()))
-	    $this->chats[]=new Chat($row['chatid']);
+	while(($row = $result->fetch_assoc())){
+	    $chat=array();
+	    $chat['chatid']=$row['chatid'];
+	    $chat['chattext']=$row['chattext'];
+	    $chat['chattype']=$row['chattype'];
+	    $chat['teamid']=$row['teamid'];
+	    $chat['userid']=$row['userid'];
+	    $chat['problemid']=$row['problemid'];
+	    $chat['compid']=$row['compid'];
+	    $chat['timesent']=$row['timesent'];
+	    $problem=new Problem($row['problemid']);
+	    $chat['problemname']=$problem->problemname;
+	    if($row['chattype']=="Hint"){
+		echo"if";
+		$user=new Admin($row['userid']);
+	    }
+	    else{
+		echo "else";
+		$user=new User($row['userid']);
+	    }
+	    $chat['username']=$user->username;
+	    $this->chats[]=$chat;
+	}
     }
     
     public function getChats(){
