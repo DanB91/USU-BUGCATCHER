@@ -91,85 +91,43 @@ function recieve()//Find Code ---------- G1004
 {
         $.ajax({type: "GET", url:"StudentContent/recieve.php", success:
         function(html){
-            		var arr = JSON.parse(html);
-			$("#ResultsList").html(arr[0]);//format(arr));
-			if(doScrollDown)
-				scrollResultsDown();
+            	var arr = JSON.parse(html);
+		$("#ResultsList").html(format(arr));
+		if(doScrollDown)
+			scrollResultsDown();
         }});
-}
-
-
-//the array is alternating time tags and messages, time tags start at index 0
-//the corresponding message for the time tag at index 0 is at index 1
-//this is a bi-directional bubble sort that sorts by the time tags
-function bubblesort(arr){
-	var swapped=true;
-	var j=0;
-	while(swapped){
-		j+=2;
-		swapped=false;
-		for(var i=j-2; i<arr.length-j; i+=2)
-		{
-			if(arr[i]>arr[i+2]){
-				swapped=true;
-				var temp=arr[i];
-				arr[i]=arr[i+2];
-				arr[i+2]=temp;
-
-				temp=arr[i+1];
-				arr[i+1]=arr[i+3];
-				arr[i+3]=temp;
-			}
-		}
-
-		for(i=arr.length-j; i>j&&!swapped; i-=2)
-		{
-			if(arr[i]<arr[i-2]){
-				swapped=true;
-				temp=arr[i];
-				arr[i]=arr[i-2];
-				arr[i-2]=temp;
-
-				temp=arr[i-1];
-				arr[i+1]=arr[i-1];
-				arr[i-1]=temp;
-			}
-		}
-	}
 }
 
 //do the filtering by tags, and then splice all the messages together for the results box
 function format(arr){
-	var curServerTime=arr.splice(arr.length-1,1);
-	bubblesort(arr);
+	//var curServerTime=arr.splice(arr.length-1,1);
 	var text="";
 	var lastIncluded=-1;
-
-	for(var i=1; i<arr.length; i+=2)
+	
+	for(var i=0; i<arr.length; i++)
 	{
-		var tag=arr[i].substring(arr[i].indexOf('[')+1, arr[i].indexOf(']'));
+		var tag=arr[i]['chattype'];
 		if(tag=="Chat" && document.getElementById("chatFilterBox").checked){
-			text+="<br>"+arr[i]+"<br>";
+			text+="<br>[Chat, "+arr[i]['username']+"]<br>";
+				text+=arr[i]['chattext']+"<br>";
 			lastIncluded=i;
 		}
 		else if(tag=="Hint" && document.getElementById("hintFilterBox").checked){
-			text+="<br>"+arr[i]+"<br>";
+			text+="<br>[Hint, "+arr[i]['problemname']+"]<br>"+arr[i]['chattext']+"<br>";
 			lastIncluded=i;
 		}
-		else if(tag.substring(0, 4) =="Test"){
+		else if(tag=="Test"){
 			if( document.getElementById("testFilterBox").checked) {
-				text+="<br>"+arr[i]+"<br>";
+				text+="<br>[Test, "+arr[i]['problemname']+", "+arr[i]['username']+"]<br>";
+				text+=arr[i]['chattext']+"<br>";
 				lastIncluded=i;
 			}
 			else{
-				var firstCommaIndex=tag.indexOf(",");
-				var secondCommaIndex=tag.indexOf(",", firstCommaIndex+2);
-
-				var Problem=tag.substring(secondCommaIndex+2);
 				//if it is the current problem, then include the test case
-				if(Problem.trim()==currProblem.trim()){
-					text+="<br>"+arr[i]+"<br>";
-					lastIncluded=i;
+				if(arr[i]['problemname'].trim()==currProblem.trim()){
+				    text+="<br>[Test, "+arr[i]['problemname']+", "+arr[i]['username']+"]<br>";
+				    text+=arr[i]['chattext']+"<br>";
+				    lastIncluded=i;
 				}
 			}
 
@@ -177,7 +135,7 @@ function format(arr){
 	}
 	doScrollDown=false;
 	if(lastIncluded>0)
-		doScrollDown= ((curServerTime-arr[lastIncluded-1])<2);
+		doScrollDown= true;//((curServerTime-arr[lastIncluded-1])<2);
 	return text;
 }
 

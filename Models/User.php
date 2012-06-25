@@ -125,9 +125,10 @@ class User extends Model{
 	return $teamArr;
     }
     
-    public function sendChat($compID, $chatText){
+    public function sendChat($compID, $chatText, $teamID){
 	$data['chattext'] = $chatText;
 	$data['chattype'] = "Chat";
+	$data['teamid'] = $teamID;
 	$data['userid'] = $this->getPrimaryKeyValue();
 	$data['compid'] = $compID;
         Model::addRow('CHATS', $data);

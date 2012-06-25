@@ -7,6 +7,8 @@ require_once dirname(__FILE__) ."/Models/Competition.php";
 require_once dirname(__FILE__) ."/Models/Problem.php";
 require_once dirname(__FILE__) ."/Models/Bug.php";
 require_once dirname(__FILE__) ."/Models/Leaderboard.php";
+require_once dirname(__FILE__) ."/Models/Chat.php";
+
 header('Content-type: text/html');
 
 
