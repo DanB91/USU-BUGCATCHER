@@ -1,5 +1,6 @@
 <?php
     session_start();
+    header('Content-Type: application/json');
     require '../Models/Problem.php';
     function intDifficulty($var){
         switch($var){
@@ -11,17 +12,25 @@
         }
         return 0;
     }  
-    if(isset($_SESSION['adminObject']) && isset($_GET["problem"])){
+    if(isset($_SESSION['adminObject'])){
+        
+        $problemsSortedByDifficulty = array('VE' => array(), 'E' => array(), 'M' => array(), 'H' => array(), 'VH' => array());
+        
         try{
-            $problem = new Problem($_GET["problem"],"problemname");
-            echo intDifficulty($problem->problemdifficulty);
+            foreach($_GET["problem"] as $probName)
+            {
+                $prob = new Problem($probName, 'problemname');
+                
+                $problemsSortedByDifficulty[$prob->problemdifficulty][] = $prob->problemname;
+            }
+            echo json_encode($problemsSortedByDifficulty);
         }
         catch(Exception $e){
-            echo 0;
+            echo json_encode(array('Error' => $e->getMessage()));
         }
     }
     else{
-        echo 0;
+        echo json_encode(array('Error' => 'Something went wrong with AJAX.... '));
     }
 
 ?>

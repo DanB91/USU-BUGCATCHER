@@ -66,7 +66,7 @@ var currentStudent = '';	 //Find Code ---------- GV1003
 var currProblemSelected = '';//Find Code ---------- GV1005
 var lastHintSelected = '';	 //Find Code ---------- GV1006
 var currProbID = '';
-var availableProbs;
+var availableProbs = [];
 var addedProbs = [];
 
 var compSetTimeS;
@@ -94,97 +94,118 @@ function refreshProbList()
 {
     var content = '<select name="ProblemsList" id="ProblemsListGet" class="Cselect" size="8" onchange="showProbPreview(this)">';
     var difficulty;
-    var pSBD = new Array(); //problems sorted by difficulty
-    for(var i = 0; i < availableProbs.length; i++)
-    {
-        $.ajax({
-            url:"AdminCompContent/getDifficulty.php", 
-            data: {problem: availableProbs[i]},
-            async: false, 
-            success:function(result){    
-                
-                difficulty = parseInt(result);
-                if(pSBD[difficulty] == undefined)
-                {
-                    pSBD[difficulty] = new Array();
-                }
-                pSBD[difficulty].push(availableProbs[i]);
-            }
-        });			
-    }
     var diffStr = '';
-    for(var difficulty = 0; difficulty < pSBD.length; difficulty++)
-    {
-        if(pSBD[difficulty] == undefined)
-            continue;
-      
-      	for(var prob = 0; prob < pSBD[difficulty].length; prob++)
-      	{
-      		switch(difficulty)
-      		{
-      			case 0:
-      				diffStr = ' - Very Easy';
-      				break;
-      			case 1:
-					diffStr = ' - Easy';
-					break;
-      			case 2:
-      				diffStr = ' - Medium';
-					break;
-      			case 3:
-					diffStr = ' - Hard';
-      				break;
-      			case 4:
-      				diffStr = ' - Very Hard';
-      				break;	
-      		}
-      		content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + pSBD[difficulty][prob] + "'>" + pSBD[difficulty][prob] + diffStr +"</option>"; 
-      	}
-      }
-      
-     content += '</select>';
     
-     document.getElementById('ProblemsList').innerHTML = content;
-     
-     content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
-      
-    for(i = 0; i < addedProbs.length; i++)
-    {
-        $.ajax({
-            url:"AdminCompContent/getDifficulty.php", 
-            async: false, 
-            data: {problem: addedProbs[i]},
-            success:function(result){     
-              
-                difficulty = parseInt(result); 
-                  
-                var diffStr = '';
-                switch (difficulty)
-                {
-                    case 0:
-                        diffStr = ' - Very Easy';
-                        break;
-                    case 1:
-                        diffStr = ' - Easy';
-                        break;
-                    case 2:
-                        diffStr = ' - Medium';
-                        break;
-                    case 3:
-                        diffStr = ' - Hard';
-                        break;
-                    case 4:
-                        diffStr = ' - Very Hard';
-                        break;    					
-                }
-                content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
+    
+    
+    $.ajax({
+        url:"AdminCompContent/getDifficulty.php", 
+        data: {
+            problem: availableProbs
+        },
+        async: false, 
+        success:function(result){    
+                
+            if(result.Error != undefined)
+            {
+                alert(result.Error);
             }
-        });
-    }
+            else{
+                    
+                for(var difficulty in result)
+                {
+                    for(prob in result[difficulty])
+                    {
+                        switch(difficulty)
+                        {
+                            case 'VE':
+                                diffStr = ' - Very Easy';
+                                break;
+                            case 'E':
+                                diffStr = ' - Easy';
+                                break;
+                            case 'M':
+                                diffStr = ' - Medium';
+                                break;
+                            case 'H':
+                                diffStr = ' - Hard';
+                                break;
+                            case 'VH':
+                                diffStr = ' - Very Hard';
+                                break;	
+                        }
+                        
+                        content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + result[difficulty][prob] + "'>" + result[difficulty][prob] + diffStr +"</option>";
+                        
+                    }
+                }
+            }
+                
+        }
+    });			
+    
+   
+  
+    content += '</select>';
+    
+    document.getElementById('ProblemsList').innerHTML = content;
+     
+    content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
+     
+     
+    
+    $.ajax({
+        url:"AdminCompContent/getDifficulty.php", 
+        data: {
+            problem: addedProbs
+        },
+        async: false, 
+        success:function(result){    
+                
+            if(result.Error != undefined)
+            {
+                alert(result.Error);
+            }
+            else{
+                    
+                for(var difficulty in result)
+                {
+                    for(prob in result[difficulty])
+                    {
+                        switch(difficulty)
+                        {
+                            case 'VE':
+                                diffStr = ' - Very Easy';
+                                break;
+                            case 'E':
+                                diffStr = ' - Easy';
+                                break;
+                            case 'M':
+                                diffStr = ' - Medium';
+                                break;
+                            case 'H':
+                                diffStr = ' - Hard';
+                                break;
+                            case 'VH':
+                                diffStr = ' - Very Hard';
+                                break;	
+                        }
+                        
+                        content += "<option onDblClick='removeProb(this.value)' value='"+ result[difficulty][prob] + "' class='difficulty"+difficulty+"'>" + result[difficulty][prob] + diffStr + "</option>";                        
+                    }
+                }
+            }
+                
+        }
+    });		
+    
+      
     content += '</select>';
     
     $('#SelectedProblems').html(content);
 }
+
+
 
 
 //This function is referenced in AdminContentUpdate.js
@@ -224,7 +245,7 @@ function addProb(problem)//Find Code ---------- CS1004
     var index = availableProbs.indexOf(problem);
     availableProbs.splice(index, 1);
     addedProbs.push(problem);
-    refreshProbList();
+    
 
     if(addedProbs.length > 0)
         document.getElementById('rBut').disabled = false;
@@ -237,8 +258,10 @@ function addProb(problem)//Find Code ---------- CS1004
 
     if(availableProbs.length == 0)
         document.getElementById('aBut').disabled = true;
+    
+    refreshProbList();
 
-            refreshProbList()
+            
 }
 
 //This function is referenced in page.html
@@ -249,7 +272,7 @@ function removeProb(problem)//Find Code ---------- CS1005
   var index = addedProbs.indexOf(problem);
   addedProbs.splice(index, 1);
   availableProbs.push(problem);
-  refreshProbList();
+  
   
   if(addedProbs.length == 0)
        document.getElementById('rBut').disabled = true;
@@ -263,7 +286,7 @@ function removeProb(problem)//Find Code ---------- CS1005
   if(availableProbs.length > 0)
        document.getElementById('aBut').disabled = false;
        
-   refreshProbList()
+   refreshProbList();
 }
 
 
@@ -619,7 +642,7 @@ function getMasterTime()//Find Code ---------- USC1002
             }
         }
         else if(time == "paused")
-            {document.getElementById("header-timer").innerHTML="paused!";  startTimerOnRefresh();}
+            {document.getElementById("header-timer").innerHTML="paused!";startTimerOnRefresh();}
         else
             document.getElementById("header-timer").innerHTML="STOP!";
 
