@@ -113,6 +113,7 @@ $.ajax({type: "GET", url:"InsertHTML.php", data: "filePath="+filePath, success:f
 					clearInterval(t3);
           break;
         case 5:
+		hideOnLoad();
                 clearInterval(progUpdate);
                 clearInterval(t3);
                 break;

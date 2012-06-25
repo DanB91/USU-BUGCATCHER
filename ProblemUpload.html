@@ -10,6 +10,8 @@
 <script language="javascript" src="Scripts/AdminTimer.js"></script>
 <script language="javascript" src="Scripts/CountdownTimer.js"></script>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <script language="javascript">
 var compSetLanguage = '';
 var compSetMode = '';
@@ -63,14 +65,99 @@ var compSetID = '';
 	<div id="Content">
 <!--Do Not Delete The Comment Below This-->
 <!--CONVERSION_STARTS_HERE-->
-		<h2>Upload Custom Problems</h2>
-        <form action="UploadProblemFolder.php" method="post" enctype="multipart/form-data" target="CP_Target">
-            <p id="smallerHeader" style="color: #000;">Filename:</p>
-            <div id="uploadWrapper"><input type="file" name="file" id="file" /></div>
-            <br />
-            <input type="submit" value="Upload Problem" name="CP_Upload" id="CP_Upload" />
-        </form>
-        <iframe id="CP_Target" name="CP_Target" src="#" style="width:0;height:0;border:0px solid #000;"></iframe>
+		<div id="CP_Left">
+    		File Structure:
+				<span class="ul-M-S">-Folder</span>
+				<span class="ul-M">-File</span>
+				<span class="ul-D">-Description</span><br />
+				
+				<ul class="ul-Head"><li class="ul-H">'ProblemName'
+					<ul class="ul-Main">
+						<li class="ul-M" id="ul-M1">'ProblemName'Oracle.jar
+								<ul id="ul-M1-Description" class="ul-Description-hidden">
+								<li class="ul-D">This is just the .jar file that corresponds to 'ProblemName'Oracle.java</li></ul>
+						</li>	
+						<li class="ul-M" id="ul-M2">'ProblemName'bug1.jar
+								<ul id="ul-M2-Description" class="ul-Description-hidden">
+								<li class="ul-D">This is just the .jar file that corresponds to 'ProblemName'bug1.java</li></ul>
+						</li>	
+						<li class="ul-M" id="ul-M3">'ProblemName'bug2.jar
+								<ul id="ul-M3-Description" class="ul-Description-hidden">
+								<li class="ul-D">This is just the .jar file that corresponds to 'ProblemName'bug2.java</li></ul>
+						</li>	
+						<li class="ul-M" id="ul-M4">'ProblemName'bug3.jar
+								<ul id="ul-M4-Description" class="ul-Description-hidden">
+								<li class="ul-D">This is just the .jar file that corresponds to 'ProblemName'bug3.java</li></ul>
+						</li>	
+						<li class="ul-M" id="ul-M5">'ProblemName'.jar
+								<ul id="ul-M5-Description" class="ul-Description-hidden">
+								<li class="ul-D">This is just the .jar file that corresponds to 'ProblemName'.java</li></ul>
+						</li>
+						<li class="ul-M" id="ul-M6">'ProblemName'.txt
+								<ul id="ul-M6-Description" class="ul-Description-hidden">
+								<li class="ul-D">This is a text file containing the same text as 'ProblemName'.jar. The file is used for showing the problem code during competitions.</li></ul>
+						</li>
+						<li class="ul-M" id="ul-M7">'ProblemName'Req.txt
+								<ul id="ul-M7-Description" class="ul-Description-hidden">
+								<li class="ul-D">This file contains the requirements for the problem.</li></ul>
+						</li>
+						<li class="ul-M" id="ul-M8">'ProblemName'Ex.txt
+								<ul id="ul-M8-Description" class="ul-Description-hidden">
+								<li class="ul-D">This file contains the tooltip text for test input and output. It is seen when hovering over the test input and output fields.</li></ul>
+						</li>
+						<li class="ul-M" id="ul-M9">bugList.txt
+								<ul id="ul-M9-Description" class="ul-Description-hidden">
+								<li class="ul-D">This file contains a description list of each of the bugs for the problem.</li></ul>
+						</li>
+						<li class="ul-M" id="ul-M10">difficulty.txt
+								<ul id="ul-M10-Description" class="ul-Description-hidden">
+								<li class="ul-D">This file contains the difficulty value for the problem.<br />(0=Very Easy, 1=Easy, 2=Medium, 3=Hard, 4=Very Hard)</li></ul>
+						</li>
+						<li class="ul-M-S" id="ul-M11">src
+								<ul id="ul-M11-Sub" class="ul-Sub-hidden">
+								<li class="ul-S" id="ul-M11-S1">'ProblemName'Oracle.java
+										<ul id="ul-M11-S1-Description" class="ul-Description-hidden">
+										<li class="ul-D">This is the master source code file that contains no bugs.</li></ul>
+								</li>
+								<li class="ul-S" id="ul-M11-S2">'ProblemName'bug1.java
+										<ul id="ul-M11-S2-Description" class="ul-Description-hidden">
+										<li class="ul-D">This is the source code file containing bug 1 for the problem.</li></ul>
+								</li>
+								<li class="ul-S" id="ul-M11-S3">'ProblemName'bug2.java
+										<ul id="ul-M11-S3-Description" class="ul-Description-hidden">
+										<li class="ul-D">This is the source code file containing bug 2 for the problem.</li></ul>
+								</li>
+								<li class="ul-S" id="ul-M11-S4">'ProblemName'bug3.java
+										<ul id="ul-M11-S4-Description" class="ul-Description-hidden">
+										<li class="ul-D">This is the source code file containing bug 3 for the problem.</li></ul>
+								</li>
+								<li class="ul-S" id="ul-M11-S5">'ProblemName'.java
+										<ul id="ul-M11-S5-Description" class="ul-Description-hidden">
+										<li class="ul-D">This is the source code file containing all of the bugs for the problem.</li></ul>
+								</li></ul><!--end ul-Sub-->
+						</li>
+					</ul><!--end ul-Main-->
+					</li>
+				</ul><!--end ul-Head-->
+				<div id="exampleFile"></div>
+    </div>
+    <div id="CP_Right">
+      <h2>Upload Custom Problems</h2>
+      <form action="UploadProblemFolder.php" method="post" enctype="multipart/form-data" target="CP_Target">
+          <p id="smallerHeader" style="color: #000;">Filename:</p>
+          <div id="uploadWrapper"><input type="file" name="file" id="file" /></div>
+          <br />
+          <span>The uploaded file must be a .zip and contain the full file structure shown to the left.</span>
+          <input type="submit" value="Upload Problem" name="CP_Upload" id="CP_Upload" />
+      </form>
+      <iframe id="CP_Target" name="CP_Target" src="#" style="width:0;height:0;border:0px solid #000;"></iframe>
+    </div>
+    
+<script>
+
+
+
+</script>
 <!--CONVERSION_ENDS_HERE-->
 <!--Do Not Delete The Comment Above This-->
 	</div><!--end content-->

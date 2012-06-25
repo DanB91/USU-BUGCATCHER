@@ -69,6 +69,7 @@ foreach($prob->getBugs() as $value){
 if($foundBug &&  $alreadyFoundBug){
     //echo "$bugObjectFound->bugid,$comp->compname\n";
     $team->foundBugInCompetition($bugObjectFound,$comp);
+    echo 1;
     echo "Found Bug\n";
     echo "Correct Output:$oOutput\n";
     echo "Program Output:$bOutput";
@@ -76,14 +77,17 @@ if($foundBug &&  $alreadyFoundBug){
 elseif($foundBug &&  !$alreadyFoundBug){
     //echo "$bugObjectFound->bugid,$comp->compname\n";
     $team->foundBugInCompetition($bugObjectFound,$comp);
+    echo 1;
     echo "Found (new) Bug\n";
     echo "Correct Output:$oOutput\n";
     echo "Program Output:$bOutput";
 }
 elseif(!$foundBug &&  $alreadyFoundBug){
+    echo 0;
     echo "Bug already exist";
 }
 else{
+    echo 0;
      echo "Bad input/output";   
 
 }

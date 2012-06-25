@@ -329,10 +329,12 @@ function getBugTestInfo(str, str2)
     
     $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
         function(html){
-            getBugs();     
-            alert(html);
-            if (html.trim() == '1' && !recentlyLogged)
+            getBugs();
+            alert(html.trim().substring(1,html.trim().length));
+
+            if (html.trim().substring(0,1) == '1')
             {
+                //&& !recentlyLogged
                 bugFoundAnimation();
             }
             else
