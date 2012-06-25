@@ -346,7 +346,7 @@ h4 {
 	color: #f3e483;
 	border: none;
 	cursor: pointer;
-	margin: 20px 10px;
+	margin: 20px 10px 20px 40px;
 }
 /* ----- Dynamic Buttons ----- */
 .buttonText {
@@ -1580,12 +1580,87 @@ td.PStats{
 
 /*    General Styles
 /*_______________________*/
-#file {
-	border: 2px solid #779853;
-	background-color:#fffded;
-	padding:0px;
-	width: 220px; 
-}
+
+/*  Custom Problems Left
+/*_______________________*/
+#CP_Left{
+			background: #AAD67B;
+			float: left;
+			height: 400px;
+			padding: 10px;
+			width: 655px;}
+
+#CP_Left span{
+			margin: 10px 10px;}
+
+#CP_Left li{
+			margin: auto;
+			padding: auto;}
+			
+#CP_Left ul{
+			padding-left: 20px;}
+			
+.ul-Head{
+			background: #dd8;
+			clear: left;
+			float: left;
+			height: 380px;
+			overflow: hidden;
+			width: 325px;}
+
+.ul-Head li{
+			cursor: default;
+			list-style-type: square;}
+
+.ul-Main li{
+			cursor: pointer;
+			list-style-type: square;}
+
+.ul-Sub li{
+			list-style-type: disc;}
+
+.ul-Description li{
+			cursor: default;
+			list-style-type: circle;}
+
+.ul-M-S, .ul-H{
+			color: #070;}
+
+.ul-M, .ul-S{
+			color: #00F;}
+
+.ul-D{
+			color: #C00;}
+
+#exampleFile{
+			background: #fff;
+			color: #000;
+			float: left;
+			height: 380px;
+			margin-left: 10px;
+			overflow: scroll;
+			width: 300px;}
+
+/* Custom Problems Right
+/*_______________________*/
+#CP_Right{
+			background: #d3fba7;
+			border-left: 9px solid #779853;
+			float: left;
+			height: 420px;
+			padding-left: 10px;
+			width: 306px;}
+
+#CP_Right p{
+			margin: 5px 0px 0px 30px;}
+
+#file{
+			border: 2px solid #779853;
+			background-color:#fffded;
+			margin: 5px 0px 5px 30px;
+			padding:0px;
+			width: 220px;}
+
 
 /*   Problem Testing (Uses Styles From Student.html)
 /*____________________________________________________*/

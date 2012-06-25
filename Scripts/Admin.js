@@ -606,6 +606,320 @@ function loadProblemNames()//Find Code ---------- H1006
 
     }});               
 }
+//###################################################################################################//
+//                                          Problem Upload                                           //
+//###################################################################################################//
+
+var slideDuration = 100;
+var DESCRIPTION_CLICKED = false;
+var SUB_CLICKED = false;
+
+//hides the submenu and all the description when the page is loaded.
+function hideOnLoad()
+{
+	$('ul[class*="hidden"]').hide();
+	
+	$("li").click(function(){handleListClick(this)});
+}
+
+//handles the li.onClick event
+function handleListClick(element)
+{
+	if ($(element).attr("class") == "ul-D")
+	{
+		DESCRIPTION_CLICKED=true;
+	}
+	else if ($(element).attr("class") == "ul-S" || $(element).attr("class") == "ul-M")
+	{
+		if ($(element).attr("class") == "ul-S")
+		{
+			SUB_CLICKED=true;
+		}
+			
+		if (DESCRIPTION_CLICKED)
+		{
+			DESCRIPTION_CLICKED=false;
+		}
+		else
+		{
+			if ($("#"+element.id+"-Description").attr("class") == "ul-Description")
+			{
+				doListHide($("#"+element.id+"-Description"),"ul-Description-hidden",slideDuration);
+			}
+			else
+			{
+				showExampleFile(element);
+				$('ul[class="ul-Description"]').slideUp(slideDuration);
+				$('ul[class="ul-Description"]').attr("class", "ul-Description-hidden");
+				doListShow($("#"+element.id+"-Description"),"ul-Description");
+			}
+		}
+	}
+	else if ($(element).attr("class") == "ul-M-S")
+	{
+		if (SUB_CLICKED)
+		{
+			SUB_CLICKED=false;
+		}
+		else
+		{
+			if ($("#"+element.id+"-Sub").attr("class") == "ul-Sub")
+			{
+				var count = 1;
+				while($("#"+element.id+"-S"+count).attr("id") != null)
+				{
+					doListHide($("#"+element.id+"-S"+count+"-Description"),"ul-Description-hidden",0);
+					count++;
+				}
+				doListHide($("#"+element.id+"-Sub"),"ul-Sub-hidden",slideDuration);
+				return;
+			}
+			$("#exampleFile").html("");
+			$('ul[class="ul-Description"]').slideUp(slideDuration);
+			$('ul[class="ul-Description"]').attr("class", "ul-Description-hidden");
+			doListShow($("#"+element.id+"-Sub"),"ul-Sub");
+			return;
+		}
+	}
+}
+
+//shows given list items
+function doListShow(element,elementClass)
+{
+	$(element).slideDown(slideDuration);
+	$(element).attr("class", elementClass);
+}
+
+//hides given list items
+function doListHide(element,elementClass,time)
+{
+	$(element).slideUp(time);
+	$(element).attr("class", elementClass);
+	$("#exampleFile").html("");
+}
+
+//populates the text inside of the division to the right of the file structure list
+function showExampleFile(element)
+{
+	var exampleFileOutput = "";
+	var ul_Index = $(element).html().indexOf("<ul",0);
+	if (ul_Index != -1)
+	{
+		exampleFileOutput += $(element).html().substring(0,ul_Index);
+	}
+	else
+	{
+		exampleFileOutput += $(element).html();
+	}
+	exampleFileOutput += "<br />----------------------------";
+	var listItemValue = element.id.replace(element.id.substring(0,4),"");
+	listItemValue = listItemValue.substring(0,2);
+	if (listItemValue == 11)
+	{
+		subItemValue = element.id.replace(element.id.substring(0,8),"");
+	}
+	switch(Number(listItemValue))
+	{
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			exampleFileOutput += '<pre>public class Fibonacci {\n';
+			exampleFileOutput += '\n';
+			exampleFileOutput += ' public static void main(String[] args) {\n';
+			exampleFileOutput += '    double N = Integer.parseInt(args[0]);\n';
+			exampleFileOutput += '    if(Math.floor(N)==N && N>-1){\n';
+			exampleFileOutput += '\n';
+			exampleFileOutput += '      int f = 0, g = 1;\n';
+			exampleFileOutput += '\n';
+			exampleFileOutput += '      for (int i = 1; i <= N+1; i++) {\n';
+			exampleFileOutput += '        f = f + g;\n';
+			exampleFileOutput += '        g = f - g;\n';
+			exampleFileOutput += '        System.out.print(f + " ");\n';
+			exampleFileOutput += '      }\n';
+			exampleFileOutput += '    }else{\n';
+			exampleFileOutput += '    System.out.println("Error:  Input must be a positive integer.");\n';
+			exampleFileOutput += '    }\n';
+			exampleFileOutput += ' }\n';
+			exampleFileOutput += '}</pre>\n';
+			break;
+		case 7:
+			exampleFileOutput += '<pre>1. The Fibonacci series are the numbers that follow the sequence: 1 1 2 3 5 8 13 ...\n';
+			exampleFileOutput += '&lt;br/>\n';
+			exampleFileOutput += '2. Each subsequent number after is the sum of the previous two.\n';
+			exampleFileOutput += '&lt;br/>\n';
+			exampleFileOutput += '3. This program begins the sequence at 1 and prints until the Nth number in the sequence.\n';
+			exampleFileOutput += '&lt;br/>\n';
+			exampleFileOutput += '4. The Nth number is the number input by the user.\n';
+			exampleFileOutput += '&lt;br/>\n';
+			exampleFileOutput += '5. This program does not accept integers greater than 30.  If the entered integer is greater, the program will output: "Error: Input too large."\n';
+			exampleFileOutput += '&lt;br/>\n';
+			exampleFileOutput += '6. If the input is not a positive integer it will output, "Error:  Input must be a positive integer."\n';
+			exampleFileOutput += '&lt;br/>\n';
+			exampleFileOutput += '7. Other invalid inputs will output, "Error: Bad Input".</pre>\n';
+			break;
+		case 8:
+			exampleFileOutput += '<pre>input: 4   output: 1 1 2 3</pre>';
+			break;
+		case 9:
+			exampleFileOutput += '<pre>Fibonacci takes an int n, and outputs the first n fibonacci numbers.';
+			exampleFileOutput += '<pre>1)line7: i<=N+1 should be i<=N otherwise an extra number is printed';
+			exampleFileOutput += '<pre>2)Does not include a "try...catch" to catch all other input errors.';
+			exampleFileOutput += '<pre>3)Does not check if input is less than 30.</pre>';
+			break;
+		case 10:
+			exampleFileOutput += '<pre>1</pre>';
+			break;
+		case 11:
+			switch(Number(subItemValue))
+			{
+				case 1:
+					exampleFileOutput += '<pre>public class FibonacciOracle {\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += ' public static void main(String[] args) {\n';
+					exampleFileOutput += '  try{\n';
+					exampleFileOutput += '    double N = Integer.parseInt(args[0]);\n';
+					exampleFileOutput += '    if(Math.floor(N)==N && N>-1){\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      if (N > 30) {\n';
+					exampleFileOutput += '        System.out.println("Error: Input too large");\n';
+					exampleFileOutput += '        return;\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      int f = 0, g = 1;\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      for (int i = 1; i <= N; i++) {\n';
+					exampleFileOutput += '        f = f + g;\n';
+					exampleFileOutput += '        g = f - g;\n';
+					exampleFileOutput += '        System.out.print(f + " ");\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '    }else{\n';
+					exampleFileOutput += '    System.out.println("Error:  Input must be a positive integer.");\n';
+					exampleFileOutput += '    }\n';
+					exampleFileOutput += '  }catch(Exception e){\n';
+					exampleFileOutput += '    System.out.println("Error: Bad Input");\n';
+					exampleFileOutput += '  }\n';
+					exampleFileOutput += ' }\n';
+					exampleFileOutput += '}</pre>\n';
+					break;
+				case 2:
+					exampleFileOutput += '<pre>//Error: Line 14, adds one extra integer to the output\n';
+					exampleFileOutput += 'public class Fibonaccibug1 {\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += ' public static void main(String[] args) {\n';
+					exampleFileOutput += '  try{\n';
+					exampleFileOutput += '    double N = Integer.parseInt(args[0]);\n';
+					exampleFileOutput += '    if(Math.floor(N)==N && N>-1){\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      if (N > 30) {\n';
+					exampleFileOutput += '        System.out.println("Error: Input too large");\n';
+					exampleFileOutput += '        return;\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      int f = 0, g = 1;\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      for (int i = 1; i <= N+1; i++) {\n';
+					exampleFileOutput += '        f = f + g;\n';
+					exampleFileOutput += '        g = f - g;\n';
+					exampleFileOutput += '        System.out.print(f + " ");\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '    }else{\n';
+					exampleFileOutput += '    System.out.println("Error:  Input must be a positive integer.");\n';
+					exampleFileOutput += '    }\n';
+					exampleFileOutput += '  }catch(Exception e){\n';
+					exampleFileOutput += '    System.out.println("Error: Bad Input");\n';
+					exampleFileOutput += '  }\n';
+					exampleFileOutput += ' }\n';
+					exampleFileOutput += '}</pre>\n';
+					break;
+				case 3:
+					exampleFileOutput += '<pre>//Error: does not check to see if input is a number; no try,catch\n';
+					exampleFileOutput += 'public class Fibonaccibug2 {\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += ' public static void main(String[] args) {\n';
+					exampleFileOutput += '    double N = Integer.parseInt(args[0]);\n';
+					exampleFileOutput += '    if(Math.floor(N)==N && N>-1){\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      if (N > 30) {\n';
+					exampleFileOutput += '        System.out.println("Error: Input too large");\n';
+					exampleFileOutput += '        return;\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      int f = 0, g = 1;\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      for (int i = 1; i <= N; i++) {\n';
+					exampleFileOutput += '        f = f + g;\n';
+					exampleFileOutput += '        g = f - g;\n';
+					exampleFileOutput += '        System.out.print(f + " ");\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '    }else{\n';
+					exampleFileOutput += '    System.out.println("Error:  Input must be a positive integer.");\n';
+					exampleFileOutput += '    }\n';
+					exampleFileOutput += ' }\n';
+					exampleFileOutput += '}</pre>\n';
+					break;
+				case 4:
+					exampleFileOutput += '<pre>//Error: does not check to see if int is overflowed, max is N=30\n';
+					exampleFileOutput += 'public class Fibonaccibug3 {\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += ' public static void main(String[] args) {\n';
+					exampleFileOutput += '  try{\n';
+					exampleFileOutput += '    double N = Integer.parseInt(args[0]);\n';
+					exampleFileOutput += '    if(Math.floor(N)==N && N>-1){\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      int f = 0, g = 1;\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      for (int i = 1; i <= N; i++) {\n';
+					exampleFileOutput += '        f = f + g;\n';
+					exampleFileOutput += '        g = f - g;\n';
+					exampleFileOutput += '        System.out.print(f + " ");\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '    }else{\n';
+					exampleFileOutput += '    System.out.println("Error:  Input must be a positive integer.");\n';
+					exampleFileOutput += '    }\n';
+					exampleFileOutput += '  }catch(Exception e){\n';
+					exampleFileOutput += '    System.out.println("Error: Bad Input");\n';
+					exampleFileOutput += '  }\n';
+					exampleFileOutput += ' }\n';
+					exampleFileOutput += '}</pre>\n';
+					break;
+				case 5:
+					exampleFileOutput += '<pre>public class Fibonacci {\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += ' public static void main(String[] args) {\n';
+					exampleFileOutput += '    double N = Integer.parseInt(args[0]);\n';
+					exampleFileOutput += '    if(Math.floor(N)==N && N>-1){\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      int f = 0, g = 1;\n';
+					exampleFileOutput += '\n';
+					exampleFileOutput += '      for (int i = 1; i <= N+1; i++) {\n';
+					exampleFileOutput += '        f = f + g;\n';
+					exampleFileOutput += '        g = f - g;\n';
+					exampleFileOutput += '        System.out.print(f + " ");\n';
+					exampleFileOutput += '      }\n';
+					exampleFileOutput += '    }else{\n';
+					exampleFileOutput += '    System.out.println("Error:  Input must be a positive integer.");\n';
+					exampleFileOutput += '    }\n';
+					exampleFileOutput += ' }\n';
+					exampleFileOutput += '}</pre>\n';
+					break;
+				default:
+					break;
+			}
+			break;
+		default:
+			exampleFileOutput += "default";
+			break;
+	}
+	$("#exampleFile").html(exampleFileOutput);
+}
 
 //###################################################################################################//
 //                                          User Status Check USC1000                                //
