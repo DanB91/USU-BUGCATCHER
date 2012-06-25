@@ -115,6 +115,7 @@ class User extends Model{
     
     
     public function getUsersTeams(){
+        $this->connection=  connectToDB();
 	$data['userid']=$this->getPrimaryKeyValue();
 	$result=$this->findInDB("STUDENT_TEAM_LINK", $data);
 	$teamArr= array();

@@ -6,4 +6,5 @@
  */
 
 define('SALT', '$6$G%$frg5gF%#f344fg54G$');
+
 ?>

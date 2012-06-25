@@ -1319,19 +1319,19 @@ a.navTabs-link:hover{
 
 /*Also used in Problem Testing
 /*_______________________*/
-option.difficulty0{
+option.difficultyVE{
 	background-color:#d3fba7;
 }
-option.difficulty1{
+option.difficultyE{
 	background-color:#f4f673;
 }
-option.difficulty2{
+option.difficultyM{
 	background-color:#ffd35c;
 }
-option.difficulty3{
+option.difficultyH{
 	background-color:#ff9453;
 }
-option.difficulty4{
+option.difficultyVH{
 	background-color:#e7542c;
 }
 
@@ -1593,4 +1593,6 @@ td.PStats{
 
 /*____________________________________________________*/
 
-
+option.boldedOpt{
+    background-color:#d3fba7;
+}

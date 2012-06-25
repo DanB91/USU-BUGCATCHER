@@ -39,6 +39,8 @@ function joinComp()
 //Post-Conditions:
 function createSTeam(tName)
 {
+    if(tName == '')
+        return;
     
     $.post('createSTeam.php', "compS="+compSelected+"&tName=" + tName, 
         function(html){

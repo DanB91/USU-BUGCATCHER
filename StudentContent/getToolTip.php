@@ -9,21 +9,13 @@ require_once "../header.php";
  
 session_start();
 $comp = $_SESSION['compObject'];
-
-$problem = $_GET["problem"];
+$probname = $_POST["problem"];
+$PROBLEM = new PROBLEM($probname, "problemname");
 
 if($comp!=null)//If the competition has been created
 {
-        if(!file_exists("../Problems/${problem}/${problem}Ex.txt"))
-        {
-            echo "No Example input available";
-            return;
-        }
     
-	$fileExamp=fopen("../Problems/${problem}/${problem}Ex.txt", "r");
-	$toolTipTxt .= fgets($fileExamp);
-	fclose($fileExamp);
-	echo $toolTipTxt;
+	echo  $PROBLEM->tooltip;
 	
 }
 else

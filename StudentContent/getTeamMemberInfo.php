@@ -9,28 +9,38 @@ $isCaptain = $_POST['isCaptain'];
 
 if ($user != NULL && $team != NULL) {
     $memberInfo = '';
-    if ($isCaptain) {
+    //code for captain (includes ability to remove)
+    if ($isCaptain == "true") {
         $members = $team->getUsers();
-        foreach ($members as $member) {
-            if ($member->userid != $user->userid)
-                $memberInfo .= "<p>".$member->username . "</p>";
+        if (count($members) <= 1)
+            echo "";
+        else {
+            $memberInfo .= "<h2>Teammates</h2>";
+            foreach ($members as $member) {
+                if ($member->userid != $user->userid) {
+                    $memberInfo .= "<p>" . $member->username;
+                    $memberInfo .= "<span onclick='removeFromTeam(" . $member->userid . ");'> (remove) </span></p>";
+                }
+            }
         }
+        //code for other member (specifies team leader)
     } else {
-        $leader = $team->getTeamLeader();
-        $leaderID = $leader->userid;
+        $members = $team->getUsers();
+        $leaderID = $team->getTeamLeader();
+        $leader = new User($leaderID);
         $userID = $user->userid;
         $memberInfo .= "<p>Team Leader: ";
-        $memberInfo .= $captain->username . "</p>";
+        $memberInfo .= $leader->username . "</p>";
 
 
-        $members = $team->getUsers();
         foreach ($members as $member) {
             //if the member is not the current user or the captain, return their information
             if (($member->userid != $leaderID) && $member->userid != $userID) {
-                $memberInfo .= "<p>".$member->username . "</p>";
+                $memberInfo .= "<p>" . $member->username . "</p>";
             }
         }
     }
+
     echo $memberInfo;
 }
 else

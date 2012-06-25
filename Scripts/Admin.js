@@ -65,8 +65,8 @@ var currentStudent = '';	 //Find Code ---------- GV1003
 
 var currProblemSelected = '';//Find Code ---------- GV1005
 var lastHintSelected = '';	 //Find Code ---------- GV1006
-
-var availableProbs;
+var currProbID = '';
+var availableProbs = [];
 var addedProbs = [];
 
 var compSetTimeS;
@@ -92,104 +92,120 @@ function startCompetition() //Find Code ---------- CS1001
 
 function refreshProbList()
 {
-    
     var content = '<select name="ProblemsList" id="ProblemsListGet" class="Cselect" size="8" onchange="showProbPreview(this)">';
     var difficulty;
-    var pSBD = new Array(); //problems sorted by difficulty
-    for(var i = 0; i < availableProbs.length; i++)
-    {
-        $.ajax({
-            url:"AdminCompContent/getDifficulty.php", 
-            data: {problem: availableProbs[i]},
-            async: false, 
-            success:function(result){    
-                
-                difficulty = parseInt(result);
-                if(pSBD[difficulty] == undefined)
-                {
-                    pSBD[difficulty] = new Array();
-                }
-                pSBD[difficulty].push(availableProbs[i]);
-            }
-        });			
-    }
     var diffStr = '';
-    for(var difficulty = 0; difficulty < pSBD.length; difficulty++)
-    {
-        if(pSBD[difficulty] == undefined)
-            continue;
-      
-      	for(var prob = 0; prob < pSBD[difficulty].length; prob++)
-      	{
-      		switch(difficulty)
-      		{
-      			case 0:
-      				diffStr = ' - Very Easy';
-      				break;
-      			case 1:
-					diffStr = ' - Easy';
-					break;
-      			case 2:
-      				diffStr = ' - Medium';
-					break;
-      			case 3:
-					diffStr = ' - Hard';
-      				break;
-      			case 4:
-      				diffStr = ' - Very Hard';
-      				break;
-     				
-      		}
-      		content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + pSBD[difficulty][prob] + "'>" + pSBD[difficulty][prob] + diffStr +"</option>"; 
-      	}
-      }
-      
-      content += '</select>';
     
-     document.getElementById('ProblemsList').innerHTML = content;
-     
-     content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
-      
-    for(i = 0; i < addedProbs.length; i++)
-    {
-        $.ajax({
-            url:"AdminCompContent/getDifficulty.php", 
-            async: false, 
-            data: {problem: addedProbs[i]},
-            success:function(result){     
-              
-                difficulty = parseInt(result); 
-                  
-                var diffStr = '';
-                switch (difficulty)
-                {
-                    case 0:
-                        diffStr = ' - Very Easy';
-                        break;
-                    case 1:
-                        diffStr = ' - Easy';
-                        break;
-                    case 2:
-                        diffStr = ' - Medium';
-                        break;
-                    case 3:
-                        diffStr = ' - Hard';
-                        break;
-                    case 4:
-                        diffStr = ' - Very Hard';
-                        break;    					
-                }
-                content += "<option onDblClick='removeProb(this.value)' value='"+ addedProbs[i] + "' class='difficulty"+difficulty+"'>" + addedProbs[i] + diffStr + "</option>";  
-
+    
+    
+    $.ajax({
+        url:"AdminCompContent/getDifficulty.php", 
+        data: {
+            problem: availableProbs
+        },
+        async: false, 
+        success:function(result){    
+                
+            if(result.Error != undefined)
+            {
+                alert(result.Error);
             }
-        });
-
-
-    }
+            else{
+                    
+                for(var difficulty in result)
+                {
+                    for(prob in result[difficulty])
+                    {
+                        switch(difficulty)
+                        {
+                            case 'VE':
+                                diffStr = ' - Very Easy';
+                                break;
+                            case 'E':
+                                diffStr = ' - Easy';
+                                break;
+                            case 'M':
+                                diffStr = ' - Medium';
+                                break;
+                            case 'H':
+                                diffStr = ' - Hard';
+                                break;
+                            case 'VH':
+                                diffStr = ' - Very Hard';
+                                break;	
+                        }
+                        
+                        content += "<option onDblClick='addProb(this.value)' class='difficulty"+difficulty+"' value='" + result[difficulty][prob] + "'>" + result[difficulty][prob] + diffStr +"</option>";
+                        
+                    }
+                }
+            }
+                
+        }
+    });			
+    
+   
+  
+    content += '</select>';
+    
+    document.getElementById('ProblemsList').innerHTML = content;
+     
+    content = '<select name="SelectedProblems" id="SelectedProblemsGet" class="Cselect"  size="5" onchange="showProbPreview(this)">';
+     
+     
+    
+    $.ajax({
+        url:"AdminCompContent/getDifficulty.php", 
+        data: {
+            problem: addedProbs
+        },
+        async: false, 
+        success:function(result){    
+                
+            if(result.Error != undefined)
+            {
+                alert(result.Error);
+            }
+            else{
+                    
+                for(var difficulty in result)
+                {
+                    for(prob in result[difficulty])
+                    {
+                        switch(difficulty)
+                        {
+                            case 'VE':
+                                diffStr = ' - Very Easy';
+                                break;
+                            case 'E':
+                                diffStr = ' - Easy';
+                                break;
+                            case 'M':
+                                diffStr = ' - Medium';
+                                break;
+                            case 'H':
+                                diffStr = ' - Hard';
+                                break;
+                            case 'VH':
+                                diffStr = ' - Very Hard';
+                                break;	
+                        }
+                        
+                        content += "<option onDblClick='removeProb(this.value)' value='"+ result[difficulty][prob] + "' class='difficulty"+difficulty+"'>" + result[difficulty][prob] + diffStr + "</option>";                        
+                    }
+                }
+            }
+                
+        }
+    });		
+    
+      
     content += '</select>';
     
     $('#SelectedProblems').html(content);
 }
+
+
 
 
 //This function is referenced in AdminContentUpdate.js
@@ -197,11 +213,9 @@ function refreshProbList()
 //Postcondition: Sets up files and does initial loading of problems available
 function popProbSelectBox()//Find Code ---------- CS1003
 {
-    
     $.ajax({type: "GET", url: "AdminCompContent/loadProblems.php", success:function(result){
-
-
-            availableProbs = eval(result);
+            
+            availableProbs = JSON.parse(result);
             var index = availableProbs.indexOf(".");
             availableProbs.splice(index, 1);
             index = availableProbs.indexOf("..");
@@ -215,7 +229,6 @@ function popProbSelectBox()//Find Code ---------- CS1003
         refreshProbList();   
 
     }});
-
 }
 
 //This function is referenced in page.html
@@ -223,41 +236,32 @@ function popProbSelectBox()//Find Code ---------- CS1003
 //Postcondition: Adds the problem to the added box(selected problems) and removes it from the available box(available problems)
 function addProb(problem)//Find Code ---------- CS1004
 {
-  //if(addedProbs.length == 5)
-  //{
-      //document.getElementById('CSetupError').innerHTML = "You cannot have more than 5 problems in a competition.";
-      //return;
-  //}
-  //alert("Called");
-  
-  if(problem == '')
-  {
-      return;
-  }
-  
-  /*if (contains(addedProbs, problem))
-  {
-  	return;
-  }*/
-  
-  var index = availableProbs.indexOf(problem);
-  availableProbs.splice(index, 1);
-  addedProbs.push(problem);
-  refreshProbList();
-  
-  if(addedProbs.length > 0)
-       document.getElementById('rBut').disabled = false;
-  
-  if(addedProbs.length > 1)
-  {
-      document.getElementById('CMoveUp').disabled = false;
-      document.getElementById('CMoveDown').disabled = false;
-  }
-  
-  if(availableProbs.length == 0)
-       document.getElementById('aBut').disabled = true;
+    if(problem == '')
+    {
+        return;
+    }
 
-	refreshProbList()
+
+    var index = availableProbs.indexOf(problem);
+    availableProbs.splice(index, 1);
+    addedProbs.push(problem);
+    
+
+    if(addedProbs.length > 0)
+        document.getElementById('rBut').disabled = false;
+
+    if(addedProbs.length > 1)
+    {
+        document.getElementById('CMoveUp').disabled = false;
+        document.getElementById('CMoveDown').disabled = false;
+    }
+
+    if(availableProbs.length == 0)
+        document.getElementById('aBut').disabled = true;
+    
+    refreshProbList();
+
+            
 }
 
 //This function is referenced in page.html
@@ -268,7 +272,7 @@ function removeProb(problem)//Find Code ---------- CS1005
   var index = addedProbs.indexOf(problem);
   addedProbs.splice(index, 1);
   availableProbs.push(problem);
-  refreshProbList();
+  
   
   if(addedProbs.length == 0)
        document.getElementById('rBut').disabled = true;
@@ -282,7 +286,7 @@ function removeProb(problem)//Find Code ---------- CS1005
   if(availableProbs.length > 0)
        document.getElementById('aBut').disabled = false;
        
-   refreshProbList()
+   refreshProbList();
 }
 
 
@@ -291,58 +295,27 @@ function removeProb(problem)//Find Code ---------- CS1005
 //Postcondition:Shows a preview of the problem currently selected
 function showProbPreview(prob)//Find Code ---------- CS1008
 {
-  var problem = prob.options[prob.selectedIndex].value;
-  if(problem == '')
+    var problem = prob.options[prob.selectedIndex].value;
+    if(problem == '')
 	return;
 	
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlshowPreview=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlshowPreview=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlshowPreview.onreadystatechange=function()
-  {
-    if (xmlshowPreview.readyState == 4 && xmlshowPreview.status == 200)
-    {
-		document.getElementById('CTextArea').value=xmlshowPreview.responseText;
-		
-    }
-  }
-  xmlshowPreview.open("GET","AdminCompContent/showPreview.php?problem=" + problem,true);
-  xmlshowPreview.send();	
-  
+    $.ajax({url: "AdminCompContent/showPreview.php", async: true, data: "problem=" + problem, success:function(result){
+
+            $("#CTextArea").val(result);
+    }});
+	
   showBugList(problem);
 }
 
 function showBugList(prob)
 {
-  if (prob == '')
+    if (prob == '')
 	  return;
 	  
-  if (window.XMLHttpRequest)
-  {// code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlshowBugList=new XMLHttpRequest();
-  }
-  else
-  {// code for IE6, IE5
-    xmlshowBugList=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  
-  xmlshowBugList.onreadystatechange=function()
-  {
-    if (xmlshowBugList.readyState == 4 && xmlshowBugList.status == 200)
-    {
-		document.getElementById('CBugArea').value=xmlshowBugList.responseText;
-		
-    }
-  }
-  xmlshowBugList.open("GET","AdminCompContent/showBugList.php?problem=" + prob,true);
-  xmlshowBugList.send();		  
+    $.ajax({url: "AdminCompContent/showBugList.php", async: true, data: "problem=" + prob, success:function(result){
 
+            $("#CBugArea").val(result);	
+    }});		  
 }
 
 function moveProbUp(problem)//Find Code ---------- CS1009
@@ -383,16 +356,13 @@ function js_array_to_php_array(a)
 
 function setCookie(c_name,value,exdays)
 {
-var exdate=new Date();
-exdate.setDate(exdate.getDate() + exdays);
-var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
-document.cookie=c_name + "=" + c_value;
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+    document.cookie=c_name + "=" + c_value;
 }
 function createCompetition()//Find Code ---------- CS1011
 {
-
-  //STOPPED = true;
-  
 
   var CodeCov = document.forms.CompForm.AllowCoverage;
   var hidden = document.forms.CompForm.HideComp;
@@ -403,8 +373,7 @@ function createCompetition()//Find Code ---------- CS1011
   var CountdownVal;
   var CodeCovVal;
   var HideCompVal;
-  
-      
+    
   if(hidden[0].checked == true)
       HideCompVal = 1;
   else
@@ -415,10 +384,9 @@ function createCompetition()//Find Code ---------- CS1011
   else
       CodeCovVal = 0;
 
-  
   var TimeVal = Time.value;
   var length = addedProbs.length;
-  
+ 
 
   if(length <= 0)
   {
@@ -453,7 +421,6 @@ function createCompetition()//Find Code ---------- CS1011
 
   var contents = "CompTime=" + TimeVal + "&numProbs=" + length + "&problems[]=" + addedProbs + "&codeCov=" + CodeCovVal + "&hidden=" + HideCompVal + "&compN=" + compName + "&desc=" + compDesc + "&passwd=" + passwd;
   
-
   $.ajax({type: "GET",  url:"setupImpl.php", data: contents, success:function(result){
         
         //alert(result);
@@ -471,8 +438,8 @@ function createCompetition()//Find Code ---------- CS1011
             //setCompCookies();
             createTimer();
             stopTimer();
-            $("#adminCompID").html("<p>" + "Competition ID: " + result + "</p>");
             $("#header-timer").html(TimeVal +":00");
+            $("#CSetupError").html("Competition successfully created.");
         }
         else
         {
@@ -481,13 +448,7 @@ function createCompetition()//Find Code ---------- CS1011
 
         
     }});
-
-
-    
-
 }
-
-
 
 //###################################################################################################//
 //                                          Team Management TM1000                                   //
@@ -561,23 +522,20 @@ function loadStudentInfo(element)//Find Code ---------- TM1007
         var getVars = "q="+teamN;
         
         $.ajax({url: "ManageContent/getStudentInfo.php", data: getVars, success:function(result){
-
-                if(result.length != 0)
-                {
-                        var t = JSON.parse(result);
-                        var temp = t.length / 4;
-                        var i;
-                        for(i = 0; i < temp; i++)
-                        {                              
-                              document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
-                              document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
-                              document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
-                              document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
-                        }
-                        
-                }
-        } });
- 
+                    if(result.length != 0)
+                    {
+                            var t = JSON.parse(result);
+                            var temp = t.length / 4;
+                            var i;
+                            for(i = 0; i < temp; i++)
+                            {                              
+                                    document.getElementById('Name_S' + (i + 1)).value=t[i * 4];
+                                    document.getElementById('Username_S' + (i  + 1)).value=t[i * 4 + 1];
+                                    document.getElementById('School_S' + (i + 1)).value=t[i * 4 + 2];
+                                    document.getElementById('State_S' + (i + 1)).value=t[i * 4 + 3];
+                            }
+                    }
+                }});
 }
 
 //###################################################################################################//
@@ -599,8 +557,6 @@ function showTableProg()//Find Code ---------- PS1001
 //                                               Hints H1000                                         //
 //###################################################################################################//
 
-
-
 //This function is referenced in Content_Hints.js
 //Precondition: Hints string must be passed and competition must be valid
 //Postcondition: Sends the custom hint to the compeition content file located in competitions folder
@@ -614,17 +570,18 @@ function sendHintsCust(str)//Find Code ---------- H1002
 
 function showPre(str)//Find Code ---------- H1003
 {
+    currProbID = str.id;
+    currProblemSelected = str.value;
 	
-    currProblemSelected = str;
-	
-    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str, success:function(result){
+    $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHints.php", data: "hintPreDef=" + str.value, success:function(result){
 
             $("#HintNum").html(result);  
     }});  
 }
 
 function showPreHintText(str)//Find Code ---------- H1004
-{      
+{   
+    lastHintSelected = str;
     $.ajax({type: "GET", async: true, url: "HintsContent/showPreDefHintText.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + str, success:function(result){
 
     $("#HintText").html(result);  
@@ -634,7 +591,7 @@ function showPreHintText(str)//Find Code ---------- H1004
 
 function sendHintPreDef()//Find Code ---------- H1005
 {    
-    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected, success:function(result){
+    $.ajax({type: "GET", async: true, url: "HintsContent/sendPre.php", data: "problemSelected=" + currProblemSelected + "&hintSelected=" + lastHintSelected + "&probID=" + currProbID, success:function(result){
 
         $("#HintText").html(result);  
 
@@ -656,7 +613,6 @@ function loadProblemNames()//Find Code ---------- H1006
 //Checks all student users' current active status
 function AdminLoadCheck()//Find Code ---------- USC1001
 {
-	//getActiveCompetition();
         getMasterTime();
 }
 
@@ -664,7 +620,6 @@ function AdminLoadCheck()//Find Code ---------- USC1001
 //Since the master timer is synced with the administrators timer
 function getMasterTime()//Find Code ---------- USC1002
 {
-    
     $.ajax({url: "AdminCompContent/getMasterTime.php", success:function(result){
 
         var time;
@@ -687,11 +642,10 @@ function getMasterTime()//Find Code ---------- USC1002
             }
         }
         else if(time == "paused")
-            {document.getElementById("header-timer").innerHTML="paused!";  startTimerOnRefresh();}
+            {document.getElementById("header-timer").innerHTML="paused!";startTimerOnRefresh();}
         else
             document.getElementById("header-timer").innerHTML="STOP!";
 
-    }});
-           
+    }});       
 }
 
