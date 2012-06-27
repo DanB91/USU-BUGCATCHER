@@ -38,6 +38,7 @@ if(!file_exists($tempFix.$prob->oraclepath)){trigger_error("Can't find Oracle, c
 
 $foundBug = false;
 $alreadyFoundBug = false;
+$notFound=false;
 $bugObjectFound ="";
 
 
@@ -63,33 +64,29 @@ foreach($prob->getBugs() as $value){
          }
          
      }
+     else $notFound=true;
 
     
 }
-if($foundBug &&  $alreadyFoundBug){
-    //echo "$bugObjectFound->bugid,$comp->compname\n";
+$testText="'Input: ".$testInput
+        ."<br>Expected Output: ".$testOutput
+        ."<br>";
+if($foundBug &&  !$alreadyFoundBug){
     $team->foundBugInCompetition($bugObjectFound,$comp);
+    $user->submitTestCase($comp->compid, $testText."Actual Output: ".$bOutput."<br>Result: Bug Found'", $prob->problemid, $team->teamid);
     echo 1;
-    echo "Found Bug\n";
-    echo "Correct Output:$oOutput\n";
-    echo "Program Output:$bOutput";
-}
-elseif($foundBug &&  !$alreadyFoundBug){
-    //echo "$bugObjectFound->bugid,$comp->compname\n";
-    $team->foundBugInCompetition($bugObjectFound,$comp);
-    echo 1;
-    echo "Found (new) Bug\n";
-    echo "Correct Output:$oOutput\n";
-    echo "Program Output:$bOutput";
 }
 elseif(!$foundBug &&  $alreadyFoundBug){
+    $user->submitTestCase($comp->compid, $testText."Actual Output: ".$bOutput."<br>Result: Bug Already Found'", $prob->problemid, $team->teamid);
     echo 0;
-    echo "Bug already exist";
+}
+elseif($notFound){
+    $user->submitTestCase($comp->compid, $testText."Actual Output: ".$bOutput."<br>Result: Bug Not Found'", $prob->problemid, $team->teamid);
+    echo 0;
 }
 else{
+    $user->submitTestCase($comp->compid, $testText."Result: Bad input/output'", $prob->problemid, $team->teamid);
     echo 0;
-     echo "Bad input/output";   
-
 }
 
 

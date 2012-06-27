@@ -24,6 +24,7 @@ if($comp->compid && $user->userid)
 		$arrayToReturn=$team->getChats();
 		if(count($arrayToReturn)==0)
 		    $arrayToReturn[]="Nothing yet";
+                $arrayToReturn[]=date("Y-m-d H:i:s");
 		$arrayToReturn = json_encode($arrayToReturn);
 		echo $arrayToReturn;//Echo back the arrayToReturn see student.js for more details.
 	}

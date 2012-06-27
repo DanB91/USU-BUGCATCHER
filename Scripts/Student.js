@@ -100,7 +100,7 @@ function recieve()//Find Code ---------- G1004
 
 //do the filtering by tags, and then splice all the messages together for the results box
 function format(arr){
-	//var curServerTime=arr.splice(arr.length-1,1);
+	var curServerTime=arr.splice(arr.length-1,1);
 	var text="";
 	var lastIncluded=-1;
 	
@@ -135,9 +135,23 @@ function format(arr){
 	}
 	doScrollDown=false;
 	if(lastIncluded>0)
-		doScrollDown= true;//((curServerTime-arr[lastIncluded-1])<2);
+		doScrollDown=((dateToMilliSecs(curServerTime[0])-dateToMilliSecs(arr[lastIncluded]['timesent']))<2);
 	return text;
 }
+
+function dateToMilliSecs(inTime)
+{
+    var date= new Date(
+        parseInt(inTime.substring(0, 4)),
+        parseInt(inTime.substring(5, 7)),
+        parseInt(inTime.substring(8, 10)),
+        parseInt(inTime.substring(11, 13)),
+        parseInt(inTime.substring(14, 16)),
+        parseInt(inTime.substring(17, 19)), 0);
+        return date.getTime();
+}
+
+
 
 //This function is called in the initialize function below
 //Precondition: Competition must be valid
@@ -330,7 +344,6 @@ function getBugTestInfo(str, str2)
     $.post('StudentContent/testCaseText.php', "testInput="+str +"&testOutput="+str2 + "&problemNum=" + currProblem + "&codeCov=" + coverage, 
         function(html){
             getBugs();
-            alert(html.trim().substring(1,html.trim().length));
 
             if (html.trim().substring(0,1) == '1')
             {

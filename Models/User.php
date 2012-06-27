@@ -136,7 +136,7 @@ class User extends Model{
     
     public function submitTestCase($compID, $testText, $problemID, $teamID){
 	$data['chattext'] = $testText;
-	$data['chattype'] = "Test";
+	$data['chattype'] = "'Test'";
 	$data['teamid'] = $teamID;
 	$data['userid'] = $this->getPrimaryKeyValue();
 	$data['problemid'] = $problemID;
