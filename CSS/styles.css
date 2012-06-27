@@ -872,32 +872,90 @@ a.button:hover p{
 /*            Styles for Starting Section
 /*____________________________________________________*/
 #LandingView-Start {
-	background-color: #cdefa9;
-	border-bottom: 2px solid #000;
-	height: 640px;
+	background-color: #cdefa9;/*#cdefa9;*/
+	height: 580px;
 	margin: 0px;
 	padding: 0px;
 	width: 1000px;
 }
 
 #LVS-Left {
-	background-color: #aad67b;
+	background-color: #aad67b;/*#aad67b;*/
 	float: left;
-	height: 640px;
+	height: 570px;
+        padding-top: 10px;
 	text-align: center;
 	width: 300px;
+}
+
+#UsersTeams{
+    border-bottom: 2px dotted #779853;
+    height: 220px;
+    margin-bottom: 20px;
+    width: 300;
+}
+
+#UsersTeams span{
+    color: #000;
+}
+
+#UsersTeams p{
+    font-size: .8em;
+    text-align: center;
+}
+
+#UsersTeams a p{
+    font-size: 1em;
+    text-align: left;
+}
+
+#LVS_Left-JoinTeam{
+    margin-left: 70px;
+}
+
+#TeamInvites{
+    border-bottom: 2px dotted #779853;
+    clear: left;
+    height: 210px;
+    margin-bottom: 10px;
+}
+
+#TeamInvites p{
+    text-align: center;
+}
+
+#LVS_Left-AcceptInvite{
+    margin-left: 60px;
+}
+
+#LVS_Left-Refresh{
+    margin-left: 40px;
 }
 
 #LVS-Right {
 	background-color: #cdefa9;
 	border-left: 9px solid #779853;
 	float: left;
-	height: 640px;
+	height: 580px;
 	width: 691px;
 }
 
 #LVS-CreateTeam {
 	width: 300px;
+}
+
+#LVS-CreateTeam h3{
+        margin-left: 50px;
+}
+
+#LVS-CreateTeam input{
+        float: left;
+        margin-left: 17px;
+        margin-bottom: 20px;
+}
+
+#LVS-CreateTeam a{
+	margin-left: 60px;
 }
 
 /*             Styles for Member Section
