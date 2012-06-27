@@ -147,8 +147,10 @@ class Team extends Model {
 	    $chat['problemid']=$row['problemid'];
 	    $chat['compid']=$row['compid'];
 	    $chat['timesent']=$row['timesent'];
-	    $problem=new Problem($row['problemid']);
-	    $chat['problemname']=$problem->problemname;
+            if($row['problemid']){
+                $problem=new Problem($row['problemid']);
+                $chat['problemname']=$problem->problemname;
+            }
 	    if($row['chattype']=="Hint"){
 		echo"if";
 		$user=new Admin($row['userid']);

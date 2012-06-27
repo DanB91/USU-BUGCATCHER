@@ -126,8 +126,8 @@ class User extends Model{
     }
     
     public function sendChat($compID, $chatText, $teamID){
-	$data['chattext'] = $chatText;
-	$data['chattype'] = "Chat";
+	$data['chattext'] = "'".$chatText."'";
+	$data['chattype'] = "'Chat'";
 	$data['teamid'] = $teamID;
 	$data['userid'] = $this->getPrimaryKeyValue();
 	$data['compid'] = $compID;

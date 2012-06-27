@@ -78,7 +78,7 @@ function getWinningTeams()//Find Code ---------- G1001
 //Postcondition: Pushes the message to the appropriate team content file.
 function instantMessaging(message)//Find Code ---------- G1003
 {
-    $.post('StudentContent/instantMessging.php', "string="+message, 
+    $.post('StudentContent/instantMessaging.php', "message="+message, 
         function(html){
             document.getElementById("ChatInput").value="";
         });			

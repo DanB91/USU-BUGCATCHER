@@ -5,7 +5,7 @@ session_start();
 $comp = $_SESSION['compObject'];
 $user = $_SESSION['userObject'];
 $team = $_SESSION['teamObject'];
-$chatText = $_GET['string'];
+$chatText = $_POST['message'];
 
 if($comp!=null && $user!=null)
 {
