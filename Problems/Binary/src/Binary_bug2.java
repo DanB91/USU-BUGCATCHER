@@ -4,7 +4,7 @@ public class Binary_bug2 {
 		
             double input = Double.parseDouble(args[0]);
             
-            if(input <= 2147483647){//checks to see if input is too large
+            if(input <= 20000000){//checks to see if input is too large
                 
             if(input > -1){//checks for positive inputs
                 
